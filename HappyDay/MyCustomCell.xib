@@ -13,12 +13,13 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sVj-Q7-h48">
-                    <rect key="frame" x="35" y="54" width="36" height="36"/>
+                <button opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sVj-Q7-h48">
+                    <rect key="frame" x="15" y="54" width="36" height="36"/>
+                    <color key="tintColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <state key="normal" image="sharp_radio_button_unchecked_black_18dp"/>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IpC-lL-F80">
-                    <rect key="frame" x="96" y="62" width="42" height="21"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IpC-lL-F80">
+                    <rect key="frame" x="71" y="62" width="42" height="20"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -26,11 +27,11 @@
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
             <constraints>
-                <constraint firstItem="pxp-wx-Jug" firstAttribute="trailing" secondItem="IpC-lL-F80" secondAttribute="trailing" constant="276" id="3sb-Wz-JwR"/>
+                <constraint firstItem="sVj-Q7-h48" firstAttribute="leading" secondItem="pxp-wx-Jug" secondAttribute="leading" constant="15" id="2Fd-Pd-9du"/>
+                <constraint firstItem="IpC-lL-F80" firstAttribute="leading" secondItem="sVj-Q7-h48" secondAttribute="trailing" constant="20" id="2Th-Uc-ppr"/>
                 <constraint firstItem="IpC-lL-F80" firstAttribute="centerY" secondItem="pxp-wx-Jug" secondAttribute="centerY" id="DtN-ob-FfA"/>
                 <constraint firstItem="sVj-Q7-h48" firstAttribute="centerY" secondItem="pxp-wx-Jug" secondAttribute="centerY" id="IGT-Bd-agd"/>
                 <constraint firstItem="IpC-lL-F80" firstAttribute="top" secondItem="pxp-wx-Jug" secondAttribute="top" constant="18" id="aDL-W3-HhG"/>
-                <constraint firstItem="IpC-lL-F80" firstAttribute="leading" secondItem="sVj-Q7-h48" secondAttribute="trailing" constant="25" id="tB3-XF-t3U"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>

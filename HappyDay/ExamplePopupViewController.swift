@@ -8,7 +8,38 @@
 
 import UIKit
 
-class ExamplePopupViewController: BottomPopupViewController  {
+class ExamplePopupViewController: BottomPopupViewController , UITableViewDelegate, UITableViewDataSource {
+    
+    @IBOutlet weak var tableView: UITableView!
+    let domains: [String] = ["상해", "베이징", "대련", "청도", "장춘"]
+    var selectedElement = [Int : String]()
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+         return self.domains.count
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MyCustomCell", for: indexPath as IndexPath) as! CustomTableViewCell
+               cell.label?.text = self.domains[indexPath.row]
+               //let deselectedImage = UIImage(named: "sharp_radio_button_unchecked_black_18dp")?.withRenderingMode(.alwaysTemplate)
+               //cell.radioBtn.setImage(deselectedImage, for: .normal)
+
+               let item = domains[indexPath.row]
+
+                  if item == selectedElement[indexPath.row] {
+                      cell.radioBtn.isSelected = true
+                  } else {
+                      cell.radioBtn.isSelected = false
+                  }
+                  cell.initCellItem()
+
+
+
+
+        return cell
+
+    }
+    
 
     var height: CGFloat?
     var topCornerRadius: CGFloat?
@@ -16,9 +47,15 @@ class ExamplePopupViewController: BottomPopupViewController  {
     var dismissDuration: Double?
     var shouldDismissInteractivelty: Bool?
     
-    @IBAction func dismissButtonTapped(_ sender: UIButton) {
+    @IBAction func dismissButtonTapped(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
+    @IBAction func finishBtnTapped(_ sender: Any) {
+        
+    }
+    //    @IBAction func dismissButtonTapped(_ sender: UIButton) {
+//        dismiss(animated: true, completion: nil)
+//    }
     
     // Bottom popup attribute methods
     // You can override the desired method to change appearance
@@ -43,6 +80,12 @@ class ExamplePopupViewController: BottomPopupViewController  {
         return shouldDismissInteractivelty ?? true
     }
     
+    override func viewDidLoad() {
+        let nib = UINib.init(nibName: "MyCustomCell", bundle: nil)
+        self.tableView.register(nib, forCellReuseIdentifier: "MyCustomCell")
+    }
+    
     
     
 }
+

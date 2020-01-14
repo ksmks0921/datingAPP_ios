@@ -8,7 +8,38 @@
 
 import UIKit
 
-class signUpVC: UIViewController {
+class signUpVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
+    
+       let domains: [String] = ["Horse", "Cow", "Camel", "Sheep", "Goat"]
+       var selectedElement = [Int : String]()
+       func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+            return self.domains.count
+       }
+
+       func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
+           let cell = tableView.dequeueReusableCell(withIdentifier: "MyCustomCell", for: indexPath as IndexPath) as! CustomTableViewCell
+                  cell.label?.text = self.domains[indexPath.row]
+                  //let deselectedImage = UIImage(named: "sharp_radio_button_unchecked_black_18dp")?.withRenderingMode(.alwaysTemplate)
+                  //cell.radioBtn.setImage(deselectedImage, for: .normal)
+
+                  let item = domains[indexPath.row]
+
+                     if item == selectedElement[indexPath.row] {
+                         cell.radioBtn.isSelected = true
+                     } else {
+                         cell.radioBtn.isSelected = false
+                     }
+                     cell.initCellItem()
+
+
+
+
+           return cell
+
+       }
+    
 
     @IBOutlet weak var womanBtn: UIButton!
     @IBOutlet weak var manBtn: UIButton!
@@ -34,7 +65,7 @@ class signUpVC: UIViewController {
     
     
     @objc func clickView(_ sender: UIView) {
-        print("hhhhhhh")
+        
           guard let popupVC = storyboard?.instantiateViewController(withIdentifier: "ExamplePopupViewController") as? ExamplePopupViewController else { return }
               popupVC.height = 400
               popupVC.topCornerRadius = 10
@@ -42,6 +73,8 @@ class signUpVC: UIViewController {
               popupVC.dismissDuration = 1
               popupVC.shouldDismissInteractivelty = true
               popupVC.popupDelegate = self
+        
+        
               //navigationController?.pushViewController(popupVC, animated: true)
               present(popupVC, animated: true, completion: nil)
     }
@@ -62,6 +95,7 @@ class signUpVC: UIViewController {
     }
     
     @IBAction func goNextBtn(_ sender: Any) {
+        
     }
     /*
     // MARK: - Navigation
@@ -74,17 +108,26 @@ class signUpVC: UIViewController {
     */
 
 }
+
 extension signUpVC: BottomPopupDelegate {
     
+  
+    
+    
+    
     func bottomPopupViewLoaded() {
+        
         print("bottomPopupViewLoaded")
+        
     }
     
     func bottomPopupWillAppear() {
         print("bottomPopupWillAppear")
     }
     
-    func bottomPopupDidAppear() {
+    func bottomPopupDidAppear() {       
+        
+        
         print("bottomPopupDidAppear")
     }
     

@@ -14,7 +14,7 @@ class selectDomainVC: UIViewController , UITableViewDelegate, UITableViewDataSou
     let domains: [String] = ["Horse", "Cow", "Camel", "Sheep", "Goat"]
     let cellReuseIdentifier = "cell"
     var selectedElement = [Int : String]()
-    var selectedIndex:NSIndexPath?
+   
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.domains.count
