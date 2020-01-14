@@ -1,3 +1,20 @@
-PODFILE CHECKSUM: 6675094ebc49b7135b205aefe90c9338991903d2
+PODS:
+  - HSPopupMenu (0.1.1):
+    - SnapKit (~> 4.0.0)
+  - SnapKit (4.0.1)
+
+DEPENDENCIES:
+  - HSPopupMenu
+
+SPEC REPOS:
+  trunk:
+    - HSPopupMenu
+    - SnapKit
+
+SPEC CHECKSUMS:
+  HSPopupMenu: ca8c0f872cdbc8fc7d9c8098c2aa6e6a0027d201
+  SnapKit: 0de968a9fec17499afa29683b05d0c775b6d1c29
+
+PODFILE CHECKSUM: 4fefa3f09d1837c05434b9300c3b411d98df9483
 
 COCOAPODS: 1.8.4

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="listCollectionViewCell" id="gTV-IL-0wX" customClass="listCollectionViewCell" customModule="HappyDay" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="389" height="110"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="389" height="110"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="c1y-zO-al8">
+                        <rect key="frame" x="0.0" y="0.0" width="108.5" height="110"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="c1y-zO-al8" secondAttribute="height" multiplier="83:84" id="N48-Bu-drP"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qlG-8n-M7b">
+                        <rect key="frame" x="123.5" y="9" width="42" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" systemColor="systemPurpleColor" red="0.68627450980000004" green="0.32156862749999998" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rrj-6k-qcP">
+                        <rect key="frame" x="123.5" y="35" width="31" height="15"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The celebration of the 200th anniversary of the Declaration of Independence was years in the making" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lLJ-jo-7de">
+                        <rect key="frame" x="123.5" y="60" width="235.5" height="31.5"/>
+                        <color key="backgroundColor" red="1" green="0.71808978873239437" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kyy-TS-JuY">
+                        <rect key="frame" x="328" y="35.5" width="31" height="14.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="outline_schedule_black_18dp" translatesAutoresizingMaskIntoConstraints="NO" id="8Bi-GV-qiq">
+                        <rect key="frame" x="304" y="34.5" width="16" height="16"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="16" id="33b-Zc-bLr"/>
+                            <constraint firstAttribute="height" constant="16" id="oGj-9y-48a"/>
+                        </constraints>
+                    </imageView>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="outline_keyboard_arrow_right_black_18dp" translatesAutoresizingMaskIntoConstraints="NO" id="3KE-sA-cuN">
+                        <rect key="frame" x="367" y="0.0" width="22" height="110"/>
+                    </imageView>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="Kyy-TS-JuY" firstAttribute="centerY" secondItem="Rrj-6k-qcP" secondAttribute="centerY" id="38x-cc-2Z5"/>
+                <constraint firstItem="8Bi-GV-qiq" firstAttribute="centerY" secondItem="Rrj-6k-qcP" secondAttribute="centerY" id="8Pq-ki-3FR"/>
+                <constraint firstAttribute="trailing" secondItem="3KE-sA-cuN" secondAttribute="trailing" id="CAe-Ht-cRI"/>
+                <constraint firstItem="Rrj-6k-qcP" firstAttribute="leading" secondItem="qlG-8n-M7b" secondAttribute="leading" id="Htj-23-qK1"/>
+                <constraint firstItem="lLJ-jo-7de" firstAttribute="leading" secondItem="qlG-8n-M7b" secondAttribute="leading" id="KLb-29-f83"/>
+                <constraint firstItem="Rrj-6k-qcP" firstAttribute="top" secondItem="qlG-8n-M7b" secondAttribute="bottom" constant="5" id="LSZ-9d-VVb"/>
+                <constraint firstItem="c1y-zO-al8" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="LUd-fu-R8D"/>
+                <constraint firstItem="Kyy-TS-JuY" firstAttribute="trailing" secondItem="lLJ-jo-7de" secondAttribute="trailing" id="NdO-Bd-M29"/>
+                <constraint firstItem="lLJ-jo-7de" firstAttribute="top" secondItem="Rrj-6k-qcP" secondAttribute="bottom" constant="10" id="R2m-5j-1kN"/>
+                <constraint firstItem="3KE-sA-cuN" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="ace-XF-a21"/>
+                <constraint firstAttribute="bottom" secondItem="c1y-zO-al8" secondAttribute="bottom" id="bMY-Ks-QdO"/>
+                <constraint firstItem="qlG-8n-M7b" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="9" id="dyw-T6-BJS"/>
+                <constraint firstItem="Kyy-TS-JuY" firstAttribute="leading" secondItem="8Bi-GV-qiq" secondAttribute="trailing" constant="8" id="g07-hp-UVO"/>
+                <constraint firstItem="3KE-sA-cuN" firstAttribute="leading" secondItem="lLJ-jo-7de" secondAttribute="trailing" constant="8" symbolic="YES" id="hAk-xu-fgR"/>
+                <constraint firstAttribute="bottom" secondItem="3KE-sA-cuN" secondAttribute="bottom" id="kj6-kX-A0N"/>
+                <constraint firstItem="qlG-8n-M7b" firstAttribute="leading" secondItem="c1y-zO-al8" secondAttribute="trailing" constant="15" id="u5j-5A-5OD"/>
+                <constraint firstAttribute="trailing" secondItem="lLJ-jo-7de" secondAttribute="trailing" constant="30" id="vBr-OJ-PAi"/>
+                <constraint firstItem="c1y-zO-al8" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="xhE-Xz-0eL"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <size key="customSize" width="389" height="110"/>
+            <connections>
+                <outlet property="age" destination="Rrj-6k-qcP" id="poZ-AI-T88"/>
+                <outlet property="date" destination="Kyy-TS-JuY" id="bGi-xd-96b"/>
+                <outlet property="desc" destination="lLJ-jo-7de" id="BUE-44-fcW"/>
+                <outlet property="image" destination="c1y-zO-al8" id="O6A-nf-4RU"/>
+                <outlet property="name" destination="qlG-8n-M7b" id="8w9-Tv-2ND"/>
+            </connections>
+            <point key="canvasLocation" x="199.27536231884059" y="107.14285714285714"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="outline_keyboard_arrow_right_black_18dp" width="36" height="36"/>
+        <image name="outline_schedule_black_18dp" width="18" height="18"/>
+    </resources>
+</document>
