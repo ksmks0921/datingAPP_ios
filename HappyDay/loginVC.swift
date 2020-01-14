@@ -31,6 +31,10 @@ class loginVC: UIViewController {
        navigationController?.pushViewController(VC, animated: true)
    }
 
+    @IBAction func facebookLogin(_ sender: Any) {
+        let VC = self.storyboard?.instantiateViewController(withIdentifier: "facebookLoginVC") as! facebookLoginVC
+              navigationController?.pushViewController(VC, animated: true)
+    }
     /*
     // MARK: - Navigation
 

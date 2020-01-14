@@ -63,18 +63,12 @@ class FirstPageVC: UIViewController {
         let VC = self.storyboard?.instantiateViewController(withIdentifier: "signUpVC") as! signUpVC
         navigationController?.pushViewController(VC, animated: true)
     }
+    @IBAction func facebookLogin(_ sender: Any) {
+        let VC = self.storyboard?.instantiateViewController(withIdentifier: "facebookLoginVC") as! facebookLoginVC
+        navigationController?.pushViewController(VC, animated: true)
+    }
     
   
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
 extension FirstPageVC: UICollectionViewDelegate, UICollectionViewDataSource{
