@@ -1,0 +1,6 @@
+framework module Pods_HappyDay_HappyDayUITests {
+  umbrella header "Pods-HappyDay-HappyDayUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
