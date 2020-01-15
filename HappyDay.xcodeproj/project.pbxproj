@@ -49,6 +49,8 @@
 		6792003723CE8CAE00C4872B /* searchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6792003523CE8CAE00C4872B /* searchTableViewCell.swift */; };
 		6792003823CE8CAE00C4872B /* searchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6792003623CE8CAE00C4872B /* searchTableViewCell.xib */; };
 		6792003A23CEB1F700C4872B /* profileImageCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6792003923CEB1F700C4872B /* profileImageCollectionCell.swift */; };
+		6792003D23CF944300C4872B /* profileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6792003B23CF944300C4872B /* profileTableViewCell.swift */; };
+		6792003E23CF944300C4872B /* profileTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6792003C23CF944300C4872B /* profileTableViewCell.xib */; };
 		8D87FFBEFAED5D09531ED522 /* Pods_HappyDay_HappyDayUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1B49F48348D37F5B81708AD /* Pods_HappyDay_HappyDayUITests.framework */; };
 		9BC3A4ED38D6D7D7CBCE9968 /* Pods_HappyDayTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C3C7D73D21AC2ECDCEBDECC /* Pods_HappyDayTests.framework */; };
 /* End PBXBuildFile section */
@@ -121,6 +123,8 @@
 		6792003523CE8CAE00C4872B /* searchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = searchTableViewCell.swift; sourceTree = "<group>"; };
 		6792003623CE8CAE00C4872B /* searchTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = searchTableViewCell.xib; sourceTree = "<group>"; };
 		6792003923CEB1F700C4872B /* profileImageCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = profileImageCollectionCell.swift; sourceTree = "<group>"; };
+		6792003B23CF944300C4872B /* profileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = profileTableViewCell.swift; sourceTree = "<group>"; };
+		6792003C23CF944300C4872B /* profileTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = profileTableViewCell.xib; sourceTree = "<group>"; };
 		816B3844B379EFCADB3A6869 /* Pods-HappyDay.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HappyDay.release.xcconfig"; path = "Target Support Files/Pods-HappyDay/Pods-HappyDay.release.xcconfig"; sourceTree = "<group>"; };
 		8C3C7D73D21AC2ECDCEBDECC /* Pods_HappyDayTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HappyDayTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		938B1294C611B0EAAEE1E917 /* Pods-HappyDay-HappyDayUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HappyDay-HappyDayUITests.release.xcconfig"; path = "Target Support Files/Pods-HappyDay-HappyDayUITests/Pods-HappyDay-HappyDayUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -262,6 +266,8 @@
 				6792003523CE8CAE00C4872B /* searchTableViewCell.swift */,
 				6792003623CE8CAE00C4872B /* searchTableViewCell.xib */,
 				6792003923CEB1F700C4872B /* profileImageCollectionCell.swift */,
+				6792003B23CF944300C4872B /* profileTableViewCell.swift */,
+				6792003C23CF944300C4872B /* profileTableViewCell.xib */,
 			);
 			path = Items;
 			sourceTree = "<group>";
@@ -418,6 +424,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6792003223CE804700C4872B /* listCollectionViewCell.xib in Resources */,
+				6792003E23CF944300C4872B /* profileTableViewCell.xib in Resources */,
 				6792003823CE8CAE00C4872B /* searchTableViewCell.xib in Resources */,
 				6775362323CC1DBE003B844E /* LaunchScreen.storyboard in Resources */,
 				6775362023CC1DBE003B844E /* Assets.xcassets in Resources */,
@@ -561,6 +568,7 @@
 				6792003A23CEB1F700C4872B /* profileImageCollectionCell.swift in Sources */,
 				6780C8CF23CC63CC00A54733 /* RoundButton.swift in Sources */,
 				6780C90323CDF45100A54733 /* facebookLoginVC.swift in Sources */,
+				6792003D23CF944300C4872B /* profileTableViewCell.swift in Sources */,
 				6780C8E023CD0E9F00A54733 /* CustomTableViewCell.swift in Sources */,
 				6775361B23CC1DB7003B844E /* profileVC.swift in Sources */,
 				6780C8F323CD601000A54733 /* BottomPopupPresentAnimator.swift in Sources */,
