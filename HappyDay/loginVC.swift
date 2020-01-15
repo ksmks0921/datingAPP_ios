@@ -14,7 +14,7 @@ class loginVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationController?.navigationBar.barTintColor = UIColor.green
+        navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.2039215686, green: 0.7803921569, blue: 0.3490196078, alpha: 1)
         UINavigationBar.appearance().tintColor = UIColor.white
         self.title = "로그인"
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
@@ -24,7 +24,6 @@ class loginVC: UIViewController {
         gotodomain.addGestureRecognizer(tapGesture)
 
         
-        // Do any additional setup after loading the view.
     }
     @objc func clickView(_ sender: UIView) {
        let VC = self.storyboard?.instantiateViewController(withIdentifier: "selectDomainVC") as! selectDomainVC
@@ -39,6 +38,8 @@ class loginVC: UIViewController {
         let VC = self.storyboard?.instantiateViewController(withIdentifier: "customTabBarVC") as! customTabBarVC
                      navigationController?.pushViewController(VC, animated: true)
     }
+    
+  
     
 
 }

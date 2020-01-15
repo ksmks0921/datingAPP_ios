@@ -53,7 +53,7 @@ class selectDomainVC: UIViewController , UITableViewDelegate, UITableViewDataSou
         
         let nib = UINib.init(nibName: "MyCustomCell", bundle: nil)
         self.tableview.register(nib, forCellReuseIdentifier: "MyCustomCell")
-        // Do any additional setup after loading the view.
+        
     }
     
 

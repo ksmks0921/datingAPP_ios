@@ -14,6 +14,13 @@ class person {
     var name: String?
     var photo: String?
     var desc: String?
+    var gender:String?
+    var born_place: String?
+    var age:Int?
+    var body:String?
+    var style: String?
+    var job: String?
+    var interest: String?
     
     required init?(){
         

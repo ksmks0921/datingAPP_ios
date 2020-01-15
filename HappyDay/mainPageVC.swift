@@ -16,6 +16,7 @@ class mainPageVC: UIViewController {
     @IBOutlet weak var selectView: DesinableView!
     @IBOutlet weak var searchView: DesinableView!
     
+    @IBOutlet weak var searchTypeView: UILabel!
     
     
     var largeCollectioinViewCellId = "largeCollectionViewCell"
@@ -30,6 +31,7 @@ class mainPageVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         
         
         let nibCell = UINib(nibName: "largeCollectionViewCell", bundle: nil)
@@ -62,10 +64,21 @@ class mainPageVC: UIViewController {
         
         let tapGestureSearch = UITapGestureRecognizer(target: self, action: #selector(gotoSearch))
         tapGestureSearch.delegate = self as? UIGestureRecognizerDelegate
-        searchView.addGestureRecognizer(tapGestureSearch)
+        searchTypeView.isUserInteractionEnabled = true
+        searchTypeView.addGestureRecognizer(tapGestureSearch)
         
         
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+          super.viewWillAppear(animated)
+          navigationController?.setNavigationBarHidden(true, animated: animated)
+      }
+
+      override func viewWillDisappear(_ animated: Bool) {
+          super.viewWillDisappear(animated)
+          navigationController?.setNavigationBarHidden(false, animated: animated)
+      }
     
     @objc func selectViewType(_ sender: UIView) {
         let popupMenu = HSPopupMenu(menuArray: menuArray, arrowPoint: CGPoint(x: UIScreen.main.bounds.width-35, y: 140))
@@ -73,7 +86,7 @@ class mainPageVC: UIViewController {
         popupMenu.delegate = self
     }
     @objc func gotoSearch(_ sender: UIView) {
-        let VC = self.storyboard?.instantiateViewController(withIdentifier: "facebookLoginVC") as! facebookLoginVC
+        let VC = self.storyboard?.instantiateViewController(withIdentifier: "searchVC") as! searchVC
         navigationController?.pushViewController(VC, animated: true)
     }
     
@@ -161,7 +174,8 @@ extension mainPageVC: UICollectionViewDelegate, UICollectionViewDataSource, UICo
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        let VC = self.storyboard?.instantiateViewController(withIdentifier: "profileVC") as! profileVC
+                     navigationController?.pushViewController(VC, animated: true)
         print(indexPath.item)
         
     }

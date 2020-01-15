@@ -28,7 +28,6 @@ class FirstPageVC: UIViewController {
             self.timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.changeImage), userInfo: nil, repeats: true)
         }
 
-        // Do any additional setup after loading the view.
     }
     @objc func changeImage(){
         if counter < imgArr.count{
@@ -45,6 +44,8 @@ class FirstPageVC: UIViewController {
             pageView.currentPage = counter
         }
     }
+    
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
@@ -54,10 +55,12 @@ class FirstPageVC: UIViewController {
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
     }
+    
+    
+    
     @IBAction func gotoLogin(_ sender: Any) {
         let VC = self.storyboard?.instantiateViewController(withIdentifier: "loginVC") as! loginVC
         navigationController?.pushViewController(VC, animated: true)
-//        self.present(VC, animated: true, completion: nil)
     }
     @IBAction func gotoSignUp(_ sender: Any) {
         let VC = self.storyboard?.instantiateViewController(withIdentifier: "signUpVC") as! signUpVC
@@ -78,12 +81,7 @@ extension FirstPageVC: UICollectionViewDelegate, UICollectionViewDataSource{
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
                       let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? firstCollectionCell
-                //        if let vc = cell.viewWithTag(111) as? UIImageView{
-                //            vc.image = imgArr[indexPath.row]
-                //        }
-                //        else if let ab = cell.viewWithTag(222) as? UIPageControl{
-                //            ab.currentPage = indexPath.row
-                //        }
+        
                         cell?.img.image = imgArr[indexPath.row]
                         return cell!
     }
@@ -102,7 +100,6 @@ extension FirstPageVC: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         let size = pageCollection.frame.size
-//        let size = UIScreen.main.bounds
         return CGSize(width: size.width, height: size.height)
     }
     
