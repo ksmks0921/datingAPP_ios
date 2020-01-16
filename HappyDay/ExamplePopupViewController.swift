@@ -13,6 +13,7 @@ class ExamplePopupViewController: BottomPopupViewController , UITableViewDelegat
     @IBOutlet weak var tableView: UITableView!
     let domains: [String] = ["상해", "베이징", "대련", "청도", "장춘"]
     var selectedElement = [Int : String]()
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
          return self.domains.count
     }

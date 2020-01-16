@@ -34,6 +34,7 @@ class profileVC: UIViewController {
         
         
     }
+    
     @IBAction func preBtnTapped(_ sender: Any) {
         
     }

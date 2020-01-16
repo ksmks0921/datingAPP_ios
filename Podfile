@@ -8,6 +8,7 @@ target 'HappyDay' do
   # Pods for HappyDay
 
   pod 'HSPopupMenu'
+  pod 'JXSegmentedView'
 
   target 'HappyDayTests' do
     inherit! :search_paths

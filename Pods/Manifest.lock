@@ -1,20 +1,24 @@
 PODS:
   - HSPopupMenu (0.1.1):
     - SnapKit (~> 4.0.0)
+  - JXSegmentedView (1.0.4)
   - SnapKit (4.0.1)
 
 DEPENDENCIES:
   - HSPopupMenu
+  - JXSegmentedView
 
 SPEC REPOS:
   trunk:
     - HSPopupMenu
+    - JXSegmentedView
     - SnapKit
 
 SPEC CHECKSUMS:
   HSPopupMenu: ca8c0f872cdbc8fc7d9c8098c2aa6e6a0027d201
+  JXSegmentedView: b278b4c5d4c4c2982b4e084cef76ff1ddd37c6a5
   SnapKit: 0de968a9fec17499afa29683b05d0c775b6d1c29
 
-PODFILE CHECKSUM: 4fefa3f09d1837c05434b9300c3b411d98df9483
+PODFILE CHECKSUM: f848f5f372a366a9b0d410e0804ca456d0bac3b4
 
 COCOAPODS: 1.8.4
