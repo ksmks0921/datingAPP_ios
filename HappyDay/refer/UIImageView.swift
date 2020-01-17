@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 extension UIImageView {
-
+    
     func roundedImage() {
 
 //        self.layer.borderWidth = 1
@@ -30,4 +30,7 @@ extension UIViewController {
         return (view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0.0) +
             (self.navigationController?.navigationBar.frame.height ?? 0.0)
     }
+}
+extension UIColor {
+    static let primaryColor = UIColor(red: 69/255, green: 193/255, blue: 89/255, alpha: 1)
 }

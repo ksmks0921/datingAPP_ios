@@ -88,7 +88,7 @@
                 <outlet property="image" destination="c1y-zO-al8" id="O6A-nf-4RU"/>
                 <outlet property="name" destination="qlG-8n-M7b" id="8w9-Tv-2ND"/>
             </connections>
-            <point key="canvasLocation" x="199.27536231884059" y="107.14285714285714"/>
+            <point key="canvasLocation" x="66" y="79"/>
         </collectionViewCell>
     </objects>
     <resources>

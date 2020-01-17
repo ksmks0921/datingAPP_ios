@@ -12,6 +12,7 @@ class playnowVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         navigationController?.hidesBarsOnTap = false
         navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.2039215686, green: 0.7803921569, blue: 0.3490196078, alpha: 1)
         UINavigationBar.appearance().tintColor = UIColor.white

@@ -21,9 +21,13 @@ class postVC: UIViewController {
     
     @IBOutlet weak var tabview: UIView!
     @IBOutlet weak var contentview: UIView!
+    @IBOutlet weak var customNavBar: UIView!
+    
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+   
         let titles = ["전체", "전국메일 친구", "친구 모집", "지금부터 놀자"]
         
         let tempdataSource = JXSegmentedTitleDataSource()
@@ -42,10 +46,7 @@ class postVC: UIViewController {
   
         
         segmentedView.indicators = [indicator]
-        for _ in segmentedView.indicators  {
-            
-        }
-        
+
       
         
         
@@ -60,6 +61,14 @@ class postVC: UIViewController {
            contentview.addSubview(listContainerView)
 
 
+    }
+    @objc func addTapped(){
+        let VC = self.storyboard?.instantiateViewController(withIdentifier: "searchTypeVC") as! searchTypeVC
+                navigationController?.pushViewController(VC, animated: true)
+    }
+    @objc func playTapped(){
+        let VC = self.storyboard?.instantiateViewController(withIdentifier: "createpostVC") as! createpostVC
+                    navigationController?.pushViewController(VC, animated: true)
     }
 //    override func viewWillAppear(_ animated: Bool) {
 //        super.viewWillAppear(animated)
@@ -76,10 +85,10 @@ class postVC: UIViewController {
            super.viewWillAppear(animated)
            navigationController?.setNavigationBarHidden(true, animated: animated)
        }
-
+    
 //       override func viewWillDisappear(_ animated: Bool) {
 //           super.viewWillDisappear(animated)
-//           navigationController?.setNavigationBarHidden(true, animated: animated)
+//           navigationController?.setNavigationBarHidden(false, animated: animated)
 //       }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -89,11 +98,13 @@ class postVC: UIViewController {
         listContainerView.frame = CGRect(x: 0, y: 0, width: view.bounds.size.width, height: view.bounds.size.height  - 50)
     }
     @IBAction func postsearch(_ sender: Any) {
-        
+        let VC = self.storyboard?.instantiateViewController(withIdentifier: "searchTypeVC") as! searchTypeVC
+        navigationController?.pushViewController(VC, animated: true)
     }
     
     @IBAction func createpost(_ sender: Any) {
-        
+        let VC = self.storyboard?.instantiateViewController(withIdentifier: "createpostVC") as! createpostVC
+        navigationController?.pushViewController(VC, animated: true)
     }
     
 

@@ -1,24 +1,44 @@
 PODS:
   - HSPopupMenu (0.1.1):
     - SnapKit (~> 4.0.0)
+  - InputBarAccessoryView (4.2.2)
   - JXSegmentedView (1.0.4)
+  - MessageKit (3.0.0):
+    - InputBarAccessoryView (~> 4.2.2)
+  - MessengerKit (1.0.5)
   - SnapKit (4.0.1)
 
 DEPENDENCIES:
   - HSPopupMenu
   - JXSegmentedView
+  - MessageKit
+  - MessengerKit (from `https://github.com/steve228uk/MessengerKit.git`)
 
 SPEC REPOS:
   trunk:
     - HSPopupMenu
+    - InputBarAccessoryView
     - JXSegmentedView
+    - MessageKit
     - SnapKit
+
+EXTERNAL SOURCES:
+  MessengerKit:
+    :git: https://github.com/steve228uk/MessengerKit.git
+
+CHECKOUT OPTIONS:
+  MessengerKit:
+    :commit: e033ac2dc066a7243c86e8e45ffbd95547cf1ad1
+    :git: https://github.com/steve228uk/MessengerKit.git
 
 SPEC CHECKSUMS:
   HSPopupMenu: ca8c0f872cdbc8fc7d9c8098c2aa6e6a0027d201
+  InputBarAccessoryView: 2b937602598e2fab3149f37f51dd7ad795653812
   JXSegmentedView: b278b4c5d4c4c2982b4e084cef76ff1ddd37c6a5
+  MessageKit: e892a9ca49ebe6d82684d3a93ad84021fa23e2c6
+  MessengerKit: 26dbfa81b76b22b7891028fb9a2cefdf4e86236f
   SnapKit: 0de968a9fec17499afa29683b05d0c775b6d1c29
 
-PODFILE CHECKSUM: f848f5f372a366a9b0d410e0804ca456d0bac3b4
+PODFILE CHECKSUM: 56884b36e322dddc9ad47ee21f3a2f830ba22799
 
 COCOAPODS: 1.8.4
