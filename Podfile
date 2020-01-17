@@ -11,6 +11,7 @@ target 'HappyDay' do
   pod 'JXSegmentedView'
   pod 'MessageKit'
   pod 'MessengerKit', :git => 'https://github.com/steve228uk/MessengerKit.git'
+  pod 'PopupDialog', '~> 1.1'
   target 'HappyDayTests' do
     inherit! :search_paths
     # Pods for testing

@@ -1,4 +1,5 @@
 PODS:
+  - DynamicBlurView (4.0.0)
   - HSPopupMenu (0.1.1):
     - SnapKit (~> 4.0.0)
   - InputBarAccessoryView (4.2.2)
@@ -6,6 +7,8 @@ PODS:
   - MessageKit (3.0.0):
     - InputBarAccessoryView (~> 4.2.2)
   - MessengerKit (1.0.5)
+  - PopupDialog (1.1.1):
+    - DynamicBlurView (~> 4.0)
   - SnapKit (4.0.1)
 
 DEPENDENCIES:
@@ -13,13 +16,16 @@ DEPENDENCIES:
   - JXSegmentedView
   - MessageKit
   - MessengerKit (from `https://github.com/steve228uk/MessengerKit.git`)
+  - PopupDialog (~> 1.1)
 
 SPEC REPOS:
   trunk:
+    - DynamicBlurView
     - HSPopupMenu
     - InputBarAccessoryView
     - JXSegmentedView
     - MessageKit
+    - PopupDialog
     - SnapKit
 
 EXTERNAL SOURCES:
@@ -32,13 +38,15 @@ CHECKOUT OPTIONS:
     :git: https://github.com/steve228uk/MessengerKit.git
 
 SPEC CHECKSUMS:
+  DynamicBlurView: ccf9acd2b20c883cc2c72e3524a04d8d3ee20533
   HSPopupMenu: ca8c0f872cdbc8fc7d9c8098c2aa6e6a0027d201
   InputBarAccessoryView: 2b937602598e2fab3149f37f51dd7ad795653812
   JXSegmentedView: b278b4c5d4c4c2982b4e084cef76ff1ddd37c6a5
   MessageKit: e892a9ca49ebe6d82684d3a93ad84021fa23e2c6
   MessengerKit: 26dbfa81b76b22b7891028fb9a2cefdf4e86236f
+  PopupDialog: 720c92befd8bc23c13442254945213db5612f149
   SnapKit: 0de968a9fec17499afa29683b05d0c775b6d1c29
 
-PODFILE CHECKSUM: 56884b36e322dddc9ad47ee21f3a2f830ba22799
+PODFILE CHECKSUM: f4a3b8d3363ea4d59764694c4678494ad37f9e2d
 
 COCOAPODS: 1.8.4
