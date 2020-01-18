@@ -42,6 +42,12 @@ class searchTypeVC: UIViewController {
         self.tableView.reloadData()
     }
     @IBAction func saveBtnTapped(_ sender: Any) {
+        saveBtn.backgroundColor = #colorLiteral(red: 0.2039215686, green: 0.7803921569, blue: 0.3490196078, alpha: 1)
+        saveBtn.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: .normal)
+        searchTypeBtn.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        searchTypeBtn.setTitleColor(#colorLiteral(red: 0.2039215686, green: 0.7803921569, blue: 0.3490196078, alpha: 1), for: .normal)
+        self.searchType = "save"
+        self.tableView.reloadData()
     }
     @IBAction func searchBtnTapped(_ sender: Any) {
     }

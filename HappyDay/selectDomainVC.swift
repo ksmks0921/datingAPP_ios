@@ -11,7 +11,7 @@ import UIKit
 class selectDomainVC: UIViewController , UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var tableview: UITableView!
-    let domains: [String] = ["Horse", "Cow", "Camel", "Sheep", "Goat"]
+    let domains: [String] = ["@gmail.com", "@hotmail.com", "@yandex.com", "@outlook.com", "@123.com"]
     let cellReuseIdentifier = "cell"
     var selectedElement = [Int : String]()
    

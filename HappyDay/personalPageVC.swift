@@ -39,10 +39,15 @@ class personalPageVC: UIViewController {
         layout.minimumLineSpacing = 0
         collectioView!.collectionViewLayout = layout
         
+        
+        
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(uploadPhotoTapped(_:)))
         tapGesture.delegate = self as? UIGestureRecognizerDelegate
         uploadPhotoView.addGestureRecognizer(tapGesture)
-
+        
+        let tapGesture_2 = UITapGestureRecognizer(target: self, action: #selector(profileBtnTapped))
+        tapGesture_2.delegate = self as? UIGestureRecognizerDelegate
+        userProfileView.addGestureRecognizer(tapGesture_2)
               
           
          
@@ -53,7 +58,11 @@ class personalPageVC: UIViewController {
                 navigationController?.pushViewController(VC, animated: true)
     }
 
-
+    @objc func profileBtnTapped(_ sender: UIView) {
+                let VC = self.storyboard?.instantiateViewController(withIdentifier: "mainProfileVC") as! mainProfileVC
+                navigationController?.pushViewController(VC, animated: true)
+    }
+    
 }
 extension personalPageVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     
@@ -86,8 +95,30 @@ extension personalPageVC: UICollectionViewDelegate, UICollectionViewDataSource, 
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let VC = self.storyboard?.instantiateViewController(withIdentifier: "profileVC") as! profileVC
-                     navigationController?.pushViewController(VC, animated: true)
+        if indexPath.row == 0 {
+            let VC = self.storyboard?.instantiateViewController(withIdentifier: "footVC") as! footVC
+            navigationController?.pushViewController(VC, animated: true)
+        }
+        if indexPath.row == 1 {
+            let VC = self.storyboard?.instantiateViewController(withIdentifier: "memoListVC") as! memoListVC
+            navigationController?.pushViewController(VC, animated: true)
+        }
+        if indexPath.row == 2 {
+            let VC = self.storyboard?.instantiateViewController(withIdentifier: "ignoreListVC") as! ignoreListVC
+            navigationController?.pushViewController(VC, animated: true)
+        }
+        if indexPath.row == 3 {
+            let VC = self.storyboard?.instantiateViewController(withIdentifier: "noSeeVC") as! noSeeVC
+            navigationController?.pushViewController(VC, animated: true)
+        }
+        if indexPath.row == 4 {
+                   let VC = self.storyboard?.instantiateViewController(withIdentifier: "favoriteListVC") as! favoriteListVC
+                   navigationController?.pushViewController(VC, animated: true)
+               }
+        if indexPath.row == 5 {
+            let VC = self.storyboard?.instantiateViewController(withIdentifier: "friendListVC") as! friendListVC
+            navigationController?.pushViewController(VC, animated: true)
+        }
         print(indexPath.item)
         
     }
