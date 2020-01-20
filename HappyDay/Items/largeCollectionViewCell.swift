@@ -17,6 +17,8 @@ class largeCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
         // Initialization code
         image.roundedImage()
+//        image.layer.masksToBounds = true
+//        image.layer.cornerRadius = image.bounds.width / 2
     }
 
 }

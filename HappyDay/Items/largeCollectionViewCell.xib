@@ -10,57 +10,63 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="largeCollectionViewCell" id="gTV-IL-0wX" customClass="largeCollectionViewCell" customModule="HappyDay" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="157" height="256"/>
+            <rect key="frame" x="0.0" y="0.0" width="199" height="269"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="157" height="256"/>
+                <rect key="frame" x="0.0" y="0.0" width="199" height="269"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="j0E-1j-gEw">
-                        <rect key="frame" x="15" y="15" width="127" height="159"/>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile_1" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="j0E-1j-gEw">
+                        <rect key="frame" x="4.5" y="4" width="190" height="190"/>
                         <constraints>
-                            <constraint firstAttribute="width" secondItem="j0E-1j-gEw" secondAttribute="height" multiplier="127:159" id="h1T-65-f2P"/>
+                            <constraint firstAttribute="width" secondItem="j0E-1j-gEw" secondAttribute="height" multiplier="1:1" id="h1T-65-f2P"/>
                         </constraints>
-                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="small"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="74"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                <real key="value" value="1"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BMp-Hq-Whz">
-                        <rect key="frame" x="57.5" y="188" width="42" height="21"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="21" id="exo-cr-ses"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <rect key="frame" x="4.5" y="202" width="44" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
                         <color key="textColor" systemColor="systemPurpleColor" red="0.68627450980000004" green="0.32156862749999998" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F6H-qU-HSd">
-                        <rect key="frame" x="57.5" y="217" width="42" height="21"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="21" id="iht-0K-nKK"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <nil key="textColor"/>
+                        <rect key="frame" x="4.5" y="231" width="35.5" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
             </view>
             <constraints>
-                <constraint firstItem="BMp-Hq-Whz" firstAttribute="top" secondItem="j0E-1j-gEw" secondAttribute="bottom" constant="14" id="GZl-MQ-5Is"/>
-                <constraint firstItem="j0E-1j-gEw" firstAttribute="centerX" secondItem="ZTg-uK-7eu" secondAttribute="centerX" id="KJn-M0-Fjk"/>
-                <constraint firstItem="BMp-Hq-Whz" firstAttribute="centerX" secondItem="ZTg-uK-7eu" secondAttribute="centerX" id="SMT-4B-0o6"/>
-                <constraint firstItem="j0E-1j-gEw" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="15" id="SVd-0V-0rg"/>
-                <constraint firstItem="j0E-1j-gEw" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="15" id="ePc-HK-JUV"/>
-                <constraint firstItem="F6H-qU-HSd" firstAttribute="centerX" secondItem="ZTg-uK-7eu" secondAttribute="centerX" id="gtQ-HL-mub"/>
-                <constraint firstItem="F6H-qU-HSd" firstAttribute="top" secondItem="BMp-Hq-Whz" secondAttribute="bottom" constant="8" id="ndi-Ht-g0g"/>
-                <constraint firstAttribute="bottom" secondItem="F6H-qU-HSd" secondAttribute="bottom" constant="18" id="pgc-tZ-X2k"/>
+                <constraint firstItem="BMp-Hq-Whz" firstAttribute="top" secondItem="j0E-1j-gEw" secondAttribute="bottom" constant="8" id="9Ku-Mk-oM8"/>
+                <constraint firstItem="F6H-qU-HSd" firstAttribute="top" secondItem="BMp-Hq-Whz" secondAttribute="bottom" constant="8" id="Hp0-i3-BpJ"/>
+                <constraint firstItem="BMp-Hq-Whz" firstAttribute="leading" secondItem="j0E-1j-gEw" secondAttribute="leading" id="eRr-jz-vGQ"/>
+                <constraint firstItem="F6H-qU-HSd" firstAttribute="leading" secondItem="BMp-Hq-Whz" secondAttribute="leading" id="fBn-QU-8F2"/>
+                <constraint firstItem="j0E-1j-gEw" firstAttribute="centerX" secondItem="ZTg-uK-7eu" secondAttribute="centerX" id="jXU-fe-0dj"/>
+                <constraint firstAttribute="trailing" secondItem="j0E-1j-gEw" secondAttribute="trailing" constant="4.5" id="pR5-TS-WY0"/>
+                <constraint firstItem="j0E-1j-gEw" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="4" id="t6z-cc-Uvf"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
-            <size key="customSize" width="157" height="256"/>
+            <size key="customSize" width="199" height="269"/>
             <connections>
                 <outlet property="image" destination="j0E-1j-gEw" id="wya-61-F8z"/>
                 <outlet property="name" destination="BMp-Hq-Whz" id="eoQ-vP-AsI"/>
                 <outlet property="otherDescription" destination="F6H-qU-HSd" id="Wwe-Nl-Vbi"/>
             </connections>
-            <point key="canvasLocation" x="35.507246376811594" y="163.39285714285714"/>
+            <point key="canvasLocation" x="65.94202898550725" y="167.07589285714286"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="profile_1" width="770" height="433"/>
+    </resources>
 </document>

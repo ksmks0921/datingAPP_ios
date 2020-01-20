@@ -18,6 +18,7 @@ class FirstPageVC: UIViewController {
     var imgArr = [ UIImage(named: "first"),
                    UIImage(named: "second"),
                    UIImage(named: "third")]
+    var txtArr = ["해피데이에 오신것을 환영합니다.", "바라는 류형의 사람을 쉽게...", "매칭이 필요 없이도..."]
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -55,7 +56,9 @@ class FirstPageVC: UIViewController {
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
     }
-//
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
     
     
     @IBAction func gotoLogin(_ sender: Any) {
@@ -83,6 +86,7 @@ extension FirstPageVC: UICollectionViewDelegate, UICollectionViewDataSource{
                       let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? firstCollectionCell
         
                         cell?.img.image = imgArr[indexPath.row]
+                        cell?.txt.text = txtArr[indexPath.row]
                         return cell!
     }
     

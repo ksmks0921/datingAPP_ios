@@ -14,6 +14,8 @@ class customTabBarVC: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
 
         UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], for: .selected)
         UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.darkGray], for: .normal)

@@ -80,6 +80,7 @@ class imageUploadVC: UIViewController {
 }
 
 extension imageUploadVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
     func showImagePickerControllerActionSheet(){
         let title = "이미지 압로드 옵션"
 
@@ -101,6 +102,7 @@ extension imageUploadVC: UIImagePickerControllerDelegate, UINavigationController
 
         self.present(popup, animated: true, completion: nil)
     }
+    
     func showImagePickerController(sourceType:UIImagePickerController.SourceType) {
         let imagePickerController = UIImagePickerController()
         imagePickerController.delegate = self

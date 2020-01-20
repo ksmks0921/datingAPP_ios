@@ -15,7 +15,10 @@ class galleryCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var age: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+//        // Initialization code
+//        image.roundedImage()
+        image.layer.cornerRadius = 8
+        image.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
     }
 
 }

@@ -8,39 +8,17 @@
 
 import UIKit
 
-class signUpVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
+protocol ExamplePopupDelegate
+{
+    func ExamplePopupWillDismissForLocation(location: String)
     
-    
-       let domains: [String] = ["Horse", "Cow", "Camel", "Sheep", "Goat"]
-       var selectedElement = [Int : String]()
-       func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return self.domains.count
-       }
+    func ExamplePopupWillDismissForAge(age: String)
+}
 
-       func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+class signUpVC: UIViewController {
 
-           let cell = tableView.dequeueReusableCell(withIdentifier: "MyCustomCell", for: indexPath as IndexPath) as! CustomTableViewCell
-                  cell.label?.text = self.domains[indexPath.row]
-                  //let deselectedImage = UIImage(named: "sharp_radio_button_unchecked_black_18dp")?.withRenderingMode(.alwaysTemplate)
-                  //cell.radioBtn.setImage(deselectedImage, for: .normal)
-
-                  let item = domains[indexPath.row]
-
-                     if item == selectedElement[indexPath.row] {
-                         cell.radioBtn.isSelected = true
-                     } else {
-                         cell.radioBtn.isSelected = false
-                     }
-                     cell.initCellItem()
-
-
-
-
-           return cell
-
-       }
-    
-
+    let domains: [String] = ["Horse", "Cow", "Camel", "Sheep", "Goat"]
+    var selectedElement = [Int : String]()
     @IBOutlet weak var womanBtn: UIButton!
     @IBOutlet weak var manBtn: UIButton!
     @IBOutlet weak var regionLabel: UILabel!
@@ -49,44 +27,72 @@ class signUpVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var ageUIView: DesinableView!
     @IBOutlet weak var passwordTxt: UITextField!
     @IBOutlet weak var passwordAgainTxt: UITextField!
-    
+    var delegate: ExamplePopupDelegate? = nil
     var gender: Bool!
     var selectedImage = UIImage(named: "sharp_check_white_18dp")?.withRenderingMode(.alwaysTemplate)
+    var location: String?
+    var age:String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.title = "간단한 계정창조"
+        navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.2039215686, green: 0.7803921569, blue: 0.3490196078, alpha: 1)
+        UINavigationBar.appearance().tintColor = UIColor.white
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "뒤로", style: .plain, target: nil, action: nil)
         
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(clickView(_:)))
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(clickView_1(_:)))
         tapGesture.delegate = self as? UIGestureRecognizerDelegate
         regionUIView.addGestureRecognizer(tapGesture)
+        
+        let tapGesture_1 = UITapGestureRecognizer(target: self, action: #selector(clickView_2(_:)))
+        tapGesture_1.delegate = self as? UIGestureRecognizerDelegate
+        ageUIView.addGestureRecognizer(tapGesture_1)
+        
 
     }
     
-    
-    @objc func clickView(_ sender: UIView) {
+
+    @objc func clickView_1(_ sender: UIView) {
         
           guard let popupVC = storyboard?.instantiateViewController(withIdentifier: "ExamplePopupViewController") as? ExamplePopupViewController else { return }
-              popupVC.height = 400
-              popupVC.topCornerRadius = 10
-              popupVC.presentDuration = 1
-              popupVC.dismissDuration = 1
-              popupVC.shouldDismissInteractivelty = true
-              popupVC.popupDelegate = self
-        
-        
-              //navigationController?.pushViewController(popupVC, animated: true)
-              present(popupVC, animated: true, completion: nil)
+          popupVC.height = 400
+          popupVC.topCornerRadius = 10
+          popupVC.presentDuration = 1
+          popupVC.dismissDuration = 1
+          popupVC.shouldDismissInteractivelty = true
+          popupVC.popupDelegate = self
+          popupVC.previousVC = self
+          popupVC.delegate = self
+          popupVC.location_age = "location"
+          present(popupVC, animated: true, completion: nil)
     }
-    
+    @objc func clickView_2(_ sender: UIView) {
+        
+          guard let popupVC = storyboard?.instantiateViewController(withIdentifier: "ExamplePopupViewController") as? ExamplePopupViewController else { return }
+          popupVC.height = 400
+          popupVC.topCornerRadius = 10
+          popupVC.presentDuration = 1
+          popupVC.dismissDuration = 1
+          popupVC.shouldDismissInteractivelty = true
+          popupVC.popupDelegate = self
+          popupVC.previousVC = self
+          popupVC.delegate = self
+          popupVC.location_age = "age"
+          present(popupVC, animated: true, completion: nil)
+    }
     @IBAction func manSelect(_ sender: Any) {
-        manBtn.backgroundColor = #colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1)
+        manBtn.backgroundColor = #colorLiteral(red: 0.2039215686, green: 0.7803921569, blue: 0.3490196078, alpha: 1)
         manBtn.setImage(selectedImage, for: .normal)
         womanBtn.setImage(nil, for: .normal)
         womanBtn.backgroundColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
         self.gender = true
     }
     @IBAction func womanSelect(_ sender: Any) {
-        womanBtn.backgroundColor = #colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1)
+        womanBtn.backgroundColor = #colorLiteral(red: 0.2039215686, green: 0.7803921569, blue: 0.3490196078, alpha: 1)
         womanBtn.setImage(selectedImage, for: .normal)
         manBtn.setImage(nil, for: .normal)
         manBtn.backgroundColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
@@ -97,15 +103,11 @@ class signUpVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         
     }
  
-
+    
 }
 
 extension signUpVC: BottomPopupDelegate {
-    
   
-    
-    
-    
     func bottomPopupViewLoaded() {
         
         print("bottomPopupViewLoaded")
@@ -127,10 +129,49 @@ extension signUpVC: BottomPopupDelegate {
     }
     
     func bottomPopupDidDismiss() {
+        
         print("bottomPopupDidDismiss")
     }
     
     func bottomPopupDismissInteractionPercentChanged(from oldValue: CGFloat, to newValue: CGFloat) {
         print("bottomPopupDismissInteractionPercentChanged fromValue: \(oldValue) to: \(newValue)")
     }
+}
+extension signUpVC: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+         return self.domains.count
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
+       let cell = tableView.dequeueReusableCell(withIdentifier: "MyCustomCell", for: indexPath as IndexPath) as! CustomTableViewCell
+       cell.label?.text = self.domains[indexPath.row]
+       let item = domains[indexPath.row]
+
+       if item == selectedElement[indexPath.row] {
+          cell.radioBtn.isSelected = true
+       } else {
+          cell.radioBtn.isSelected = false
+       }
+       cell.initCellItem()
+       return cell
+
+    }
+    
+    
+}
+
+extension signUpVC: ExamplePopupDelegate {
+    func ExamplePopupWillDismissForLocation(location: String) {
+        self.regionLabel.text = location
+        print(location)
+    }
+    
+    func ExamplePopupWillDismissForAge(age: String) {
+        self.ageLabel.text = age
+        print(age)
+    }
+
+        
 }

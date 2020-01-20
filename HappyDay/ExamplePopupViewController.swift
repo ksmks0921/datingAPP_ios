@@ -8,38 +8,16 @@
 
 import UIKit
 
-class ExamplePopupViewController: BottomPopupViewController , UITableViewDelegate, UITableViewDataSource {
+
+
+class ExamplePopupViewController: BottomPopupViewController  {
     
     @IBOutlet weak var tableView: UITableView!
-    let domains: [String] = ["상해", "베이징", "대련", "청도", "장춘"]
+    let locations: [String] = ["상해", "베이징", "대련", "청도", "장춘"]
+    let ages: [String] = ["18세 ~ 20세", "20세 ~ 25세", "25세 ~ 35세", "35세 ~ 45세", "45세 ~ 60세"]
     var selectedElement = [Int : String]()
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-         return self.domains.count
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
-        let cell = tableView.dequeueReusableCell(withIdentifier: "MyCustomCell", for: indexPath as IndexPath) as! CustomTableViewCell
-               cell.label?.text = self.domains[indexPath.row]
-               //let deselectedImage = UIImage(named: "sharp_radio_button_unchecked_black_18dp")?.withRenderingMode(.alwaysTemplate)
-               //cell.radioBtn.setImage(deselectedImage, for: .normal)
-
-               let item = domains[indexPath.row]
-
-                  if item == selectedElement[indexPath.row] {
-                      cell.radioBtn.isSelected = true
-                  } else {
-                      cell.radioBtn.isSelected = false
-                  }
-                  cell.initCellItem()
-
-
-
-
-        return cell
-
-    }
+    var selectedIndex:IndexPath!
+   
     
 
     var height: CGFloat?
@@ -47,19 +25,30 @@ class ExamplePopupViewController: BottomPopupViewController , UITableViewDelegat
     var presentDuration: Double?
     var dismissDuration: Double?
     var shouldDismissInteractivelty: Bool?
+    var location: String?
+    var age:String?
+    var previousVC: signUpVC?
+    var delegate: ExamplePopupDelegate?
+    var location_age: String?
+    
     
     @IBAction func dismissButtonTapped(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
     @IBAction func finishBtnTapped(_ sender: Any) {
-        
+
+        dismiss(animated: true, completion: nil)
+        if self.location_age == "location"{
+
+            delegate?.ExamplePopupWillDismissForLocation(location: locations[selectedIndex.row])
+        }
+        else {
+
+            delegate?.ExamplePopupWillDismissForAge(age: ages[selectedIndex.row])
+        }
+
     }
-    //    @IBAction func dismissButtonTapped(_ sender: UIButton) {
-//        dismiss(animated: true, completion: nil)
-//    }
-    
-    // Bottom popup attribute methods
-    // You can override the desired method to change appearance
+
     
     override func getPopupHeight() -> CGFloat {
         return height ?? CGFloat(300)
@@ -82,11 +71,65 @@ class ExamplePopupViewController: BottomPopupViewController , UITableViewDelegat
     }
     
     override func viewDidLoad() {
+        
         let nib = UINib.init(nibName: "MyCustomCell", bundle: nil)
         self.tableView.register(nib, forCellReuseIdentifier: "MyCustomCell")
+       
+
     }
     
     
     
 }
 
+extension ExamplePopupViewController: UITableViewDelegate, UITableViewDataSource{
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if self.location_age == "location" {
+            return self.locations.count
+        }
+        else {
+            return self.ages.count
+        }
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if self.location_age == "location"{
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: "MyCustomCell", for: indexPath as IndexPath) as! CustomTableViewCell
+            cell.label?.text = self.locations[indexPath.row]
+
+            if (selectedIndex == indexPath) {
+                cell.radioBtn.setImage(UIImage(named: "sharp_radio_button_checked_black_18dp"),for:.normal)
+                   } else {
+                cell.radioBtn.setImage(UIImage(named: "sharp_radio_button_unchecked_black_18dp"),for:.normal)
+            }
+
+
+
+            return cell
+        }
+        else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "MyCustomCell", for: indexPath as IndexPath) as! CustomTableViewCell
+            cell.label?.text = self.ages[indexPath.row]
+
+            if (selectedIndex == indexPath) {
+                cell.radioBtn.setImage(UIImage(named: "sharp_radio_button_checked_black_18dp"),for:.normal)
+                   } else {
+                cell.radioBtn.setImage(UIImage(named: "sharp_radio_button_unchecked_black_18dp"),for:.normal)
+            }
+
+
+
+            return cell
+        }
+
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
+        selectedIndex = indexPath as IndexPath
+        tableView.reloadData()
+         
+    }
+    
+}

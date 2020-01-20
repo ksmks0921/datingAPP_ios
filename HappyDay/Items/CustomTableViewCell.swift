@@ -16,6 +16,7 @@ class CustomTableViewCell: UITableViewCell {
 
     @IBOutlet weak var radioBtn: UIButton!
     @IBOutlet weak var label: UILabel!
+    var TappedIndex: Int?
   
     var delegate: CustomTableViewCellDelegate?
     
@@ -29,7 +30,7 @@ class CustomTableViewCell: UITableViewCell {
     }
     
     @objc func radioButtonTapped(_ radioButton: UIButton) {
-        print("radio button tapped")
+        
         let isSelected = !self.radioBtn.isSelected
         self.radioBtn.isSelected = isSelected
         if isSelected {
@@ -37,6 +38,8 @@ class CustomTableViewCell: UITableViewCell {
         }
         let tableView = self.superview as! UITableView
         let tappedCellIndexPath = tableView.indexPath(for: self)!
+        self.TappedIndex = tappedCellIndexPath[1]
+        print(self.TappedIndex)
         delegate?.didToggleRadioButton(tappedCellIndexPath)
     }
     
@@ -53,13 +56,12 @@ class CustomTableViewCell: UITableViewCell {
     }
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
     }
 
 }
