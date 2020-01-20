@@ -17,18 +17,20 @@ class playnowVC: UIViewController {
         navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.2039215686, green: 0.7803921569, blue: 0.3490196078, alpha: 1)
         UINavigationBar.appearance().tintColor = UIColor.white
         self.title = "지금부터 놀자"
-        // Do any additional setup after loading the view.
+        let backButton = UIBarButtonItem()
+        backButton.title = "뒤로"
+        self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
+    }
+    @IBAction func messageBtnTapped(_ sender: Any) {
+//        let VC = self.storyboard?.instantiateViewController(withIdentifier: "chatRoomVC") as! chatRoomVC
+//        navigationController?.pushViewController(VC, animated: true)
+        navigationController?.pushViewController(AdvancedExampleViewController(), animated: true)
+    }
+    @IBAction func otherBtnTapped(_ sender: Any) {
+    }
+    @IBAction func memoBtnTapped(_ sender: Any) {
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

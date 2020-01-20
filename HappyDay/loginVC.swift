@@ -23,6 +23,7 @@ class loginVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.title = "로그인"
         navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.2039215686, green: 0.7803921569, blue: 0.3490196078, alpha: 1)
         UINavigationBar.appearance().tintColor = UIColor.white
@@ -33,12 +34,7 @@ class loginVC: UIViewController {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(selectDomain(_:)))
         tapGesture.delegate = self as? UIGestureRecognizerDelegate
         gotodomain.addGestureRecognizer(tapGesture)
-        
-        if domain != nil {
-            domainLabel.text = domain
-        }
 
-        
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {

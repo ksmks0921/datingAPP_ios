@@ -37,10 +37,7 @@ class contentforpostVC: UIViewController {
           navigationController?.setNavigationBarHidden(true, animated: animated)
       }
 
-//      override func viewWillDisappear(_ animated: Bool) {
-//          super.viewWillDisappear(animated)
-//          navigationController?.setNavigationBarHidden(false, animated: animated)
-//      }
+
     
 
 }
@@ -62,8 +59,14 @@ extension contentforpostVC:  UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-       
+        
             let cell = postTableView.dequeueReusableCell(withIdentifier: "postTableViewCell", for: indexPath as IndexPath) as! postTableViewCell
+            if indexPath.row == 0 {
+                cell.topContent.isHidden = false
+            }
+            else {
+                cell.topContent.isHidden = true
+            }
             cell.personPhoto.image = UIImage(named: "first")
             if self.pageType == 0 {
                 cell.hopeTypeBack.backgroundColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
@@ -79,7 +82,13 @@ extension contentforpostVC:  UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-       return 100
+        if indexPath.row == 0 {
+            return 150
+        }
+        else {
+            return 100
+        }
+       
     }
     
 }

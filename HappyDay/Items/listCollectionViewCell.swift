@@ -15,6 +15,7 @@ class listCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var age: UILabel!
     @IBOutlet weak var desc: UILabel!
     @IBOutlet weak var date: UILabel!
+    @IBOutlet weak var markImageView: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

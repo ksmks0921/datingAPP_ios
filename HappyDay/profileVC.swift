@@ -28,6 +28,15 @@ class profileVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.2039215686, green: 0.7803921569, blue: 0.3490196078, alpha: 1)
+        UINavigationBar.appearance().tintColor = UIColor.white
+        self.title = "김똘똘"
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
+        let backButton = UIBarButtonItem()
+        backButton.title = "뒤로"
+        self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
+        
+        
         let nib = UINib.init(nibName: "profileTableViewCell", bundle: nil)
         self.userinfotableview.register(nib, forCellReuseIdentifier: "profileTableViewCell")
         userinfotableview.reloadData()
@@ -36,11 +45,35 @@ class profileVC: UIViewController {
     }
     
     @IBAction func preBtnTapped(_ sender: Any) {
-        
+        if counter > 0{
+            let index = IndexPath.init(item: counter, section: 0)
+            self.sliderCollectionView.scrollToItem(at: index, at: .centeredHorizontally, animated: true)
+            
+            counter -= 1
+
+        }
+        else {
+            counter = imgArr.count
+            let index = IndexPath.init(item: counter, section: imgArr.count)
+            self.sliderCollectionView.scrollToItem(at: index, at: .centeredHorizontally, animated: true)
+   
+        }
     }
     
     @IBAction func nextBtnTapped(_ sender: Any) {
-        
+        if counter < imgArr.count{
+           let index = IndexPath.init(item: counter, section: 0)
+           self.sliderCollectionView.scrollToItem(at: index, at: .centeredHorizontally, animated: true)
+           
+           counter += 1
+
+        }
+        else {
+           counter = 0
+           let index = IndexPath.init(item: counter, section: 0)
+           self.sliderCollectionView.scrollToItem(at: index, at: .centeredHorizontally, animated: true)
+  
+        }
     }
     
 

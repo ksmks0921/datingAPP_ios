@@ -12,16 +12,15 @@ class createpostVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: nil, action: nil)
+        
+        self.title = "프로화일 검색"
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
+        let backButton = UIBarButtonItem()
+        backButton.title = "뒤로"
+        self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
+
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(false, animated: animated)
-        
-        navigationItem.backBarButtonItem = UIBarButtonItem(
-        title: "TTT", style: .plain, target: nil, action: nil)
-    }
    
 
 }

@@ -22,6 +22,8 @@ class postTableViewCell: UITableViewCell {
     @IBOutlet weak var date: UILabel!
     @IBOutlet weak var views: UILabel!
     @IBOutlet weak var newOrNot: UIImageView!
+    @IBOutlet weak var topView: UIView!
+    @IBOutlet weak var topContent: UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()

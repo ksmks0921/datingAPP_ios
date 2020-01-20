@@ -26,10 +26,15 @@ class chatBotVC: UIViewController {
         UINavigationBar.appearance().tintColor = UIColor.white
         
         
-        
+        setUpChatBot()
 
         
 
+        
+
+    }
+    
+    private func setUpChatBot(){
         totalItemWidth = UIScreen.main.bounds.size.width - 30*2
         let titles = ["모두", "읽지 않음", "미 회선", "회신 된", "저장 된"]
         let titleDataSource = JXSegmentedTitleDataSource()
@@ -76,16 +81,14 @@ class chatBotVC: UIViewController {
 
         segmentedView.listContainer = listContainerView
         view.addSubview(listContainerView)
-
     }
     
-
+    
+    
       override func viewDidLayoutSubviews() {
           super.viewDidLayoutSubviews()
 
-          segmentedView.frame = CGRect(x: 30, y: topbarHeight + 10, width: totalItemWidth, height: 30)
-//          segmentedView.frame = CGRect(x: 0, y: 0, width: view.bounds.size.width, height: 30)
-        
+          segmentedView.frame = CGRect(x: 30, y: topbarHeight + 10, width: totalItemWidth, height: 30)       
           listContainerView.frame = CGRect(x: 0, y: topbarHeight + 50, width: view.bounds.size.width, height: view.bounds.size.height  - topbarHeight - 50)
       }
     
@@ -94,11 +97,7 @@ class chatBotVC: UIViewController {
                navigationController?.setNavigationBarHidden(false, animated: animated)
                
         }
-        
-    //       override func viewWillDisappear(_ animated: Bool) {
-    //           super.viewWillDisappear(animated)
-    //           navigationController?.setNavigationBarHidden(false, animated: animated)
-    //       }
+
         
 }
 

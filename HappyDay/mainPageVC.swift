@@ -20,6 +20,7 @@ class mainPageVC: UIViewController {
     @IBOutlet weak var customPopUpView: UIView!
     @IBOutlet weak var customPopUpCellLargeView: UIView!
     
+    @IBOutlet weak var TypeImageView: UIImageView!
     @IBOutlet weak var customPopUpCellGalleryView: UIView!
     
     @IBOutlet weak var customPopUpCellListView: UIView!
@@ -45,7 +46,7 @@ class mainPageVC: UIViewController {
         
         for _ in 1...10 {
             let partner = person()
-            partner?.name = "zhang xiao ling"
+            partner?.name = "김똘똘"
             partners.append(partner!)
             
         }
@@ -97,11 +98,6 @@ class mainPageVC: UIViewController {
         topTapCustomView.frame.size.height = navbarHeight
     }
 
-//      override func viewWillDisappear(_ animated: Bool) {
-//          super.viewWillDisappear(animated)
-//          navigationController?.setNavigationBarHidden(false, animated: animated)
-//      }
-    
     @objc func selectViewType(_ sender: UIView) {
 
         customPopUpView.isHidden = false
@@ -123,6 +119,7 @@ class mainPageVC: UIViewController {
            let nibCell = UINib(nibName: "largeCollectionViewCell", bundle: nil)
            collectionView.register(nibCell, forCellWithReuseIdentifier: largeCollectioinViewCellId)
            collectionView.reloadData()
+           TypeImageView.image = UIImage(systemName: "square.grid.2x2.fill")
         
     }
     @objc func showAsListCell(_ sender: UIView) {
@@ -132,7 +129,7 @@ class mainPageVC: UIViewController {
            let nibCell = UINib(nibName: "listCollectionViewCell", bundle: nil)
            collectionView.register(nibCell, forCellWithReuseIdentifier: listCollectionViewCellId)
            collectionView.reloadData()
-        
+           TypeImageView.image = UIImage(systemName: "rectangle.grid.1x2.fill")
     
     }
     @objc func showAsGalleryCell(_ sender: UIView) {
@@ -142,7 +139,7 @@ class mainPageVC: UIViewController {
            let nibCell = UINib(nibName: "galleryCollectionViewCell", bundle: nil)
            collectionView.register(nibCell, forCellWithReuseIdentifier: galleryCollectionViewCellId)
            collectionView.reloadData()
-        
+           TypeImageView.image = UIImage(systemName: "square.grid.3x2.fill")
     
     }
     @objc func cancelCustomPopup(_ sender: UIView) {
@@ -157,11 +154,6 @@ class mainPageVC: UIViewController {
         let VC = self.storyboard?.instantiateViewController(withIdentifier: "searchVC") as! searchVC
         navigationController?.pushViewController(VC, animated: true)
     }
-    
-    
-   
- 
-
    
 
 }
@@ -197,33 +189,22 @@ extension mainPageVC: UICollectionViewDelegate, UICollectionViewDataSource, UICo
              let partner = partners[indexPath.row]
 
              cell.name.text = partner.name!
-             cell.image.image = UIImage(named: "first")
-//             cell.image.layer.masksToBounds = true
-//             cell.image.layer.cornerRadius = cell.image.bounds.width / 2
-//             print(cell.image.bounds.width / 2)
-
-            return cell
+             cell.image.image = UIImage(named: "profile_1")
+             return cell
         }
         else if viewStyle == 1 {
              let cell = collectionView.dequeueReusableCell(withReuseIdentifier: galleryCollectionViewCellId, for: indexPath) as! galleryCollectionViewCell
              let partner = partners[indexPath.row]
-
              cell.name.text = partner.name!
              cell.image.image = UIImage(named: "second")
-//             cell.image.layer.masksToBounds = true
-//             cell.image.layer.cornerRadius = cell.image.bounds.width / 2
-//             print(cell.image.bounds.width / 2)
-
              return cell
         }
         else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: listCollectionViewCellId, for: indexPath) as! listCollectionViewCell
-             let partner = partners[indexPath.row]
-
-                    cell.name.text = partner.name!
-                    cell.image.image = UIImage(named: "third")
-
-                    return cell
+            let partner = partners[indexPath.row]
+            cell.name.text = partner.name!
+            cell.image.image = UIImage(named: "third")
+            return cell
         }
               
        
@@ -242,9 +223,10 @@ extension mainPageVC: UICollectionViewDelegate, UICollectionViewDataSource, UICo
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
         let VC = self.storyboard?.instantiateViewController(withIdentifier: "profileVC") as! profileVC
-                     navigationController?.pushViewController(VC, animated: true)
-        print(indexPath.item)
+        navigationController?.pushViewController(VC, animated: true)
+
         
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout:
@@ -268,25 +250,4 @@ extension mainPageVC: UICollectionViewDelegate, UICollectionViewDataSource, UICo
     
 }
 
-//extension mainPageVC: HSPopupMenuDelegate {
-//    func popupMenu(_ popupMenu: HSPopupMenu, didSelectAt index: Int) {
-//        viewStyle = index
-//        if viewStyle == 0 {
-//            let nibCell = UINib(nibName: "largeCollectionViewCell", bundle: nil)
-//            collectionView.register(nibCell, forCellWithReuseIdentifier: largeCollectioinViewCellId)
-//        }
-//        else if viewStyle == 1 {
-//
-//            let nibCell = UINib(nibName: "galleryCollectionViewCell", bundle: nil)
-//            collectionView.register(nibCell, forCellWithReuseIdentifier: galleryCollectionViewCellId)
-//        }
-//        else if viewStyle == 2 {
-//
-//            let nibCell = UINib(nibName: "listCollectionViewCell", bundle: nil)
-//            collectionView.register(nibCell, forCellWithReuseIdentifier: listCollectionViewCellId)
-//        }
-//        collectionView.reloadData()
-//        print("selected index is: " + "\(index)")
-//    }
-//}
 

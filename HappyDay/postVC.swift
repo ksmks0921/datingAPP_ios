@@ -27,7 +27,8 @@ class postVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-   
+        
+        setupNavigationBar()
         let titles = ["전체", "전국메일 친구", "친구 모집", "지금부터 놀자"]
         
         let tempdataSource = JXSegmentedTitleDataSource()
@@ -47,20 +48,26 @@ class postVC: UIViewController {
         
         segmentedView.indicators = [indicator]
 
-      
+
+         segmentedView.dataSource = segmentedDataSource
+         segmentedView.delegate = self
+         tabview.addSubview(self.segmentedView)
+
+         segmentedView.listContainer = listContainerView
+         contentview.addSubview(listContainerView)
+
+
+    }
+    private func setupNavigationBar(){
+        let button_1 = UIButton(type: .system)
+        button_1.setImage(UIImage(systemName: "doc.text.magnifyingglass"), for: .normal)
+        button_1.frame = CGRect(x: 0, y: 0, width: 34, height: 34)
         
+        let button_2 = UIButton(type: .system)
+        button_2.setImage(UIImage(systemName: "doc.text.magnifyingglass"), for: .normal)
+        button_2.frame = CGRect(x: 0, y: 0, width: 34, height: 34)
         
-        
-         view.backgroundColor = .white
-
-           segmentedView.dataSource = segmentedDataSource
-           segmentedView.delegate = self
-           tabview.addSubview(self.segmentedView)
-
-           segmentedView.listContainer = listContainerView
-           contentview.addSubview(listContainerView)
-
-
+        navigationItem.rightBarButtonItems = [UIBarButtonItem(customView: button_1), UIBarButtonItem(customView: button_2)]
     }
     @objc func addTapped(){
         let VC = self.storyboard?.instantiateViewController(withIdentifier: "searchTypeVC") as! searchTypeVC
@@ -70,31 +77,17 @@ class postVC: UIViewController {
         let VC = self.storyboard?.instantiateViewController(withIdentifier: "createpostVC") as! createpostVC
                     navigationController?.pushViewController(VC, animated: true)
     }
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//
-//        navigationController?.interactivePopGestureRecognizer?.isEnabled = (segmentedView.selectedIndex == 0)
-//    }
-//
-//    override func viewWillDisappear(_ animated: Bool) {
-//        super.viewWillDisappear(animated)
-//
-//        navigationController?.interactivePopGestureRecognizer?.isEnabled = true
-//    }
+
     override func viewWillAppear(_ animated: Bool) {
            super.viewWillAppear(animated)
-           navigationController?.setNavigationBarHidden(true, animated: animated)
-       }
-    
-//       override func viewWillDisappear(_ animated: Bool) {
-//           super.viewWillDisappear(animated)
-//           navigationController?.setNavigationBarHidden(false, animated: animated)
-//       }
+           navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-
+        customNavBar.frame.size.height = navbarHeight
         segmentedView.frame = CGRect(x: 0, y: 0, width: view.bounds.size.width, height: 30)
-       
+        
         listContainerView.frame = CGRect(x: 0, y: 0, width: view.bounds.size.width, height: view.bounds.size.height  - 50)
     }
     @IBAction func postsearch(_ sender: Any) {
