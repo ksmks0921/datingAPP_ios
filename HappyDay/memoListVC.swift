@@ -41,7 +41,7 @@ class memoListVC: UIViewController {
         let VC = self.storyboard?.instantiateViewController(withIdentifier: "selectDomainVC") as! selectDomainVC
         VC.delegate_momolist = self
         VC.page_from = "momoList"
-        VC.title = "카테고리 선택"
+   
         navigationController?.pushViewController(VC, animated: true)
     }
     

@@ -55,8 +55,7 @@ extension chatListVC:  UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
        
             let cell = chatListTableView.dequeueReusableCell(withIdentifier: "chatTableCell", for: indexPath as IndexPath) as! chatTableCell
-            cell.photo.image = UIImage(named: "second")
-           
+            cell.photo.image = UIImage(named: "profile_2")
 
             return cell
            
@@ -67,7 +66,6 @@ extension chatListVC:  UITableViewDelegate, UITableViewDataSource {
        return 100
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let VC = self.storyboard?.instantiateViewController(withIdentifier: "chatRoomVC") as! chatRoomVC
-        navigationController?.pushViewController(VC, animated: true)
+        navigationController?.pushViewController(AdvancedExampleViewController(), animated: true)
     }
 }

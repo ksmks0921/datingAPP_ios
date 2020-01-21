@@ -26,18 +26,24 @@ class searchVC: UIViewController {
         
         super.viewDidLoad()
         
-        navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.2039215686, green: 0.7803921569, blue: 0.3490196078, alpha: 1)
-        UINavigationBar.appearance().tintColor = UIColor.white
-        self.title = "프로필 검색"
-        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
-        let backButton = UIBarButtonItem()
-        backButton.title = "뒤로"
-        self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
+       
         
         searchType = "profile"
         let nib = UINib.init(nibName: "searchTableViewCell", bundle: nil)
         self.tableView.register(nib, forCellReuseIdentifier: "searchTableViewCell")
         tableView.reloadData()
+        
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        
+        super.viewWillAppear(animated)
+        
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+       
+                
+    }
+    @IBAction func backBtnTapped(_ sender: Any) {
+         self.navigationController?.popViewController(animated: true)
     }
     @IBAction func profilesearchBtnTapped(_ sender: Any) {
         

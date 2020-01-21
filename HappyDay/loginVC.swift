@@ -23,13 +23,7 @@ class loginVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //tap bar
-        self.title = "로그인"
-        navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.2039215686, green: 0.7803921569, blue: 0.3490196078, alpha: 1)
-        UINavigationBar.appearance().tintColor = UIColor.white
-        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "뒤로", style: .plain, target: nil, action: nil)
+     
         
         //select domain function
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(selectDomain(_:)))
@@ -37,17 +31,26 @@ class loginVC: UIViewController {
         gotodomain.addGestureRecognizer(tapGesture)
 
     }
+   
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+       
+                
+    }
     override var preferredStatusBarStyle: UIStatusBarStyle {
            return .lightContent
     }
 
-    
+    @IBAction func backBtnTapped(_ sender: Any) {
+           self.navigationController?.popViewController(animated: true)
+    }
     @objc func selectDomain(_ sender: UIView) {
        let VC = self.storyboard?.instantiateViewController(withIdentifier: "selectDomainVC") as! selectDomainVC
        VC.delegate = self
        VC.page_from = "login"
-       VC.title = "도메인 선택"
        navigationController?.pushViewController(VC, animated: true)
     }
 

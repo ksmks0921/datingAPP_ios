@@ -36,12 +36,12 @@ class signUpVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = "간단한 계정창조"
-        navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.2039215686, green: 0.7803921569, blue: 0.3490196078, alpha: 1)
-        UINavigationBar.appearance().tintColor = UIColor.white
-        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "뒤로", style: .plain, target: nil, action: nil)
+//        self.title = "간단한 계정창조"
+//        navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.2039215686, green: 0.7803921569, blue: 0.3490196078, alpha: 1)
+//        UINavigationBar.appearance().tintColor = UIColor.white
+//        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
+//        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+//        navigationItem.backBarButtonItem = UIBarButtonItem(title: "뒤로", style: .plain, target: nil, action: nil)
         
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(clickView_1(_:)))
@@ -54,8 +54,18 @@ class signUpVC: UIViewController {
         
 
     }
+    override func viewWillAppear(_ animated: Bool) {
+           super.viewWillAppear(animated)
+           
+           navigationController?.setNavigationBarHidden(true, animated: animated)
+          
+                   
+       }
+    @IBAction func backBtnTapped(_ sender: Any) {
+        
+        self.navigationController?.popViewController(animated: true)
+    }
     
-
     @objc func clickView_1(_ sender: UIView) {
         
           guard let popupVC = storyboard?.instantiateViewController(withIdentifier: "ExamplePopupViewController") as? ExamplePopupViewController else { return }

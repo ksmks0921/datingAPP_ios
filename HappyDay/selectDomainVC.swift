@@ -20,18 +20,35 @@ class selectDomainVC: UIViewController{
     var delegate_momolist: memoListVCDelegate?
     var selectedIndex: IndexPath?
     var page_from: String?
+    @IBOutlet weak var custom_title: UILabel!
     
+ 
     override func viewDidLoad() {
         super.viewDidLoad()
  
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "뒤로", style: .plain, target: nil, action: nil)
+        setUpTitle()
         
         let nib = UINib.init(nibName: "MyCustomCell", bundle: nil)
         self.tableview.register(nib, forCellReuseIdentifier: "MyCustomCell")
         
+        
     }
-
+    
+    private func setUpTitle(){
+        if page_from == "login"{
+            custom_title.text = "도메인 선택"
+       }
+       else {
+            custom_title.text = "카테고리 선택"
+       }
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+       
+                
+    }
     override func viewDidDisappear(_ animated: Bool) {
         if page_from == "login"{
             self.delegate?.selectDomainDismiss(domain: domains[selectedIndex!.row] )
@@ -39,6 +56,9 @@ class selectDomainVC: UIViewController{
         else {
             self.delegate_momolist?.selectCategoryDismiss(category: categories[selectedIndex!.row])
         }
+    }
+    @IBAction func backBtnTapped(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
     }
 
 }
