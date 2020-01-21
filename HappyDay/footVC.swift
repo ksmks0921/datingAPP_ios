@@ -15,6 +15,7 @@ class footVC: UIViewController {
     @IBOutlet weak var allFootLabel: UILabel!
     @IBOutlet weak var footBtn: UIButton!
     @IBOutlet weak var selfFootBtn: UIButton!
+    @IBOutlet weak var envelopBtn: UIButton!
     @IBOutlet weak var footView: UIView!
     
     let properties_profile: [String] = ["성별", "출생지", "년령", "신체", "스타일", "직업", "이미지", "흥미있는"]
@@ -30,6 +31,17 @@ class footVC: UIViewController {
         footTableView.reloadData()
 
        
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    @IBAction func backBtnTapped(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+    }
+    @IBAction func envelopBtnTapped(_ sender: Any) {
+    }
+    @IBAction func trashBtnTapped(_ sender: Any) {
     }
     @IBAction func footBtnTapped(_ sender: Any) {
         footBtn.backgroundColor = #colorLiteral(red: 0.2039215686, green: 0.7803921569, blue: 0.3490196078, alpha: 1)

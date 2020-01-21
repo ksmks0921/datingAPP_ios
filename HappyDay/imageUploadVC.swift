@@ -22,6 +22,7 @@ class imageUploadVC: UIViewController {
     var image_index:Int?
     override func viewDidLoad() {
         super.viewDidLoad()
+       
         
         
         let tapGesture_1 = UITapGestureRecognizer(target: self, action: #selector(uploadPhotoTapped_1(_:)))
@@ -52,15 +53,16 @@ class imageUploadVC: UIViewController {
         imageView3.addGestureRecognizer(tapGesture_6)
        
     }
+    @IBAction func backBtnTapped(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+        
+    }
     override func viewWillAppear(_ animated: Bool) {
            super.viewWillAppear(animated)
-           navigationController?.setNavigationBarHidden(false, animated: animated)
+           navigationController?.setNavigationBarHidden(true, animated: animated)
     }
         
-    override func viewWillDisappear(_ animated: Bool) {
-       super.viewWillDisappear(animated)
-       navigationController?.setNavigationBarHidden(false, animated: animated)
-    }
+  
 
     @objc func uploadPhotoTapped_1(_ sender: UIView) {
         self.image_index = 1

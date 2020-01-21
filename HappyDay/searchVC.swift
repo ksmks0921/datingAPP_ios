@@ -28,7 +28,7 @@ class searchVC: UIViewController {
         
         navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.2039215686, green: 0.7803921569, blue: 0.3490196078, alpha: 1)
         UINavigationBar.appearance().tintColor = UIColor.white
-        self.title = "프로화일 검색"
+        self.title = "프로필 검색"
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
         let backButton = UIBarButtonItem()
         backButton.title = "뒤로"

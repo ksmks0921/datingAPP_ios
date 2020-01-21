@@ -10,13 +10,23 @@ import UIKit
 
 class ignoreListVC: UIViewController {
 
+    @IBOutlet weak var backBtn: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.title = "무시 목록"
+        
+    }
+    @IBAction func backBtnTapped(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
     }
     
-
-   
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+       
+                
+    }
+    
 
 }

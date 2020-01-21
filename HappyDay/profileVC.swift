@@ -13,6 +13,7 @@ class profileVC: UIViewController {
     @IBOutlet weak var sliderCollectionView: UICollectionView!
     @IBOutlet weak var name_birth: UILabel!
     @IBOutlet weak var age_location: UILabel!
+    @IBOutlet weak var custom_title: UILabel!
     @IBOutlet weak var userinfotableview: UITableView!
     
     var counter = 0
@@ -28,22 +29,23 @@ class profileVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.2039215686, green: 0.7803921569, blue: 0.3490196078, alpha: 1)
-        UINavigationBar.appearance().tintColor = UIColor.white
-        self.title = "김똘똘"
-        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
-        let backButton = UIBarButtonItem()
-        backButton.title = "뒤로"
-        self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
-        
-        
+ 
         let nib = UINib.init(nibName: "profileTableViewCell", bundle: nil)
         self.userinfotableview.register(nib, forCellReuseIdentifier: "profileTableViewCell")
         userinfotableview.reloadData()
         
         
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+       
+                
+    }
+    @IBAction func backBtnTapped(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+    }
     @IBAction func preBtnTapped(_ sender: Any) {
         if counter > 0{
             let index = IndexPath.init(item: counter, section: 0)

@@ -27,8 +27,7 @@ class postVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        setupNavigationBar()
+
         let titles = ["전체", "전국메일 친구", "친구 모집", "지금부터 놀자"]
         
         let tempdataSource = JXSegmentedTitleDataSource()
@@ -58,25 +57,7 @@ class postVC: UIViewController {
 
 
     }
-    private func setupNavigationBar(){
-        let button_1 = UIButton(type: .system)
-        button_1.setImage(UIImage(systemName: "doc.text.magnifyingglass"), for: .normal)
-        button_1.frame = CGRect(x: 0, y: 0, width: 34, height: 34)
-        
-        let button_2 = UIButton(type: .system)
-        button_2.setImage(UIImage(systemName: "doc.text.magnifyingglass"), for: .normal)
-        button_2.frame = CGRect(x: 0, y: 0, width: 34, height: 34)
-        
-        navigationItem.rightBarButtonItems = [UIBarButtonItem(customView: button_1), UIBarButtonItem(customView: button_2)]
-    }
-    @objc func addTapped(){
-        let VC = self.storyboard?.instantiateViewController(withIdentifier: "searchTypeVC") as! searchTypeVC
-                navigationController?.pushViewController(VC, animated: true)
-    }
-    @objc func playTapped(){
-        let VC = self.storyboard?.instantiateViewController(withIdentifier: "createpostVC") as! createpostVC
-                    navigationController?.pushViewController(VC, animated: true)
-    }
+
 
     override func viewWillAppear(_ animated: Bool) {
            super.viewWillAppear(animated)

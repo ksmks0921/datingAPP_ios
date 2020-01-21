@@ -27,8 +27,15 @@ class personalPageVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.2039215686, green: 0.7803921569, blue: 0.3490196078, alpha: 1)
+        UINavigationBar.appearance().tintColor = UIColor.white
+
+        
+        //register collectionView
         let nibCell = UINib(nibName: "personalPageCollectionCell", bundle: nil)
         collectioView.register(nibCell, forCellWithReuseIdentifier: "personalPageCollectionCell")
+        
+        
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         screenSize = UIScreen.main.bounds
         screenWidth = screenSize.width
@@ -52,6 +59,17 @@ class personalPageVC: UIViewController {
           
          
         
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+        
+                
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
     }
     @objc func uploadPhotoTapped(_ sender: UIView) {
                 let VC = self.storyboard?.instantiateViewController(withIdentifier: "imageUploadVC") as! imageUploadVC

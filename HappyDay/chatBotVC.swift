@@ -17,15 +17,14 @@ class chatBotVC: UIViewController {
         return JXSegmentedListContainerView(dataSource: self)
     }()
     
+    @IBOutlet weak var mainView: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         
-        navigationController?.hidesBarsOnTap = false
-        navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.2039215686, green: 0.7803921569, blue: 0.3490196078, alpha: 1)
-        UINavigationBar.appearance().tintColor = UIColor.white
-        
-        
+
+
         setUpChatBot()
 
         
@@ -33,9 +32,14 @@ class chatBotVC: UIViewController {
         
 
     }
-    
+    @IBAction func trashBtnTapped(_ sender: Any) {
+        
+    }
+    @IBAction func envelopBtnTapped(_ sender: Any) {
+        
+    }
     private func setUpChatBot(){
-        totalItemWidth = UIScreen.main.bounds.size.width - 30*2
+        totalItemWidth = UIScreen.main.bounds.size.width - 20*2
         let titles = ["모두", "읽지 않음", "미 회선", "회신 된", "저장 된"]
         let titleDataSource = JXSegmentedTitleDataSource()
         titleDataSource.itemContentWidth = totalItemWidth/CGFloat(titles.count)
@@ -50,7 +54,7 @@ class chatBotVC: UIViewController {
         gridView.frame = CGRect(x: 0, y: 0, width: totalItemWidth, height: 30)
         gridView.backgroundColor = UIColor.white
         gridView.layer.masksToBounds = true
-        gridView.layer.cornerRadius = 3
+        gridView.layer.cornerRadius = 4
         gridView.layer.borderColor = #colorLiteral(red: 0.2039215686, green: 0.7803921569, blue: 0.3490196078, alpha: 1)
         
         gridView.layer.borderWidth = 1/UIScreen.main.scale
@@ -67,20 +71,16 @@ class chatBotVC: UIViewController {
 
         let indicator = JXSegmentedIndicatorBackgroundView()
         indicator.indicatorHeight = 30
-        indicator.indicatorCornerRadius = 3
+        indicator.indicatorCornerRadius = 4
         indicator.backgroundWidthIncrement = 2
         indicator.indicatorColor = #colorLiteral(red: 0.2039215686, green: 0.7803921569, blue: 0.3490196078, alpha: 1)
         segmentedView.indicators = [indicator]
-        
-        
-        view.backgroundColor = .white
 
-        
         segmentedView.delegate = self
-        view.addSubview(self.segmentedView)
+        mainView.addSubview(self.segmentedView)
 
         segmentedView.listContainer = listContainerView
-        view.addSubview(listContainerView)
+        mainView.addSubview(listContainerView)
     }
     
     
@@ -88,14 +88,15 @@ class chatBotVC: UIViewController {
       override func viewDidLayoutSubviews() {
           super.viewDidLayoutSubviews()
 
-          segmentedView.frame = CGRect(x: 30, y: topbarHeight + 10, width: totalItemWidth, height: 30)       
-          listContainerView.frame = CGRect(x: 0, y: topbarHeight + 50, width: view.bounds.size.width, height: view.bounds.size.height  - topbarHeight - 50)
+          segmentedView.frame = CGRect(x: 20, y:  10, width: totalItemWidth, height: 30)
+          listContainerView.frame = CGRect(x: 0, y: 50, width: view.bounds.size.width, height: view.bounds.size.height - 50)
       }
     
       override func viewWillAppear(_ animated: Bool) {
                super.viewWillAppear(animated)
-               navigationController?.setNavigationBarHidden(false, animated: animated)
-               
+               navigationController?.setNavigationBarHidden(true, animated: animated)
+          
+             
         }
 
         

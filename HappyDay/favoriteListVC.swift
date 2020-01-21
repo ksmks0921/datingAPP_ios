@@ -13,10 +13,19 @@ class favoriteListVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.title = "즐겨 찾기"
+      
     }
-    
-
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+       
+                
+    }
+    @IBAction func backBtnTapped(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+        
+    }
   
 
 }

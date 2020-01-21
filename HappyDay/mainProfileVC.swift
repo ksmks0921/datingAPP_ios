@@ -21,6 +21,13 @@ class mainProfileVC: UIViewController {
     let properties_profile: [String] = ["기본 프로필", "프로필 소개문", "외모", "직업관련", "라이흐 스타일"]
     override func viewDidLoad() {
         super.viewDidLoad()
+        //set title and change back button title
+        self.title = "기본 프로필 설정"
+        let backButton = UIBarButtonItem()
+        backButton.title = "뒤로"
+        self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
+        
+        
         
         let nib = UINib.init(nibName: "searchTableViewCell", bundle: nil)
         self.tableView.register(nib, forCellReuseIdentifier: "searchTableViewCell")
@@ -30,12 +37,23 @@ class mainProfileVC: UIViewController {
         settingBtn.isUserInteractionEnabled = true
         settingBtn.addGestureRecognizer(tapGesture_1)
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+           super.viewWillAppear(animated)
+           
+           navigationController?.setNavigationBarHidden(true, animated: animated)
+          
+                   
+    }
+    @IBAction func backBtnTapped(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+        
+    }
     @objc func settingBtnTapped(_ sender: UIView) {
         
                 
     }
-
+    
+    
 }
 extension mainProfileVC:  UITableViewDelegate, UITableViewDataSource {
     
@@ -65,6 +83,8 @@ extension mainProfileVC:  UITableViewDelegate, UITableViewDataSource {
                     VC.items = ["별명", "나이", "별자리", "피형", "___", "잘노는 지역", "출생지", ""]
                     VC.values = ["김미선", "26", "처녀좌", "B", "___", "베이징", "선택하세요", "모두에게 공개"]
                     VC.pageIndex = "main"
+                    VC.title = "기본 프로필 설정"
+                    
                 }
                 else if indexPath.row == 1 {
                     
@@ -73,16 +93,19 @@ extension mainProfileVC:  UITableViewDelegate, UITableViewDataSource {
                     VC.items = ["스타일", "체중", "당신의 형태", "눈"]
                     VC.values = ["스타일", "75", "당신의 형태", "Black"]
                     VC.pageIndex = "style"
+                    VC.title = "외모"
                 }
                 else if indexPath.row == 3 {
                      VC.items = ["직업", "", "년봉", ""]
                      VC.values = ["programmer", "", "5000", ""]
                      VC.pageIndex = "job"
+                     VC.title = "직업관련"
                 }
                 else if indexPath.row == 4 {
                      VC.items = ["담배", "술", "여가시간", "교재 인원수"]
                      VC.values = ["no", "no", "football", "10"]
                      VC.pageIndex = "life"
+                     VC.title = "라이흐 스타일"
                 }
         navigationController?.pushViewController(VC, animated: true)
     }

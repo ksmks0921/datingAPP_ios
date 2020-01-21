@@ -12,10 +12,27 @@ class friendListVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "친구 목록"
+        
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+       
+                
+    }
+    @IBAction func backBtnTapped(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+        
     }
     
-
-    
+    @IBAction func createFriendBtnTapped(_ sender: Any) {
+    }
+    @IBAction func friendBtnTapped(_ sender: Any) {
+    }
+    @IBAction func waitBtnTapped(_ sender: Any) {
+    }
+    @IBAction func agreeWatiBtnTapped(_ sender: Any) {
+    }
 
 }
