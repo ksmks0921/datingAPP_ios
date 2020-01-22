@@ -38,9 +38,11 @@
 		6780C8F323CD601000A54733 /* BottomPopupPresentAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6780C8EB23CD601000A54733 /* BottomPopupPresentAnimator.swift */; };
 		6780C8F423CD601000A54733 /* BottomPopupTransitionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6780C8EC23CD601000A54733 /* BottomPopupTransitionHandler.swift */; };
 		6780C8F523CD601000A54733 /* BottomPopupPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6780C8ED23CD601000A54733 /* BottomPopupPresentationController.swift */; };
-		6780C8F923CD62A500A54733 /* ExamplePopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6780C8F823CD62A500A54733 /* ExamplePopupViewController.swift */; };
 		6780C90123CD6DD500A54733 /* MyCustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6780C90023CD6DD500A54733 /* MyCustomCell.xib */; };
 		6780C90323CDF45100A54733 /* facebookLoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6780C90223CDF45100A54733 /* facebookLoginVC.swift */; };
+		6783EBC523D7C2B1009DC0A3 /* pointChangeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6783EBC423D7C2B1009DC0A3 /* pointChangeVC.swift */; };
+		6783EBC723D7DB2C009DC0A3 /* paymentStartVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6783EBC623D7DB2C009DC0A3 /* paymentStartVC.swift */; };
+		6783EBC923D7F3E7009DC0A3 /* BottomeSelectVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6783EBC823D7F3E7009DC0A3 /* BottomeSelectVC.swift */; };
 		678C199723D216B900906A8D /* DesinableImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 678C199623D216B900906A8D /* DesinableImageView.swift */; };
 		678C199923D25E4D00906A8D /* mainProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 678C199823D25E4D00906A8D /* mainProfileVC.swift */; };
 		678C199B23D26A3800906A8D /* mainProfileItemVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 678C199A23D26A3800906A8D /* mainProfileItemVC.swift */; };
@@ -158,9 +160,11 @@
 		6780C8EB23CD601000A54733 /* BottomPopupPresentAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomPopupPresentAnimator.swift; sourceTree = "<group>"; };
 		6780C8EC23CD601000A54733 /* BottomPopupTransitionHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomPopupTransitionHandler.swift; sourceTree = "<group>"; };
 		6780C8ED23CD601000A54733 /* BottomPopupPresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomPopupPresentationController.swift; sourceTree = "<group>"; };
-		6780C8F823CD62A500A54733 /* ExamplePopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamplePopupViewController.swift; sourceTree = "<group>"; };
 		6780C90023CD6DD500A54733 /* MyCustomCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyCustomCell.xib; sourceTree = "<group>"; };
 		6780C90223CDF45100A54733 /* facebookLoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = facebookLoginVC.swift; sourceTree = "<group>"; };
+		6783EBC423D7C2B1009DC0A3 /* pointChangeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pointChangeVC.swift; sourceTree = "<group>"; };
+		6783EBC623D7DB2C009DC0A3 /* paymentStartVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = paymentStartVC.swift; sourceTree = "<group>"; };
+		6783EBC823D7F3E7009DC0A3 /* BottomeSelectVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomeSelectVC.swift; sourceTree = "<group>"; };
 		678C199623D216B900906A8D /* DesinableImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesinableImageView.swift; sourceTree = "<group>"; };
 		678C199823D25E4D00906A8D /* mainProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mainProfileVC.swift; sourceTree = "<group>"; };
 		678C199A23D26A3800906A8D /* mainProfileItemVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mainProfileItemVC.swift; sourceTree = "<group>"; };
@@ -322,7 +326,7 @@
 				6780C8DB23CCF76800A54733 /* selectDomainVC.swift */,
 				6780C90223CDF45100A54733 /* facebookLoginVC.swift */,
 				6780C8DD23CCF7A500A54733 /* signUpVC.swift */,
-				6780C8F823CD62A500A54733 /* ExamplePopupViewController.swift */,
+				6783EBC823D7F3E7009DC0A3 /* BottomeSelectVC.swift */,
 				6792001D23CE1C8400C4872B /* customTabBarVC.swift */,
 				6792001B23CE18A500C4872B /* mainPageVC.swift */,
 				6792003323CE874400C4872B /* searchVC.swift */,
@@ -347,6 +351,8 @@
 				678C19AA23D3BB8000906A8D /* memoListVC.swift */,
 				678C19AC23D3C4A800906A8D /* noSeeVC.swift */,
 				678C19AE23D3CF1B00906A8D /* favoriteListVC.swift */,
+				6783EBC423D7C2B1009DC0A3 /* pointChangeVC.swift */,
+				6783EBC623D7DB2C009DC0A3 /* paymentStartVC.swift */,
 				6775361C23CC1DB7003B844E /* Main.storyboard */,
 				6775361F23CC1DBE003B844E /* Assets.xcassets */,
 				6775362123CC1DBE003B844E /* LaunchScreen.storyboard */,
@@ -757,6 +763,8 @@
 				6792001C23CE18A500C4872B /* mainPageVC.swift in Sources */,
 				6792004223CFA7EA00C4872B /* contentforpostVC.swift in Sources */,
 				6792006423D1620200C4872B /* MockMessage.swift in Sources */,
+				6783EBC723D7DB2C009DC0A3 /* paymentStartVC.swift in Sources */,
+				6783EBC923D7F3E7009DC0A3 /* BottomeSelectVC.swift in Sources */,
 				6792005723D1249A00C4872B /* chatTableCell.swift in Sources */,
 				6792002D23CE793900C4872B /* galleryCollectionViewCell.swift in Sources */,
 				6792003723CE8CAE00C4872B /* searchTableViewCell.swift in Sources */,
@@ -803,11 +811,11 @@
 				6771FA4423D56B9B00DA1051 /* UIView+Border.m in Sources */,
 				6780C8F423CD601000A54733 /* BottomPopupTransitionHandler.swift in Sources */,
 				678C19A923D3BAD900906A8D /* friendListVC.swift in Sources */,
-				6780C8F923CD62A500A54733 /* ExamplePopupViewController.swift in Sources */,
 				6792002323CE57CC00C4872B /* largeCollectionViewCell.swift in Sources */,
 				6771FA4B23D623A100DA1051 /* CustomMessageFlowLayout.swift in Sources */,
 				6792003123CE804700C4872B /* listCollectionViewCell.swift in Sources */,
 				678C19A123D2C02800906A8D /* footVC.swift in Sources */,
+				6783EBC523D7C2B1009DC0A3 /* pointChangeVC.swift in Sources */,
 				6792004C23D0DF0700C4872B /* playnowVC.swift in Sources */,
 				6792006E23D1625600C4872B /* SampleData.swift in Sources */,
 				674B9DA823D68F8400FD2C48 /* ChatViewController.swift in Sources */,

@@ -68,28 +68,28 @@ class signUpVC: UIViewController {
     
     @objc func clickView_1(_ sender: UIView) {
         
-          guard let popupVC = storyboard?.instantiateViewController(withIdentifier: "ExamplePopupViewController") as? ExamplePopupViewController else { return }
+          guard let popupVC = storyboard?.instantiateViewController(withIdentifier: "BottomeSelectVC") as? BottomeSelectVC else { return }
           popupVC.height = 400
           popupVC.topCornerRadius = 10
           popupVC.presentDuration = 1
           popupVC.dismissDuration = 1
           popupVC.shouldDismissInteractivelty = true
           popupVC.popupDelegate = self
-          popupVC.previousVC = self
+//          popupVC.previousVC = self
           popupVC.delegate = self
           popupVC.location_age = "location"
           present(popupVC, animated: true, completion: nil)
     }
     @objc func clickView_2(_ sender: UIView) {
         
-          guard let popupVC = storyboard?.instantiateViewController(withIdentifier: "ExamplePopupViewController") as? ExamplePopupViewController else { return }
+          guard let popupVC = storyboard?.instantiateViewController(withIdentifier: "BottomeSelectVC") as? BottomeSelectVC else { return }
           popupVC.height = 400
           popupVC.topCornerRadius = 10
           popupVC.presentDuration = 1
           popupVC.dismissDuration = 1
           popupVC.shouldDismissInteractivelty = true
           popupVC.popupDelegate = self
-          popupVC.previousVC = self
+//          popupVC.previousVC = self
           popupVC.delegate = self
           popupVC.location_age = "age"
           present(popupVC, animated: true, completion: nil)

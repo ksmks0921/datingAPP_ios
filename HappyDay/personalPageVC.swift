@@ -18,6 +18,9 @@ class personalPageVC: UIViewController {
     @IBOutlet weak var commentView: UIView!
     @IBOutlet weak var commentEditView: DesinableView!
     @IBOutlet weak var adView: UIView!
+    @IBOutlet weak var pointerAddView: DesinableView!
+    @IBOutlet weak var pointerChangeView: DesinableView!
+    
     
     let properties_profile: [String] = ["발자국", "메모 목록", "무시 목록", "보면 아니야", "즐거 찾기", "친구 목록"]
     let icons: [UIImage] = [#imageLiteral(resourceName: "outline_account_circle_black_18dp"), #imageLiteral(resourceName: "outline_account_circle_black_18dp"), #imageLiteral(resourceName: "outline_account_circle_black_18dp"),#imageLiteral(resourceName: "outline_account_circle_black_18dp"),#imageLiteral(resourceName: "outline_account_circle_black_18dp"),#imageLiteral(resourceName: "outline_account_circle_black_18dp"),]
@@ -52,12 +55,17 @@ class personalPageVC: UIViewController {
         tapGesture.delegate = self as? UIGestureRecognizerDelegate
         uploadPhotoView.addGestureRecognizer(tapGesture)
         
-        let tapGesture_2 = UITapGestureRecognizer(target: self, action: #selector(profileBtnTapped))
+        let tapGesture_2 = UITapGestureRecognizer(target: self, action: #selector(profileBtnTapped(_:)))
         tapGesture_2.delegate = self as? UIGestureRecognizerDelegate
         userProfileView.addGestureRecognizer(tapGesture_2)
               
-          
+        let tapGesture_3 = UITapGestureRecognizer(target: self, action: #selector(pointerAddTapped(_:)))
+        tapGesture_3.delegate = self as? UIGestureRecognizerDelegate
+        pointerAddView.addGestureRecognizer(tapGesture_3)
          
+        let tapGesture_4 = UITapGestureRecognizer(target: self, action: #selector(pointerChangeTapped(_:)))
+        tapGesture_4.delegate = self as? UIGestureRecognizerDelegate
+        pointerChangeView.addGestureRecognizer(tapGesture_4)
         
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -71,16 +79,25 @@ class personalPageVC: UIViewController {
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
     }
+    
     @objc func uploadPhotoTapped(_ sender: UIView) {
-                let VC = self.storyboard?.instantiateViewController(withIdentifier: "imageUploadVC") as! imageUploadVC
-                navigationController?.pushViewController(VC, animated: true)
+                let VC_1 = self.storyboard?.instantiateViewController(withIdentifier: "imageUploadVC") as! imageUploadVC
+                navigationController?.pushViewController(VC_1, animated: true)
     }
 
     @objc func profileBtnTapped(_ sender: UIView) {
-                let VC = self.storyboard?.instantiateViewController(withIdentifier: "mainProfileVC") as! mainProfileVC
-                navigationController?.pushViewController(VC, animated: true)
+                let VC_2 = self.storyboard?.instantiateViewController(withIdentifier: "mainProfileVC") as! mainProfileVC
+                navigationController?.pushViewController(VC_2, animated: true)
     }
-    
+    @objc func pointerAddTapped(_ sender: UIView) {
+       
+                let VC_3 = self.storyboard?.instantiateViewController(withIdentifier: "pointChangeVC") as! pointChangeVC
+                navigationController?.pushViewController(VC_3, animated: true)
+    }
+    @objc func pointerChangeTapped(_ sender: UIView) {
+                let VC_4 = self.storyboard?.instantiateViewController(withIdentifier: "pointChangeVC") as! pointChangeVC
+                navigationController?.pushViewController(VC_4, animated: true)
+    }
 }
 extension personalPageVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     
