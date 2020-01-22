@@ -153,7 +153,7 @@ final class AdvancedExampleViewController: ChatViewController {
         messageInputBar.sendButton.imageView?.backgroundColor = #colorLiteral(red: 0.2039215686, green: 0.7803921569, blue: 0.3490196078, alpha: 1)
         messageInputBar.sendButton.contentEdgeInsets = UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2)
         messageInputBar.sendButton.setSize(CGSize(width: 36, height: 36), animated: false)
-        messageInputBar.sendButton.setImage(UIImage(named: "round_send_white_18dp"), for: .normal)
+        messageInputBar.sendButton.setImage(UIImage(named: "right-arrow"), for: .normal)
         messageInputBar.sendButton.title = nil
         messageInputBar.sendButton.imageView?.layer.cornerRadius = 16
         messageInputBar.middleContentViewPadding.right = 2

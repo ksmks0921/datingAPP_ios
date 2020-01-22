@@ -10,7 +10,7 @@ import UIKit
 
 class BottomeSelectVC: BottomPopupViewController {
     @IBOutlet weak var tableView: UITableView!
-      let locations: [String] = ["상해", "베이징", "대련", "청도", "장춘"]
+      let locations: [String] = ["상해", "베이징", "대련", "청도", "장춘","길림","천진", "홍콩", "연길", "길림"]
       let ages: [String] = ["18세 ~ 20세", "20세 ~ 25세", "25세 ~ 35세", "35세 ~ 45세", "45세 ~ 60세"]
     
       var selectedIndex:IndexPath!

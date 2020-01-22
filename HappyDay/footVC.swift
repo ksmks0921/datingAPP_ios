@@ -75,6 +75,7 @@ extension footVC: UITableViewDelegate, UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "footTableViewCell", for: indexPath as IndexPath) as! footTableViewCell
         cell.photo.image = UIImage(named: "first")
+        cell.newMark.image = UIImage(named: "new_mark")
         let item = properties_profile[indexPath.row]
 
         return cell

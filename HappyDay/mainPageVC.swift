@@ -196,14 +196,14 @@ extension mainPageVC: UICollectionViewDelegate, UICollectionViewDataSource, UICo
              let cell = collectionView.dequeueReusableCell(withReuseIdentifier: galleryCollectionViewCellId, for: indexPath) as! galleryCollectionViewCell
              let partner = partners[indexPath.row]
              cell.name.text = partner.name!
-             cell.image.image = UIImage(named: "second")
+             cell.image.image = UIImage(named: "profile_1")
              return cell
         }
         else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: listCollectionViewCellId, for: indexPath) as! listCollectionViewCell
             let partner = partners[indexPath.row]
             cell.name.text = partner.name!
-            cell.image.image = UIImage(named: "third")
+            cell.image.image = UIImage(named: "profile_1")
             return cell
         }
               

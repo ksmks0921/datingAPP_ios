@@ -69,7 +69,7 @@ class signUpVC: UIViewController {
     @objc func clickView_1(_ sender: UIView) {
         
           guard let popupVC = storyboard?.instantiateViewController(withIdentifier: "BottomeSelectVC") as? BottomeSelectVC else { return }
-          popupVC.height = 400
+          popupVC.height = 600
           popupVC.topCornerRadius = 10
           popupVC.presentDuration = 1
           popupVC.dismissDuration = 1
@@ -83,7 +83,7 @@ class signUpVC: UIViewController {
     @objc func clickView_2(_ sender: UIView) {
         
           guard let popupVC = storyboard?.instantiateViewController(withIdentifier: "BottomeSelectVC") as? BottomeSelectVC else { return }
-          popupVC.height = 400
+          popupVC.height = 440
           popupVC.topCornerRadius = 10
           popupVC.presentDuration = 1
           popupVC.dismissDuration = 1

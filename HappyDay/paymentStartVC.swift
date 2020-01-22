@@ -18,11 +18,10 @@ class paymentStartVC: BottomPopupViewController {
     var dismissDuration: Double?
     var shouldDismissInteractivelty: Bool?
     var location: String?
-    var age:String?
-    var previousVC: signUpVC?
-    var delegate: ExamplePopupDelegate?
+    var delegate: paymentFunctionDelegate?
     var location_age: String?
     
+    @IBOutlet weak var continueBtnTapped: UIButton!
     
     override func getPopupHeight() -> CGFloat {
         return height ?? CGFloat(300)
@@ -42,5 +41,14 @@ class paymentStartVC: BottomPopupViewController {
     
     override func shouldPopupDismissInteractivelty() -> Bool {
         return shouldDismissInteractivelty ?? true
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+    }
+    @IBAction func continueBtnTapped(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+        delegate?.continueBtnTappedDismiss(status: "continue")
     }
 }

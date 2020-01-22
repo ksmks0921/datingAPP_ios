@@ -8,6 +8,12 @@
 
 import UIKit
 
+protocol paymentFunctionDelegate
+{
+    func continueBtnTappedDismiss(status: String)
+
+}
+
 class pointChangeVC: UIViewController {
 
     @IBOutlet weak var poinBalanceLabel: UILabel!
@@ -17,6 +23,10 @@ class pointChangeVC: UIViewController {
     @IBOutlet weak var changeBtn_4: UIButton!
     @IBOutlet weak var pointerAddBtn: UIButton!
     @IBOutlet weak var pointerChangeBtn: UIButton!
+    
+    
+    
+    var status: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,10 +46,18 @@ class pointChangeVC: UIViewController {
     }
     
     @IBAction func pointerAddBtnTapped(_ sender: Any) {
-       
+        pointerAddBtn.backgroundColor = #colorLiteral(red: 0.2039215686, green: 0.7803921569, blue: 0.3490196078, alpha: 1)
+        pointerAddBtn.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: .normal)
+        pointerChangeBtn.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        pointerChangeBtn.setTitleColor(#colorLiteral(red: 0.2039215686, green: 0.7803921569, blue: 0.3490196078, alpha: 1), for: .normal)
+
+//        footView.isHidden = false
     }
     @IBAction func pointerChangeBtnTapped(_ sender: Any) {
-        
+        pointerChangeBtn.backgroundColor = #colorLiteral(red: 0.2039215686, green: 0.7803921569, blue: 0.3490196078, alpha: 1)
+        pointerChangeBtn.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: .normal)
+        pointerAddBtn.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        pointerAddBtn.setTitleColor(#colorLiteral(red: 0.2039215686, green: 0.7803921569, blue: 0.3490196078, alpha: 1), for: .normal)
         
     }
     @IBAction func changeBtn_1_Tapped(_ sender: Any) {
@@ -49,7 +67,8 @@ class pointChangeVC: UIViewController {
         popupVC.presentDuration = 1
         popupVC.dismissDuration = 1
         popupVC.shouldDismissInteractivelty = true
-
+        popupVC.delegate = self
+        popupVC.popupDelegate = self
         present(popupVC, animated: true, completion: nil)
     }
     @IBAction func changeBtn_2_tapped(_ sender: Any) {
@@ -59,7 +78,7 @@ class pointChangeVC: UIViewController {
         popupVC.presentDuration = 1
         popupVC.dismissDuration = 1
         popupVC.shouldDismissInteractivelty = true
-
+        popupVC.popupDelegate = self
         present(popupVC, animated: true, completion: nil)
     }
     @IBAction func changeBtn_3_Tapped(_ sender: Any) {
@@ -72,4 +91,97 @@ class pointChangeVC: UIViewController {
     
 
 
+}
+extension pointChangeVC: BottomPopupDelegate {
+  
+    func bottomPopupViewLoaded() {
+        
+        print("bottomPopupViewLoaded")
+        
+    }
+    
+    func bottomPopupWillAppear() {
+        print("bottomPopupWillAppear")
+    }
+    
+    func bottomPopupDidAppear() {
+        
+        
+        print("bottomPopupDidAppear")
+    }
+    
+    func bottomPopupWillDismiss() {
+        print("bottomPopupWillDismiss")
+    }
+    
+    func bottomPopupDidDismiss() {
+        
+        print("bottomPopupDidDismiss")
+    }
+    
+    func bottomPopupDismissInteractionPercentChanged(from oldValue: CGFloat, to newValue: CGFloat) {
+        print("bottomPopupDismissInteractionPercentChanged fromValue: \(oldValue) to: \(newValue)")
+    }
+}
+extension pointChangeVC: paymentFunctionDelegate {
+    func continueBtnTappedDismiss(status: String) {
+        print(status)
+        if status == "continue" {
+            guard let popupVC = storyboard?.instantiateViewController(withIdentifier: "selectPaymentVC") as? selectPaymentVC else { return }
+            popupVC.height = 600
+            popupVC.topCornerRadius = 10
+            popupVC.presentDuration = 1
+            popupVC.dismissDuration = 1
+            popupVC.shouldDismissInteractivelty = true
+            popupVC.delegate = self
+            popupVC.popupDelegate = self
+            present(popupVC, animated: true, completion: nil)
+        }
+        else if status == "by_cash" {
+            guard let popupVC = storyboard?.instantiateViewController(withIdentifier: "paymentConfirmVC") as? paymentConfirmVC else { return }
+            popupVC.height = 340
+            popupVC.topCornerRadius = 10
+            popupVC.presentDuration = 1
+            popupVC.dismissDuration = 1
+            popupVC.shouldDismissInteractivelty = true
+            popupVC.delegate = self
+            popupVC.popupDelegate = self
+            present(popupVC, animated: true, completion: nil)
+        }
+        else if status == "by_paypal" {
+            guard let popupVC = storyboard?.instantiateViewController(withIdentifier: "paymentConfirmVC") as? paymentConfirmVC else { return }
+            popupVC.height = 340
+            popupVC.topCornerRadius = 10
+            popupVC.presentDuration = 1
+            popupVC.dismissDuration = 1
+            popupVC.shouldDismissInteractivelty = true
+            popupVC.delegate = self
+            popupVC.popupDelegate = self
+            present(popupVC, animated: true, completion: nil)
+        }
+        else if status == "by_google" {
+            guard let popupVC = storyboard?.instantiateViewController(withIdentifier: "paymentConfirmVC") as? paymentConfirmVC else { return }
+            popupVC.height = 340
+            popupVC.topCornerRadius = 10
+            popupVC.presentDuration = 1
+            popupVC.dismissDuration = 1
+            popupVC.shouldDismissInteractivelty = true
+            popupVC.delegate = self
+            popupVC.popupDelegate = self
+            present(popupVC, animated: true, completion: nil)
+        }
+        else if status == "by_konbini" {
+            guard let popupVC = storyboard?.instantiateViewController(withIdentifier: "paymentConfirmVC") as? paymentConfirmVC else { return }
+            popupVC.height = 340
+            popupVC.topCornerRadius = 10
+            popupVC.presentDuration = 1
+            popupVC.dismissDuration = 1
+            popupVC.shouldDismissInteractivelty = true
+            popupVC.delegate = self
+            popupVC.popupDelegate = self
+            present(popupVC, animated: true, completion: nil)
+        }
+    }
+    
+    
 }

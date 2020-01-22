@@ -23,7 +23,7 @@ class personalPageVC: UIViewController {
     
     
     let properties_profile: [String] = ["발자국", "메모 목록", "무시 목록", "보면 아니야", "즐거 찾기", "친구 목록"]
-    let icons: [UIImage] = [#imageLiteral(resourceName: "outline_account_circle_black_18dp"), #imageLiteral(resourceName: "outline_account_circle_black_18dp"), #imageLiteral(resourceName: "outline_account_circle_black_18dp"),#imageLiteral(resourceName: "outline_account_circle_black_18dp"),#imageLiteral(resourceName: "outline_account_circle_black_18dp"),#imageLiteral(resourceName: "outline_account_circle_black_18dp"),]
+    let icons: [UIImage] = [#imageLiteral(resourceName: "step"), #imageLiteral(resourceName: "memo-1"), #imageLiteral(resourceName: "forbidden"),#imageLiteral(resourceName: "shield"),#imageLiteral(resourceName: "star"),#imageLiteral(resourceName: "love"),]
     var screenSize: CGRect!
     var screenWidth: CGFloat!
     var screenHeight: CGFloat!
