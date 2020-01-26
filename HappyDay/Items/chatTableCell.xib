@@ -42,7 +42,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f7S-xk-HkQ">
-                        <rect key="frame" x="85" y="63" width="39.5" height="19.5"/>
+                        <rect key="frame" x="85" y="60" width="39.5" height="19.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -59,14 +59,23 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circle-24" translatesAutoresizingMaskIntoConstraints="NO" id="7mM-Oj-x81">
+                        <rect key="frame" x="70" y="5" width="10" height="10"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="10" id="6SD-QP-O4g"/>
+                            <constraint firstAttribute="height" constant="10" id="KJi-eb-kWi"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="f7S-xk-HkQ" firstAttribute="trailing" secondItem="TdN-SY-gwa" secondAttribute="trailing" id="6tz-oL-0m7"/>
+                    <constraint firstItem="7mM-Oj-x81" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="6PA-MB-kEC"/>
                     <constraint firstItem="JRw-Bw-E6Z" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="9cz-zt-D80"/>
                     <constraint firstItem="JRw-Bw-E6Z" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="CPJ-gm-XRp"/>
                     <constraint firstItem="nSb-Hg-Qjn" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="M1U-Hc-UMi"/>
                     <constraint firstItem="gcG-9A-z38" firstAttribute="centerY" secondItem="TdN-SY-gwa" secondAttribute="centerY" id="QLV-y3-Ptv"/>
-                    <constraint firstItem="f7S-xk-HkQ" firstAttribute="top" secondItem="TdN-SY-gwa" secondAttribute="bottom" constant="11" id="Qpi-AW-TlD"/>
+                    <constraint firstItem="f7S-xk-HkQ" firstAttribute="top" secondItem="TdN-SY-gwa" secondAttribute="bottom" constant="8" id="Qpi-AW-TlD"/>
+                    <constraint firstItem="f7S-xk-HkQ" firstAttribute="leading" secondItem="gdX-Id-vP9" secondAttribute="leading" id="UH5-Ix-sJa"/>
+                    <constraint firstItem="7mM-Oj-x81" firstAttribute="leading" secondItem="JRw-Bw-E6Z" secondAttribute="trailing" constant="-5" id="V7q-tC-3lf"/>
                     <constraint firstItem="TdN-SY-gwa" firstAttribute="centerX" secondItem="gdX-Id-vP9" secondAttribute="centerX" id="Ygu-gt-tz6"/>
                     <constraint firstItem="TdN-SY-gwa" firstAttribute="top" secondItem="gdX-Id-vP9" secondAttribute="bottom" constant="5" id="eyC-db-kee"/>
                     <constraint firstItem="gdX-Id-vP9" firstAttribute="leading" secondItem="JRw-Bw-E6Z" secondAttribute="trailing" constant="10" id="iU5-H4-a1H"/>
@@ -84,6 +93,7 @@
                 <outlet property="location" destination="7Gm-Ws-iBq" id="Y2g-YW-huY"/>
                 <outlet property="message" destination="f7S-xk-HkQ" id="Enm-7o-Y9d"/>
                 <outlet property="name" destination="gdX-Id-vP9" id="Lud-9p-EnS"/>
+                <outlet property="newBadge" destination="7mM-Oj-x81" id="WLh-Hh-A8Z"/>
                 <outlet property="photo" destination="JRw-Bw-E6Z" id="uXj-TN-3pS"/>
                 <outlet property="time" destination="gcG-9A-z38" id="oFp-DX-NlZ"/>
             </connections>
@@ -92,6 +102,7 @@
     </objects>
     <resources>
         <image name="chevron.right" catalog="system" width="48" height="64"/>
+        <image name="circle-24" width="24" height="24"/>
         <image name="profile_2" width="621" height="414"/>
     </resources>
 </document>

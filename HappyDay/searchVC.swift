@@ -69,6 +69,9 @@ class searchVC: UIViewController {
     }
     @IBAction func searchBtnTapped(_ sender: Any) {
         
+        let VC = self.storyboard?.instantiateViewController(withIdentifier: "mainPageVC") as! mainPageVC
+        VC.search_key = "key"
+        navigationController?.pushViewController(VC, animated: true)
     }
   
    

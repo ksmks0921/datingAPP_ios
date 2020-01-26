@@ -12,6 +12,7 @@ target 'HappyDay' do
   pod 'MessageKit'
   pod 'MessengerKit', :git => 'https://github.com/steve228uk/MessengerKit.git'
   pod 'PopupDialog', '~> 1.1'
+  pod 'MessageViewController'
 
   target 'HappyDayTests' do
     inherit! :search_paths

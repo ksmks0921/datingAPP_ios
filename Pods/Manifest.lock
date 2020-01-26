@@ -6,6 +6,7 @@ PODS:
   - JXSegmentedView (1.0.4)
   - MessageKit (3.0.0):
     - InputBarAccessoryView (~> 4.2.2)
+  - MessageViewController (0.2.1)
   - MessengerKit (1.0.5)
   - PopupDialog (1.1.1):
     - DynamicBlurView (~> 4.0)
@@ -15,6 +16,7 @@ DEPENDENCIES:
   - HSPopupMenu
   - JXSegmentedView
   - MessageKit
+  - MessageViewController
   - MessengerKit (from `https://github.com/steve228uk/MessengerKit.git`)
   - PopupDialog (~> 1.1)
 
@@ -25,6 +27,7 @@ SPEC REPOS:
     - InputBarAccessoryView
     - JXSegmentedView
     - MessageKit
+    - MessageViewController
     - PopupDialog
     - SnapKit
 
@@ -43,10 +46,11 @@ SPEC CHECKSUMS:
   InputBarAccessoryView: 2b937602598e2fab3149f37f51dd7ad795653812
   JXSegmentedView: b278b4c5d4c4c2982b4e084cef76ff1ddd37c6a5
   MessageKit: e892a9ca49ebe6d82684d3a93ad84021fa23e2c6
+  MessageViewController: 63ef2719d82c91d949ad52e101f049028a5a0611
   MessengerKit: 26dbfa81b76b22b7891028fb9a2cefdf4e86236f
   PopupDialog: 720c92befd8bc23c13442254945213db5612f149
   SnapKit: 0de968a9fec17499afa29683b05d0c775b6d1c29
 
-PODFILE CHECKSUM: 2eba3fce5fd392845b016f4cdd89062e6219b2bb
+PODFILE CHECKSUM: 2cdb516776a53bedbc5c3a782476b51819e99664
 
 COCOAPODS: 1.8.4

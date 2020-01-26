@@ -7,30 +7,34 @@
 //
 
 import UIKit
-import JXSegmentedView
+
 class chatListVC: UIViewController {
 
    
-    var partners = [person]()
+    var partners = [message]()
     @IBOutlet weak var chatListTableView: UITableView!
+    
+//    var persons =
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//           view.backgroundColor = UIColor(red: CGFloat(arc4random()%255)/255, green: CGFloat(arc4random()%255)/255, blue: CGFloat(arc4random()%255)/255, alpha: 1)
+
          let nib = UINib.init(nibName: "chatTableCell", bundle: nil)
          self.chatListTableView.register(nib, forCellReuseIdentifier: "chatTableCell")
          chatListTableView.reloadData()
         
-          
-        for _ in 1...5 {
-              let partner = person()
-              partner?.name = "zhang xiao ling"
-              partners.append(partner!)
-              
-        }
-
         
+        let person_1 = message(name: "장소영", photo: "person_1", last_message: "뭐하니?", is_favorite: true, has_new: true)
+        partners.append(person_1)
+        let person_2 = message(name: "하춘", photo: "person_2", last_message: "잘지내니?", is_favorite: true, has_new: false)
+        partners.append(person_2)
+        let person_3 = message(name: "소영영", photo: "person_3", last_message: "안녕?.", is_favorite: false, has_new: false)
+        partners.append(person_3)
+        let person_4 = message(name: "하의의", photo: "person_4", last_message: "그렇게 하자.", is_favorite: false, has_new: true)
+        partners.append(person_4)
+        
+
     }
     
 
@@ -38,11 +42,6 @@ class chatListVC: UIViewController {
 
 }
 
-extension chatListVC: JXSegmentedListContainerViewListDelegate {
-    func listView() -> UIView {
-        return view
-    }
-}
 extension chatListVC:  UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -55,8 +54,24 @@ extension chatListVC:  UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
        
             let cell = chatListTableView.dequeueReusableCell(withIdentifier: "chatTableCell", for: indexPath as IndexPath) as! chatTableCell
-            cell.photo.image = UIImage(named: "profile_2")
-
+            let item = partners[indexPath.row]
+            
+            cell.name.text = item.name
+            cell.message.text = item.last_message
+            cell.photo.image = UIImage(named: item.photo ?? "avatar_woman" )
+            if item.is_favorite == true {
+                cell.contentView.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+            }
+            else {
+                cell.contentView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+            }
+            if item.has_new == true {
+                cell.newBadge.isHidden = false
+            }
+            else {
+                cell.newBadge.isHidden = true
+            }
+          
             return cell
            
         
@@ -67,5 +82,6 @@ extension chatListVC:  UITableViewDelegate, UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         navigationController?.pushViewController(AdvancedExampleViewController(), animated: true)
+//        print("sdfsdf")
     }
 }

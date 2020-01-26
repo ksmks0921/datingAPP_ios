@@ -125,7 +125,15 @@ final class AdvancedExampleViewController: ChatViewController {
         messageInputBar.inputTextView.scrollIndicatorInsets = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
         configureInputBarItems()
     }
-
+    @objc func didButtonClick(_ sender: UIButton) {
+        
+        print("button clicked")
+        
+        
+        
+        
+        
+    }
     private func configureInputBarItems() {
         let view_1 = UIView(frame: CGRect(x: 0, y: 0, width: 36, height: 36))
         view_1.backgroundColor = #colorLiteral(red: 0.2039215686, green: 0.7803921569, blue: 0.3490196078, alpha: 1)
@@ -137,9 +145,18 @@ final class AdvancedExampleViewController: ChatViewController {
         
         button_1.tintColor = #colorLiteral(red: 0.2039215686, green: 0.7803921569, blue: 0.3490196078, alpha: 1)
         view_1.addSubview(button_1)
+//        button_1.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -20).isActive = true
+        button_1.addTarget(self, action: Selector(("didButtonClick:")), for: .touchUpInside)
         
         messageInputBar.leftStackView.addSubview(button_1)
         
+//        let contentView = addContentView()
+//        let subviews = [contentView]
+//        for view_item in subviews {
+//            messageInputBar.bottomStackView.addArrangedSubview(view_item)
+//        }
+        
+//        contentView.isHidden = true
         let button_2 = UIButton(type: .system)
         button_2.setImage(UIImage(named: "round_sentiment_satisfied_black_18dp"), for: .normal)
         button_2.frame = CGRect(x: -42, y: 2, width: 36, height: 36)
@@ -147,6 +164,8 @@ final class AdvancedExampleViewController: ChatViewController {
         button_2.contentEdgeInsets = UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2)
         messageInputBar.rightStackView.addSubview(button_2)
         
+        button_1.addTarget(self, action: #selector(didButtonClick), for: .touchUpInside)
+//        button_2.addTarget(self, action: #selector(didButtonClick), for: .touchUpInside)
         
         messageInputBar.setRightStackViewWidthConstant(to: 36, animated: false)
         messageInputBar.setLeftStackViewWidthConstant(to: 36, animated: false)

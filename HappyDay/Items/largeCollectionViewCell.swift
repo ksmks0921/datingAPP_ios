@@ -13,6 +13,7 @@ class largeCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var image: UIImageView!
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var otherDescription: UILabel!
+    @IBOutlet weak var age: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
