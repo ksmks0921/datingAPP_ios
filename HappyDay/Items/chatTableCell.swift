@@ -11,14 +11,15 @@ import UIKit
 class chatTableCell: UITableViewCell {
 
     @IBOutlet weak var photo: UIImageView!
-    @IBOutlet weak var newBadge: UIImageView!
+    @IBOutlet weak var status_icon: UIImageView!
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var age: UILabel!
-    @IBOutlet weak var location: UILabel!
-    @IBOutlet weak var time: UILabel!
-    @IBOutlet weak var message: UILabel!
+    @IBOutlet weak var job: UILabel!
+
+    @IBOutlet weak var status: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
+        photo.roundedImage()
         // Initialization code
     }
 

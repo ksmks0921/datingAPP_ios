@@ -26,19 +26,21 @@ class message {
     var has_new: Bool?
     var is_favorite: Bool?
     var time: String?
+    var is_online: String?
     
     
-    init(friend_id: Int, name: String, photo: String, age: String, location: String, time: String, last_message: String, is_favorite: Bool, has_new: Bool){
+    init(friend_id: Int, name: String, photo: String, age: String, job: String, time: String, last_message: String, is_favorite: Bool, has_new: Bool, is_online: String){
         
         self.friend_id = friend_id
         self.name = name
         self.photo = photo
         self.age = age
-        self.location = location
+        self.job = job
         self.time = time
         self.is_favorite = is_favorite
         self.has_new = has_new
         self.last_message = last_message
+        self.is_online = is_online
 
     }
     

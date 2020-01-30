@@ -31,14 +31,14 @@ class person {
     var nickName: String?
     
     
-    init(id: Int, name: String, avatar: String, photos: Int, birthday: String, about_gender: String, live_place: String, aboutMe: String, gender: String, age: String, nickName: String)
+    init(id: Int, name: String, avatar: String, photos: Int, birthday: String, about_gender: String, live_place: String, aboutMe: String, gender: String, age: String, nickName: String, job: String)
     {
         self.id = id
         self.name = name
         self.avatar = avatar
         self.photos = photos
         self.birthday = birthday
-        
+        self.job = job
         self.about_gender = about_gender
         self.live_place = live_place
         self.aboutMe = aboutMe
