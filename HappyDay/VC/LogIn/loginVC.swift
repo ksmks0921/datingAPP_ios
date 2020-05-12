@@ -87,7 +87,10 @@ extension loginVC {
 //        if UserVM.isPasswordValid(cleanPassword) == false {
 //            return "Please make sure your password is at least 8 characters, contains a special character and a number"
 //        }
-        return nil
+        else {
+             return nil
+        }
+       
         
         
         

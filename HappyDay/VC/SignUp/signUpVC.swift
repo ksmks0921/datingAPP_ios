@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import FirebaseDatabase
+import FirebaseAuth
+
 
 protocol ExamplePopupDelegate
 {
@@ -33,11 +36,49 @@ class signUpVC: BaseVC {
     var location: String?
     var age:String?
     @IBOutlet weak var emailTextField: UITextField!
-    
+    var AgeList = [String]()
+    var RegionList = [String]()
     override func viewDidLoad() {
         super.viewDidLoad()
 
         
+        setUpViewClick()
+        
+        if DataManager.isLogin! {
+            
+            SettingVM.shared.getSelectingAges(completion: {_ in
+               
+                self.AgeList = SettingVM.AgeList
+            })
+            SettingVM.shared.getSelectingRegions(completion: {_ in
+                self.RegionList = SettingVM.RegionList
+            })
+            
+        } else {
+            UserVM.shared.AnonymousLogin{(success, message, error) in
+                if error == nil {
+
+                           SettingVM.shared.getSelectingAges(completion: {_ in
+                                self.AgeList = SettingVM.AgeList
+                           })
+                           SettingVM.shared.getSelectingRegions(completion: {_ in
+                                self.RegionList = SettingVM.RegionList
+                           })
+
+                }else {
+                    self.showAlert(message: "_____error____")
+                }
+        }
+       
+                   
+    }
+       
+        
+        
+        
+    }
+    
+    func setUpViewClick() {
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(clickView_1(_:)))
         tapGesture.delegate = self as? UIGestureRecognizerDelegate
@@ -47,8 +88,8 @@ class signUpVC: BaseVC {
         tapGesture_1.delegate = self as? UIGestureRecognizerDelegate
         ageUIView.addGestureRecognizer(tapGesture_1)
         
-
     }
+    
     override func viewWillAppear(_ animated: Bool) {
            super.viewWillAppear(animated)
            
@@ -73,13 +114,14 @@ class signUpVC: BaseVC {
           popupVC.popupDelegate = self
           popupVC.delegate = self
           popupVC.location_age = "location"
+          popupVC.locations = self.RegionList
           present(popupVC, animated: true, completion: nil)
         
     }
     @objc func clickView_2(_ sender: UIView) {
         
           guard let popupVC = storyboard?.instantiateViewController(withIdentifier: "BottomeSelectVC") as? BottomeSelectVC else { return }
-          popupVC.height = 440
+          popupVC.height = 600
           popupVC.topCornerRadius = 10
           popupVC.presentDuration = 1
           popupVC.dismissDuration = 1
@@ -87,7 +129,9 @@ class signUpVC: BaseVC {
           popupVC.popupDelegate = self
           popupVC.delegate = self
           popupVC.location_age = "age"
+          popupVC.ages = self.AgeList
           present(popupVC, animated: true, completion: nil)
+        
     }
     @IBAction func manSelect(_ sender: Any) {
         manBtn.backgroundColor = #colorLiteral(red: 0.2039215686, green: 0.7803921569, blue: 0.3490196078, alpha: 1)

@@ -10,41 +10,80 @@ import Foundation
 
 class person {
     
-    var id:Int?
-    var name: String?
-    var avatar: String?
-    var desc: String?
-    var gender:String?
-    var about_gender: String?
-    var live_place: String?
-    var age:String?
-    var body:String?
-    var style: String?
-    var job: String?
-    var interest: String?
-    var is_favorite: Bool?
-    var last_message: String?
-    var has_new: Bool?
-    var aboutMe: String?
-    var photos: Int?
-    var birthday: String?
-    var nickName: String?
+//    var id:Int?
+//    var name: String?
+//    var avatar: String?
+//    var desc: String?
+//    var gender:String?
+//    var about_gender: String?
+//    var live_place: String?
+//    var age:String?
+//    var body:String?
+//    var style: String?
+//    var job: String?
+//    var interest: String?
+//    var is_favorite: Bool?
+//    var last_message: String?
+//    var has_new: Bool?
+//    var aboutMe: String?
+//    var photos: Int?
+//    var birthday: String?
+//    var nickName: String?
+    
+    var required_age : String?
+    var require_style : String?
+    var require_tall : String?
+    var style_1 : String?
+    var style_2 : String?
+    var style_3 : String?
+    var style_4 : String?
+    var user_age : String?
+    var user_avatar : String?
+    var user_blood : String?
+    var user_city : String?
+    var user_date : String?
+    var user_email : String?
+    var user_id : String?
+    var user_introduce : String?
+    var user_job : String?
+    var user_lifestyle : String?
+    var user_nickName : String?
+    var user_outside : String?
+    var user_sex : String?
+    var user_star : String?
+    var user_style : String?
+    var user_tall : String?
+    var user_createdAt : String?
+    var user_status : String?
     
     
-    init(id: Int, name: String, avatar: String, photos: Int, birthday: String, about_gender: String, live_place: String, aboutMe: String, gender: String, age: String, nickName: String, job: String)
+    init(required_age: String, require_style: String, require_tall: String, style_1: String, style_2: String, style_3: String, style_4: String, user_age: String, user_avatar: String, user_blood: String, user_city: String, user_date: String, user_email: String, user_id: String, user_introduce: String, user_job: String, user_lifestyle: String, user_nickName: String, user_outside: String, user_sex: String, user_star: String, user_style: String, user_tall: String, user_createdAt: String, user_status: String)
     {
-        self.id = id
-        self.name = name
-        self.avatar = avatar
-        self.photos = photos
-        self.birthday = birthday
-        self.job = job
-        self.about_gender = about_gender
-        self.live_place = live_place
-        self.aboutMe = aboutMe
-        self.gender = gender
-        self.age = age
-        self.nickName = nickName
+        self.required_age = required_age
+        self.require_style = require_style
+        self.require_tall = require_tall
+        self.style_1 = style_1
+        self.style_2 = style_2
+        self.style_3 = style_3
+        self.style_4 = style_4
+        self.user_age = user_age
+        self.user_avatar = user_avatar
+        self.user_blood = user_blood
+        self.user_city = user_city
+        self.user_date = user_date
+        self.user_email = user_email
+        self.user_id = user_id
+        self.user_introduce = user_introduce
+        self.user_job = user_job
+        self.user_lifestyle = user_lifestyle
+        self.user_nickName = user_nickName
+        self.user_outside = user_outside
+        self.user_sex = user_sex
+        self.user_star = user_star
+        self.user_style = user_style
+        self.user_tall = user_tall
+        self.user_createdAt = user_createdAt
+        self.user_status = user_status
     }
     
 }

@@ -2345,9 +2345,6 @@
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="34" id="jxu-QA-db2"/>
                                                 </constraints>
-                                                <string key="text" base64-UTF8="YES">
-Cg
-</string>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
