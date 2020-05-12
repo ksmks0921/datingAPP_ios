@@ -7,12 +7,18 @@ target 'HappyDay' do
 
   # Pods for HappyDay
 
-  pod 'HSPopupMenu'
-  pod 'JXSegmentedView'
-  pod 'MessageKit'
-  pod 'MessengerKit', :git => 'https://github.com/steve228uk/MessengerKit.git'
-  pod 'PopupDialog', '~> 1.1'
-  pod 'MessageViewController'
+  	pod 'HSPopupMenu'
+ 	pod 'JXSegmentedView'
+  	pod 'MessageKit'
+  	pod 'MessengerKit', :git => 'https://github.com/steve228uk/MessengerKit.git'
+  	pod 'PopupDialog', '~> 1.1'
+  	pod 'MessageViewController'
+  	pod 'Firebase/Analytics'
+  	pod 'Firebase/Auth'
+  	pod 'Firebase/Firestore'
+  	pod 'Firebase/Database'
+	pod 'Firebase/Core' 
+
 
   target 'HappyDayTests' do
     inherit! :search_paths

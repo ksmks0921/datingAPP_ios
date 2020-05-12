@@ -10,6 +10,7 @@
 		262341BEFD5583B8D97949B3 /* Pods_HappyDay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 394C0000A8A79953D7D4C0CA /* Pods_HappyDay.framework */; };
 		6732AE3523DCF3A6009A495C /* profilePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6732AE3423DCF3A6009A495C /* profilePageViewController.swift */; };
 		6732AE3923DCFF95009A495C /* profileContentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6732AE3823DCFF95009A495C /* profileContentVC.swift */; };
+		6741F470246AD64C007E9B93 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6741F46F246AD64B007E9B93 /* GoogleService-Info.plist */; };
 		674B9DA823D68F8400FD2C48 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674B9DA723D68DDD00FD2C48 /* ChatViewController.swift */; };
 		674B9DA923D68F8400FD2C48 /* AdvancedExampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674B9DA623D68DDC00FD2C48 /* AdvancedExampleViewController.swift */; };
 		6775361723CC1DB7003B844E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6775361623CC1DB7003B844E /* AppDelegate.swift */; };
@@ -46,7 +47,6 @@
 		6783EBE023D7FBDF009DC0A3 /* MockSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6783EBDD23D7FBDE009DC0A3 /* MockSocket.swift */; };
 		6783EBE423D7FC7F009DC0A3 /* Lorem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6783EBE223D7FC7F009DC0A3 /* Lorem.swift */; };
 		6783EBE523D7FC7F009DC0A3 /* SampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6783EBE323D7FC7F009DC0A3 /* SampleData.swift */; };
-		6783EBE823D7FCC8009DC0A3 /* UIView+Border.m in Sources */ = {isa = PBXBuildFile; fileRef = 6783EBE723D7FCC7009DC0A3 /* UIView+Border.m */; };
 		6783EBEA23D7FD11009DC0A3 /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6783EBE923D7FD10009DC0A3 /* UIViewController+Extensions.swift */; };
 		6783EBEC23D7FD31009DC0A3 /* Settings+UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6783EBEB23D7FD31009DC0A3 /* Settings+UserDefaults.swift */; };
 		6783EBEF23D7FD59009DC0A3 /* CustomMessageFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6783EBEE23D7FD58009DC0A3 /* CustomMessageFlowLayout.swift */; };
@@ -104,6 +104,11 @@
 		67A4B3FF23D84F6500F39C10 /* paymentConfirmVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A4B3FE23D84F6500F39C10 /* paymentConfirmVC.swift */; };
 		67A4B40123D901E800F39C10 /* addContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A4B40023D901E800F39C10 /* addContentView.swift */; };
 		67A4B40323D9021100F39C10 /* addContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 67A4B40223D9021100F39C10 /* addContentView.xib */; };
+		67F294E1246AE84E0036BA5C /* BaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F294E0246AE84E0036BA5C /* BaseVC.swift */; };
+		67F294E4246AEA4E0036BA5C /* UserVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F294E3246AEA4E0036BA5C /* UserVM.swift */; };
+		67F294E6246AEB7F0036BA5C /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F294E5246AEB7F0036BA5C /* AppConstants.swift */; };
+		67F294E8246AEC000036BA5C /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F294E7246AEC000036BA5C /* DataManager.swift */; };
+		67F294F3246B0F5E0036BA5C /* FireBaseConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F294F2246B0F5E0036BA5C /* FireBaseConstant.swift */; };
 		8D87FFBEFAED5D09531ED522 /* Pods_HappyDay_HappyDayUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1B49F48348D37F5B81708AD /* Pods_HappyDay_HappyDayUITests.framework */; };
 		9BC3A4ED38D6D7D7CBCE9968 /* Pods_HappyDayTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C3C7D73D21AC2ECDCEBDECC /* Pods_HappyDayTests.framework */; };
 /* End PBXBuildFile section */
@@ -131,9 +136,9 @@
 		5BC3BA98B7574F132D655A3A /* Pods-HappyDay.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HappyDay.debug.xcconfig"; path = "Target Support Files/Pods-HappyDay/Pods-HappyDay.debug.xcconfig"; sourceTree = "<group>"; };
 		6732AE3423DCF3A6009A495C /* profilePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = profilePageViewController.swift; sourceTree = "<group>"; };
 		6732AE3823DCFF95009A495C /* profileContentVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = profileContentVC.swift; sourceTree = "<group>"; };
+		6741F46F246AD64B007E9B93 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		674B9DA623D68DDC00FD2C48 /* AdvancedExampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvancedExampleViewController.swift; sourceTree = "<group>"; };
 		674B9DA723D68DDD00FD2C48 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
-		6771FA4123D56B9900DA1051 /* HappyDay-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HappyDay-Bridging-Header.h"; sourceTree = "<group>"; };
 		6775361323CC1DB7003B844E /* HappyDay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HappyDay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6775361623CC1DB7003B844E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6775361823CC1DB7003B844E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -148,7 +153,7 @@
 		6775363423CC1DBE003B844E /* HappyDayUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HappyDayUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6775363823CC1DBE003B844E /* HappyDayUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HappyDayUITests.swift; sourceTree = "<group>"; };
 		6775363A23CC1DBE003B844E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6780C8CA23CC26E000A54733 /* FirstPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstPageVC.swift; sourceTree = "<group>"; };
+		6780C8CA23CC26E000A54733 /* FirstPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FirstPageVC.swift; path = "../New Group/FirstPageVC.swift"; sourceTree = "<group>"; };
 		6780C8CC23CC4E5C00A54733 /* firstCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = firstCollectionCell.swift; sourceTree = "<group>"; };
 		6780C8CE23CC63CC00A54733 /* RoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
 		6780C8D523CCD1A400A54733 /* loginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = loginVC.swift; sourceTree = "<group>"; };
@@ -174,8 +179,6 @@
 		6783EBDD23D7FBDE009DC0A3 /* MockSocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockSocket.swift; sourceTree = "<group>"; };
 		6783EBE223D7FC7F009DC0A3 /* Lorem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Lorem.swift; sourceTree = "<group>"; };
 		6783EBE323D7FC7F009DC0A3 /* SampleData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleData.swift; sourceTree = "<group>"; };
-		6783EBE623D7FCC7009DC0A3 /* UIView+Border.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Border.h"; sourceTree = "<group>"; };
-		6783EBE723D7FCC7009DC0A3 /* UIView+Border.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Border.m"; sourceTree = "<group>"; };
 		6783EBE923D7FD10009DC0A3 /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 		6783EBEB23D7FD31009DC0A3 /* Settings+UserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Settings+UserDefaults.swift"; sourceTree = "<group>"; };
 		6783EBEE23D7FD58009DC0A3 /* CustomMessageFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomMessageFlowLayout.swift; sourceTree = "<group>"; };
@@ -233,6 +236,12 @@
 		67A4B3FE23D84F6500F39C10 /* paymentConfirmVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = paymentConfirmVC.swift; sourceTree = "<group>"; };
 		67A4B40023D901E800F39C10 /* addContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addContentView.swift; sourceTree = "<group>"; };
 		67A4B40223D9021100F39C10 /* addContentView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = addContentView.xib; sourceTree = "<group>"; };
+		67F294E0246AE84E0036BA5C /* BaseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseVC.swift; sourceTree = "<group>"; };
+		67F294E3246AEA4E0036BA5C /* UserVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserVM.swift; sourceTree = "<group>"; };
+		67F294E5246AEB7F0036BA5C /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
+		67F294E7246AEC000036BA5C /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		67F294F0246AFBAF0036BA5C /* HappyDay-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HappyDay-Bridging-Header.h"; sourceTree = "<group>"; };
+		67F294F2246B0F5E0036BA5C /* FireBaseConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireBaseConstant.swift; sourceTree = "<group>"; };
 		816B3844B379EFCADB3A6869 /* Pods-HappyDay.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HappyDay.release.xcconfig"; path = "Target Support Files/Pods-HappyDay/Pods-HappyDay.release.xcconfig"; sourceTree = "<group>"; };
 		8C3C7D73D21AC2ECDCEBDECC /* Pods_HappyDayTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HappyDayTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		938B1294C611B0EAAEE1E917 /* Pods-HappyDay-HappyDayUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HappyDay-HappyDayUITests.release.xcconfig"; path = "Target Support Files/Pods-HappyDay-HappyDayUITests/Pods-HappyDay-HappyDayUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -282,6 +291,103 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		6741F466246A540C007E9B93 /* LogIn */ = {
+			isa = PBXGroup;
+			children = (
+				6780C8D523CCD1A400A54733 /* loginVC.swift */,
+				6780C8DB23CCF76800A54733 /* selectDomainVC.swift */,
+				6780C90223CDF45100A54733 /* facebookLoginVC.swift */,
+			);
+			path = LogIn;
+			sourceTree = "<group>";
+		};
+		6741F467246A5446007E9B93 /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				6780C8DD23CCF7A500A54733 /* signUpVC.swift */,
+				6783EBC823D7F3E7009DC0A3 /* BottomeSelectVC.swift */,
+			);
+			path = SignUp;
+			sourceTree = "<group>";
+		};
+		6741F468246AD315007E9B93 /* MainPage */ = {
+			isa = PBXGroup;
+			children = (
+				6792001B23CE18A500C4872B /* mainPageVC.swift */,
+				6792004B23D0DF0700C4872B /* playnowVC.swift */,
+			);
+			path = MainPage;
+			sourceTree = "<group>";
+		};
+		6741F469246AD32C007E9B93 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				6792003323CE874400C4872B /* searchVC.swift */,
+				6792004F23D1067300C4872B /* searchTypeVC.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		6741F46A246AD33A007E9B93 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				6732AE3823DCFF95009A495C /* profileContentVC.swift */,
+				678C199823D25E4D00906A8D /* mainProfileVC.swift */,
+				6775361A23CC1DB7003B844E /* profileVC.swift */,
+				6792007823D1F3CA00C4872B /* personalPageVC.swift */,
+				678C199A23D26A3800906A8D /* mainProfileItemVC.swift */,
+				678C19AE23D3CF1B00906A8D /* favoriteListVC.swift */,
+				678C19AC23D3C4A800906A8D /* noSeeVC.swift */,
+				678C19AA23D3BB8000906A8D /* memoListVC.swift */,
+				6792007623D168E600C4872B /* imageUploadVC.swift */,
+				678C19A823D3BAD900906A8D /* friendListVC.swift */,
+				678C19A623D3B74D00906A8D /* ignoreListVC.swift */,
+				6783EBC423D7C2B1009DC0A3 /* pointChangeVC.swift */,
+				6732AE3423DCF3A6009A495C /* profilePageViewController.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		6741F46B246AD34E007E9B93 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				674B9DA523D68DC700FD2C48 /* chat */,
+				6792005323D123C000C4872B /* chatListVC.swift */,
+				6792005123D1207800C4872B /* chatBotVC.swift */,
+				674B9DA723D68DDD00FD2C48 /* ChatViewController.swift */,
+				6792005D23D1616000C4872B /* chatRoomVC.swift */,
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
+		6741F46C246AD374007E9B93 /* Post */ = {
+			isa = PBXGroup;
+			children = (
+				6792003F23CFA74400C4872B /* postVC.swift */,
+				6792004D23D0EF0A00C4872B /* createpostVC.swift */,
+				6792004123CFA7EA00C4872B /* contentforpostVC.swift */,
+			);
+			path = Post;
+			sourceTree = "<group>";
+		};
+		6741F46D246AD3A2007E9B93 /* Foot */ = {
+			isa = PBXGroup;
+			children = (
+				678C19A023D2C02700906A8D /* footVC.swift */,
+			);
+			path = Foot;
+			sourceTree = "<group>";
+		};
+		6741F46E246AD441007E9B93 /* Payment */ = {
+			isa = PBXGroup;
+			children = (
+				6783EBC623D7DB2C009DC0A3 /* paymentStartVC.swift */,
+				67A4B3FC23D84F4400F39C10 /* selectPaymentVC.swift */,
+				67A4B3FE23D84F6500F39C10 /* paymentConfirmVC.swift */,
+			);
+			path = Payment;
+			sourceTree = "<group>";
+		};
 		674B9DA523D68DC700FD2C48 /* chat */ = {
 			isa = PBXGroup;
 			children = (
@@ -316,58 +422,23 @@
 		6775361523CC1DB7003B844E /* HappyDay */ = {
 			isa = PBXGroup;
 			children = (
+				67F294F1246AFBB30036BA5C /* refer */,
+				67F294E2246AEA2B0036BA5C /* Common */,
 				6783EBF023D7FD8C009DC0A3 /* Sounds */,
 				6783EBED23D7FD58009DC0A3 /* Layout */,
 				6783EBE123D7FC7F009DC0A3 /* Data Generation */,
-				674B9DA523D68DC700FD2C48 /* chat */,
-				6792002823CE6D3700C4872B /* refer */,
-				6783EBCA23D7FB3B009DC0A3 /* BottomPopupController */,
+				6792002823CE6D3700C4872B /* CustomDesign */,
 				6783EBF523D7FDB4009DC0A3 /* AudioController */,
 				6792002523CE596200C4872B /* Models */,
 				6780C8D323CCD10600A54733 /* Items */,
 				6780C8D223CCD0E100A54733 /* VC */,
 				6775361623CC1DB7003B844E /* AppDelegate.swift */,
 				6775361823CC1DB7003B844E /* SceneDelegate.swift */,
-				6780C8CA23CC26E000A54733 /* FirstPageVC.swift */,
-				6780C8D523CCD1A400A54733 /* loginVC.swift */,
-				6780C8DB23CCF76800A54733 /* selectDomainVC.swift */,
-				6780C90223CDF45100A54733 /* facebookLoginVC.swift */,
-				6780C8DD23CCF7A500A54733 /* signUpVC.swift */,
-				6783EBC823D7F3E7009DC0A3 /* BottomeSelectVC.swift */,
-				6792001D23CE1C8400C4872B /* customTabBarVC.swift */,
-				6792001B23CE18A500C4872B /* mainPageVC.swift */,
-				6792003323CE874400C4872B /* searchVC.swift */,
-				6732AE3823DCFF95009A495C /* profileContentVC.swift */,
-				6732AE3423DCF3A6009A495C /* profilePageViewController.swift */,
-				6775361A23CC1DB7003B844E /* profileVC.swift */,
-				6792003F23CFA74400C4872B /* postVC.swift */,
-				6792004123CFA7EA00C4872B /* contentforpostVC.swift */,
-				6792004B23D0DF0700C4872B /* playnowVC.swift */,
-				6792004D23D0EF0A00C4872B /* createpostVC.swift */,
-				6792004F23D1067300C4872B /* searchTypeVC.swift */,
-				6792005323D123C000C4872B /* chatListVC.swift */,
-				6792005123D1207800C4872B /* chatBotVC.swift */,
-				6792005D23D1616000C4872B /* chatRoomVC.swift */,
-				674B9DA623D68DDC00FD2C48 /* AdvancedExampleViewController.swift */,
-				674B9DA723D68DDD00FD2C48 /* ChatViewController.swift */,
-				6792007823D1F3CA00C4872B /* personalPageVC.swift */,
-				6792007623D168E600C4872B /* imageUploadVC.swift */,
-				678C199823D25E4D00906A8D /* mainProfileVC.swift */,
-				678C199A23D26A3800906A8D /* mainProfileItemVC.swift */,
-				678C19A023D2C02700906A8D /* footVC.swift */,
-				678C19A623D3B74D00906A8D /* ignoreListVC.swift */,
-				678C19A823D3BAD900906A8D /* friendListVC.swift */,
-				678C19AA23D3BB8000906A8D /* memoListVC.swift */,
-				678C19AC23D3C4A800906A8D /* noSeeVC.swift */,
-				678C19AE23D3CF1B00906A8D /* favoriteListVC.swift */,
-				6783EBC423D7C2B1009DC0A3 /* pointChangeVC.swift */,
-				6783EBC623D7DB2C009DC0A3 /* paymentStartVC.swift */,
-				67A4B3FC23D84F4400F39C10 /* selectPaymentVC.swift */,
-				67A4B3FE23D84F6500F39C10 /* paymentConfirmVC.swift */,
 				6775361C23CC1DB7003B844E /* Main.storyboard */,
 				6775361F23CC1DBE003B844E /* Assets.xcassets */,
 				6775362123CC1DBE003B844E /* LaunchScreen.storyboard */,
 				6775362423CC1DBE003B844E /* Info.plist */,
+				6741F46F246AD64B007E9B93 /* GoogleService-Info.plist */,
 			);
 			path = HappyDay;
 			sourceTree = "<group>";
@@ -393,6 +464,20 @@
 		6780C8D223CCD0E100A54733 /* VC */ = {
 			isa = PBXGroup;
 			children = (
+				67F294E0246AE84E0036BA5C /* BaseVC.swift */,
+				6792001D23CE1C8400C4872B /* customTabBarVC.swift */,
+				674B9DA623D68DDC00FD2C48 /* AdvancedExampleViewController.swift */,
+				6783EBCA23D7FB3B009DC0A3 /* BottomPopupController */,
+				67F294DF246AE7EC0036BA5C /* FirstPage */,
+				6741F46E246AD441007E9B93 /* Payment */,
+				6741F46D246AD3A2007E9B93 /* Foot */,
+				6741F46C246AD374007E9B93 /* Post */,
+				6741F46B246AD34E007E9B93 /* Chat */,
+				6741F46A246AD33A007E9B93 /* Profile */,
+				6741F469246AD32C007E9B93 /* Search */,
+				6741F468246AD315007E9B93 /* MainPage */,
+				6741F467246A5446007E9B93 /* SignUp */,
+				6741F466246A540C007E9B93 /* LogIn */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -491,17 +576,41 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		6792002823CE6D3700C4872B /* refer */ = {
+		6792002823CE6D3700C4872B /* CustomDesign */ = {
 			isa = PBXGroup;
 			children = (
 				6783EBEB23D7FD31009DC0A3 /* Settings+UserDefaults.swift */,
 				6783EBE923D7FD10009DC0A3 /* UIViewController+Extensions.swift */,
-				6783EBE623D7FCC7009DC0A3 /* UIView+Border.h */,
-				6783EBE723D7FCC7009DC0A3 /* UIView+Border.m */,
 				6792002923CE6D5500C4872B /* UIImageView.swift */,
-				6771FA4123D56B9900DA1051 /* HappyDay-Bridging-Header.h */,
 				6780C8D923CCE2F900A54733 /* DesinableView.swift */,
 				678C199623D216B900906A8D /* DesinableImageView.swift */,
+			);
+			path = CustomDesign;
+			sourceTree = "<group>";
+		};
+		67F294DF246AE7EC0036BA5C /* FirstPage */ = {
+			isa = PBXGroup;
+			children = (
+				6780C8CA23CC26E000A54733 /* FirstPageVC.swift */,
+			);
+			path = FirstPage;
+			sourceTree = "<group>";
+		};
+		67F294E2246AEA2B0036BA5C /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				67F294E3246AEA4E0036BA5C /* UserVM.swift */,
+				67F294E5246AEB7F0036BA5C /* AppConstants.swift */,
+				67F294E7246AEC000036BA5C /* DataManager.swift */,
+				67F294F2246B0F5E0036BA5C /* FireBaseConstant.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		67F294F1246AFBB30036BA5C /* refer */ = {
+			isa = PBXGroup;
+			children = (
+				67F294F0246AFBAF0036BA5C /* HappyDay-Bridging-Header.h */,
 			);
 			path = refer;
 			sourceTree = "<group>";
@@ -637,6 +746,7 @@
 				6792005823D1249A00C4872B /* chatTableCell.xib in Resources */,
 				67A4B40323D9021100F39C10 /* addContentView.xib in Resources */,
 				6783EBF323D7FD8C009DC0A3 /* sound2.m4a in Resources */,
+				6741F470246AD64C007E9B93 /* GoogleService-Info.plist in Resources */,
 				6780C90123CD6DD500A54733 /* MyCustomCell.xib in Resources */,
 				678C199F23D271B700906A8D /* profileItemTableViewCell.xib in Resources */,
 				6792002E23CE793900C4872B /* galleryCollectionViewCell.xib in Resources */,
@@ -770,6 +880,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				67F294E4246AEA4E0036BA5C /* UserVM.swift in Sources */,
 				6792007C23D1F6E400C4872B /* personalPageCollectionCell.swift in Sources */,
 				6780C8DA23CCE2F900A54733 /* DesinableView.swift in Sources */,
 				6792007923D1F3CB00C4872B /* personalPageVC.swift in Sources */,
@@ -794,6 +905,7 @@
 				6780C90323CDF45100A54733 /* facebookLoginVC.swift in Sources */,
 				6783EBF923D7FE19009DC0A3 /* CustomCell.swift in Sources */,
 				6792003D23CF944300C4872B /* profileTableViewCell.swift in Sources */,
+				67F294E8246AEC000036BA5C /* DataManager.swift in Sources */,
 				6780C8E023CD0E9F00A54733 /* CustomTableViewCell.swift in Sources */,
 				6783EBD523D7FB3C009DC0A3 /* BottomPopupDismissInteractionController.swift in Sources */,
 				6792004E23D0EF0A00C4872B /* createpostVC.swift in Sources */,
@@ -821,12 +933,14 @@
 				6792002A23CE6D5500C4872B /* UIImageView.swift in Sources */,
 				6732AE3923DCFF95009A495C /* profileContentVC.swift in Sources */,
 				678C199923D25E4D00906A8D /* mainProfileVC.swift in Sources */,
+				67F294E1246AE84E0036BA5C /* BaseVC.swift in Sources */,
 				6792005223D1207800C4872B /* chatBotVC.swift in Sources */,
 				67A4B3FD23D84F4400F39C10 /* selectPaymentVC.swift in Sources */,
 				6780C8CB23CC26E000A54733 /* FirstPageVC.swift in Sources */,
 				6792004923D00AEB00C4872B /* postTableViewCell.swift in Sources */,
 				6783EBD723D7FB3C009DC0A3 /* BottomPopupDismissAnimator.swift in Sources */,
 				678C199B23D26A3800906A8D /* mainProfileItemVC.swift in Sources */,
+				67F294E6246AEB7F0036BA5C /* AppConstants.swift in Sources */,
 				6783EBDE23D7FBDF009DC0A3 /* MockMessage.swift in Sources */,
 				6780C8DE23CCF7A500A54733 /* signUpVC.swift in Sources */,
 				6775361923CC1DB7003B844E /* SceneDelegate.swift in Sources */,
@@ -834,7 +948,7 @@
 				6783EBD423D7FB3C009DC0A3 /* BottomPopupViewController.swift in Sources */,
 				678C19A923D3BAD900906A8D /* friendListVC.swift in Sources */,
 				6792002323CE57CC00C4872B /* largeCollectionViewCell.swift in Sources */,
-				6783EBE823D7FCC8009DC0A3 /* UIView+Border.m in Sources */,
+				67F294F3246B0F5E0036BA5C /* FireBaseConstant.swift in Sources */,
 				6783EBE423D7FC7F009DC0A3 /* Lorem.swift in Sources */,
 				6792003123CE804700C4872B /* listCollectionViewCell.swift in Sources */,
 				6783EBEF23D7FD59009DC0A3 /* CustomMessageFlowLayout.swift in Sources */,
@@ -1028,7 +1142,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.phone.auth.HappyDay;
+				PRODUCT_BUNDLE_IDENTIFIER = com.phone.HappyDay;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "HappyDay/refer/HappyDay-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1050,7 +1164,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.phone.auth.HappyDay;
+				PRODUCT_BUNDLE_IDENTIFIER = com.phone.HappyDay;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "HappyDay/refer/HappyDay-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
