@@ -37,14 +37,14 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VO5-vi-eBz">
-                                <rect key="frame" x="37" y="103" width="26.5" height="12"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Da Lian" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VO5-vi-eBz">
+                                <rect key="frame" x="32" y="103" width="36" height="12"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                 <color key="textColor" systemColor="systemPurpleColor" red="0.68627450980000004" green="0.32156862749999998" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="REg-z7-jG0">
-                                <rect key="frame" x="37" y="118" width="26.5" height="12"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="25 - 30" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="REg-z7-jG0">
+                                <rect key="frame" x="32" y="118" width="36" height="12"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                 <color key="textColor" systemColor="systemPurpleColor" red="0.68627450980000004" green="0.32156862749999998" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -53,8 +53,8 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="RCg-Gd-lNU" secondAttribute="trailing" id="5iN-e8-yJu"/>
-                            <constraint firstItem="REg-z7-jG0" firstAttribute="top" secondItem="VO5-vi-eBz" secondAttribute="bottom" constant="3" id="A0k-Jg-p6g"/>
                             <constraint firstItem="REg-z7-jG0" firstAttribute="centerX" secondItem="9sw-f5-r6a" secondAttribute="centerX" id="LUi-So-fl9"/>
+                            <constraint firstItem="REg-z7-jG0" firstAttribute="top" secondItem="RCg-Gd-lNU" secondAttribute="bottom" constant="18" id="ZnR-s3-iTm"/>
                             <constraint firstItem="RCg-Gd-lNU" firstAttribute="top" secondItem="9sw-f5-r6a" secondAttribute="top" id="aj0-M9-eMt"/>
                             <constraint firstItem="VO5-vi-eBz" firstAttribute="centerX" secondItem="9sw-f5-r6a" secondAttribute="centerX" id="fvh-Xt-6LT"/>
                             <constraint firstItem="VO5-vi-eBz" firstAttribute="top" secondItem="RCg-Gd-lNU" secondAttribute="bottom" constant="3" id="uZ4-ab-STh"/>
@@ -85,7 +85,7 @@
             <connections>
                 <outlet property="age" destination="REg-z7-jG0" id="Om3-5C-xvZ"/>
                 <outlet property="image" destination="RCg-Gd-lNU" id="8aD-B5-Zl3"/>
-                <outlet property="name" destination="VO5-vi-eBz" id="q9c-L3-mIJ"/>
+                <outlet property="region" destination="VO5-vi-eBz" id="ckJ-Ps-hIC"/>
             </connections>
             <point key="canvasLocation" x="-34.782608695652179" y="68.303571428571431"/>
         </collectionViewCell>

@@ -19,7 +19,7 @@ class profileContentVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        customTitle.text = partners[currentViewControllerIndex!].name
+        customTitle.text = partners[currentViewControllerIndex!].user_nickName
         configurePageViewController()
         
     }

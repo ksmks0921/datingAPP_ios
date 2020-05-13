@@ -9,6 +9,8 @@
 
 import UIKit
 
+import SDWebImage
+
 class BaseVC: UIViewController {
     
     

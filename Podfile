@@ -18,8 +18,8 @@ target 'HappyDay' do
   	pod 'Firebase/Firestore'
   	pod 'Firebase/Database'
 	pod 'Firebase/Core' 
-
-
+	pod 'SDWebImage', '~> 5.0'
+	pod 'HCSStarRatingView', '~> 1.5'
   target 'HappyDayTests' do
     inherit! :search_paths
     # Pods for testing

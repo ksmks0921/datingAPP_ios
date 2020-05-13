@@ -33,6 +33,9 @@ class FireBaseConstant{
     static let kStyle3 = "Style3"
     static let kStyle4 = "Style4"
     static let kUserAvatar = "UserAvatar"
+    static let kUserAvatar1 = "UserAvatar1"
+    static let kUserAvatar2 = "UserAvatar2"
+    static let kUserAvatar3 = "UserAvatar3"
     static let kUserBlood = "UserBlood"
     static let kUserDate = "UserDate"
     static let kUserIntroduce = "UserIntroduce"
@@ -45,7 +48,7 @@ class FireBaseConstant{
     static let kUserStyle = "UserStyle"
     static let kUserTall = "UserTall"
     static let kCreatedAt = "created_at"
-    static let kUpdatedAt = "created_at"
+    static let kUpdatedAt = "updated_at"
     static let kIsApproved = "is_approved"
     static let kStatus = "status"
     

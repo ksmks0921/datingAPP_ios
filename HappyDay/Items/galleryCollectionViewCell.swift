@@ -11,7 +11,8 @@ import UIKit
 class galleryCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var image: UIImageView!
-    @IBOutlet weak var name: UILabel!
+  
+    @IBOutlet weak var region: UILabel!
     @IBOutlet weak var age: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
