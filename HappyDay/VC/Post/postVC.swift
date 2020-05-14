@@ -22,28 +22,36 @@ class postVC: UIViewController {
     @IBOutlet weak var tabview: UIView!
     @IBOutlet weak var contentview: UIView!
     @IBOutlet weak var customNavBar: UIView!
+    @IBOutlet weak var allSectBtn: RoundButton!
+    @IBOutlet weak var imageSelectBtn: RoundButton!
     
-
+    @IBOutlet weak var videoSelectBtn: RoundButton!
+    
+    var selected_type = "전체"
+    var selected_source_type = AppConstant.eAll
+    var selected_location = AppConstant.eAll
+    var titles = AppConstant.eType
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let titles = ["전체", "전국메일 친구", "친구 모집", "지금부터 놀자"]
+        
         
         let tempdataSource = JXSegmentedTitleDataSource()
         tempdataSource.isTitleColorGradientEnabled = false
         tempdataSource.titles = titles
         tempdataSource.titleSelectedColor = UIColor.white
         segmentedDataSource = tempdataSource
-        
+        DataManager.isShowingFilterResult = false
     
         
      
         let indicator = JXSegmentedIndicatorLineView()
-        indicator.indicatorHeight = 30
-        indicator.indicatorWidthIncrement = 20
-        indicator.indicatorColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
-  
+        indicator.indicatorHeight = 40
+        indicator.indicatorWidthIncrement = 30
+        indicator.layer.cornerRadius = 8
+        indicator.indicatorColor = #colorLiteral(red: 0.1521415114, green: 0.7645066977, blue: 0.3480054438, alpha: 1)
+        
         
         segmentedView.indicators = [indicator]
 
@@ -57,7 +65,85 @@ class postVC: UIViewController {
 
 
     }
+    @IBAction func selectRegionTapped(_ sender: Any) {
+        
+        
+        SettingVM.shared.getSelectingRegions(completion: {_ in
+            guard let popupVC = self.storyboard?.instantiateViewController(withIdentifier: "otherSettingVC") as? otherSettingVC else { return }
 
+            popupVC.height = CGFloat((SettingVM.RegionList.count + 1 ) * 60)
+            popupVC.topCornerRadius = 10
+            popupVC.presentDuration = 1
+            popupVC.dismissDuration = 1
+            popupVC.shouldDismissInteractivelty = true
+            popupVC.items = SettingVM.RegionList
+            popupVC.delegate = self
+            popupVC.index_type = 0  // for using searchType delegate..... possible to ignore this
+            self.present(popupVC, animated: true, completion: nil)
+        })
+        
+        
+        
+        
+    }
+   
+    @IBAction func allSelectTapped(_ sender: Any) {
+        
+        allSectBtn.backgroundColor = #colorLiteral(red: 0.1521415114, green: 0.7645066977, blue: 0.3480054438, alpha: 1)
+        allSectBtn.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: .normal)
+        imageSelectBtn.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        imageSelectBtn.setTitleColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), for: .normal)
+        videoSelectBtn.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        videoSelectBtn.setTitleColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), for: .normal)
+        self.selected_source_type = AppConstant.eAll
+        
+        DataManager.isShowingFilterResult = true
+        Indicator.sharedInstance.showIndicator()
+        UserVM.shared.filterEvents(location: self.selected_location, type: self.selected_type, source_type: self.selected_source_type, completion: {_ in
+            
+                Indicator.sharedInstance.hideIndicator()
+                self.listContainerView.reloadData()
+          
+        })
+    }
+    @IBAction func videoSelectTapped(_ sender: Any) {
+        
+        videoSelectBtn.backgroundColor = #colorLiteral(red: 0.1521415114, green: 0.7645066977, blue: 0.3480054438, alpha: 1)
+        videoSelectBtn.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: .normal)
+        imageSelectBtn.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        imageSelectBtn.setTitleColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), for: .normal)
+        allSectBtn.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        allSectBtn.setTitleColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), for: .normal)
+        DataManager.isShowingFilterResult = true
+        self.selected_source_type = AppConstant.eVideo
+        Indicator.sharedInstance.showIndicator()
+        
+        UserVM.shared.filterEvents(location: self.selected_location, type: self.selected_type, source_type: self.selected_source_type, completion: {_ in
+            
+                Indicator.sharedInstance.hideIndicator()
+                self.listContainerView.reloadData()
+          
+        })
+    }
+    @IBAction func imageSelectTapped(_ sender: Any) {
+        
+        imageSelectBtn.backgroundColor = #colorLiteral(red: 0.1521415114, green: 0.7645066977, blue: 0.3480054438, alpha: 1)
+        imageSelectBtn.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: .normal)
+        allSectBtn.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        allSectBtn.setTitleColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), for: .normal)
+        videoSelectBtn.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        videoSelectBtn.setTitleColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), for: .normal)
+        DataManager.isShowingFilterResult = true
+        self.selected_source_type = AppConstant.eImage
+        Indicator.sharedInstance.showIndicator()
+        UserVM.shared.filterEvents(location: self.selected_location, type: self.selected_type, source_type: self.selected_source_type, completion: {_ in
+            
+                Indicator.sharedInstance.hideIndicator()
+                self.listContainerView.reloadData()
+          
+        })
+    }
+    
 
     override func viewWillAppear(_ animated: Bool) {
            super.viewWillAppear(animated)
@@ -67,9 +153,9 @@ class postVC: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         customNavBar.frame.size.height = navbarHeight
-        segmentedView.frame = CGRect(x: 0, y: 0, width: view.bounds.size.width, height: 30)
+        segmentedView.frame = CGRect(x: 0, y: 0, width: view.bounds.size.width, height: 40)
         
-        listContainerView.frame = CGRect(x: 0, y: 0, width: view.bounds.size.width, height: view.bounds.size.height  - 50)
+        listContainerView.frame = CGRect(x: 0, y: 0, width: view.bounds.size.width, height: view.bounds.size.height)
     }
     @IBAction func postsearch(_ sender: Any) {
         let VC = self.storyboard?.instantiateViewController(withIdentifier: "searchTypeVC") as! searchTypeVC
@@ -84,8 +170,36 @@ class postVC: UIViewController {
 
 
 }
+extension postVC: SearchTypeDelegate{
+    func selectSearchType(index: Int, type: String) {
+        self.selected_location = type
+        Indicator.sharedInstance.showIndicator()
+        UserVM.shared.filterEvents(location: self.selected_location, type: self.selected_type, source_type: self.selected_source_type, completion: {_ in
+            
+                Indicator.sharedInstance.hideIndicator()
+                self.listContainerView.reloadData()
+          
+        })
+        print(type)
+    }
+    
+    
+}
+
+
 extension postVC: JXSegmentedViewDelegate {
+    
     func segmentedView(_ segmentedView: JXSegmentedView, didSelectedItemAt index: Int) {
+        
+        self.selected_type = self.titles[index]
+        Indicator.sharedInstance.showIndicator()
+        UserVM.shared.filterEvents(location: self.selected_location, type: self.selected_type, source_type: self.selected_source_type, completion: {_ in
+            
+                Indicator.sharedInstance.hideIndicator()
+                self.listContainerView.reloadData()
+          
+        })
+        
         if let dotDataSource = segmentedDataSource as? JXSegmentedDotDataSource {
             
             dotDataSource.dotStates[index] = false
@@ -95,23 +209,16 @@ extension postVC: JXSegmentedViewDelegate {
         }
         for indicaotr in (segmentedView.indicators as! [JXSegmentedIndicatorBaseView]) {
            
-           if index == 0 {
-               indicaotr.indicatorColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
-           }
-           else if index == 1 {
-               indicaotr.indicatorColor = #colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1)
-           }
-           else if index == 2 {
-               indicaotr.indicatorColor = #colorLiteral(red: 0.8823529412, green: 0.2274509804, blue: 0.2274509804, alpha: 1)
-           }
+
+               indicaotr.indicatorColor = #colorLiteral(red: 0.1521415114, green: 0.7645066977, blue: 0.3480054438, alpha: 1)
+
         }
        segmentedView.reloadDataWithoutListContainer()
        navigationController?.interactivePopGestureRecognizer?.isEnabled = (segmentedView.selectedIndex == 0)
-        if index == 3 {
-            let VC = self.storyboard?.instantiateViewController(withIdentifier: "playnowVC") as! playnowVC
-            navigationController?.pushViewController(VC, animated: true)
-        }
+
     }
+    
+    
 }
 
 extension postVC: JXSegmentedListContainerViewDataSource {

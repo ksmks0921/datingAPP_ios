@@ -10,25 +10,7 @@ import Foundation
 
 class person {
     
-//    var id:Int?
-//    var name: String?
-//    var avatar: String?
-//    var desc: String?
-//    var gender:String?
-//    var about_gender: String?
-//    var live_place: String?
-//    var age:String?
-//    var body:String?
-//    var style: String?
-//    var job: String?
-//    var interest: String?
-//    var is_favorite: Bool?
-//    var last_message: String?
-//    var has_new: Bool?
-//    var aboutMe: String?
-//    var photos: Int?
-//    var birthday: String?
-//    var nickName: String?
+
     
     var required_age : String?
     var require_style : String?

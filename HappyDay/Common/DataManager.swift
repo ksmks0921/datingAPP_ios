@@ -38,7 +38,15 @@ class DataManager {
             return UserDefaults.standard.bool(forKey: AppConstant.kShowingSearch)
         }
     }
-    
+    static var isShowingFilterResult: Bool?{
+        set{
+            UserDefaults.standard.setValue(newValue, forKey: AppConstant.kShowingSearch)
+            UserDefaults.standard.synchronize()
+        }
+        get{
+            return UserDefaults.standard.bool(forKey: AppConstant.kShowingSearch)
+        }
+    }
     static var email:String? {
         set {
             UserDefaults.standard.setValue(newValue, forKey: AppConstant.kUserEmail)

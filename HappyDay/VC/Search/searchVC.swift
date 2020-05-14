@@ -124,21 +124,8 @@ class searchVC: UIViewController {
                 let VC = self.storyboard?.instantiateViewController(withIdentifier: "customTabBarVC") as! customTabBarVC
                 self.navigationController?.pushViewController(VC, animated: true)
             
-            
-               
-               
-               
-            
         })
-            
-         
-            
-          
-              
-            
-        
-        
-        
+
     }
   
    

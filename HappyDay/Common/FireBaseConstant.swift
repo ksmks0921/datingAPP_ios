@@ -14,7 +14,7 @@ class FireBaseConstant{
     static let UserNode     = "Users"
     static let Settings     = "Settings"
     static let Likes        = "Likes"
-    
+    static let Events       = "Events"
     
     
     
@@ -73,6 +73,30 @@ class FireBaseConstant{
     static let kUpdatedAt       = "updated_at"
     static let kIsApproved      = "is_approved"
     static let kStatus          = "status"
+    //********************** Events *********************
+    
+    static let EventCity                = "EventCity"
+    static let EventCreatedDate         = "EventCreatedDate"
+    static let EventDes                 = "EventDes"
+    static let EventPhone               = "EventPhone"
+    static let EventTitle               = "EventTitle"
+    static let EventType                = "EventType"
+    static let EventUserAge             = "EventUserAge"
+    static let EventUserAvatar          = "EventUserAvatar"
+    static let EventUserCity            = "EventUserCity"
+    static let EventUserGender          = "EventUserGender"
+    static let EventUserJob             = "EventUserJob"
+    static let EventUserName            = "EventUserName"
+    static let EventUserStyle           = "EventUserStyle"
+    static let EventUserTall            = "EventUserTall"
+    static let UserID                   = "UserID"
+    static let created_at               = "created_at"
+    static let row_key                  = "row_key"
+    static let source_type              = "source_type"
+    static let thumb_path               = "thumb_path"
+    static let view_counts              = "view_counts"
+    
+    
     
     
 }

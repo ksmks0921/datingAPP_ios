@@ -18,6 +18,8 @@ class UserVM {
     static let shared = UserVM()
     static var users = [person]()
     static var search_result = [person]()
+    static var eventPosts = [PostEvent]()
+    static var filtered_eventPosts = [PostEvent]()
     let ref : DatabaseReference = Database.database().reference()
     
     
@@ -196,32 +198,32 @@ class UserVM {
         UserVM.search_result = UserVM.users
         
         if sex != "전체" {
-            UserVM.search_result = filter(init_data: UserVM.search_result, key: "sex", value: sex)
+            UserVM.search_result = filterUsesrs(init_data: UserVM.search_result, key: "sex", value: sex)
         }
         if city != "전체" {
-            UserVM.search_result = filter(init_data: UserVM.search_result, key: "city", value: city)
+            UserVM.search_result = filterUsesrs(init_data: UserVM.search_result, key: "city", value: city)
         }
         if age != "전체" {
-            UserVM.search_result = filter(init_data: UserVM.search_result, key: "age", value: age)
+            UserVM.search_result = filterUsesrs(init_data: UserVM.search_result, key: "age", value: age)
         }
         if tall != "전체" {
-            UserVM.search_result = filter(init_data: UserVM.search_result, key: "tall", value: tall)
+            UserVM.search_result = filterUsesrs(init_data: UserVM.search_result, key: "tall", value: tall)
         }
         if style != "전체" {
-            UserVM.search_result = filter(init_data: UserVM.search_result, key: "style", value: style)
+            UserVM.search_result = filterUsesrs(init_data: UserVM.search_result, key: "style", value: style)
         }
         if job != "전체" {
-            UserVM.search_result = filter(init_data: UserVM.search_result, key: "job", value: job)
+            UserVM.search_result = filterUsesrs(init_data: UserVM.search_result, key: "job", value: job)
         }
         if nick_name != "전체" {
-            UserVM.search_result = filter(init_data: UserVM.search_result, key: "nick_name", value: nick_name)
+            UserVM.search_result = filterUsesrs(init_data: UserVM.search_result, key: "nick_name", value: nick_name)
         }
        
         completion(true)
         
     }
     
-    func filter(init_data: [person], key: String, value: String) -> [person] {
+    func filterUsesrs(init_data: [person], key: String, value: String) -> [person] {
         var result = [person]()
         if key == "sex" {
             for item in init_data {
@@ -292,6 +294,94 @@ class UserVM {
         return result
     }
     
+    func getEventPosts(completion: @escaping (Bool) -> Void){
+        
+        ref.child(FireBaseConstant.Events).observe(.value) { (snapShot) in
+            let children = snapShot.children
+            UserVM.eventPosts.removeAll()
+            while let rest = children.nextObject() as? DataSnapshot {
+                if let restDict = rest.value as? NSDictionary{
+                    
+                    let user_avatar = restDict[FireBaseConstant.EventUserAvatar] as? String
+                    let event_type = restDict[FireBaseConstant.EventType] as? String
+                    let view_counts = restDict[FireBaseConstant.view_counts] as? String
+                    let nick_name = restDict[FireBaseConstant.EventUserName] as? String
+                    
+                    let age = restDict[FireBaseConstant.EventUserAge] as? String
+                    let region = restDict[FireBaseConstant.EventUserCity] as? String
+                    let gender = restDict[FireBaseConstant.EventUserGender] as? Bool
+                   
+                    let event_des = restDict[FireBaseConstant.EventDes] as? String
+                    let thumb_path = restDict[FireBaseConstant.thumb_path] as? String
+                    let source_type = restDict[FireBaseConstant.source_type] as? String
+                    let post_item = PostEvent(user_avatar: user_avatar!, event_type: event_type!, view_counts: view_counts!, nick_name: nick_name!, age: age!, region: region!, event_des: event_des!, thumb_path: thumb_path!, user_gender: gender!, source_type: source_type!)
+                    UserVM.eventPosts.append(post_item)
+
+                    
+                }
+            }
+        
+        completion(true)
+        }
+        
+    }
+    
+    func filterEvents(location: String, type: String, source_type: String, completion: @escaping (Bool) -> Void){
+        UserVM.filtered_eventPosts = UserVM.eventPosts
+        
+        if type != "전체" {
+            UserVM.filtered_eventPosts = doFilter(init_data: UserVM.filtered_eventPosts , key: FireBaseConstant.EventType, value: type)
+        }
+        if source_type != AppConstant.eAll {
+        
+            UserVM.filtered_eventPosts = doFilter(init_data: UserVM.filtered_eventPosts , key: FireBaseConstant.source_type, value: source_type)
+        }
+        if location != AppConstant.eAll {
+        
+            UserVM.filtered_eventPosts = doFilter(init_data: UserVM.filtered_eventPosts , key: FireBaseConstant.EventCity, value: location)
+        }
+        
+        completion(true)
+    }
+    func doFilter(init_data: [PostEvent], key: String, value: String) -> [PostEvent]  {
+            var result = [PostEvent]()
+        
+            if key == FireBaseConstant.EventType {
+                for item in init_data {
+                    
+                    
+                    if item.event_type == value  {
+                        result.append(item)
+                    }
+                    
+                }
+                
+            }
+            if key == FireBaseConstant.source_type {
+                for item in init_data {
+                    
+                    
+                    if item.source_type == value  {
+                        result.append(item)
+
+                    }
+                    
+                }
+            }
+            if key == FireBaseConstant.EventCity {
+                for item in init_data {
+                    
+                    
+                    if item.region == value  {
+                        result.append(item)
+
+                    }
+                    
+                }
+            }
+            return result
+        
+    }
     static func isPasswordValid(_ password : String) -> Bool {
         
         let passwordTest = NSPredicate(format: "SELF MATCHES %@", "^(?=.*[a-z])(?=.*[$@$#!%*?&])[A-Za-z\\d$$@$#!%*?&]{8,}")
@@ -301,13 +391,4 @@ class UserVM {
     
 }
 
-class SearchKey {
-    var key: String!
-    var value: String!
-    
-    init(key: String, value: String)  {
-        self.key = key
-        self.value = value
-    }
-    
-}
+

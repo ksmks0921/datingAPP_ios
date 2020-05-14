@@ -48,6 +48,12 @@ class mainPageVC: BaseVC {
       
         if DataManager.isShowingSearchResult! {
             self.partners = UserVM.search_result
+            if self.partners.count == 0 {
+                noResultLabel.isHidden = true
+            }
+            if self.partners.count == 0 {
+                noResultLabel.isHidden = false
+            }
             self.collectionView.reloadData()
         }
         else {
@@ -60,12 +66,7 @@ class mainPageVC: BaseVC {
             })
         }
         
-        if self.partners.count == 0 {
-            noResultLabel.isHidden = true
-        }
-        if self.partners.count == 0 {
-            noResultLabel.isHidden = false
-        }
+        
        
         
         

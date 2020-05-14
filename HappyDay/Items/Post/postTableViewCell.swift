@@ -10,24 +10,18 @@ import UIKit
 
 class postTableViewCell: UITableViewCell {
 
-   
-    @IBOutlet weak var personPhoto: UIImageView!
-    @IBOutlet weak var hopeType: UILabel!
-    @IBOutlet weak var hopeTypeBack: DesinableView!
-    @IBOutlet weak var start: UIImageView!
-    @IBOutlet weak var star: UIImageView!
-    @IBOutlet weak var nickname: UILabel!
-    @IBOutlet weak var name: UILabel!
-    @IBOutlet weak var age_location: UILabel!
-    @IBOutlet weak var date: UILabel!
-    @IBOutlet weak var views: UILabel!
-    @IBOutlet weak var newOrNot: UIImageView!
-    @IBOutlet weak var topView: UIView!
-    @IBOutlet weak var topContent: UIView!
+ 
     
+    @IBOutlet weak var hobbyLabel: UILabel!
+    @IBOutlet weak var postImageView: UIImageView!
+    @IBOutlet weak var nickname: UILabel!
+    @IBOutlet weak var age_region_label: UILabel!
+    @IBOutlet weak var textContentLabel: UILabel!
+    @IBOutlet weak var personPhoto: UIImageView!
+    @IBOutlet weak var views: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+         personPhoto.roundedImage()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
