@@ -8,7 +8,7 @@
 
 import UIKit
 
-class profileContentVC: UIViewController {
+class profileContentVC: BaseVC {
 
     @IBOutlet weak var customTitle: UILabel!
     @IBOutlet weak var contentView: UIView!
@@ -35,9 +35,43 @@ class profileContentVC: UIViewController {
     @IBAction func sendMessageBtnTapped(_ sender: Any) {
         navigationController?.pushViewController(AdvancedExampleViewController(), animated: true)
     }
+    
+    
     @IBAction func otherBtnTapped(_ sender: Any) {
+        
+        guard let popupVC = storyboard?.instantiateViewController(withIdentifier: "otherSettingVC") as? otherSettingVC else { return }
+        let items = ["블록 등록", "무시 등록", "메모 등록", "신고 하기"]
+        popupVC.items = items
+        popupVC.height = CGFloat((items.count + 1) * 60)
+        popupVC.topCornerRadius = 10
+        popupVC.presentDuration = 1
+        popupVC.dismissDuration = 1
+        popupVC.shouldDismissInteractivelty = true
+        
+       
+      
+        present(popupVC, animated: true, completion: nil)
+        
     }
     @IBAction func likeBtnTapped(_ sender: Any) {
+        
+        Indicator.sharedInstance.showIndicator()
+        UserVM.shared.likeUser(like_age: partners[currentViewControllerIndex!].user_age!, like_avatar: partners[currentViewControllerIndex!].user_avatar![0], like_city: partners[currentViewControllerIndex!].user_city!, like_date: partners[currentViewControllerIndex!].user_date!, like_id: partners[currentViewControllerIndex!].user_id!, like_info: partners[currentViewControllerIndex!].user_introduce!, like_name: partners[currentViewControllerIndex!].user_nickName!, like_sex: partners[currentViewControllerIndex!].user_sex! ) { (success, message, error) in
+                   if error == nil{
+                       if success{
+                            self.showAlert(message: "You liked me!")
+                            Indicator.sharedInstance.hideIndicator()
+                        
+                        
+                        } else {
+                            self.showAlert(message: message)
+                        }
+                    
+                }else {
+                    self.showAlert(message: message)
+                }
+        }
+        
     }
     private func configurePageViewController(){
         

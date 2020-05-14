@@ -1,17 +1,15 @@
 //
-//  searchTableViewCell.swift
+//  aboutMeCell.swift
 //  HappyDay
 //
-//  Created by Panda Star on 1/14/20.
+//  Created by Crystal Abarientos on 5/13/20.
 //  Copyright © 2020 Panda Star. All rights reserved.
 //
 
 import UIKit
 
-class searchTableViewCell: UITableViewCell {
-
-    @IBOutlet weak var property: UILabel!
-    @IBOutlet weak var value: UILabel!
+class aboutMeCell: UITableViewCell {
+    @IBOutlet weak var aboutMeText: UITextView!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

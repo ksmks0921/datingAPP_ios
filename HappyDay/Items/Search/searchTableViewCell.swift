@@ -1,17 +1,18 @@
 //
-//  selfEvaluationCell.swift
+//  searchTableViewCell.swift
 //  HappyDay
 //
-//  Created by Crystal Abarientos on 5/13/20.
+//  Created by Panda Star on 1/14/20.
 //  Copyright © 2020 Panda Star. All rights reserved.
 //
 
 import UIKit
-import HCSStarRatingView
-class selfEvaluationCell: UITableViewCell {
 
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var ratingView: HCSStarRatingView!
+class searchTableViewCell: UITableViewCell {
+
+    @IBOutlet weak var property: UILabel!
+    @IBOutlet weak var value: UILabel!
+    @IBOutlet weak var inputTextField: UITextField!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

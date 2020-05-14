@@ -11,12 +11,18 @@ import Foundation
 
 
 
-let kUserId = "userId"
-let kLoginStatus = "loginStatus"
-let kUserEmail = "userEmail"
-let kDeviceToken = "deviceToken"
 
-//************************** Firebase **************************//
 
-let UserFcmIds = "user-fcm-ids"
-
+class AppConstant {
+    
+    static let kUserId = "userId"
+    static let kLoginStatus = "loginStatus"
+    static let kUserEmail = "userEmail"
+    static let kDeviceToken = "deviceToken"
+    static let UserFcmIds = "user-fcm-ids"
+    
+    
+    
+    
+    
+}

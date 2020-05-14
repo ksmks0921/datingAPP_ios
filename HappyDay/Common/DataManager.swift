@@ -11,41 +11,41 @@ class DataManager {
     
     static var userId:String? {
         set {
-            UserDefaults.standard.setValue(newValue, forKey: kUserId)
+            UserDefaults.standard.setValue(newValue, forKey: AppConstant.kUserId)
             UserDefaults.standard.synchronize()
         }
         get {
-            return UserDefaults.standard.string(forKey: kUserId)
+            return UserDefaults.standard.string(forKey: AppConstant.kUserId)
         }
     }
     
     static var isLogin: Bool?{
         set{
-            UserDefaults.standard.setValue(newValue, forKey: kLoginStatus)
+            UserDefaults.standard.setValue(newValue, forKey: AppConstant.kLoginStatus)
             UserDefaults.standard.synchronize()
         }
         get{
-            return UserDefaults.standard.bool(forKey: kLoginStatus)
+            return UserDefaults.standard.bool(forKey: AppConstant.kLoginStatus)
         }
     }
     
     static var email:String? {
         set {
-            UserDefaults.standard.setValue(newValue, forKey: kUserEmail)
+            UserDefaults.standard.setValue(newValue, forKey: AppConstant.kUserEmail)
             UserDefaults.standard.synchronize()
         }
         get {
-            return UserDefaults.standard.string(forKey: kUserEmail)
+            return UserDefaults.standard.string(forKey: AppConstant.kUserEmail)
         }
     }
     
     static var deviceToken:String? {
         set {
-            UserDefaults.standard.setValue(newValue, forKey: kDeviceToken)
+            UserDefaults.standard.setValue(newValue, forKey: AppConstant.kDeviceToken)
             UserDefaults.standard.synchronize()
         }
         get {
-            return UserDefaults.standard.string(forKey: kDeviceToken)
+            return UserDefaults.standard.string(forKey: AppConstant.kDeviceToken)
         }
     }
 }

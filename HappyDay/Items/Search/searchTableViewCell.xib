@@ -16,8 +16,8 @@
                 <rect key="frame" x="0.0" y="0.0" width="315" height="44"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dJs-3f-tIh">
-                        <rect key="frame" x="138" y="22" width="0.0" height="0.0"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dJs-3f-tIh">
+                        <rect key="frame" x="138" y="12" width="42" height="20.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
@@ -32,12 +32,23 @@
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <textField hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="닉네임을 입력하세요." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tcC-D6-6nT">
+                        <rect key="frame" x="97.5" y="5" width="120" height="34"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="120" id="tgq-gV-vVE"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits"/>
+                    </textField>
                 </subviews>
                 <constraints>
                     <constraint firstItem="s4A-MA-soC" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="4" id="5XM-5S-Z0k"/>
                     <constraint firstItem="dJs-3f-tIh" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="9QT-h1-f9b"/>
                     <constraint firstItem="TPu-Lr-YW0" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Lou-tO-WOb"/>
                     <constraint firstItem="dJs-3f-tIh" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="138" id="OlL-8Q-HFc"/>
+                    <constraint firstItem="tcC-D6-6nT" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Yrl-dW-wZT"/>
+                    <constraint firstItem="tcC-D6-6nT" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="bXB-rb-FTu"/>
+                    <constraint firstItem="tcC-D6-6nT" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="mAI-0P-3T4"/>
                     <constraint firstAttribute="trailing" secondItem="s4A-MA-soC" secondAttribute="trailing" constant="20" id="sJt-q5-AXA"/>
                     <constraint firstItem="TPu-Lr-YW0" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="zrP-xk-cXD"/>
                 </constraints>
@@ -47,6 +58,7 @@
             </constraints>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="inputTextField" destination="tcC-D6-6nT" id="rVD-X3-3AJ"/>
                 <outlet property="property" destination="TPu-Lr-YW0" id="ypT-5d-ePC"/>
                 <outlet property="value" destination="dJs-3f-tIh" id="DdV-wq-pyG"/>
             </connections>

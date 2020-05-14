@@ -17,6 +17,7 @@ class UserVM {
     private init(){}
     static let shared = UserVM()
     static var users = [person]()
+    static var search_result = [person]()
     let ref : DatabaseReference = Database.database().reference()
     
     
@@ -37,12 +38,30 @@ class UserVM {
         
     }
     
+    func likeUser(like_age: String, like_avatar: String, like_city: String, like_date: String, like_id: String, like_info: String, like_name: String, like_sex: String, response: @escaping responseCallBack) {
+        
+        let updateUser = [  FireBaseConstant.lAge           : like_age,
+                            FireBaseConstant.lAvatar        : like_avatar,
+                            FireBaseConstant.lCity          : like_city,
+                            FireBaseConstant.lDate          : like_date,
+                            FireBaseConstant.lID            : like_id,
+                            FireBaseConstant.lInfo          : like_info,
+                            FireBaseConstant.lName          : like_name,
+                            FireBaseConstant.lSex           : like_sex
+                           
+        ]
+        self.ref.child(FireBaseConstant.Likes).child(DataManager.userId!).child(like_id).setValue(updateUser)
+        response(true, "success", nil)
+    }
+    
+    
     func login(email: String, password: String, response: @escaping responseCallBack){
         
         Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
             Indicator.sharedInstance.hideIndicator()
             if error == nil{
-                DataManager.userId = user?.user.uid
+                let user_id = email.replacingOccurrences(of: "@", with: "", options: NSString.CompareOptions.literal, range: nil).replacingOccurrences(of: ".", with: "", options: NSString.CompareOptions.literal, range: nil)
+                DataManager.userId = user_id
                 DataManager.email = user?.user.email
                 
                 response(true, "Login Successfully.", nil)
@@ -97,6 +116,7 @@ class UserVM {
         }
         
     }
+    
     func getUsers(completion: @escaping (Bool) -> Void) {
         
         ref.child(FireBaseConstant.UserNode).observe(.value) { (snapShot) in
@@ -169,6 +189,12 @@ class UserVM {
         
     }
     
+    
+    func search(sex : String, city: String, age: String, tall: String, style: String, job: String, nick_name: String, response: @escaping responseCallBack) {
+        
+        
+        
+    }
     static func isPasswordValid(_ password : String) -> Bool {
         
         let passwordTest = NSPredicate(format: "SELF MATCHES %@", "^(?=.*[a-z])(?=.*[$@$#!%*?&])[A-Za-z\\d$$@$#!%*?&]{8,}")
