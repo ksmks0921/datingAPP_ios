@@ -163,10 +163,10 @@ class UserVM {
                           
                            
                             if (restDict[FireBaseConstant.kUserSex] as? Bool)! {
-                                user_sex = "man"
+                                user_sex = "남자"
                             }
                             else {
-                                user_sex = "woman"
+                                user_sex = "녀자"
                             }
                             let user_star = restDict[FireBaseConstant.kUserStar] as? String
                             let user_style = restDict[FireBaseConstant.kUserStyle] as? String
@@ -181,6 +181,7 @@ class UserVM {
                    }
                   
             }
+            
              completion(true)
         }
     
@@ -190,15 +191,123 @@ class UserVM {
     }
     
     
-    func search(sex : String, city: String, age: String, tall: String, style: String, job: String, nick_name: String, response: @escaping responseCallBack) {
+    func search(sex : String, city: String, age: String, tall: String, style: String, job: String, nick_name: String, completion: @escaping (Bool) -> Void) {
+       
+        UserVM.search_result = UserVM.users
         
-        
+        if sex != "전체" {
+            UserVM.search_result = filter(init_data: UserVM.search_result, key: "sex", value: sex)
+        }
+        if city != "전체" {
+            UserVM.search_result = filter(init_data: UserVM.search_result, key: "city", value: city)
+        }
+        if age != "전체" {
+            UserVM.search_result = filter(init_data: UserVM.search_result, key: "age", value: age)
+        }
+        if tall != "전체" {
+            UserVM.search_result = filter(init_data: UserVM.search_result, key: "tall", value: tall)
+        }
+        if style != "전체" {
+            UserVM.search_result = filter(init_data: UserVM.search_result, key: "style", value: style)
+        }
+        if job != "전체" {
+            UserVM.search_result = filter(init_data: UserVM.search_result, key: "job", value: job)
+        }
+        if nick_name != "전체" {
+            UserVM.search_result = filter(init_data: UserVM.search_result, key: "nick_name", value: nick_name)
+        }
+       
+        completion(true)
         
     }
+    
+    func filter(init_data: [person], key: String, value: String) -> [person] {
+        var result = [person]()
+        if key == "sex" {
+            for item in init_data {
+                
+                
+                if item.user_sex == value  {
+                    result.append(item)
+                }
+                
+            }
+            
+        }
+        if key == "city" {
+            for item in init_data {
+                
+                
+                if item.user_city == value  {
+                    result.append(item)
+                }
+                
+            }
+           
+        }
+        if key == "age" {
+            for item in init_data {
+                
+                
+                if item.user_age == value  {
+                    result.append(item)
+                }
+                
+            }
+           
+        }
+        if key == "tall" {
+            for item in init_data {
+                
+                
+                if item.user_tall == value  {
+                    result.append(item)
+                }
+                
+            }
+           
+        }
+        if key == "style" {
+            for item in init_data {
+                
+                
+                if item.user_style == value  {
+                    result.append(item)
+                }
+                
+            }
+           
+        }
+        if key == "job" {
+            for item in init_data {
+                
+                
+                if item.user_job == value  {
+                    result.append(item)
+                }
+                
+            }
+           
+        }
+        return result
+    }
+    
     static func isPasswordValid(_ password : String) -> Bool {
         
         let passwordTest = NSPredicate(format: "SELF MATCHES %@", "^(?=.*[a-z])(?=.*[$@$#!%*?&])[A-Za-z\\d$$@$#!%*?&]{8,}")
         return passwordTest.evaluate(with: password)
     }
+    
+    
 }
 
+class SearchKey {
+    var key: String!
+    var value: String!
+    
+    init(key: String, value: String)  {
+        self.key = key
+        self.value = value
+    }
+    
+}

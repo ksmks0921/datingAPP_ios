@@ -20,7 +20,7 @@ class AppConstant {
     static let kUserEmail = "userEmail"
     static let kDeviceToken = "deviceToken"
     static let UserFcmIds = "user-fcm-ids"
-    
+    static let kShowingSearch = "kSearch"
     
     
     

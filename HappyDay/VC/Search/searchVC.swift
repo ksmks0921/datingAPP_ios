@@ -115,10 +115,28 @@ class searchVC: UIViewController {
     }
     @IBAction func searchBtnTapped(_ sender: Any) {
         Indicator.sharedInstance.showIndicator()
-//        UserVM.shared.
-        let VC = self.storyboard?.instantiateViewController(withIdentifier: "mainPageVC") as! mainPageVC
-        VC.search_key = "key"
-        navigationController?.pushViewController(VC, animated: true)
+        UserVM.shared.search(sex: search_typye_value[0], city: search_typye_value[1], age: search_typye_value[2], tall: search_typye_value[3], style: search_typye_value[4], job: search_typye_value[5], nick_name: search_typye_value_nick[3], completion: {_ in
+            
+            
+                Indicator.sharedInstance.hideIndicator()
+            
+                DataManager.isShowingSearchResult = true
+                let VC = self.storyboard?.instantiateViewController(withIdentifier: "customTabBarVC") as! customTabBarVC
+                self.navigationController?.pushViewController(VC, animated: true)
+            
+            
+               
+               
+               
+            
+        })
+            
+         
+            
+          
+              
+            
+        
         
         
     }
@@ -178,7 +196,7 @@ extension searchVC:  UITableViewDelegate, UITableViewDataSource {
         case .PROFILE:
             switch indexPath.row {
                 case 0:
-                    showSelectView(type_index: indexPath.row, items: ["남 자", "녀 자"])
+                    showSelectView(type_index: indexPath.row, items: ["남자", "녀자"])
                     break
                 case 1:
                     showSelectView(type_index: indexPath.row, items: SettingVM.RegionList)
@@ -202,7 +220,7 @@ extension searchVC:  UITableViewDelegate, UITableViewDataSource {
         case .NICKNAME:
             switch indexPath.row {
             case 0:
-                showSelectView(type_index: indexPath.row, items: ["남 자", "녀 자"])
+                showSelectView(type_index: indexPath.row, items: ["남자", "녀자"])
                 break
             case 1:
                 showSelectView(type_index: indexPath.row, items: SettingVM.AgeList)

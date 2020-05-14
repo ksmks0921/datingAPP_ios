@@ -1715,6 +1715,12 @@
                                     <constraint firstItem="XJI-E9-P0s" firstAttribute="trailing" secondItem="CJO-Lu-qFD" secondAttribute="trailing" id="zM9-RI-Olz"/>
                                 </constraints>
                             </view>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="검색결과가 없습니다." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kr2-eJ-9Qv">
+                                <rect key="frame" x="132" y="418" width="150" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -1731,6 +1737,8 @@
                             <constraint firstItem="qlS-65-6YY" firstAttribute="leading" secondItem="xrJ-hd-2id" secondAttribute="leading" id="glq-1q-yoB"/>
                             <constraint firstItem="qlS-65-6YY" firstAttribute="trailing" secondItem="xrJ-hd-2id" secondAttribute="trailing" id="h9S-rH-oiq"/>
                             <constraint firstItem="38h-tA-28b" firstAttribute="trailing" secondItem="xrJ-hd-2id" secondAttribute="trailing" id="nm6-fg-r8u"/>
+                            <constraint firstItem="Kr2-eJ-9Qv" firstAttribute="centerY" secondItem="xrJ-hd-2id" secondAttribute="centerY" id="ofE-Go-hSM"/>
+                            <constraint firstItem="Kr2-eJ-9Qv" firstAttribute="centerX" secondItem="xrJ-hd-2id" secondAttribute="centerX" id="q9z-nO-rnX"/>
                             <constraint firstItem="Fot-5T-Y2g" firstAttribute="top" secondItem="xrJ-hd-2id" secondAttribute="top" id="r6v-lK-jqs"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="xrJ-hd-2id"/>
@@ -1747,6 +1755,7 @@
                         <outlet property="customPopUpCellLargeView" destination="Jpv-4I-2hm" id="iXS-Cb-SGW"/>
                         <outlet property="customPopUpCellListView" destination="hnN-Ej-n6K" id="qdT-Zk-SQN"/>
                         <outlet property="customPopUpView" destination="Bah-aH-fBZ" id="HhG-66-5cX"/>
+                        <outlet property="noResultLabel" destination="Kr2-eJ-9Qv" id="lnL-8n-WRq"/>
                         <outlet property="searchTypeView" destination="7sp-DA-mtC" id="Ua4-J8-4mH"/>
                         <outlet property="searchView" destination="nMq-rC-mDH" id="Yio-B7-zXR"/>
                         <outlet property="selectView" destination="wMB-ao-xRD" id="OIw-D7-9gr"/>
@@ -3199,14 +3208,14 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V0F-sj-ots">
-                                                    <rect key="frame" x="30" y="-6.5" width="72" height="72"/>
+                                                    <rect key="frame" x="30" y="11.5" width="36" height="36"/>
                                                     <color key="tintColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <state key="normal" image="sharp_radio_button_unchecked_black_18dp">
                                                         <color key="titleColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </state>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uUE-vE-E7w">
-                                                    <rect key="frame" x="117" y="19" width="42" height="21"/>
+                                                    <rect key="frame" x="81" y="19" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -4326,7 +4335,7 @@
                                                 <rect key="frame" x="8" y="11" width="122" height="122"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="avatar_woman" translatesAutoresizingMaskIntoConstraints="NO" id="eKD-kA-RHQ">
-                                                        <rect key="frame" x="6" y="0.0" width="110" height="256"/>
+                                                        <rect key="frame" x="6" y="0.0" width="110" height="128"/>
                                                         <color key="tintColor" red="1" green="0.75089698174653186" blue="0.80191118476259016" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="이미지 설정" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ehz-Uy-lk7">

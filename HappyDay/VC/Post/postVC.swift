@@ -87,9 +87,9 @@ class postVC: UIViewController {
 extension postVC: JXSegmentedViewDelegate {
     func segmentedView(_ segmentedView: JXSegmentedView, didSelectedItemAt index: Int) {
         if let dotDataSource = segmentedDataSource as? JXSegmentedDotDataSource {
-            //先更新数据源的数据
+            
             dotDataSource.dotStates[index] = false
-            //再调用reloadItem(at: index)
+            
             segmentedView.reloadItem(at: index)
             
         }

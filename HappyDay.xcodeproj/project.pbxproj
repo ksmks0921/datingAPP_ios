@@ -379,6 +379,7 @@
 		6741F46B246AD34E007E9B93 /* Chat */ = {
 			isa = PBXGroup;
 			children = (
+				674B9DA623D68DDC00FD2C48 /* AdvancedExampleViewController.swift */,
 				674B9DA523D68DC700FD2C48 /* chat */,
 				6792005323D123C000C4872B /* chatListVC.swift */,
 				6792005123D1207800C4872B /* chatBotVC.swift */,
@@ -493,8 +494,6 @@
 			isa = PBXGroup;
 			children = (
 				67F294E0246AE84E0036BA5C /* BaseVC.swift */,
-				6792001D23CE1C8400C4872B /* customTabBarVC.swift */,
-				674B9DA623D68DDC00FD2C48 /* AdvancedExampleViewController.swift */,
 				6783EBCA23D7FB3B009DC0A3 /* BottomPopupController */,
 				67F294DF246AE7EC0036BA5C /* FirstPage */,
 				6741F46E246AD441007E9B93 /* Payment */,
@@ -504,6 +503,7 @@
 				6741F46A246AD33A007E9B93 /* Profile */,
 				6741F469246AD32C007E9B93 /* Search */,
 				6741F468246AD315007E9B93 /* MainPage */,
+				67A2EEBA246D7354002A49BD /* CustomTabBar */,
 				6741F467246A5446007E9B93 /* SignUp */,
 				6741F466246A540C007E9B93 /* LogIn */,
 			);
@@ -513,6 +513,7 @@
 		6780C8D323CCD10600A54733 /* Items */ = {
 			isa = PBXGroup;
 			children = (
+				67A2EEBB246D7F5C002A49BD /* Post */,
 				6728DB5A246CF0A100BB56DA /* Search */,
 				67F294FC246BA23C0036BA5C /* Profile */,
 				6783EBF823D7FE19009DC0A3 /* CustomCell.swift */,
@@ -526,8 +527,6 @@
 				6780C8DF23CD0E9F00A54733 /* CustomTableViewCell.swift */,
 				6780C90023CD6DD500A54733 /* MyCustomCell.xib */,
 				6792003923CEB1F700C4872B /* profileImageCollectionCell.swift */,
-				6792004723D00AEB00C4872B /* postTableViewCell.swift */,
-				6792004823D00AEB00C4872B /* postTableViewCell.xib */,
 				6792005523D1249A00C4872B /* chatTableCell.swift */,
 				6792005623D1249A00C4872B /* chatTableCell.xib */,
 				6792007A23D1F6E400C4872B /* personalPageCollectionCell.swift */,
@@ -611,6 +610,23 @@
 				678C199623D216B900906A8D /* DesinableImageView.swift */,
 			);
 			path = CustomDesign;
+			sourceTree = "<group>";
+		};
+		67A2EEBA246D7354002A49BD /* CustomTabBar */ = {
+			isa = PBXGroup;
+			children = (
+				6792001D23CE1C8400C4872B /* customTabBarVC.swift */,
+			);
+			path = CustomTabBar;
+			sourceTree = "<group>";
+		};
+		67A2EEBB246D7F5C002A49BD /* Post */ = {
+			isa = PBXGroup;
+			children = (
+				6792004723D00AEB00C4872B /* postTableViewCell.swift */,
+				6792004823D00AEB00C4872B /* postTableViewCell.xib */,
+			);
+			path = Post;
 			sourceTree = "<group>";
 		};
 		67F294DF246AE7EC0036BA5C /* FirstPage */ = {

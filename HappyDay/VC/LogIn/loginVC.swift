@@ -107,6 +107,7 @@ extension loginVC {
                        if error == nil{
                            if success{
                                 DataManager.isLogin = true
+                                DataManager.isShowingSearchResult = false
                                 let VC = self.storyboard?.instantiateViewController(withIdentifier: "customTabBarVC") as! customTabBarVC
                                 self.navigationController?.pushViewController(VC, animated: true)
                             

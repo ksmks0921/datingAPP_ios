@@ -8,6 +8,8 @@
 
 import UIKit
 
+
+
 class mainPageVC: BaseVC {
     
     
@@ -34,6 +36,7 @@ class mainPageVC: BaseVC {
     var partners = [person]()
     var viewStyle = 0
     var search_key: String?
+    @IBOutlet weak var noResultLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,27 +46,27 @@ class mainPageVC: BaseVC {
         let nibCell = UINib(nibName: "largeCollectionViewCell", bundle: nil)
         collectionView.register(nibCell, forCellWithReuseIdentifier: largeCollectioinViewCellId)
       
-        if search_key != nil {
-              
-              Indicator.sharedInstance.showIndicator()
-              UserVM.shared.getUsers(completion:  {_ in
-                 Indicator.sharedInstance.hideIndicator()
-                    self.partners = UserVM.users
-                    self.collectionView.reloadData()
-                
-              })
- 
+        if DataManager.isShowingSearchResult! {
+            self.partners = UserVM.search_result
+            self.collectionView.reloadData()
         }
         else {
-            
             Indicator.sharedInstance.showIndicator()
-             UserVM.shared.getUsers(completion: {_ in
-                Indicator.sharedInstance.hideIndicator()
-                self.partners = UserVM.users
-                self.collectionView.reloadData()
-             })
-
+            UserVM.shared.getUsers(completion:  {_ in
+                  Indicator.sharedInstance.hideIndicator()
+                  self.partners = UserVM.users
+                  self.collectionView.reloadData()
+            
+            })
         }
+        
+        if self.partners.count == 0 {
+            noResultLabel.isHidden = true
+        }
+        if self.partners.count == 0 {
+            noResultLabel.isHidden = false
+        }
+       
         
         
 
@@ -206,7 +209,7 @@ extension mainPageVC: UICollectionViewDelegate, UICollectionViewDataSource, UICo
              cell.region.text = partner.user_city!
              cell.age.text = partner.user_age
              cell.image.sd_setImage(with: URL(string: partner.user_avatar![0]), placeholderImage: UIImage(named: "avatar_woman"))
-             if partners[indexPath.row].user_sex == "man" {
+             if partners[indexPath.row].user_sex == "남자" {
                 cell.region.textColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
                 cell.age.textColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
              }
@@ -222,7 +225,7 @@ extension mainPageVC: UICollectionViewDelegate, UICollectionViewDataSource, UICo
              let partner = partners[indexPath.row]
              cell.region.text = partner.user_city!
              cell.image.sd_setImage(with: URL(string: partner.user_avatar![0]), placeholderImage: UIImage(named: "avatar_woman"))
-             if partners[indexPath.row].user_sex == "man" {
+             if partners[indexPath.row].user_sex == "남자" {
                  cell.region.textColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
                  cell.age.textColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
              }
