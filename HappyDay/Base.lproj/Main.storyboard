@@ -354,9 +354,6 @@
                                         <state key="normal" title="뒤로" image="chevron.left" catalog="system">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
-                                        <connections>
-                                            <action selector="backBtnTapped:" destination="u9A-4X-f9G" eventType="touchUpInside" id="FXa-5X-ucL"/>
-                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -368,11 +365,19 @@
                                     <constraint firstItem="o1x-7N-4Uv" firstAttribute="leading" secondItem="Lvh-F7-R8C" secondAttribute="leading" constant="10" id="zT9-ii-PGO"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hGQ-jO-YXf">
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="hGQ-jO-YXf" firstAttribute="top" secondItem="Lvh-F7-R8C" secondAttribute="bottom" id="4zr-ws-izU"/>
+                            <constraint firstItem="hGQ-jO-YXf" firstAttribute="leading" secondItem="hlT-I2-wSW" secondAttribute="leading" id="OGc-hE-NCC"/>
+                            <constraint firstItem="hGQ-jO-YXf" firstAttribute="trailing" secondItem="hlT-I2-wSW" secondAttribute="trailing" id="OYp-BG-dwn"/>
                             <constraint firstItem="Lvh-F7-R8C" firstAttribute="top" secondItem="hlT-I2-wSW" secondAttribute="top" id="QgD-4b-sWO"/>
                             <constraint firstItem="Lvh-F7-R8C" firstAttribute="leading" secondItem="hlT-I2-wSW" secondAttribute="leading" id="ZIX-bf-5mc"/>
+                            <constraint firstItem="hGQ-jO-YXf" firstAttribute="bottom" secondItem="hlT-I2-wSW" secondAttribute="bottom" id="cNZ-Oq-a8x"/>
                             <constraint firstItem="Lvh-F7-R8C" firstAttribute="trailing" secondItem="hlT-I2-wSW" secondAttribute="trailing" id="p7m-GD-EMx"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="hlT-I2-wSW"/>
@@ -380,7 +385,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Y8-bk-H3F" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4622" y="2157"/>
+            <point key="canvasLocation" x="4621.739130434783" y="2156.9196428571427"/>
         </scene>
         <!--프로파일-->
         <scene sceneID="zrL-At-nWG">
@@ -4728,7 +4733,7 @@
                                                 <rect key="frame" x="8" y="11" width="122" height="122"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="avatar_woman" translatesAutoresizingMaskIntoConstraints="NO" id="eKD-kA-RHQ">
-                                                        <rect key="frame" x="6" y="1" width="110" height="125.5"/>
+                                                        <rect key="frame" x="6" y="0.0" width="110" height="128"/>
                                                         <color key="tintColor" red="1" green="0.75089698174653186" blue="0.80191118476259016" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="이미지 설정" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ehz-Uy-lk7">

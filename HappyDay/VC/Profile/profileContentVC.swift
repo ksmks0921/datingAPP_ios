@@ -29,14 +29,25 @@ class profileContentVC: BaseVC {
            navigationController?.setNavigationBarHidden(true, animated: animated)
     }
     
+  
     @IBAction func backBtnTapped(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
+    
     @IBAction func sendMessageBtnTapped(_ sender: Any) {
-//        navigationController?.pushViewController(AdvancedExampleViewController(), animated: true)
+
         
-        let VC = self.storyboard?.instantiateViewController(withIdentifier: "ChatttingVC") as! ChatttingVC
-        self.navigationController?.pushViewController(VC, animated: true)
+//        let dataSource = DemoChatDataSource(count: 5, pageSize: 50)
+        let viewController = self.storyboard?.instantiateViewController(withIdentifier: "ChatttingVC") as! ChatttingVC
+//        viewController.dataSource = dataSource
+//        viewController.shouldUseAlternativePresenter = false
+        viewController.chat_title = partners[currentViewControllerIndex!].user_nickName
+        let backItem = UIBarButtonItem()
+        backItem.title = "뒤로"
+        backItem.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        navigationItem.backBarButtonItem = backItem // This will show in the next view controller being pushed
+        self.navigationController?.pushViewController(viewController, animated: true)
+        
     }
     
     

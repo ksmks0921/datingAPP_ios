@@ -28,21 +28,47 @@ import MessageKit
 import InputBarAccessoryView
 
 class ChatttingVC: ChatViewController {
-        
+    
+
+    
+    @IBOutlet weak var contentView: UIView!
     let outgoingAvatarOverlap: CGFloat = 17.5
- 
+    var chat_title: String!
     override func viewDidLoad() {
-        messagesCollectionView = MessagesCollectionView(frame: .zero, collectionViewLayout: CustomMessagesFlowLayout())
-        messagesCollectionView.register(CustomCell.self)
+        
+
         super.viewDidLoad()
+        let button_translate = UIBarButtonItem(
+               image: UIImage(named: "translate_icon"),
+               style: .plain,
+               target: self,
+               
+               action: #selector(selectLanguage)
+           )
+           
+           let button_setting = UIBarButtonItem(
+               image: UIImage(systemName: "gear"),
+               style: .plain,
+               target: self,
+               action: #selector(showSetting)
+           )
+           button_setting.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+           button_translate.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+           self.title = chat_title
         
+           self.navigationItem.rightBarButtonItems = [button_translate, button_setting]
         
+ 
+    }
+    @objc
+    private func selectLanguage() {
         
-        let backButton = UIBarButtonItem()
-        backButton.title = "뒤로"
-        self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
     }
     
+    @objc
+    private func showSetting() {
+        
+    }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -55,7 +81,12 @@ class ChatttingVC: ChatViewController {
 //                })
 //        }
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+          super.viewWillAppear(animated)
+          navigationController?.setNavigationBarHidden(false, animated: animated)
+          navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.2039215686, green: 0.7803921569, blue: 0.3490196078, alpha: 1)
+          navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)]
+      }
     @IBAction func backBtnTapped(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
@@ -127,48 +158,105 @@ class ChatttingVC: ChatViewController {
         messageInputBar.inputTextView.layer.masksToBounds = true
         messageInputBar.inputTextView.scrollIndicatorInsets = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
         configureInputBarItems()
+        
+        
+        let button = InputBarButtonItem()
+        button.image = UIImage(systemName: "plus.circle.fill")
+        button.setSize(CGSize(width: 42, height: 42), animated: false)
+        button.tintColor = #colorLiteral(red: 0.2039215686, green: 0.7803921569, blue: 0.3490196078, alpha: 1)
+        button.onKeyboardSwipeGesture { item, gesture in
+            if (gesture.direction == .left)     { item.inputBarAccessoryView?.setLeftStackViewWidthConstant(to: 0, animated: true)        }
+            if (gesture.direction == .right) { item.inputBarAccessoryView?.setLeftStackViewWidthConstant(to: 36, animated: true)    }
+        }
+        messageInputBar.setStackViewItems([button], forStack: .left, animated: false)
+        
+        button.onTouchUpInside { item in
+            self.actionAttachMessage()
+        }
     }
-    @objc func didButtonClick(_ sender: UIButton) {
+    
+    func actionAttachMessage() {
+
+        messageInputBar.inputTextView.resignFirstResponder()
         
-        print("button clicked")
+        let attributedString = NSAttributedString(string: "Title", attributes: [
+            NSAttributedString.Key.font : UIFont.systemFont(ofSize: 15), //your font here
+            NSAttributedString.Key.foregroundColor : #colorLiteral(red: 0.2039215686, green: 0.7803921569, blue: 0.3490196078, alpha: 1)
+        ])
         
-        
-        
-        
-        
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+
+        let alertCamera = UIAlertAction(title: "카메라", style: .default) { action in
+            ImagePicker.cameraMulti(target: self, edit: true)
+        }
+        let alertPhoto = UIAlertAction(title: "사진", style: .default) { action in
+            ImagePicker.photoLibrary(target: self, edit: true)
+        }
+        let alertVideo = UIAlertAction(title: "비디오", style: .default) { action in
+            ImagePicker.videoLibrary(target: self, edit: true)
+        }
+//        let alertAudio = UIAlertAction(title: "Audio", style: .default) { action in
+////            self.actionAudio()
+//        }
+        let alertStickers = UIAlertAction(title: "Sticker", style: .default) { action in
+            self.actionStickers()
+        }
+//        let alertLocation = UIAlertAction(title: "Location", style: .default) { action in
+////            self.actionLocation()
+//        }
+
+        let configuration    = UIImage.SymbolConfiguration(pointSize: 25, weight: .regular)
+        let imageCamera        = UIImage(systemName: "camera", withConfiguration: configuration)
+        let imagePhoto        = UIImage(systemName: "photo", withConfiguration: configuration)
+        let imageVideo        = UIImage(systemName: "play.rectangle", withConfiguration: configuration)
+        let imageAudio        = UIImage(systemName: "music.mic", withConfiguration: configuration)
+        let imageStickers    = UIImage(systemName: "tortoise", withConfiguration: configuration)
+        let imageLocation    = UIImage(systemName: "location", withConfiguration: configuration)
+
+        alertCamera.setValue(imageCamera, forKey: "image");     alert.addAction(alertCamera)
+        alertPhoto.setValue(imagePhoto, forKey: "image");        alert.addAction(alertPhoto)
+        alertVideo.setValue(imageVideo, forKey: "image");        alert.addAction(alertVideo)
+//        alertAudio.setValue(imageAudio, forKey: "image");        alert.addAction(alertAudio)
+        alertStickers.setValue(imageStickers, forKey: "image");    alert.addAction(alertStickers)
+//        alertLocation.setValue(imageLocation, forKey: "image");    alert.addAction(alertLocation)
+    
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        alert.setValue(attributedString, forKey: "attributedTitle")
+        present(alert, animated: true)
+    }
+    
+    func actionStickers() {
+
+        let stickersView = StickersView()
+        stickersView.delegate = self
+        let navController = NavigationController(rootViewController: stickersView)
+        present(navController, animated: true)
     }
     private func configureInputBarItems() {
-        let view_1 = UIView(frame: CGRect(x: 0, y: 0, width: 36, height: 36))
-        view_1.backgroundColor = #colorLiteral(red: 0.2039215686, green: 0.7803921569, blue: 0.3490196078, alpha: 1)
-        
-        let button_1 = UIButton(type: .system)
-        button_1.setImage(UIImage(named: "round_add_circle_black_18dp"), for: .normal)
-        button_1.frame = CGRect(x: 2, y: 2, width: 38, height: 38)
-        button_1.contentEdgeInsets = UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2)
-        
-        button_1.tintColor = #colorLiteral(red: 0.2039215686, green: 0.7803921569, blue: 0.3490196078, alpha: 1)
-        view_1.addSubview(button_1)
-//        button_1.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -20).isActive = true
-        button_1.addTarget(self, action: Selector(("didButtonClick:")), for: .touchUpInside)
-        
-        messageInputBar.leftStackView.addSubview(button_1)
-        
-//        let contentView = addContentView()
-//        let subviews = [contentView]
-//        for view_item in subviews {
-//            messageInputBar.bottomStackView.addArrangedSubview(view_item)
-//        }
-        
-//        contentView.isHidden = true
-        let button_2 = UIButton(type: .system)
-        button_2.setImage(UIImage(named: "round_sentiment_satisfied_black_18dp"), for: .normal)
-        button_2.frame = CGRect(x: -42, y: 2, width: 36, height: 36)
-        button_2.tintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-        button_2.contentEdgeInsets = UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2)
-        messageInputBar.rightStackView.addSubview(button_2)
-        
-        button_1.addTarget(self, action: #selector(didButtonClick), for: .touchUpInside)
-//        button_2.addTarget(self, action: #selector(didButtonClick), for: .touchUpInside)
+//        let view_1 = UIView(frame: CGRect(x: 0, y: 0, width: 36, height: 36))
+//        view_1.backgroundColor = #colorLiteral(red: 0.2039215686, green: 0.7803921569, blue: 0.3490196078, alpha: 1)
+//
+//        let button_1 = UIButton(type: .system)
+//        button_1.setImage(UIImage(named: "round_add_circle_black_18dp"), for: .normal)
+//        button_1.frame = CGRect(x: 2, y: 2, width: 38, height: 38)
+//        button_1.contentEdgeInsets = UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2)
+//
+//        button_1.tintColor = #colorLiteral(red: 0.2039215686, green: 0.7803921569, blue: 0.3490196078, alpha: 1)
+//        view_1.addSubview(button_1)
+//
+//        button_1.addTarget(self, action: Selector(("didButtonClick:")), for: .touchUpInside)
+//
+//        messageInputBar.leftStackView.addSubview(button_1)
+//
+//        let button_2 = UIButton(type: .system)
+//        button_2.setImage(UIImage(named: "round_sentiment_satisfied_black_18dp"), for: .normal)
+//        button_2.frame = CGRect(x: -42, y: 2, width: 36, height: 36)
+//        button_2.tintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+//        button_2.contentEdgeInsets = UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2)
+//        messageInputBar.rightStackView.addSubview(button_2)
+//
+//        button_1.addTarget(self, action: #selector(didButtonClick), for: .touchUpInside)
+////        button_2.addTarget(self, action: #selector(didButtonClick), for: .touchUpInside)
         
         messageInputBar.setRightStackViewWidthConstant(to: 36, animated: false)
         messageInputBar.setLeftStackViewWidthConstant(to: 36, animated: false)
@@ -467,6 +555,28 @@ extension ChatttingVC: MessagesLayoutDelegate {
     }
 
 }
-extension ChatttingVC {
+extension ChatttingVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+
+        let video = info[.mediaURL] as? URL
+        let photo = info[.editedImage] as? UIImage
+
+        messageSend(text: nil, photo: photo, video: video, audio: nil)
+
+        picker.dismiss(animated: true)
+    }
+    
+    func messageSend(text: String?, photo: UIImage?, video: URL?, audio: String?) {
+
+//        Messages.send(chatId: chatId, text: text, photo: photo, video: video, audio: audio)
+    }
+}
+extension ChatttingVC: StickersDelegate {
+
+    //---------------------------------------------------------------------------------------------------------------------------------------------
+    func didSelectSticker(sticker: UIImage) {
+
+//        messageSend(text: nil, photo: sticker, video: nil, audio: nil)
+    }
 }

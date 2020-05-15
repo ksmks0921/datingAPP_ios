@@ -164,6 +164,9 @@ PODS:
   - BoringSSL-GRPC/Implementation (0.0.3):
     - BoringSSL-GRPC/Interface (= 0.0.3)
   - BoringSSL-GRPC/Interface (0.0.3)
+  - Chatto (3.6.0)
+  - ChattoAdditions (3.6.0):
+    - Chatto
   - DynamicBlurView (4.0.0)
   - Firebase/Analytics (6.21.0):
     - Firebase/Core
@@ -287,6 +290,9 @@ PODS:
     - SnapKit (~> 4.0.0)
   - InputBarAccessoryView (4.2.2)
   - JXSegmentedView (1.0.4)
+  - Kingfisher (5.14.0):
+    - Kingfisher/Core (= 5.14.0)
+  - Kingfisher/Core (5.14.0)
   - leveldb-library (1.22)
   - MessageKit (3.0.0):
     - InputBarAccessoryView (~> 4.2.2)
@@ -299,13 +305,21 @@ PODS:
   - nanopb/encode (0.3.9011)
   - PopupDialog (1.1.1):
     - DynamicBlurView (~> 4.0)
+  - ProgressHUD (2.70)
   - PromisesObjC (1.2.8)
+  - Realm (4.4.0):
+    - Realm/Headers (= 4.4.0)
+  - Realm/Headers (4.4.0)
+  - RealmSwift (4.4.0):
+    - Realm (= 4.4.0)
   - SDWebImage (5.7.0):
     - SDWebImage/Core (= 5.7.0)
   - SDWebImage/Core (5.7.0)
   - SnapKit (4.0.1)
 
 DEPENDENCIES:
+  - Chatto (= 3.6.0)
+  - ChattoAdditions (= 3.6.0)
   - Firebase/Analytics
   - Firebase/Auth
   - Firebase/Core
@@ -314,17 +328,23 @@ DEPENDENCIES:
   - Firebase/Storage
   - HCSStarRatingView (~> 1.5)
   - HSPopupMenu
+  - InputBarAccessoryView
   - JXSegmentedView
+  - Kingfisher
   - MessageKit
   - MessageViewController
   - MessengerKit (from `https://github.com/steve228uk/MessengerKit.git`)
   - PopupDialog (~> 1.1)
+  - ProgressHUD
+  - RealmSwift
   - SDWebImage (~> 5.0)
 
 SPEC REPOS:
   trunk:
     - abseil
     - BoringSSL-GRPC
+    - Chatto
+    - ChattoAdditions
     - DynamicBlurView
     - Firebase
     - FirebaseAnalytics
@@ -348,12 +368,16 @@ SPEC REPOS:
     - HSPopupMenu
     - InputBarAccessoryView
     - JXSegmentedView
+    - Kingfisher
     - leveldb-library
     - MessageKit
     - MessageViewController
     - nanopb
     - PopupDialog
+    - ProgressHUD
     - PromisesObjC
+    - Realm
+    - RealmSwift
     - SDWebImage
     - SnapKit
 
@@ -369,6 +393,8 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   abseil: 18063d773f5366ff8736a050fe035a28f635fd27
   BoringSSL-GRPC: db8764df3204ccea016e1c8dd15d9a9ad63ff318
+  Chatto: 44f711a558e421d6b34ac6f097fac95fbf21494c
+  ChattoAdditions: 78f90d4ad4d5fb171c5d11558ca493b5f8e9d419
   DynamicBlurView: ccf9acd2b20c883cc2c72e3524a04d8d3ee20533
   Firebase: f378c80340dd41c0ad0914af740c021eb282a04b
   FirebaseAnalytics: a1a0b3327ceb5cd5b4bacffdb293f6c909aa087d
@@ -392,16 +418,20 @@ SPEC CHECKSUMS:
   HSPopupMenu: ca8c0f872cdbc8fc7d9c8098c2aa6e6a0027d201
   InputBarAccessoryView: 2b937602598e2fab3149f37f51dd7ad795653812
   JXSegmentedView: b278b4c5d4c4c2982b4e084cef76ff1ddd37c6a5
+  Kingfisher: 7b64389a43139c903ec434788344c288217c792d
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
   MessageKit: e892a9ca49ebe6d82684d3a93ad84021fa23e2c6
   MessageViewController: 63ef2719d82c91d949ad52e101f049028a5a0611
   MessengerKit: 26dbfa81b76b22b7891028fb9a2cefdf4e86236f
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
   PopupDialog: 720c92befd8bc23c13442254945213db5612f149
+  ProgressHUD: e603e8b8622c47d8818b9fb38b3cfe9d3e7ca421
   PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
+  Realm: e125f464884cda953ebefe70c671b75b03b81b9b
+  RealmSwift: 33656a42bd300959a081fc13347376bc478071af
   SDWebImage: a99471f452bdfa0ca52ddf5b1adf2b61cab1d1eb
   SnapKit: 0de968a9fec17499afa29683b05d0c775b6d1c29
 
-PODFILE CHECKSUM: e72d8c8abe011017d64c8a329695d70b420e2db9
+PODFILE CHECKSUM: 1d847eeb4de11617e5301491ff4770c6dcd0a787
 
 COCOAPODS: 1.8.4

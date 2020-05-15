@@ -48,26 +48,21 @@ class ChatViewController: MessagesViewController, MessagesDataSource {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         configureMessageCollectionView()
         configureMessageInputBar()
-//        loadFirstMessages()
+
         
-        
-        
-        title = "김똘똘"
-        let backButton = UIBarButtonItem()
-        backButton.title = "뒤로"
-        self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        MockSocket.shared.connect(with: [SampleData.shared.nathan, SampleData.shared.wu])
-            .onNewMessage { [weak self] message in
-                self?.insertMessage(message)
-        }
+//        MockSocket.shared.connect(with: [SampleData.shared.nathan, SampleData.shared.wu])
+//            .onNewMessage { [weak self] message in
+//                self?.insertMessage(message)
+//        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
