@@ -13,10 +13,10 @@ class chatTableCell: UITableViewCell {
     @IBOutlet weak var photo: UIImageView!
     @IBOutlet weak var status_icon: UIImageView!
     @IBOutlet weak var name: UILabel!
-    @IBOutlet weak var age: UILabel!
-    @IBOutlet weak var job: UILabel!
-
-    @IBOutlet weak var status: UILabel!
+    @IBOutlet weak var age_region_label: UILabel!
+    @IBOutlet weak var statusView: DesinableView!
+    @IBOutlet weak var last_chat_label: UILabel!
+    @IBOutlet weak var time_label: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         photo.roundedImage()

@@ -27,17 +27,17 @@ import MapKit
 import MessageKit
 import InputBarAccessoryView
 
-final class AdvancedExampleViewController: ChatViewController {
+class ChatttingVC: ChatViewController {
         
     let outgoingAvatarOverlap: CGFloat = 17.5
-    
+ 
     override func viewDidLoad() {
         messagesCollectionView = MessagesCollectionView(frame: .zero, collectionViewLayout: CustomMessagesFlowLayout())
         messagesCollectionView.register(CustomCell.self)
         super.viewDidLoad()
         
-        updateTitleView(title: "김똘똘", subtitle: "2 온라인")
-
+        
+        
         let backButton = UIBarButtonItem()
         backButton.title = "뒤로"
         self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
@@ -46,40 +46,43 @@ final class AdvancedExampleViewController: ChatViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        MockSocket.shared.connect(with: [SampleData.shared.nathan, SampleData.shared.wu])
-            .onTypingStatus { [weak self] in
-                self?.setTypingIndicatorViewHidden(false)
-            }.onNewMessage { [weak self] message in
-                self?.setTypingIndicatorViewHidden(true, performUpdates: {
-                    self?.insertMessage(message)
-                })
-        }
+//        MockSocket.shared.connect(with: [SampleData.shared.nathan, SampleData.shared.wu])
+//            .onTypingStatus { [weak self] in
+//                self?.setTypingIndicatorViewHidden(false)
+//            }.onNewMessage { [weak self] message in
+//                self?.setTypingIndicatorViewHidden(true, performUpdates: {
+//                    self?.insertMessage(message)
+//                })
+//        }
     }
     
-    override func loadFirstMessages() {
-        DispatchQueue.global(qos: .userInitiated).async {
-            let count = UserDefaults.standard.mockMessagesCount()
-            SampleData.shared.getAdvancedMessages(count: count) { messages in
-                DispatchQueue.main.async {
-                    self.messageList = messages
-                    self.messagesCollectionView.reloadData()
-                    self.messagesCollectionView.scrollToBottom()
-                }
-            }
-        }
+    @IBAction func backBtnTapped(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
     }
+//    override func loadFirstMessages() {
+//        DispatchQueue.global(qos: .userInitiated).async {
+//            let count = UserDefaults.standard.mockMessagesCount()
+////            SampleData.shared.getAdvancedMessages(count: count) { messages in
+////                DispatchQueue.main.async {
+////                    self.messageList = messages
+////                    self.messagesCollectionView.reloadData()
+////                    self.messagesCollectionView.scrollToBottom()
+////                }
+////            }
+//        }
+//    }
     
-    override func loadMoreMessages() {
-        DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: .now() + 1) {
-            SampleData.shared.getAdvancedMessages(count: 20) { messages in
-                DispatchQueue.main.async {
-                    self.messageList.insert(contentsOf: messages, at: 0)
-                    self.messagesCollectionView.reloadDataAndKeepOffset()
-                    self.refreshControl.endRefreshing()
-                }
-            }
-        }
-    }
+//    override func loadMoreMessages() {
+//        DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: .now() + 1) {
+//            SampleData.shared.getAdvancedMessages(count: 20) { messages in
+//                DispatchQueue.main.async {
+//                    self.messageList.insert(contentsOf: messages, at: 0)
+//                    self.messagesCollectionView.reloadDataAndKeepOffset()
+//                    self.refreshControl.endRefreshing()
+//                }
+//            }
+//        }
+//    }
     
     override func configureMessageCollectionView() {
         super.configureMessageCollectionView()
@@ -315,7 +318,7 @@ final class AdvancedExampleViewController: ChatViewController {
 
 // MARK: - MessagesDisplayDelegate
 
-extension AdvancedExampleViewController: MessagesDisplayDelegate {
+extension ChatttingVC: MessagesDisplayDelegate {
 
     // MARK: - Text Messages
 
@@ -442,7 +445,7 @@ extension AdvancedExampleViewController: MessagesDisplayDelegate {
 
 // MARK: - MessagesLayoutDelegate
 
-extension AdvancedExampleViewController: MessagesLayoutDelegate {
+extension ChatttingVC: MessagesLayoutDelegate {
 
     func cellTopLabelHeight(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> CGFloat {
         if isTimeLabelVisible(at: indexPath) {
@@ -464,6 +467,6 @@ extension AdvancedExampleViewController: MessagesLayoutDelegate {
     }
 
 }
-extension AdvancedExampleViewController {
+extension ChatttingVC {
     
 }

@@ -14,25 +14,27 @@ class searchTypeVC: UIViewController {
     
     @IBOutlet weak var saveBtn: UIButton!
     
-    let search_type: [String] = ["성별", "거주지", "년령", "신장", "스타일",  "직업"]
+    let properties_nickname: [String] = ["성별", "거주지", "년령", "신장", "스타일",  "직업"]
+    var search_typye_value_nick : [String] = ["전체", "전체", "전체", "전체", "전체", "전체"]
     
-//    let values_profile: [String] = ["녀성", "장춘", "장춘", "나이", "19세", "매력", "매력스타일", "미남", "게임머", "이미지1", "동영상1"]
-    let properties_nickname: [String] = ["성별", "년령", "거주지", "닉네임"]
-//    let values_nickname: [String] = ["녀성", "19세 ~ 21세", "장춘", "따영"]
+    let search_type: [String] = ["성별", "년령", "거주지", "닉네임"]
+    
+    var search_typye_value : [String] = ["전체", "전체", "전체", "전체"]
+    
     var height_of_table = 60
     var TallList = [String]()
     var StyleList = [String]()
     var JobList = [String]()
-   
+    var searchType: SearchType?
     
-    var searchType: String?
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         
         getSettingData()
-        searchType = "searchType"
+        searchType = .PROFILE
         
         
         
@@ -72,7 +74,7 @@ class searchTypeVC: UIViewController {
         searchTypeBtn.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: .normal)
         saveBtn.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         saveBtn.setTitleColor(#colorLiteral(red: 0.2039215686, green: 0.7803921569, blue: 0.3490196078, alpha: 1), for: .normal)
-        self.searchType = "searchType"
+        self.searchType = .PROFILE
         self.tableView.reloadData()
     }
     @IBAction func saveBtnTapped(_ sender: Any) {
@@ -80,16 +82,53 @@ class searchTypeVC: UIViewController {
         saveBtn.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: .normal)
         searchTypeBtn.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         searchTypeBtn.setTitleColor(#colorLiteral(red: 0.2039215686, green: 0.7803921569, blue: 0.3490196078, alpha: 1), for: .normal)
-        self.searchType = "searchType_save"
+        self.searchType = .NICKNAME
         self.tableView.reloadData()
     }
+    
     @IBAction func searchBtnTapped(_ sender: Any) {
+            Indicator.sharedInstance.showIndicator()
+        
+            switch self.searchType {
+                case .PROFILE:
+                    UserVM.shared.filterEvents(location: self.search_typye_value_nick[1], type: AppConstant.eAll, source_type: AppConstant.eAll, age: self.search_typye_value[2], tall: self.search_typye_value_nick[3], style: self.search_typye_value_nick[4], job: self.search_typye_value_nick[5], nick_name: "String", completion: {_ in
+                        
+                            Indicator.sharedInstance.hideIndicator()
+                            
+                      
+                    })
+                    break
+                case .NICKNAME:
+                    UserVM.shared.filterEvents(location: self.search_typye_value[2], type: AppConstant.eAll, source_type: AppConstant.eAll, age: self.search_typye_value[1], tall: AppConstant.eAll, style: AppConstant.eAll, job: AppConstant.eAll, nick_name: "", completion: {_ in
+                        
+                            Indicator.sharedInstance.hideIndicator()
+                            
+                      
+                    })
+                    break
+                default:
+                    break
+            }
+            
         
     }
     @IBAction func resetBtnTapped(_ sender: Any) {
+            switch self.searchType {
+              case .PROFILE:
+                  search_typye_value = ["전체", "전체", "전체", "전체"]
+                  break
+              case .NICKNAME:
+                  search_typye_value_nick = ["전체", "전체", "전체", "전체", "전체", "전체"]
+                  break
+              default:
+                  break
+              }
+              
+              tableView.reloadData()
         
     }
     @IBAction func TypeBtnTapped(_ sender: Any) {
+        
         
     }
     
@@ -99,81 +138,142 @@ class searchTypeVC: UIViewController {
 extension searchTypeVC:  UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if searchType == "searchType" {
+       switch searchType {
+        case .PROFILE:
             return search_type.count
-        }
-        else {
+           
+        case .NICKNAME:
             return properties_nickname.count
+         
+        default:
+            return 0
+           
         }
         
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if searchType == "searchType" {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "searchTableViewCell", for: indexPath as IndexPath) as! searchTableViewCell
-            cell.property?.text = self.search_type[indexPath.row]
-            cell.value?.text = "전 체"
-            if indexPath.row == 0 || indexPath.row == 1 || indexPath.row == 2 {
-                cell.value?.textColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
-            }
-            else {
-                cell.value?.textColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
-            }
-            return cell
-        }
-        else {
-            if indexPath.row == 3 {
+        switch searchType {
+            case .PROFILE:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "searchTableViewCell", for: indexPath as IndexPath) as! searchTableViewCell
-                cell.property?.text = self.properties_nickname[indexPath.row]
+                cell.property?.text = self.search_type[indexPath.row]
+                cell.value?.text = self.search_typye_value[indexPath.row]
+                
+                cell.value?.textColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
+                
                 
                 return cell
-            }
-            else {
-                let cell = tableView.dequeueReusableCell(withIdentifier: "searchTableViewCell", for: indexPath as IndexPath) as! searchTableViewCell
-                cell.property?.text = self.properties_nickname[indexPath.row]
-                cell.value?.text = "전 체"
-                return cell
-            }
+            default:
+                if indexPath.row == 3 {
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "searchTableViewCell", for: indexPath as IndexPath) as! searchTableViewCell
+                    cell.property?.text = self.properties_nickname[indexPath.row]
+                    
+                    return cell
+                }
+                else {
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "searchTableViewCell", for: indexPath as IndexPath) as! searchTableViewCell
+                    cell.property?.text = self.properties_nickname[indexPath.row]
+                    cell.value?.text = self.search_typye_value_nick[indexPath.row]
+                    return cell
+                }
             
         }
+            
+       
         
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        switch indexPath.row {
-        case 0:
-            showSelectView(items: ["남 자", "녀 자"])
-            break
-        case 1:
-            showSelectView(items: SettingVM.RegionList)
-            break
-        case 2:
-            showSelectView(items: SettingVM.AgeList)
-            break
-        case 3:
-            showSelectView(items: SettingVM.TallList)
-            break
-        case 4:
-            showSelectView(items: SettingVM.StyleList)
-            break
-        case 5:
-            showSelectView(items: SettingVM.JobList)
-            break
-        default:
-            break
-        }
+     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+           switch searchType {
+           case .PROFILE:
+               switch indexPath.row {
+                   case 0:
+                       showSelectView(type_index: indexPath.row, items: ["남자", "녀자"])
+                       break
+                   case 1:
+                       showSelectView(type_index: indexPath.row, items: SettingVM.RegionList)
+                       break
+                   case 2:
+                       showSelectView(type_index: indexPath.row, items: SettingVM.AgeList)
+                       break
+                   case 3:
+                       showSelectView(type_index: indexPath.row, items: SettingVM.TallList)
+                       break
+                   case 4:
+                       showSelectView(type_index: indexPath.row, items: SettingVM.StyleList)
+                       break
+                   case 5:
+                       showSelectView(type_index: indexPath.row, items: SettingVM.JobList)
+                       break
+                   default:
+                       break
+               }
+               break
+           case .NICKNAME:
+               switch indexPath.row {
+               case 0:
+                   showSelectView(type_index: indexPath.row, items: ["남자", "녀자"])
+                   break
+               case 1:
+                   showSelectView(type_index: indexPath.row, items: SettingVM.AgeList)
+                   break
+               case 2:
+                   showSelectView(type_index: indexPath.row, items: SettingVM.RegionList)
+                   break
+                         
+               default:
+                   break
+               }
+               break
+           default:
+               break
+               
+
+           }
     }
     
-    func showSelectView(items: [String]) {
+    func showSelectView(type_index: Int, items: [String]) {
         guard let popupVC = storyboard?.instantiateViewController(withIdentifier: "otherSettingVC") as? otherSettingVC else { return }
-        popupVC.height = CGFloat((items.count + 1) * height_of_table)
+        
+        let height_view = self.view.frame.size.height
+        let height_bottom_view = (items.count + 1) * height_of_table
+        if height_bottom_view > Int(height_view) {
+            popupVC.height = CGFloat(height_view)
+        }
+        else {
+            popupVC.height = CGFloat(height_bottom_view)        }
         popupVC.topCornerRadius = 10
         popupVC.presentDuration = 1
         popupVC.dismissDuration = 1
         popupVC.shouldDismissInteractivelty = true
         popupVC.items = items
+        popupVC.delegate = self
+        popupVC.index_type = type_index
         present(popupVC, animated: true, completion: nil)
         
     }
+}
+extension searchTypeVC: SearchTypeDelegate {
+   
+    
+    func selectSearchType(index: Int, type: String) {
+        
+        let selected_item = type
+        switch searchType {
+        case .PROFILE:
+            search_typye_value[index] = selected_item
+            break
+        case .NICKNAME:
+            search_typye_value_nick[index] = selected_item
+            break
+        default:
+            break
+        }
+        
+        tableView.reloadData()
+        print(selected_item)
+        
+    }
+    
+    
 }

@@ -33,7 +33,10 @@ class profileContentVC: BaseVC {
         self.navigationController?.popViewController(animated: true)
     }
     @IBAction func sendMessageBtnTapped(_ sender: Any) {
-        navigationController?.pushViewController(AdvancedExampleViewController(), animated: true)
+//        navigationController?.pushViewController(AdvancedExampleViewController(), animated: true)
+        
+        let VC = self.storyboard?.instantiateViewController(withIdentifier: "ChatttingVC") as! ChatttingVC
+        self.navigationController?.pushViewController(VC, animated: true)
     }
     
     

@@ -14,10 +14,7 @@ protocol SearchTypeDelegate
 
 }
 
-enum SearchType : String{
-    case PROFILE
-    case NICKNAME
-}
+
 class searchVC: UIViewController {
     
     
@@ -115,17 +112,35 @@ class searchVC: UIViewController {
     }
     @IBAction func searchBtnTapped(_ sender: Any) {
         Indicator.sharedInstance.showIndicator()
-        UserVM.shared.search(sex: search_typye_value[0], city: search_typye_value[1], age: search_typye_value[2], tall: search_typye_value[3], style: search_typye_value[4], job: search_typye_value[5], nick_name: search_typye_value_nick[3], completion: {_ in
+        switch searchType {
+                case .PROFILE:
+                 UserVM.shared.search(sex: search_typye_value[0], city: search_typye_value[1], age: search_typye_value[2], tall: search_typye_value[3], style: search_typye_value[4], job: search_typye_value[5], nick_name: search_typye_value_nick[3], completion: {_ in
+                    
+                    
+                        Indicator.sharedInstance.hideIndicator()
+                    
+                        DataManager.isShowingSearchResult = true
+                        let VC = self.storyboard?.instantiateViewController(withIdentifier: "customTabBarVC") as! customTabBarVC
+                        self.navigationController?.pushViewController(VC, animated: true)
+                    
+                 })
+                 break
+                 case .NICKNAME:
+                    UserVM.shared.search(sex: search_typye_value_nick[0], city: search_typye_value_nick[2], age: search_typye_value_nick[1], tall: AppConstant.eAll, style: AppConstant.eAll, job: AppConstant.eAll, nick_name: search_typye_value_nick[3], completion: {_ in
+                        
+                        /////////////////////
+                            Indicator.sharedInstance.hideIndicator()
+                        
+                            DataManager.isShowingSearchResult = true
+                            let VC = self.storyboard?.instantiateViewController(withIdentifier: "customTabBarVC") as! customTabBarVC
+                            self.navigationController?.pushViewController(VC, animated: true)
+                        
+                    })
+                    break
+                 default:
+                 break
+            }
             
-            
-                Indicator.sharedInstance.hideIndicator()
-            
-                DataManager.isShowingSearchResult = true
-                let VC = self.storyboard?.instantiateViewController(withIdentifier: "customTabBarVC") as! customTabBarVC
-                self.navigationController?.pushViewController(VC, animated: true)
-            
-        })
-
     }
   
    

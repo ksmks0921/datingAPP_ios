@@ -76,8 +76,7 @@ extension chatListVC:  UITableViewDelegate, UITableViewDataSource {
             cell.name.text = item.name
           
             cell.photo.image = UIImage(named: item.photo ?? "avatar_woman" )
-            cell.age.text = item.age
-            cell.job.text = item.job
+        
        
         
 //            if item.is_favorite == true {
@@ -87,16 +86,16 @@ extension chatListVC:  UITableViewDelegate, UITableViewDataSource {
 //                cell.contentView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
 //            }
             if item.is_online == "online" {
-                cell.status_icon.image = UIImage(named: "circle-24-green")
-                cell.status.text = "온라인"
+              
+         
             }
             else if item.is_online == "offline"{
-                cell.status_icon.image = UIImage(named: "circle-24-red")
-                cell.status.text = "오프라인"
+               
+             
             }
             else {
                 cell.status_icon.image = UIImage(named: "circle-24-yellow")
-                cell.status.text = "자리비움"
+              
             }
           
             return cell
@@ -108,7 +107,9 @@ extension chatListVC:  UITableViewDelegate, UITableViewDataSource {
        return 100
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        navigationController?.pushViewController(AdvancedExampleViewController(), animated: true)
-//        print("sdfsdf")
+//        navigationController?.pushViewController(AdvancedExampleViewController(), animated: true)
+        let VC = self.storyboard?.instantiateViewController(withIdentifier: "ChatttingVC") as! ChatttingVC
+               self.navigationController?.pushViewController(VC, animated: true)
     }
+    
 }

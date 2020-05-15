@@ -99,7 +99,7 @@ class postVC: UIViewController {
         
         DataManager.isShowingFilterResult = true
         Indicator.sharedInstance.showIndicator()
-        UserVM.shared.filterEvents(location: self.selected_location, type: self.selected_type, source_type: self.selected_source_type, completion: {_ in
+        UserVM.shared.filterEvents(location: self.selected_location, type: self.selected_type, source_type: self.selected_source_type, age: AppConstant.eAll, tall: AppConstant.eAll, style: AppConstant.eAll, job: AppConstant.eAll, nick_name: AppConstant.eAll, completion: {_ in
             
                 Indicator.sharedInstance.hideIndicator()
                 self.listContainerView.reloadData()
@@ -118,7 +118,7 @@ class postVC: UIViewController {
         self.selected_source_type = AppConstant.eVideo
         Indicator.sharedInstance.showIndicator()
         
-        UserVM.shared.filterEvents(location: self.selected_location, type: self.selected_type, source_type: self.selected_source_type, completion: {_ in
+        UserVM.shared.filterEvents(location: self.selected_location, type: self.selected_type, source_type: self.selected_source_type, age: AppConstant.eAll, tall: AppConstant.eAll, style: AppConstant.eAll, job: AppConstant.eAll, nick_name: AppConstant.eAll, completion: {_ in
             
                 Indicator.sharedInstance.hideIndicator()
                 self.listContainerView.reloadData()
@@ -135,8 +135,9 @@ class postVC: UIViewController {
         videoSelectBtn.setTitleColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), for: .normal)
         DataManager.isShowingFilterResult = true
         self.selected_source_type = AppConstant.eImage
+        
         Indicator.sharedInstance.showIndicator()
-        UserVM.shared.filterEvents(location: self.selected_location, type: self.selected_type, source_type: self.selected_source_type, completion: {_ in
+        UserVM.shared.filterEvents(location: self.selected_location, type: self.selected_type, source_type: self.selected_source_type, age: AppConstant.eAll, tall: AppConstant.eAll, style: AppConstant.eAll, job: AppConstant.eAll, nick_name: AppConstant.eAll, completion: {_ in
             
                 Indicator.sharedInstance.hideIndicator()
                 self.listContainerView.reloadData()
@@ -174,7 +175,7 @@ extension postVC: SearchTypeDelegate{
     func selectSearchType(index: Int, type: String) {
         self.selected_location = type
         Indicator.sharedInstance.showIndicator()
-        UserVM.shared.filterEvents(location: self.selected_location, type: self.selected_type, source_type: self.selected_source_type, completion: {_ in
+        UserVM.shared.filterEvents(location: self.selected_location, type: self.selected_type, source_type: self.selected_source_type, age: AppConstant.eAll, tall: AppConstant.eAll, style: AppConstant.eAll, job: AppConstant.eAll, nick_name: AppConstant.eAll, completion: {_ in
             
                 Indicator.sharedInstance.hideIndicator()
                 self.listContainerView.reloadData()
@@ -193,7 +194,7 @@ extension postVC: JXSegmentedViewDelegate {
         
         self.selected_type = self.titles[index]
         Indicator.sharedInstance.showIndicator()
-        UserVM.shared.filterEvents(location: self.selected_location, type: self.selected_type, source_type: self.selected_source_type, completion: {_ in
+        UserVM.shared.filterEvents(location: self.selected_location, type: self.selected_type, source_type: self.selected_source_type, age: AppConstant.eAll, tall: AppConstant.eAll, style: AppConstant.eAll, job: AppConstant.eAll, nick_name: AppConstant.eAll, completion: {_ in
             
                 Indicator.sharedInstance.hideIndicator()
                 self.listContainerView.reloadData()

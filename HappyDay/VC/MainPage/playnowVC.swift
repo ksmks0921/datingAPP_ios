@@ -29,7 +29,7 @@ class playnowVC: UIViewController {
     @IBAction func messageBtnTapped(_ sender: Any) {
 //        let VC = self.storyboard?.instantiateViewController(withIdentifier: "chatRoomVC") as! chatRoomVC
 //        navigationController?.pushViewController(VC, animated: true)
-        navigationController?.pushViewController(AdvancedExampleViewController(), animated: true)
+        
     }
     @IBAction func otherBtnTapped(_ sender: Any) {
     }
