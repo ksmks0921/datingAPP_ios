@@ -15,8 +15,8 @@ class FireBaseConstant{
     static let Settings     = "Settings"
     static let Likes        = "Likes"
     static let Events       = "Events"
-    
-    
+    static let Chats        = "Chats"
+    static let Chatlist     = "Chatlist"
     
     
     static let name         = "name"
@@ -96,7 +96,23 @@ class FireBaseConstant{
     static let thumb_path               = "thumb_path"
     static let view_counts              = "view_counts"
     
+    //****************************** Chats ****************
     
+    static let lang_chinese                 = "chinese"
+    static let lang_korean                  = "korean"
+    static let lang_japanese                = "japanese"
+    static let lang_english                 = "english"
+    static let mdate                        = "date"
+    static let misseen                      = "isseen"
+    static let message                      = "message"
+    static let mreceiver                    = "receiver"
+    static let msender                      = "sender"
+    static let msource_path                 = "source_path"
+    static let msource_type                 = "source_type"
+    static let mthumb_path                  = "thumb_path"
+    static let mtime                        = "time"
     
-    
+    //****************************** Chatlist ****************
+    static let l_id                 = "id"
+    static let l_status             = "status"
 }

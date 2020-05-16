@@ -108,8 +108,7 @@ extension chatListVC:  UITableViewDelegate, UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //        navigationController?.pushViewController(AdvancedExampleViewController(), animated: true)
-        let VC = self.storyboard?.instantiateViewController(withIdentifier: "ChatttingVC") as! ChatttingVC
-               self.navigationController?.pushViewController(VC, animated: true)
+    
     }
     
 }

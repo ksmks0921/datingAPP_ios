@@ -25,6 +25,10 @@ target 'HappyDay' do
 	pod 'RealmSwift'
 	pod 'ProgressHUD'
 	pod 'Kingfisher'
+	pod 'CryptoSwift'
+	pod 'OneSignal'
+	pod 'RNCryptor-objc'
+	pod 'Reachability'
 
 	pod 'Chatto', '= 3.6.0'
 	pod 'ChattoAdditions', '= 3.6.0'

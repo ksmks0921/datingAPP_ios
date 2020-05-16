@@ -315,7 +315,10 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
 
         // Send button activity animation
         messageInputBar.sendButton.startAnimating()
-        messageInputBar.inputTextView.placeholder = "Sending..."
+        messageInputBar.inputTextView.placeholder = "전송중..."
+        
+        
+        
         DispatchQueue.global(qos: .default).async {
             // fake send request task
             sleep(1)

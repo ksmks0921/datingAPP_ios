@@ -167,6 +167,7 @@ PODS:
   - Chatto (3.6.0)
   - ChattoAdditions (3.6.0):
     - Chatto
+  - CryptoSwift (1.3.1)
   - DynamicBlurView (4.0.0)
   - Firebase/Analytics (6.21.0):
     - Firebase/Core
@@ -303,15 +304,18 @@ PODS:
     - nanopb/encode (= 0.3.9011)
   - nanopb/decode (0.3.9011)
   - nanopb/encode (0.3.9011)
+  - OneSignal (2.13.1)
   - PopupDialog (1.1.1):
     - DynamicBlurView (~> 4.0)
   - ProgressHUD (2.70)
   - PromisesObjC (1.2.8)
+  - Reachability (3.2)
   - Realm (4.4.0):
     - Realm/Headers (= 4.4.0)
   - Realm/Headers (4.4.0)
   - RealmSwift (4.4.0):
     - Realm (= 4.4.0)
+  - RNCryptor-objc (3.0.6)
   - SDWebImage (5.7.0):
     - SDWebImage/Core (= 5.7.0)
   - SDWebImage/Core (5.7.0)
@@ -320,6 +324,7 @@ PODS:
 DEPENDENCIES:
   - Chatto (= 3.6.0)
   - ChattoAdditions (= 3.6.0)
+  - CryptoSwift
   - Firebase/Analytics
   - Firebase/Auth
   - Firebase/Core
@@ -334,9 +339,12 @@ DEPENDENCIES:
   - MessageKit
   - MessageViewController
   - MessengerKit (from `https://github.com/steve228uk/MessengerKit.git`)
+  - OneSignal
   - PopupDialog (~> 1.1)
   - ProgressHUD
+  - Reachability
   - RealmSwift
+  - RNCryptor-objc
   - SDWebImage (~> 5.0)
 
 SPEC REPOS:
@@ -345,6 +353,7 @@ SPEC REPOS:
     - BoringSSL-GRPC
     - Chatto
     - ChattoAdditions
+    - CryptoSwift
     - DynamicBlurView
     - Firebase
     - FirebaseAnalytics
@@ -373,11 +382,14 @@ SPEC REPOS:
     - MessageKit
     - MessageViewController
     - nanopb
+    - OneSignal
     - PopupDialog
     - ProgressHUD
     - PromisesObjC
+    - Reachability
     - Realm
     - RealmSwift
+    - RNCryptor-objc
     - SDWebImage
     - SnapKit
 
@@ -395,6 +407,7 @@ SPEC CHECKSUMS:
   BoringSSL-GRPC: db8764df3204ccea016e1c8dd15d9a9ad63ff318
   Chatto: 44f711a558e421d6b34ac6f097fac95fbf21494c
   ChattoAdditions: 78f90d4ad4d5fb171c5d11558ca493b5f8e9d419
+  CryptoSwift: f12f037f6d0fcd6d48c96db0071b653de64e6c4d
   DynamicBlurView: ccf9acd2b20c883cc2c72e3524a04d8d3ee20533
   Firebase: f378c80340dd41c0ad0914af740c021eb282a04b
   FirebaseAnalytics: a1a0b3327ceb5cd5b4bacffdb293f6c909aa087d
@@ -424,14 +437,17 @@ SPEC CHECKSUMS:
   MessageViewController: 63ef2719d82c91d949ad52e101f049028a5a0611
   MessengerKit: 26dbfa81b76b22b7891028fb9a2cefdf4e86236f
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
+  OneSignal: fa98eaa90372bb367b6a4a1c1622ffb9832c7600
   PopupDialog: 720c92befd8bc23c13442254945213db5612f149
   ProgressHUD: e603e8b8622c47d8818b9fb38b3cfe9d3e7ca421
   PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
+  Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   Realm: e125f464884cda953ebefe70c671b75b03b81b9b
   RealmSwift: 33656a42bd300959a081fc13347376bc478071af
+  RNCryptor-objc: d1b228f9c02e2173df063f0617684c134aed890e
   SDWebImage: a99471f452bdfa0ca52ddf5b1adf2b61cab1d1eb
   SnapKit: 0de968a9fec17499afa29683b05d0c775b6d1c29
 
-PODFILE CHECKSUM: 1d847eeb4de11617e5301491ff4770c6dcd0a787
+PODFILE CHECKSUM: 63a5290d0999f2a79d2b47b3b30c9b254e30e809
 
 COCOAPODS: 1.8.4

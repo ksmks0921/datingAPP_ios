@@ -504,6 +504,36 @@ class UserVM {
         
     }
     
+    func sendMessage(sender_id: String, receiverr_id: String, text: String, response: @escaping responseCallBack) {
+        
+        let newMessage = [    FireBaseConstant.lang_chinese                 : "",
+                              FireBaseConstant.lang_korean                  : "",
+                              FireBaseConstant.lang_japanese                : "",
+                              FireBaseConstant.lang_english                 : "",
+                              FireBaseConstant.mdate                        : "",
+                              FireBaseConstant.misseen                      : false,
+                              FireBaseConstant.message                      : "",
+                              FireBaseConstant.mreceiver                    : "",
+                              FireBaseConstant.msender                      : "",
+                              FireBaseConstant.msource_path                 : "",
+                              FireBaseConstant.msource_type                 : "",
+                              FireBaseConstant.mthumb_path                  : "",
+                              FireBaseConstant.mtime                        : ""
+                    
+         ] as [String : Any]
+        
+        self.ref.child(FireBaseConstant.Chats).setValue(newMessage)
+        
+        
+        let newChatList = [ FireBaseConstant.l_id       : "",
+                            FireBaseConstant.l_status   : "add"
+        ]
+       
+        self.ref.child(FireBaseConstant.Chatlist).child(sender_id).child(receiverr_id).setValue(newMessage)
+        response(true, "Registered Successfully.", nil)
+    }
+    
+    
     static func isPasswordValid(_ password : String) -> Bool {
         
         let passwordTest = NSPredicate(format: "SELF MATCHES %@", "^(?=.*[a-z])(?=.*[$@$#!%*?&])[A-Za-z\\d$$@$#!%*?&]{8,}")
