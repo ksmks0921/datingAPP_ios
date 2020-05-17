@@ -37,7 +37,7 @@ class profileContentVC: BaseVC {
     @IBAction func sendMessageBtnTapped(_ sender: Any) {
 
 
-        let privateChatView = MKPrivateChatView(chatId: "chatId", recipientId: "recipientId")
+        let privateChatView = MKPrivateChatView(chatId: UserVM.current_user.user_id!, connectedPerson: partners[currentViewControllerIndex!])
 
         privateChatView.chat_title = partners[currentViewControllerIndex!].user_nickName
         let backItem = UIBarButtonItem()

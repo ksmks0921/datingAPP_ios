@@ -11,7 +11,7 @@ import UIKit
 class chatListVC: UIViewController {
 
    
-    var partners = [message]()
+    var partners = [person]()
     @IBOutlet weak var chatListTableView: UITableView!
     
     var friends = [person]()
@@ -71,32 +71,7 @@ extension chatListVC:  UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
        
             let cell = chatListTableView.dequeueReusableCell(withIdentifier: "chatTableCell", for: indexPath as IndexPath) as! chatTableCell
-            let item = partners[indexPath.row]
             
-            cell.name.text = item.name
-          
-            cell.photo.image = UIImage(named: item.photo ?? "avatar_woman" )
-        
-       
-        
-//            if item.is_favorite == true {
-//                cell.contentView.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
-//            }
-//            else {
-//                cell.contentView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-//            }
-            if item.is_online == "online" {
-              
-         
-            }
-            else if item.is_online == "offline"{
-               
-             
-            }
-            else {
-                cell.status_icon.image = UIImage(named: "circle-24-yellow")
-              
-            }
           
             return cell
            

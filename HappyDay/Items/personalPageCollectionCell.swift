@@ -10,8 +10,10 @@ import UIKit
 
 class personalPageCollectionCell: UICollectionViewCell {
 
+    @IBOutlet weak var badgeHeight: NSLayoutConstraint!
     @IBOutlet weak var icon: UIImageView!
     @IBOutlet weak var txt: UILabel!
+    @IBOutlet weak var otherText: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

@@ -504,33 +504,33 @@ class UserVM {
         
     }
     
-    func sendMessage(sender_id: String, receiverr_id: String, text: String, response: @escaping responseCallBack) {
+    func sendMessage(sender_id: String, receiver_id: String, text: String, sourceType: String, sourcePath: String, thumb_path: String, time: String, date: String,  response: @escaping responseCallBack) {
         
         let newMessage = [    FireBaseConstant.lang_chinese                 : "",
                               FireBaseConstant.lang_korean                  : "",
                               FireBaseConstant.lang_japanese                : "",
                               FireBaseConstant.lang_english                 : "",
-                              FireBaseConstant.mdate                        : "",
+                              FireBaseConstant.mdate                        : date,
                               FireBaseConstant.misseen                      : false,
-                              FireBaseConstant.message                      : "",
-                              FireBaseConstant.mreceiver                    : "",
-                              FireBaseConstant.msender                      : "",
-                              FireBaseConstant.msource_path                 : "",
-                              FireBaseConstant.msource_type                 : "",
-                              FireBaseConstant.mthumb_path                  : "",
-                              FireBaseConstant.mtime                        : ""
+                              FireBaseConstant.message                      : text,
+                              FireBaseConstant.mreceiver                    : receiver_id,
+                              FireBaseConstant.msender                      : sender_id,
+                              FireBaseConstant.msource_path                 : sourcePath,
+                              FireBaseConstant.msource_type                 : sourceType,
+                              FireBaseConstant.mthumb_path                  : thumb_path,
+                              FireBaseConstant.mtime                        : time
                     
          ] as [String : Any]
         
-        self.ref.child(FireBaseConstant.Chats).setValue(newMessage)
+        self.ref.child(FireBaseConstant.Chats).childByAutoId().setValue(newMessage)
         
         
-        let newChatList = [ FireBaseConstant.l_id       : "",
+        let newChatList = [ FireBaseConstant.l_id       : receiver_id,
                             FireBaseConstant.l_status   : "add"
         ]
        
-        self.ref.child(FireBaseConstant.Chatlist).child(sender_id).child(receiverr_id).setValue(newMessage)
-        response(true, "Registered Successfully.", nil)
+        self.ref.child(FireBaseConstant.Chatlist).child(sender_id).child(receiver_id).setValue(newChatList)
+        response(true, "sent Successfully.", nil)
     }
     
     

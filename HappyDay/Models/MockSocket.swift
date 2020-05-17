@@ -77,9 +77,12 @@ final class MockSocket {
             queuedMessage = nil
         } else {
             let sender = arc4random_uniform(1) % 2 == 0 ? connectedUsers.first! : connectedUsers.last!
-            SampleData.shared.getMessages(count: 1, allowedSenders: [sender]) { (message) in
+            
+//            let sender = connectedUsers[0]   // only one connected user
+            MessageVM.shared.getMessages(count: 1, allowedSenders: [sender]) { (message) in
                 queuedMessage = message.first
             }
+            
             onTypingStatusCode?()
         }
     }

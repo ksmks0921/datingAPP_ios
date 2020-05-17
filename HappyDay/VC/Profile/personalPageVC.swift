@@ -22,8 +22,9 @@ class personalPageVC: UIViewController {
     @IBOutlet weak var pointerChangeView: DesinableView!
     
     
-    let properties_profile: [String] = ["발자국", "메모 목록", "무시 목록", "보면 아니야", "즐거 찾기", "친구 목록"]
-    let icons: [UIImage] = [#imageLiteral(resourceName: "step"), #imageLiteral(resourceName: "memo-1"), #imageLiteral(resourceName: "forbidden"),#imageLiteral(resourceName: "shield"),#imageLiteral(resourceName: "star"),#imageLiteral(resourceName: "love"),]
+    let properties_profile: [String] = ["좋아하는", "메모 목록", "무시 목록", "블록 목록", "신고 목록", "자기 게시물보기", "알림 보기", "각종 설정", "도움말", "로그 아웃"]
+    let icon_strings = ["heart.fill", "square.and.pencil"]
+    let icons: [UIImage] = [#imageLiteral(resourceName: "step"), #imageLiteral(resourceName: "memo-1"), #imageLiteral(resourceName: "forbidden"),#imageLiteral(resourceName: "shield"),#imageLiteral(resourceName: "star"),#imageLiteral(resourceName: "love"), #imageLiteral(resourceName: "love"), #imageLiteral(resourceName: "love"), #imageLiteral(resourceName: "love"), #imageLiteral(resourceName: "love")]
     var screenSize: CGRect!
     var screenWidth: CGFloat!
     var screenHeight: CGFloat!
@@ -109,15 +110,17 @@ extension personalPageVC: UICollectionViewDelegate, UICollectionViewDataSource, 
         return 1
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-       
-             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "personalPageCollectionCell", for: indexPath) as! personalPageCollectionCell
-             cell.txt.text = properties_profile[indexPath.row]
-             cell.icon.image = icons[indexPath.row]
-    
-                 
-            cell.layer.borderColor = UIColor.lightGray.cgColor
-            cell.layer.borderWidth = 0.5
+         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "personalPageCollectionCell", for: indexPath) as! personalPageCollectionCell
+         cell.txt.text = properties_profile[indexPath.row]
+         cell.icon.image = icons[indexPath.row]
+
+             
+         cell.layer.borderColor = UIColor.lightGray.cgColor
+         cell.layer.borderWidth = 0.5
+         if indexPath.row != 0 || indexPath.row != 6{
+            cell.badgeHeight.constant = CGFloat(0)
+         }
+             
             return cell
        
               
@@ -125,7 +128,7 @@ extension personalPageVC: UICollectionViewDelegate, UICollectionViewDataSource, 
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
       
-            return CGSize(width: screenWidth/3, height: screenWidth/3 - 20);
+        return CGSize(width: screenWidth/3, height: collectioView.frame.size.height / 4);
      
     }
     
