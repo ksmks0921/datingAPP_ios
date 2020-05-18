@@ -17,11 +17,11 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person_2" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="j0E-1j-gEw">
-                        <rect key="frame" x="4.5" y="4" width="190" height="190"/>
+                        <rect key="frame" x="39.5" y="4" width="120" height="120"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="190" id="7X7-aG-fYy"/>
+                            <constraint firstAttribute="width" constant="120" id="7X7-aG-fYy"/>
                             <constraint firstAttribute="width" secondItem="j0E-1j-gEw" secondAttribute="height" multiplier="1:1" id="h1T-65-f2P"/>
-                            <constraint firstAttribute="height" constant="190" id="qsk-6x-Xe2"/>
+                            <constraint firstAttribute="height" constant="120" id="qsk-6x-Xe2"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
@@ -30,13 +30,13 @@
                         </userDefinedRuntimeAttributes>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DaLian" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BMp-Hq-Whz">
-                        <rect key="frame" x="12.5" y="202" width="56" height="22"/>
+                        <rect key="frame" x="20" y="132" width="56" height="22"/>
                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                         <color key="textColor" systemColor="systemPurpleColor" red="0.68627450980000004" green="0.32156862749999998" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="25 ~ 30" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fJ9-RV-3jX">
-                        <rect key="frame" x="127" y="202" width="64" height="22"/>
+                        <rect key="frame" x="115" y="132" width="64" height="22"/>
                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                         <color key="textColor" systemColor="systemPurpleColor" red="0.68627450980000004" green="0.32156862749999998" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
@@ -45,10 +45,10 @@
             </view>
             <constraints>
                 <constraint firstItem="fJ9-RV-3jX" firstAttribute="top" secondItem="j0E-1j-gEw" secondAttribute="bottom" constant="8" id="0c3-EQ-yud"/>
+                <constraint firstAttribute="trailing" secondItem="fJ9-RV-3jX" secondAttribute="trailing" constant="20" id="1R1-av-C2u"/>
                 <constraint firstItem="BMp-Hq-Whz" firstAttribute="top" secondItem="j0E-1j-gEw" secondAttribute="bottom" constant="8" id="9Ku-Mk-oM8"/>
-                <constraint firstAttribute="trailing" secondItem="fJ9-RV-3jX" secondAttribute="trailing" constant="8" id="C67-Zk-GEh"/>
                 <constraint firstItem="j0E-1j-gEw" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="4" id="Hxj-s5-5rh"/>
-                <constraint firstItem="BMp-Hq-Whz" firstAttribute="leading" secondItem="j0E-1j-gEw" secondAttribute="leading" constant="8" id="eRr-jz-vGQ"/>
+                <constraint firstItem="BMp-Hq-Whz" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="20" id="hom-mi-eEK"/>
                 <constraint firstItem="j0E-1j-gEw" firstAttribute="centerX" secondItem="ZTg-uK-7eu" secondAttribute="centerX" id="jXU-fe-0dj"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>

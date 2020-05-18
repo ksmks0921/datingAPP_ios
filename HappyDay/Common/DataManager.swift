@@ -66,4 +66,13 @@ class DataManager {
             return UserDefaults.standard.string(forKey: AppConstant.kDeviceToken)
         }
     }
+    static var points:Int! {
+        set {
+            UserDefaults.standard.setValue(newValue, forKey: AppConstant.points)
+            UserDefaults.standard.synchronize()
+        }
+        get {
+            return UserDefaults.standard.integer(forKey: AppConstant.points)
+        }
+    }
 }

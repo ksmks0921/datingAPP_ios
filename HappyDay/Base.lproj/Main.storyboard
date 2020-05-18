@@ -362,10 +362,10 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J7q-C6-UMZ" customClass="DesinableView" customModule="HappyDay" customModuleProvider="target">
-                                        <rect key="frame" x="157" y="52" width="100" height="140"/>
+                                        <rect key="frame" x="137" y="52" width="140" height="140"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="avatar_man" translatesAutoresizingMaskIntoConstraints="NO" id="C1N-AQ-JJf" customClass="DesinableImageView" customModule="HappyDay" customModuleProvider="target">
-                                                <rect key="frame" x="10" y="20" width="80" height="80"/>
+                                                <rect key="frame" x="30" y="20" width="80" height="80"/>
                                                 <color key="tintColor" red="0.2274509804" green="0.80000000000000004" blue="0.88235294119999996" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="80" id="A4e-Et-140"/>
@@ -376,12 +376,12 @@
                                                         <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </userDefinedRuntimeAttribute>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                        <real key="value" value="30"/>
+                                                        <real key="value" value="40"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MG4-hG-ofA">
-                                                <rect key="frame" x="26" y="108" width="49" height="21"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MG4-hG-ofA">
+                                                <rect key="frame" x="49" y="108" width="42.5" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -390,10 +390,10 @@
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="140" id="2rh-Uh-0nJ"/>
+                                            <constraint firstItem="MG4-hG-ofA" firstAttribute="centerX" secondItem="C1N-AQ-JJf" secondAttribute="centerX" id="WWM-50-JTS"/>
                                             <constraint firstItem="C1N-AQ-JJf" firstAttribute="centerX" secondItem="J7q-C6-UMZ" secondAttribute="centerX" id="YqC-F8-apF"/>
                                             <constraint firstItem="C1N-AQ-JJf" firstAttribute="top" secondItem="J7q-C6-UMZ" secondAttribute="top" constant="20" id="a6N-wU-UwL"/>
-                                            <constraint firstAttribute="width" constant="100" id="cDC-us-gJm"/>
-                                            <constraint firstItem="MG4-hG-ofA" firstAttribute="centerX" secondItem="J7q-C6-UMZ" secondAttribute="centerX" id="e5o-cb-hgE"/>
+                                            <constraint firstAttribute="width" constant="140" id="cDC-us-gJm"/>
                                             <constraint firstItem="MG4-hG-ofA" firstAttribute="top" secondItem="C1N-AQ-JJf" secondAttribute="bottom" constant="8" id="kqC-3z-yYu"/>
                                         </constraints>
                                     </view>
@@ -524,13 +524,13 @@
                                         <rect key="frame" x="0.0" y="194" width="414" height="46"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h8M-CB-z9q">
-                                                <rect key="frame" x="129.5" y="0.0" width="155" height="46"/>
+                                                <rect key="frame" x="117" y="0.0" width="180" height="46"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BQS-zY-tfR" customClass="DesinableView" customModule="HappyDay" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="8" width="74" height="30"/>
+                                                        <rect key="frame" x="0.0" y="8" width="86" height="30"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="enu-nC-uOX" customClass="DesinableView" customModule="HappyDay" customModuleProvider="target">
-                                                                <rect key="frame" x="4" y="4" width="66" height="22"/>
+                                                                <rect key="frame" x="4" y="4" width="78" height="22"/>
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                                 <userDefinedRuntimeAttributes>
                                                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -539,7 +539,7 @@
                                                                 </userDefinedRuntimeAttributes>
                                                             </view>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="포인트" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Erl-cA-PlJ">
-                                                                <rect key="frame" x="19" y="6.5" width="36.5" height="17"/>
+                                                                <rect key="frame" x="24.5" y="6.5" width="36.5" height="17"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <color key="textColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
@@ -563,7 +563,7 @@
                                                         </userDefinedRuntimeAttributes>
                                                     </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9000 PT" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h9m-9M-LeE">
-                                                        <rect key="frame" x="91.5" y="13.5" width="63.5" height="19.5"/>
+                                                        <rect key="frame" x="116.5" y="13.5" width="63.5" height="19.5"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -574,7 +574,7 @@
                                                     <constraint firstItem="h9m-9M-LeE" firstAttribute="centerY" secondItem="h8M-CB-z9q" secondAttribute="centerY" id="Bq4-yw-hGU"/>
                                                     <constraint firstItem="BQS-zY-tfR" firstAttribute="leading" secondItem="h8M-CB-z9q" secondAttribute="leading" id="EV8-r4-z6W"/>
                                                     <constraint firstItem="BQS-zY-tfR" firstAttribute="width" secondItem="h8M-CB-z9q" secondAttribute="width" multiplier="0.477419" id="MHP-qW-bC5"/>
-                                                    <constraint firstAttribute="width" constant="155" id="egT-rz-4xN"/>
+                                                    <constraint firstAttribute="width" constant="180" id="egT-rz-4xN"/>
                                                     <constraint firstItem="BQS-zY-tfR" firstAttribute="centerY" secondItem="h8M-CB-z9q" secondAttribute="centerY" id="kEO-rM-IRZ"/>
                                                     <constraint firstAttribute="trailing" secondItem="h9m-9M-LeE" secondAttribute="trailing" id="kwJ-uC-tcV"/>
                                                 </constraints>
@@ -645,9 +645,12 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="프로파일" id="rro-4m-eTq"/>
                     <connections>
+                        <outlet property="avatarImageView" destination="C1N-AQ-JJf" id="pr4-Wu-xF4"/>
                         <outlet property="collectioView" destination="oPf-Jt-MEm" id="fKy-bt-G3X"/>
                         <outlet property="commentEditView" destination="9ea-IL-CV6" id="4l8-ZT-826"/>
                         <outlet property="commentView" destination="CFu-9a-DN6" id="Mbi-MG-HJJ"/>
+                        <outlet property="nameLabel" destination="MG4-hG-ofA" id="YvU-yK-FFu"/>
+                        <outlet property="pointLabel" destination="h9m-9M-LeE" id="U1a-Ns-icm"/>
                         <outlet property="profileEditView" destination="foE-cg-Xby" id="jnY-lf-WHR"/>
                         <outlet property="uploadPhotoView" destination="J7q-C6-UMZ" id="Oa5-rt-ich"/>
                         <outlet property="userProfileView" destination="o3M-ia-bAS" id="GSm-oA-1T7"/>

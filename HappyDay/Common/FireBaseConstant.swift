@@ -17,7 +17,7 @@ class FireBaseConstant{
     static let Events       = "Events"
     static let Chats        = "Chats"
     static let Chatlist     = "Chatlist"
-    
+    static let Points       = "Points"
     
     static let name         = "name"
     
@@ -115,4 +115,20 @@ class FireBaseConstant{
     //****************************** Chatlist ****************
     static let l_id                 = "id"
     static let l_status             = "status"
+    
+    //****************************** Chatlist ****************
+    static let p_point                 = "point"
+    static let p_updated_at            = "updated_at"
+    
+    //****************************** Likes ****************
+    static let LikeAge                  = "LikeAge"
+    static let LikeAvatar               = "LikeAvatar"
+    static let LikeCity                 = "LikeCity"
+    static let LikeDate                 = "LikeDate"
+    static let LikeID                   = "LikeID"
+    static let LikeInfo                 = "LikeInfo"
+    static let LikeName                 = "LikeName"
+    static let UserSex                  = "UserSex"
+    
+    
 }

@@ -12,7 +12,6 @@ class profileContentVC: BaseVC {
 
     @IBOutlet weak var customTitle: UILabel!
     @IBOutlet weak var contentView: UIView!
-    let dataSource = ["profile_1", "profile_2", "profile_3"]
     var currentViewControllerIndex: Int?
     var partners = [person]()
     

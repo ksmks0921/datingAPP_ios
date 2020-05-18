@@ -506,7 +506,9 @@ final internal class MessageVM {
     var messages = [MockMessage]()
     var custom_messages =  [MessageItem]()
     var currentConnectedPerson : MockUser!
-    
+    var custom_currentConnectedPerson : MessageItem!
+    var chatList = [ChatList]()
+    var chatListItems = [ChatListItem]()
     
     let attributes = ["Font1", "Font2", "Font3", "Font4", "Color", "Combo"]
     
@@ -634,11 +636,13 @@ final internal class MessageVM {
                  
                     self.currentSender = MockUser(senderId: sender_id, displayName: UserVM.current_user.user_nickName!)
                     self.currentConnectedPerson = MockUser(senderId: connectedPerson.user_id!, displayName: connectedPerson.user_nickName!)
-        
-        
+
+                    // get message data
                     ref.child(FireBaseConstant.Chats).observe(.value) { (snapShot) in
                 
                            let children = snapShot.children
+                        
+                           self.custom_messages.removeAll()
                            self.messages.removeAll()
                            while let rest = children.nextObject() as? DataSnapshot {
                                if let restDict = rest.value as? NSDictionary{
@@ -659,7 +663,8 @@ final internal class MessageVM {
                                         let custom_message_item = MessageItem(chinese: chinese!, date: date!, english: english!, isseen: is_seen!, japanese: japanese!, korean: korean!, message: message!, receiver: receiver!, sender: sender!, source_path: source_path!, source_type: source_type!, thumb_path: thumb_path!, time:time!)
                                 
                                 if (custom_message_item.receiver == sender_id && custom_message_item.sender == connectedPerson.user_id) || (custom_message_item.receiver == connectedPerson.user_id && custom_message_item.sender == sender_id) {
-    
+                                            
+                                   
                                             self.custom_messages.append(custom_message_item)
                                             let user: MockUser!
                                             if custom_message_item.sender == sender_id {
@@ -682,17 +687,170 @@ final internal class MessageVM {
     
                            }
     
-                        print("________")
-                        print(self.messages.count)
+                    print("________")
+                    print(self.messages.count)
+                   
+                    completion(true)
+                }
+                    
+    
+    }
+    
+    func getChatListId(completion: @escaping (Bool) -> Void){
+            
+        ref.child(FireBaseConstant.Chatlist).child(UserVM.current_user.user_id!).observe(.value) { (snapShot) in
+                let children = snapShot.children
+                self.chatList.removeAll()
+                while let rest = children.nextObject() as? DataSnapshot {
+                    if let restDict = rest.value as? NSDictionary{
+                        let id = restDict[FireBaseConstant.l_id] as? String
+                        let status = restDict[FireBaseConstant.l_status] as? String
+                        let list_item = ChatList(id: id!, status: status!)
                         
-                        completion(true)
+                        self.chatList.append(list_item)
                     }
-    
-    
+                }
+          
+               completion(true)
         }
+    }
+    
+    func getChatListContents(completion: @escaping (Bool) -> Void){
+        
+        
+        
+        
+        
+        ref.child(FireBaseConstant.Chatlist).child(UserVM.current_user.user_id!).observe(.value) { (snapShot) in
+                let children = snapShot.children
+            
+                self.chatList.removeAll()
+                self.chatListItems.removeAll()
+            
+                while let rest = children.nextObject() as? DataSnapshot {
+                    if let restDict = rest.value as? NSDictionary{
+                        let id = restDict[FireBaseConstant.l_id] as? String
+                        let status = restDict[FireBaseConstant.l_status] as? String
+                        
+                        
+                        
+                        let person_list = self.getDataFromUsers(id: id!)
+                        let avatar = person_list.user_avatar
+                        let age = person_list.user_age
+                        let region = person_list.user_city
+                        let nick_name = person_list.user_nickName
+//
+//                        let last_message = self.getLastMessageData(sender_id: UserVM.current_user.user_id!, connectedPerson: person_list)
+//                        let date = last_message.date
+//                        let time = last_message.time
+//                        let last_message_content = last_message.message
+//                        let list_item = ChatListItem(avatar: avatar![0], nick_name: nick_name!,  age: age!, region:region!, last_message:last_message_content!, last_connect_time: time!, last_connect_date: date!)
+                        
+                        self.geData(sender_id: UserVM.current_user.user_id!, connectedPerson: person_list, completion: {_ in
+
+                            let last_message = self.custom_messages[self.custom_messages.count - 1].message
+
+                            let time = self.custom_messages[self.custom_messages.count - 1].time
+                            let date = self.custom_messages[self.custom_messages.count - 1].date
+//                            let time_date = time! + " " + date!
+                            
+                            print("_________")
+                            print(time)
+                            print("_________")
+                            print(date)
+
+                        })
+                        let list_item = ChatListItem(avatar: avatar![0], nick_name: nick_name!,  age: age!, region:region!, last_message:"last_message", last_connect_time: "time", last_connect_date: "date", id: person_list.user_id!)
+
+
+                        self.chatListItems.append(list_item)
+                        
+                    }
+                }
+                print("_________")
+                print(self.chatListItems.count)
+                completion(true)
+        }
+    }
+    
+    func getLastMessageData(sender_id: String, connectedPerson: person) -> MessageItem {
     
     
+                    var return_data : MessageItem!
+                    self.currentSender = MockUser(senderId: sender_id, displayName: UserVM.current_user.user_nickName!)
+                    self.currentConnectedPerson = MockUser(senderId: connectedPerson.user_id!, displayName: connectedPerson.user_nickName!)
+
+                    // get message data
+                    ref.child(FireBaseConstant.Chats).observe(.value) { (snapShot) in
+                
+                           let children = snapShot.children
+                        
+                           self.custom_messages.removeAll()
+                           self.messages.removeAll()
+                           while let rest = children.nextObject() as? DataSnapshot {
+                               if let restDict = rest.value as? NSDictionary{
     
+                                        let chinese = restDict[FireBaseConstant.lang_chinese] as? String
+                                        let date = restDict[FireBaseConstant.mdate] as? String
+                                        let english = restDict[FireBaseConstant.lang_english] as? String
+                                        let is_seen = restDict[FireBaseConstant.misseen] as? Bool
+                                        let japanese = restDict[FireBaseConstant.lang_japanese] as? String
+                                        let korean = restDict[FireBaseConstant.lang_korean] as? String
+                                        let message = restDict[FireBaseConstant.message] as? String
+                                        let receiver = restDict[FireBaseConstant.mreceiver] as? String
+                                        let sender = restDict[FireBaseConstant.msender] as? String
+                                        let source_path = restDict[FireBaseConstant.msource_path] as? String
+                                        let source_type = restDict[FireBaseConstant.msource_type] as? String
+                                        let thumb_path = restDict[FireBaseConstant.mthumb_path] as? String
+                                        let time = restDict[FireBaseConstant.mtime] as? String
+                                        let custom_message_item = MessageItem(chinese: chinese!, date: date!, english: english!, isseen: is_seen!, japanese: japanese!, korean: korean!, message: message!, receiver: receiver!, sender: sender!, source_path: source_path!, source_type: source_type!, thumb_path: thumb_path!, time:time!)
+                                
+                                if (custom_message_item.receiver == sender_id && custom_message_item.sender == connectedPerson.user_id) || (custom_message_item.receiver == connectedPerson.user_id && custom_message_item.sender == sender_id) {
+                                            
+                                   
+                                            self.custom_messages.append(custom_message_item)
+                                            let user: MockUser!
+                                            if custom_message_item.sender == sender_id {
+                                                user = MessageVM.shared.currentSender
+                                            }
+                                            else {
+                                                user = MessageVM.shared.currentConnectedPerson
+                                            }
+                                            let uniqueID = UUID().uuidString
+                                            let date = self.dateAddingRandomTime()
+                                                let original_message = MockMessage(text: custom_message_item.message!, user: user!, messageId: uniqueID, date: date)
+                                            self.messages.append(original_message)
+                                       
+    
+    
+                                        }
+    
+    
+                                }
+    
+                           }
+                    return_data = self.custom_messages[self.custom_messages.count - 1]
+               
+                   
+                }
+                return return_data
+    
+    }
+    
+    func getDataFromUsers(id: String) -> person{
+        var target_user: person!
+        for user_item in UserVM.users {
+            
+            if user_item.user_id == id {
+                
+               target_user = user_item
+                
+            }
+            
+        }
+        return target_user
+    }
+
     // swiftlint:enable cyclomatic_complexity
     
     func getMessages(count: Int, completion: ([MockMessage]) -> Void) {
@@ -738,10 +896,12 @@ final internal class MessageVM {
         completion(messages)
     }
 
-    func getAvatarFor(sender: SenderType) -> Avatar {
+    func getAvatarFor(sender: SenderType) ->  Avatar{
         let firstName = sender.displayName.components(separatedBy: " ").first
         let lastName = sender.displayName.components(separatedBy: " ").first
         let initials = "\(firstName?.first ?? "A")\(lastName?.first ?? "A")"
+        
+        
         switch sender.senderId {
         case "000001":
             return Avatar(image: #imageLiteral(resourceName: "logo_temp"), initials: initials)

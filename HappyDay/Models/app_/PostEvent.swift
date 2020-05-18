@@ -24,6 +24,7 @@ struct PostEvent {
     var user_tall : String!
     var user_style : String!
     var user_job : String!
+    
     init(user_avatar: String, event_type:String, view_counts: String, nick_name: String, age: String, region: String,  event_des: String, thumb_path: String, user_gender: Bool, source_type: String, user_tall: String, user_style: String, user_job: String){
         
         self.user_avatar    = user_avatar

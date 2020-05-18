@@ -1094,11 +1094,18 @@ extension MKPrivateChatView: MessagesDisplayDelegate {
     }
     
     func configureAvatarView(_ avatarView: AvatarView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
-        let avatar = MessageVM.shared.getAvatarFor(sender: message.sender)
-        avatarView.set(avatar: avatar)
+        
+        
+        
+//        let avatar = MessageVM.shared.getAvatarFor(sender: message.sender)
+        
+       avatarView.sd_setImage(with: URL(string: connectedPerson.user_avatar![0]), placeholderImage: UIImage(named: "avatar_woman"))
+        
+//        avatarView.set(avatar: avatar)
         avatarView.isHidden = isNextMessageSameSender(at: indexPath)
         avatarView.layer.borderWidth = 2
         avatarView.layer.borderColor = UIColor.primaryColor.cgColor
+        
     }
     
     func configureAccessoryView(_ accessoryView: UIView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {

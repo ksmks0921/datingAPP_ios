@@ -27,6 +27,7 @@ class AppConstant {
     static let kShowingFilter = "kFilter"
     static let eVideo = "video"
     static let eImage = "image"
+    static let points = "points"
     static let eAll = "전체"
     static let eType = ["전체", "메일친구 모집", "지금부터 즐기는", "친구 모집", "성인, 나이많은", "애호가", "연인모집"]
     static let phoneSetting = ["1시간 후까지 받음", "2시간 후까지 받음", "3시간 후까지 받음", "4시간 후까지 받음", "5시간 후까지 받음"]

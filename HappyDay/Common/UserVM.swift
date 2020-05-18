@@ -22,7 +22,7 @@ class UserVM {
     static var filtered_eventPosts = [PostEvent]()
     static var current_user: person!
     let ref : DatabaseReference = Database.database().reference()
-    
+    static var user_points: Int!
     
     func AnonymousLogin (response: @escaping responseCallBack) {
         
@@ -533,7 +533,24 @@ class UserVM {
         response(true, "sent Successfully.", nil)
     }
     
-    
+    func getPoint(user_id: String, completion: @escaping (Bool) -> Void) {
+        
+        ref.child(FireBaseConstant.Points).child(user_id).child(FireBaseConstant.p_point).observe(.value) { (snapShot) in
+
+            let value = snapShot.value as! Int
+            UserVM.self.user_points = value
+                completion(true)
+        }
+    }
+    func getLikes(user_id: String, completion: @escaping (Bool) -> Void) {
+        
+        ref.child(FireBaseConstant.Points).child(user_id).child(FireBaseConstant.p_point).observe(.value) { (snapShot) in
+
+            let value = snapShot.value as! Int
+            UserVM.self.user_points = value
+                completion(true)
+        }
+    }
     static func isPasswordValid(_ password : String) -> Bool {
         
         let passwordTest = NSPredicate(format: "SELF MATCHES %@", "^(?=.*[a-z])(?=.*[$@$#!%*?&])[A-Za-z\\d$$@$#!%*?&]{8,}")

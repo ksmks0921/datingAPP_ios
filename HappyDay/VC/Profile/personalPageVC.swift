@@ -18,16 +18,19 @@ class personalPageVC: UIViewController {
     @IBOutlet weak var commentView: UIView!
     @IBOutlet weak var commentEditView: DesinableView!
     @IBOutlet weak var adView: UIView!
-    @IBOutlet weak var pointerAddView: DesinableView!
-    @IBOutlet weak var pointerChangeView: DesinableView!
+    @IBOutlet weak var avatarImageView: DesinableImageView!
     
+    
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var pointLabel: UILabel!
     
     let properties_profile: [String] = ["좋아하는", "메모 목록", "무시 목록", "블록 목록", "신고 목록", "자기 게시물보기", "알림 보기", "각종 설정", "도움말", "로그 아웃"]
-    let icon_strings = ["heart.fill", "square.and.pencil"]
+    let icon_strings = ["heart.fill", "square.and.pencil", "xmark.octagon", "nosign", "star.fill", "table", "bell", "gear", "questionmark.circle.fill", "escape"]
     let icons: [UIImage] = [#imageLiteral(resourceName: "step"), #imageLiteral(resourceName: "memo-1"), #imageLiteral(resourceName: "forbidden"),#imageLiteral(resourceName: "shield"),#imageLiteral(resourceName: "star"),#imageLiteral(resourceName: "love"), #imageLiteral(resourceName: "love"), #imageLiteral(resourceName: "love"), #imageLiteral(resourceName: "love"), #imageLiteral(resourceName: "love")]
     var screenSize: CGRect!
     var screenWidth: CGFloat!
     var screenHeight: CGFloat!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -59,14 +62,17 @@ class personalPageVC: UIViewController {
         let tapGesture_2 = UITapGestureRecognizer(target: self, action: #selector(profileBtnTapped(_:)))
         tapGesture_2.delegate = self as? UIGestureRecognizerDelegate
         userProfileView.addGestureRecognizer(tapGesture_2)
-              
-        let tapGesture_3 = UITapGestureRecognizer(target: self, action: #selector(pointerAddTapped(_:)))
-        tapGesture_3.delegate = self as? UIGestureRecognizerDelegate
-        pointerAddView.addGestureRecognizer(tapGesture_3)
-         
-        let tapGesture_4 = UITapGestureRecognizer(target: self, action: #selector(pointerChangeTapped(_:)))
-        tapGesture_4.delegate = self as? UIGestureRecognizerDelegate
-        pointerChangeView.addGestureRecognizer(tapGesture_4)
+        
+       
+        if DataManager.points != nil {
+            pointLabel.text = String(DataManager.points) + " " + "PT"
+        }
+        if UserVM.current_user != nil {
+            let user = UserVM.current_user
+            
+            avatarImageView.sd_setImage(with: URL(string: user!.user_avatar![0]), placeholderImage: UIImage(named: "avatar_woman"))
+            nameLabel.text = UserVM.current_user.user_nickName
+        }
         
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -112,12 +118,12 @@ extension personalPageVC: UICollectionViewDelegate, UICollectionViewDataSource, 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
          let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "personalPageCollectionCell", for: indexPath) as! personalPageCollectionCell
          cell.txt.text = properties_profile[indexPath.row]
-         cell.icon.image = icons[indexPath.row]
+        cell.icon.image = UIImage(systemName: icon_strings[indexPath.row])
 
              
          cell.layer.borderColor = UIColor.lightGray.cgColor
          cell.layer.borderWidth = 0.5
-         if indexPath.row != 0 || indexPath.row != 6{
+         if indexPath.row != 0 && indexPath.row != 6{
             cell.badgeHeight.constant = CGFloat(0)
          }
              

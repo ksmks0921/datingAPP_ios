@@ -106,10 +106,12 @@ extension loginVC {
             UserVM.shared.login(email: emailTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines), password: passwordTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)) { (success, message, error) in
                        if error == nil{
                            if success{
+                            
                                 DataManager.isLogin = true
                                 DataManager.isShowingSearchResult = false
                                 let VC = self.storyboard?.instantiateViewController(withIdentifier: "customTabBarVC") as! customTabBarVC
                                 self.navigationController?.pushViewController(VC, animated: true)
+                                self.getPoints()
                             
                             
                             } else {
@@ -121,11 +123,12 @@ extension loginVC {
                     }
             }
         }
-        
-        
-        
-        
-       
+
+    }
+    func getPoints() {
+        UserVM.shared.getPoint(user_id: DataManager.userId!, completion: {_ in
+            DataManager.points = UserVM.user_points
+        })
     }
 }
 
