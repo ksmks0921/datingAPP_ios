@@ -178,13 +178,23 @@ extension personalPageVC: UICollectionViewDelegate, UICollectionViewDataSource, 
             navigationController?.pushViewController(VC, animated: true)
         }
         if indexPath.row == 4 {
-                   let VC = self.storyboard?.instantiateViewController(withIdentifier: "favoriteListVC") as! favoriteListVC
-                   navigationController?.pushViewController(VC, animated: true)
+           let VC = self.storyboard?.instantiateViewController(withIdentifier: "favoriteListVC") as! favoriteListVC
+           navigationController?.pushViewController(VC, animated: true)
         }
         if indexPath.row == 5 {
-            let VC = self.storyboard?.instantiateViewController(withIdentifier: "friendListVC") as! friendListVC
+            
+            let VC = self.storyboard?.instantiateViewController(withIdentifier: "userPostsVC") as! userPostsVC
+            VC.titleText = "게시물 보기"
             navigationController?.pushViewController(VC, animated: true)
         }
+        if indexPath.row == 6 {
+            
+            let VC = self.storyboard?.instantiateViewController(withIdentifier: "alertViewVC") as! alertViewVC
+          
+            navigationController?.pushViewController(VC, animated: true)
+            
+        }
+        
         print(indexPath.item)
         
     }

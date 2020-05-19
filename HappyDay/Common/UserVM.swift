@@ -19,6 +19,7 @@ class UserVM {
     static var users = [person]()
     static var search_result = [person]()
     static var eventPosts = [PostEvent]()
+    static var my_eventPosts = [PostEvent]()
     static var filtered_eventPosts = [PostEvent]()
     
     static var likes    = [Like]()  // used same class "Like" for likes , ignores, blocks and memos
@@ -378,8 +379,9 @@ class UserVM {
                     let user_tall = restDict[FireBaseConstant.EventUserTall] as? String
                     let user_style = restDict[FireBaseConstant.EventUserStyle] as? String
                     let user_job = restDict[FireBaseConstant.EventUserJob] as? String
+                    let user_id = restDict[FireBaseConstant.EventUserID] as? String
                     
-                    let post_item = PostEvent(user_avatar: user_avatar!, event_type: event_type!, view_counts: view_counts!, nick_name: nick_name!, age: age!, region: region!, event_des: event_des!, thumb_path: thumb_path!, user_gender: gender!, source_type: source_type!, user_tall: user_tall!, user_style: user_style!, user_job: user_job!)
+                    let post_item = PostEvent(user_avatar: user_avatar!, event_type: event_type!, view_counts: view_counts!, nick_name: nick_name!, age: age!, region: region!, event_des: event_des!, thumb_path: thumb_path!, user_gender: gender!, source_type: source_type!, user_tall: user_tall!, user_style: user_style!, user_job: user_job!, user_id: user_id!)
                     UserVM.eventPosts.append(post_item)
 
                     
@@ -390,7 +392,45 @@ class UserVM {
         }
         
     }
-    
+    func getMyEventPosts(completion: @escaping (Bool) -> Void){
+        
+        ref.child(FireBaseConstant.Events).observe(.value) { (snapShot) in
+            let children = snapShot.children
+            UserVM.my_eventPosts.removeAll()
+            while let rest = children.nextObject() as? DataSnapshot {
+                if let restDict = rest.value as? NSDictionary{
+                    
+                    let user_avatar = restDict[FireBaseConstant.EventUserAvatar] as? String
+                    let event_type = restDict[FireBaseConstant.EventType] as? String
+                    let view_counts = restDict[FireBaseConstant.view_counts] as? String
+                    let nick_name = restDict[FireBaseConstant.EventUserName] as? String
+                    
+                    let age = restDict[FireBaseConstant.EventUserAge] as? String
+                    let region = restDict[FireBaseConstant.EventUserCity] as? String
+                    let gender = restDict[FireBaseConstant.EventUserGender] as? Bool
+                   
+                    let event_des = restDict[FireBaseConstant.EventDes] as? String
+                    let thumb_path = restDict[FireBaseConstant.thumb_path] as? String
+                    let source_type = restDict[FireBaseConstant.source_type] as? String
+                    let user_tall = restDict[FireBaseConstant.EventUserTall] as? String
+                    let user_style = restDict[FireBaseConstant.EventUserStyle] as? String
+                    let user_job = restDict[FireBaseConstant.EventUserJob] as? String
+                    let user_id = restDict[FireBaseConstant.EventUserID] as? String
+                    
+                    let post_item = PostEvent(user_avatar: user_avatar!, event_type: event_type!, view_counts: view_counts!, nick_name: nick_name!, age: age!, region: region!, event_des: event_des!, thumb_path: thumb_path!, user_gender: gender!, source_type: source_type!, user_tall: user_tall!, user_style: user_style!, user_job: user_job!, user_id: user_id!)
+                    if post_item.user_id == DataManager.userId {
+                        UserVM.my_eventPosts.append(post_item)
+                    }
+                    
+
+                    
+                }
+            }
+        
+        completion(true)
+        }
+        
+    }
     func filterEvents(location: String, type: String, source_type: String, age: String, tall: String, style: String, job: String, nick_name: String, completion: @escaping (Bool) -> Void){
         UserVM.filtered_eventPosts = UserVM.eventPosts
         if location != AppConstant.eAll {
@@ -541,7 +581,7 @@ class UserVM {
                         FireBaseConstant.EventUserName            : user_name,
                         FireBaseConstant.EventUserStyle           : user_style,
                         FireBaseConstant.EventUserTall            : user_tall,
-                        FireBaseConstant.UserID                   : user_id,
+                        FireBaseConstant.EventUserID              : user_id,
                         FireBaseConstant.created_at               : created_at,
                         FireBaseConstant.row_key                  : row_key,
                         FireBaseConstant.source_type              : source_type,
@@ -640,7 +680,7 @@ class UserVM {
                     
                     let memo_item = Like(like_age: memo_age!, like_avatar: memo_avatar!, like_city: memo_city!, like_date: memo_date!, like_id: memo_id!, like_info: memo_info!, like_name: memo_name!, user_sex: user_sex!)
                         
-                        UserVM.likes.append(memo_item)
+                        UserVM.memos.append(memo_item)
                     
                     }
 

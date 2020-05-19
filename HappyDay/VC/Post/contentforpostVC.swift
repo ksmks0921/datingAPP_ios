@@ -27,6 +27,7 @@ class contentforpostVC: UIViewController {
         
         let nib = UINib.init(nibName: "postTableViewCell", bundle: nil)
         self.postTableView.register(nib, forCellReuseIdentifier: "postTableViewCell")
+        
         if DataManager.isShowingFilterResult! {
             self.event_post = UserVM.filtered_eventPosts
             self.postTableView.reloadData()
@@ -99,7 +100,7 @@ extension contentforpostVC:  UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-       return 300
+        return CGFloat(AppConstant.height_postTableCell)
        
     }
     
