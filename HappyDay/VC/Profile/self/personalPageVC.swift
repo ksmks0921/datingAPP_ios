@@ -194,8 +194,36 @@ extension personalPageVC: UICollectionViewDelegate, UICollectionViewDataSource, 
             navigationController?.pushViewController(VC, animated: true)
             
         }
+        if indexPath.row == 7 {
+            
+            let VC = self.storyboard?.instantiateViewController(withIdentifier: "settingVC") as! settingVC
+          
+            navigationController?.pushViewController(VC, animated: true)
+            
+        }
+        if indexPath.row == 9 {
+                    Indicator.sharedInstance.showIndicator()
+                       UserVM.shared.logout() { (success, message, error) in
+                                  if error == nil{
+                                      if success{
+                                           Indicator.sharedInstance.hideIndicator()
+                                           DataManager.isLogin = false
+                                           
+                                           let VC = self.storyboard?.instantiateViewController(withIdentifier: "customTabBarVC") as! customTabBarVC
+                                           self.navigationController?.pushViewController(VC, animated: true)
+                                           
+                                       
+                                       
+                                       } else {
+                                           print("______")
+                                       }
+                                   
+                               }else {
+                                   print("______")
+                               }
+                       }
+        }
         
-        print(indexPath.item)
         
     }
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {

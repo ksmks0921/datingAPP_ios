@@ -24,7 +24,21 @@ class FirstPageVC: UIViewController {
         
         pageView.numberOfPages = imgArr.count
         pageView.currentPage = 0
-       
+        
+        
+        if DataManager.isAutoLogin == nil {
+            DataManager.isAutoLogin = false
+        }
+        if DataManager.messageAlarm == nil {
+            DataManager.messageAlarm = false
+        }
+        if DataManager.likeAlarm == nil {
+            DataManager.likeAlarm = false
+        }
+        if DataManager.reportAlarm == nil {
+            DataManager.reportAlarm = false
+        }
+        
         DispatchQueue.main.async {
             self.timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.changeImage), userInfo: nil, repeats: true)
         }
@@ -62,8 +76,11 @@ class FirstPageVC: UIViewController {
     
     
     @IBAction func gotoLogin(_ sender: Any) {
+       
         let VC = self.storyboard?.instantiateViewController(withIdentifier: "loginVC") as! loginVC
         navigationController?.pushViewController(VC, animated: true)
+       
+               
     }
     @IBAction func gotoSignUp(_ sender: Any) {
         let VC = self.storyboard?.instantiateViewController(withIdentifier: "signUpVC") as! signUpVC

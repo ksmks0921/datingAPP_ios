@@ -17,7 +17,8 @@ class selectDomainVC: UIViewController{
     let cellReuseIdentifier = "cell"
     var selectedElement = [Int : String]()
     var delegate: loginVCDelegate?
-    var delegate_momolist: memoListVCDelegate?
+   
+    
     var selectedIndex: IndexPath?
     var page_from: String?
     @IBOutlet weak var custom_title: UILabel!
@@ -53,9 +54,7 @@ class selectDomainVC: UIViewController{
         if page_from == "login"{
             self.delegate?.selectDomainDismiss(domain: domains[selectedIndex!.row] )
         }
-        else {
-            self.delegate_momolist?.selectCategoryDismiss(category: categories[selectedIndex!.row])
-        }
+       
     }
     @IBAction func backBtnTapped(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)

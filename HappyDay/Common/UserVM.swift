@@ -85,6 +85,24 @@ class UserVM {
             }
         }
     }
+    func logout(response: @escaping responseCallBack){
+            
+            let firebaseAuth = Auth.auth()
+            do {
+              try firebaseAuth.signOut()
+              response(true, "Login Successfully.", nil)
+            } catch let signOutError as NSError {
+              print ("Error signing out: %@", signOutError)
+            }
+        
+    }
+    func updatePassword(newPass: String, response: @escaping responseCallBack){
+            
+        let user = Auth.auth().currentUser
+        Auth.auth().currentUser?.updatePassword(to: newPass) { (error) in
+            response(true, "암호가 성과적으로 변경되였습니다.", nil)
+        }
+    }
     func updateUserData(city: String,age: String, job: String, blood: String, star: String, tall: String,user_style: String, life_style: String, user_outside: String, sex: Bool, nick_name: String, style_1: String, style_2 : String, style_3: String, style_4: String,require_age: String, is_approved:String, updated_at: String, created_at: String, require_style: String, require_tall: String, status: String, introduce: String, date: String, user_avatar: [String], response: @escaping responseCallBack){
         
         

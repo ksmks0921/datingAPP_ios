@@ -106,7 +106,7 @@ extension loginVC {
             UserVM.shared.login(email: emailTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines), password: passwordTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)) { (success, message, error) in
                        if error == nil{
                            if success{
-                            
+                                Indicator.sharedInstance.hideIndicator()
                                 DataManager.isLogin = true
                                 DataManager.isShowingSearchResult = false
                                 
@@ -131,6 +131,7 @@ extension loginVC {
         }
 
     }
+    
     func getPoints() {
         UserVM.shared.getPoint(user_id: DataManager.userId!, completion: {_ in
             DataManager.points = UserVM.user_points

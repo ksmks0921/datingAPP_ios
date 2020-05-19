@@ -75,4 +75,40 @@ class DataManager {
             return UserDefaults.standard.integer(forKey: AppConstant.points)
         }
     }
+    static var isAutoLogin: Bool!{
+        set{
+            UserDefaults.standard.setValue(newValue, forKey: AppConstant.kIsAutoLogin)
+            UserDefaults.standard.synchronize()
+        }
+        get{
+            return UserDefaults.standard.bool(forKey: AppConstant.kIsAutoLogin)
+        }
+    }
+    static var messageAlarm: Bool!{
+        set{
+            UserDefaults.standard.setValue(newValue, forKey: AppConstant.kIsAutoLogin)
+            UserDefaults.standard.synchronize()
+        }
+        get{
+            return UserDefaults.standard.bool(forKey: AppConstant.kIsAutoLogin)
+        }
+    }
+    static var likeAlarm: Bool!{
+        set{
+            UserDefaults.standard.setValue(newValue, forKey: AppConstant.kMessageAlarm)
+            UserDefaults.standard.synchronize()
+        }
+        get{
+            return UserDefaults.standard.bool(forKey: AppConstant.kMessageAlarm)
+        }
+    }
+    static var reportAlarm: Bool!{
+        set{
+            UserDefaults.standard.setValue(newValue, forKey: AppConstant.kReportAlarm)
+            UserDefaults.standard.synchronize()
+        }
+        get{
+            return UserDefaults.standard.bool(forKey: AppConstant.kReportAlarm)
+        }
+    }
 }
