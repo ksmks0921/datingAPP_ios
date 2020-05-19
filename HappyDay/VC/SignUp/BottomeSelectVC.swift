@@ -10,13 +10,9 @@ import UIKit
 
 class BottomeSelectVC: BottomPopupViewController {
     @IBOutlet weak var tableView: UITableView!
-//      let locations: [String] = ["상해", "베이징", "대련", "청도", "장춘","길림","천진", "홍콩", "연길", "길림"]
-//      let ages: [String] = ["18세 ~ 20세", "20세 ~ 25세", "25세 ~ 35세", "35세 ~ 45세", "45세 ~ 60세"]
-    
-    
-      
-      var ages = [String]()
-      var locations = [String]()
+
+      var items = [String]()
+      var height_row = 60
       var selectedIndex:IndexPath!
 
       var height: CGFloat?
@@ -24,11 +20,10 @@ class BottomeSelectVC: BottomPopupViewController {
       var presentDuration: Double?
       var dismissDuration: Double?
       var shouldDismissInteractivelty: Bool?
-    
-      var location: String?
-      var age:String?
-      var delegate: ExamplePopupDelegate?
-      var location_age: String?
+ 
+      @IBOutlet weak var height_of_table: NSLayoutConstraint!
+      var delegate: PopUpDelegate?
+ 
       
       
       @IBAction func dismissButtonTapped(_ sender: Any) {
@@ -37,14 +32,10 @@ class BottomeSelectVC: BottomPopupViewController {
       @IBAction func finishBtnTapped(_ sender: Any) {
 
           dismiss(animated: true, completion: nil)
-          if self.location_age == "location"{
+          
 
-              delegate?.ExamplePopupWillDismissForLocation(location: locations[selectedIndex.row])
-          }
-          else {
-
-              delegate?.ExamplePopupWillDismissForAge(age: ages[selectedIndex.row])
-          }
+         delegate?.PopupWillDismissForData(data: items[selectedIndex.row])
+         
 
       }
 
@@ -74,27 +65,31 @@ class BottomeSelectVC: BottomPopupViewController {
           let nib = UINib.init(nibName: "MyCustomCell", bundle: nil)
           self.tableView.register(nib, forCellReuseIdentifier: "MyCustomCell")
           
+          let height_view = self.view.frame.height
+          let height_table = items.count * AppConstant.height_60
+          if  (height_table + 50) > Int(height_view) {
+              height_of_table.constant = CGFloat(height_view - 100)
+          }
+          else {
+              height_of_table.constant = CGFloat(items.count * AppConstant.height_60)
+          }
 
       }
+    
 }
 
 
 extension BottomeSelectVC: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if self.location_age == "location" {
-            return self.locations.count
-        }
-        else {
-            return self.ages.count
-        }
+        return self.items.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if self.location_age == "location"{
+        
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "MyCustomCell", for: indexPath as IndexPath) as! CustomTableViewCell
-            cell.label?.text = self.locations[indexPath.row]
+            cell.label?.text = self.items[indexPath.row]
 
             if (selectedIndex == indexPath) {
                 cell.radioBtn.setImage(UIImage(named: "sharp_radio_button_checked_black_18dp"),for:.normal)
@@ -105,22 +100,10 @@ extension BottomeSelectVC: UITableViewDelegate, UITableViewDataSource{
 
 
             return cell
-        }
-        else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "MyCustomCell", for: indexPath as IndexPath) as! CustomTableViewCell
-            cell.label?.text = self.ages[indexPath.row]
-
-            if (selectedIndex == indexPath) {
-                cell.radioBtn.setImage(UIImage(named: "sharp_radio_button_checked_black_18dp"),for:.normal)
-                   } else {
-                cell.radioBtn.setImage(UIImage(named: "sharp_radio_button_unchecked_black_18dp"),for:.normal)
-            }
-
-
-
-            return cell
-        }
-
+     
+    }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return CGFloat(self.height_row)
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
@@ -128,5 +111,11 @@ extension BottomeSelectVC: UITableViewDelegate, UITableViewDataSource{
         tableView.reloadData()
          
     }
-    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout:
+        UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets{
+      
+            return UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)
+      
+        
+    }
 }

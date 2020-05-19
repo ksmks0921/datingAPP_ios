@@ -11,11 +11,11 @@ import FirebaseDatabase
 import FirebaseAuth
 
 
-protocol ExamplePopupDelegate
+protocol PopUpDelegate
 {
-    func ExamplePopupWillDismissForLocation(location: String)
+    func PopupWillDismissForData(data: String)
     
-    func ExamplePopupWillDismissForAge(age: String)
+    
 }
 
 class signUpVC: BaseVC {
@@ -30,7 +30,7 @@ class signUpVC: BaseVC {
     @IBOutlet weak var ageUIView: DesinableView!
     @IBOutlet weak var passwordTxt: UITextField!
     @IBOutlet weak var passwordAgainTxt: UITextField!
-    var delegate: ExamplePopupDelegate? = nil
+ 
     var gender = true
     var selectedImage = UIImage(named: "sharp_check_white_18dp")?.withRenderingMode(.alwaysTemplate)
     var location: String?
@@ -38,6 +38,8 @@ class signUpVC: BaseVC {
     @IBOutlet weak var emailTextField: UITextField!
     var AgeList = [String]()
     var RegionList = [String]()
+    var selected_item: Int!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -46,13 +48,7 @@ class signUpVC: BaseVC {
         
         if DataManager.isLogin! {
             
-            SettingVM.shared.getSelectingAges(completion: {_ in
-               
-                self.AgeList = SettingVM.AgeList
-            })
-            SettingVM.shared.getSelectingRegions(completion: {_ in
-                self.RegionList = SettingVM.RegionList
-            })
+            
             
         } else {
             UserVM.shared.AnonymousLogin{(success, message, error) in
@@ -105,32 +101,42 @@ class signUpVC: BaseVC {
     
     @objc func clickView_1(_ sender: UIView) {
         
-          guard let popupVC = storyboard?.instantiateViewController(withIdentifier: "BottomeSelectVC") as? BottomeSelectVC else { return }
-          popupVC.height = 600
-          popupVC.topCornerRadius = 10
-          popupVC.presentDuration = 1
-          popupVC.dismissDuration = 1
-          popupVC.shouldDismissInteractivelty = true
-          popupVC.popupDelegate = self
-          popupVC.delegate = self
-          popupVC.location_age = "location"
-          popupVC.locations = self.RegionList
-          present(popupVC, animated: true, completion: nil)
+        SettingVM.shared.getSelectingRegions(completion: {_ in
+            self.selected_item = 0
+            self.RegionList = SettingVM.RegionList
+            guard let popupVC = self.storyboard?.instantiateViewController(withIdentifier: "BottomeSelectVC") as? BottomeSelectVC else { return }
+               popupVC.height = CGFloat(self.RegionList.count * 60 + 70)
+               popupVC.topCornerRadius = 10
+               popupVC.presentDuration = 1
+               popupVC.dismissDuration = 1
+               popupVC.shouldDismissInteractivelty = true
+               popupVC.popupDelegate = self
+               popupVC.delegate = self
+            
+               popupVC.items = self.RegionList
+            self.present(popupVC, animated: true, completion: nil)
+        })
+          
         
     }
     @objc func clickView_2(_ sender: UIView) {
-        
-          guard let popupVC = storyboard?.instantiateViewController(withIdentifier: "BottomeSelectVC") as? BottomeSelectVC else { return }
-          popupVC.height = 600
-          popupVC.topCornerRadius = 10
-          popupVC.presentDuration = 1
-          popupVC.dismissDuration = 1
-          popupVC.shouldDismissInteractivelty = true
-          popupVC.popupDelegate = self
-          popupVC.delegate = self
-          popupVC.location_age = "age"
-          popupVC.ages = self.AgeList
-          present(popupVC, animated: true, completion: nil)
+        SettingVM.shared.getSelectingAges(completion: {_ in
+           
+             self.AgeList = SettingVM.AgeList
+             self.selected_item = 1
+             guard let popupVC = self.storyboard?.instantiateViewController(withIdentifier: "BottomeSelectVC") as? BottomeSelectVC else { return }
+             popupVC.height = CGFloat(self.AgeList.count * 60 + 70)
+             popupVC.topCornerRadius = 10
+             popupVC.presentDuration = 1
+             popupVC.dismissDuration = 1
+             popupVC.shouldDismissInteractivelty = true
+             popupVC.popupDelegate = self
+             popupVC.delegate = self
+    
+             popupVC.items = self.AgeList
+             self.present(popupVC, animated: true, completion: nil)
+        })
+          
         
     }
     @IBAction func manSelect(_ sender: Any) {
@@ -272,16 +278,20 @@ extension signUpVC: UITableViewDelegate, UITableViewDataSource {
     
 }
 
-extension signUpVC: ExamplePopupDelegate {
-    func ExamplePopupWillDismissForLocation(location: String) {
-        self.regionLabel.text = location
-        print(location)
+extension signUpVC: PopUpDelegate {
+    
+    func PopupWillDismissForData(data: String) {
+        if self.selected_item == 0 {
+            self.regionLabel.text = data
+           
+        }
+        else {
+            self.ageLabel.text = data
+        }
+
     }
     
-    func ExamplePopupWillDismissForAge(age: String) {
-        self.ageLabel.text = age
-        print(age)
-    }
+    
 
         
 }

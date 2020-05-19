@@ -33,7 +33,7 @@ class otherSettingVC: BottomPopupViewController {
         let height_view = self.view.frame.height
         let height_table = (items.count + 1) * height_cell
         if  height_table > Int(height_view) {
-            heightOfTable.constant = CGFloat(height_view)
+            heightOfTable.constant = CGFloat(height_view - 50)
         }
         else {
             heightOfTable.constant = CGFloat((items.count + 1) * height_cell)

@@ -20,8 +20,9 @@ class SettingVM {
     static var TallList = [String]()
     static var StyleList = [String]()
     static var JobList = [String]()
-    
-    
+    static var StarList = [String]()
+    static var OurStyleList = [String]()
+    static var LifeStyleList = [String]()
     
     func getSelectingAges(completion: @escaping (Bool) -> Void){
         
@@ -42,7 +43,44 @@ class SettingVM {
         }
        
     }
-    
+    func getStars(completion: @escaping (Bool) -> Void){
+           
+          
+           ref.child(FireBaseConstant.Settings).child(FireBaseConstant.StarList).observe(.value) { (snapShot) in
+
+                  let children = snapShot.children
+                  SettingVM.StarList.removeAll()
+                  while let rest = children.nextObject() as? DataSnapshot {
+                      if let restDict = rest.value as? NSDictionary{
+
+                               let data = restDict[FireBaseConstant.name] as? String
+                               SettingVM.StarList.append(data!)
+                          }
+
+                  }
+                  completion(true)
+           }
+          
+    }
+    func getOurStyle(completion: @escaping (Bool) -> Void){
+           
+          
+           ref.child(FireBaseConstant.Settings).child(FireBaseConstant.OurSideStyleList).observe(.value) { (snapShot) in
+
+                  let children = snapShot.children
+                  SettingVM.OurStyleList.removeAll()
+                  while let rest = children.nextObject() as? DataSnapshot {
+                      if let restDict = rest.value as? NSDictionary{
+
+                               let data = restDict[FireBaseConstant.name] as? String
+                               SettingVM.OurStyleList.append(data!)
+                          }
+
+                  }
+                  completion(true)
+           }
+          
+    }
     func getSelectingRegions(completion: @escaping (Bool) -> Void){
         
        
@@ -118,7 +156,24 @@ class SettingVM {
            }
            
     }
-    
+    func getLifeStyle(completion: @escaping (Bool) -> Void) {
+           ref.child(FireBaseConstant.Settings).child(FireBaseConstant.LifeStyleList).observe(.value) {(snapShot) in
+               
+                   let children = snapShot.children
+                   SettingVM.LifeStyleList.removeAll()
+                   while let rest = children.nextObject() as? DataSnapshot {
+                       if let restDict = rest.value as? NSDictionary{
+
+                                let data = restDict[FireBaseConstant.name] as? String
+                                SettingVM.LifeStyleList.append(data!)
+                           }
+
+                   }
+                   completion(true)
+               
+           }
+           
+    }
     
 }
     

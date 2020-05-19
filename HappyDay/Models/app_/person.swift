@@ -35,11 +35,13 @@ class person {
     var user_star : String?
     var user_style : String?
     var user_tall : String?
-
     var user_status : String?
+    var is_approved : String?
+    var updated_at : String?
+    var created_at : String?
     
     
-    init(required_age: String, require_style: String, require_tall: String, style_1: String, style_2: String, style_3: String, style_4: String, user_age: String, user_avatar: [String], user_blood: String, user_city: String, user_date: String, user_email: String, user_id: String, user_introduce: String, user_job: String, user_lifestyle: String, user_nickName: String, user_outside: String, user_sex: String, user_star: String, user_style: String, user_tall: String,  user_status: String)
+    init(required_age: String, require_style: String, require_tall: String, style_1: String, style_2: String, style_3: String, style_4: String, user_age: String, user_avatar: [String], user_blood: String, user_city: String, user_date: String, user_email: String, user_id: String, user_introduce: String, user_job: String, user_lifestyle: String, user_nickName: String, user_outside: String, user_sex: String, user_star: String, user_style: String, user_tall: String,  user_status: String, is_approved: String, updated_at: String, created_at: String)
     {
         self.required_age = required_age
         self.require_style = require_style
@@ -64,8 +66,11 @@ class person {
         self.user_star = user_star
         self.user_style = user_style
         self.user_tall = user_tall
-       
+        
         self.user_status = user_status
+        self.is_approved = is_approved
+        self.updated_at = updated_at
+        self.created_at = created_at
     }
     
 }

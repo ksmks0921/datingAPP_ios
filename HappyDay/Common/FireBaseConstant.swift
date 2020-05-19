@@ -18,7 +18,7 @@ class FireBaseConstant{
     static let Chats        = "Chats"
     static let Chatlist     = "Chatlist"
     static let Points       = "Points"
-    
+
     static let name         = "name"
     
     //********************** Settings *********************

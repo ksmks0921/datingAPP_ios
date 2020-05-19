@@ -60,6 +60,7 @@
             <connections>
                 <outlet property="inputTextField" destination="tcC-D6-6nT" id="rVD-X3-3AJ"/>
                 <outlet property="property" destination="TPu-Lr-YW0" id="ypT-5d-ePC"/>
+                <outlet property="rightArrowIcon" destination="s4A-MA-soC" id="4vn-Rg-YhG"/>
                 <outlet property="value" destination="dJs-3f-tIh" id="DdV-wq-pyG"/>
             </connections>
             <point key="canvasLocation" x="45.652173913043484" y="125.22321428571428"/>

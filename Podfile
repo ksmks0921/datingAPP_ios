@@ -29,6 +29,7 @@ target 'HappyDay' do
 	pod 'OneSignal'
 	pod 'RNCryptor-objc'
 	pod 'Reachability'
+	pod 'Cosmos', '~> 21.0'
 
 	pod 'Chatto', '= 3.6.0'
 	pod 'ChattoAdditions', '= 3.6.0'

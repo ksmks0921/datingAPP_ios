@@ -251,7 +251,9 @@ extension searchVC:  UITableViewDelegate, UITableViewDataSource {
             popupVC.height = CGFloat(height_view)
         }
         else {
-            popupVC.height = CGFloat(height_bottom_view)        }
+            popupVC.height = CGFloat(height_bottom_view)
+            
+        }
         popupVC.topCornerRadius = 10
         popupVC.presentDuration = 1
         popupVC.dismissDuration = 1

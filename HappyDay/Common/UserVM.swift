@@ -20,6 +20,7 @@ class UserVM {
     static var search_result = [person]()
     static var eventPosts = [PostEvent]()
     static var filtered_eventPosts = [PostEvent]()
+    static var likes = [Like]()
     static var current_user: person!
     let ref : DatabaseReference = Database.database().reference()
     static var user_points: Int!
@@ -78,7 +79,46 @@ class UserVM {
             }
         }
     }
-    
+    func updateUserData(city: String,age: String, job: String, blood: String, star: String, tall: String,user_style: String, life_style: String, user_outside: String, sex: Bool, nick_name: String, style_1: String, style_2 : String, style_3: String, style_4: String,require_age: String, is_approved:String, updated_at: String, created_at: String, require_style: String, require_tall: String, status: String, introduce: String, date: String, response: @escaping responseCallBack){
+        
+        
+        let updateUserAvatar = [FireBaseConstant.kStyle1 : style_1,
+                                FireBaseConstant.kStyle2 : style_2,
+                                FireBaseConstant.kStyle3 : style_3,
+        ]
+
+        let updateUser = [FireBaseConstant.kEmail     : DataManager.email!,
+                      FireBaseConstant.kCity          : city,
+                      FireBaseConstant.kAge           : age,
+                      FireBaseConstant.kUserID        : DataManager.userId!,
+                      FireBaseConstant.kUserAvatar    : updateUserAvatar,
+                      FireBaseConstant.kUserJob       : job,
+                      FireBaseConstant.kUserPassword  : "",
+                      FireBaseConstant.kUserBlood     : blood,
+                      FireBaseConstant.kUserDate      : date,
+                      FireBaseConstant.kUserStar      : star,
+                      FireBaseConstant.kUserTall      : tall,
+                      FireBaseConstant.kUserStyle     : user_style,
+                      FireBaseConstant.kUserIntroduce : introduce,
+                      FireBaseConstant.kUserLifeStyle : life_style,
+                      FireBaseConstant.kUserOutside   : user_outside,
+                      FireBaseConstant.kUserSex       : sex,
+                      FireBaseConstant.kUserNickName  : nick_name,
+                      FireBaseConstant.kStatus        : status,
+                      FireBaseConstant.kStyle1        : style_1,
+                      FireBaseConstant.kStyle2        : style_2,
+                      FireBaseConstant.kStyle3        : style_3,
+                      FireBaseConstant.kStyle4        : style_4,
+                      FireBaseConstant.kCreatedAt     : Int(created_at),
+                      FireBaseConstant.kUpdatedAt     : Int(updated_at),
+                      FireBaseConstant.kIsApproved    : is_approved,
+                      FireBaseConstant.kRequireAge    : require_age,
+                      FireBaseConstant.kRequireStyle  : require_style,
+                      FireBaseConstant.kRequireTall   : require_tall
+            ] as [String : Any]
+            self.ref.child(FireBaseConstant.UserNode).child(DataManager.userId!).setValue(updateUser)
+            response(true, "Registered Successfully.", nil)
+    }
     func singUp(email: String, password: String, city: String, gender: Bool, age: String,  response: @escaping responseCallBack){
         
         Auth.auth().createUser(withEmail: email, password: password) { (user, error) in
@@ -93,7 +133,7 @@ class UserVM {
                                   FireBaseConstant.kUserID        : user_id,
                                   FireBaseConstant.kUserAvatar    : "",
                                   FireBaseConstant.kUserJob       : "",
-                                  FireBaseConstant.kUserAvatar    : "",
+                                  FireBaseConstant.kUserPassword  : "",
                                   FireBaseConstant.kUserBlood     : "",
                                   FireBaseConstant.kUserDate      : "",
                                   FireBaseConstant.kUserStar      : "",
@@ -109,13 +149,13 @@ class UserVM {
                                   FireBaseConstant.kStyle2        : "",
                                   FireBaseConstant.kStyle3        : "",
                                   FireBaseConstant.kStyle4        : "",
-                                  FireBaseConstant.kCreatedAt     : "",
-                                  FireBaseConstant.kUpdatedAt     : "",
+                                  FireBaseConstant.kCreatedAt     : 0,
+                                  FireBaseConstant.kUpdatedAt     : 0,
                                   FireBaseConstant.kIsApproved    : "",
                                   FireBaseConstant.kRequireAge    : "",
                                   FireBaseConstant.kRequireStyle  : "",
                                   FireBaseConstant.kRequireTall   : ""
-                    ]
+                    ] as [String : Any]
                 self.ref.child(FireBaseConstant.UserNode).child(user_id).setValue(updateUser)
                 response(true, "Registered Successfully.", nil)
             }else{
@@ -167,7 +207,13 @@ class UserVM {
                             let user_lifestyle = restDict[FireBaseConstant.kUserLifeStyle] as? String
                             let user_nickName = restDict[FireBaseConstant.kUserNickName] as? String
                             let user_outside = restDict[FireBaseConstant.kUserOutside] as? String
-                    
+                            let is_approved = restDict[FireBaseConstant.kIsApproved] as? String
+                            
+                            let updated_at = restDict[FireBaseConstant.kUpdatedAt] as? Int
+                            let created_at = restDict[FireBaseConstant.kCreatedAt] as? Int
+                    print(":LLLLLL")
+                    print(updated_at)
+                    print(created_at)
                             let user_sex : String!
                           
                            
@@ -182,7 +228,7 @@ class UserVM {
                             let user_tall = restDict[FireBaseConstant.kUserTall] as? String
                             
                             let user_status = restDict[FireBaseConstant.kStatus] as? String
-                            let person_item = person(required_age: required_age!, require_style: require_style!, require_tall: require_tall!, style_1: style_1!, style_2: style_2!, style_3: style_3!,  style_4: style_4!, user_age: user_age!, user_avatar: user_avatar_list, user_blood: user_blood!, user_city: user_city!, user_date: user_date!, user_email: user_email!, user_id: user_id!, user_introduce : user_introduce!,user_job: user_job!, user_lifestyle: user_lifestyle!, user_nickName: user_nickName!, user_outside: user_outside!, user_sex: user_sex!, user_star: user_star!, user_style: user_style!, user_tall: user_tall!,  user_status : user_status!)
+                    let person_item = person(required_age: required_age!, require_style: require_style!, require_tall: require_tall!, style_1: style_1!, style_2: style_2!, style_3: style_3!,  style_4: style_4!, user_age: user_age!, user_avatar: user_avatar_list, user_blood: user_blood!, user_city: user_city!, user_date: user_date!, user_email: user_email!, user_id: user_id!, user_introduce : user_introduce!,user_job: user_job!, user_lifestyle: user_lifestyle!, user_nickName: user_nickName!, user_outside: user_outside!, user_sex: user_sex!, user_star: user_star!, user_style: user_style!, user_tall: user_tall!,  user_status : user_status!, is_approved: is_approved!, updated_at: String(updated_at!), created_at: String(created_at!))
                             if person_item.user_id == DataManager.userId {
                                 UserVM.current_user = person_item
                             }
@@ -542,15 +588,36 @@ class UserVM {
                 completion(true)
         }
     }
+    
     func getLikes(user_id: String, completion: @escaping (Bool) -> Void) {
         
-        ref.child(FireBaseConstant.Points).child(user_id).child(FireBaseConstant.p_point).observe(.value) { (snapShot) in
+        ref.child(FireBaseConstant.Likes).child(user_id).observe(.value) { (snapShot) in
 
-            let value = snapShot.value as! Int
-            UserVM.self.user_points = value
-                completion(true)
+            let children = snapShot.children
+            UserVM.likes.removeAll()
+            while let rest = children.nextObject() as? DataSnapshot {
+                if let restDict = rest.value as? NSDictionary{
+
+                        let like_age = restDict[FireBaseConstant.LikeAge] as? String
+                        let like_avatar = restDict[FireBaseConstant.LikeAvatar] as? String
+                        let like_city = restDict[FireBaseConstant.LikeCity] as? String
+                        let like_date = restDict[FireBaseConstant.LikeDate] as? String
+                        let like_id = restDict[FireBaseConstant.LikeID] as? String
+                        let like_info = restDict[FireBaseConstant.LikeInfo] as? String
+                        let like_name = restDict[FireBaseConstant.LikeName] as? String
+                        let user_sex = restDict[FireBaseConstant.UserSex] as? Bool
+                    
+                    let like_item = Like(like_age: like_age!, like_avatar:like_avatar!, like_city:like_city!, like_date:like_date!, like_id:like_id!, like_info:like_info!, like_name:like_name!, user_sex: user_sex!)
+                        
+                        UserVM.likes.append(like_item)
+                    
+                    }
+
+            }
+            completion(true)
         }
     }
+    
     static func isPasswordValid(_ password : String) -> Bool {
         
         let passwordTest = NSPredicate(format: "SELF MATCHES %@", "^(?=.*[a-z])(?=.*[$@$#!%*?&])[A-Za-z\\d$$@$#!%*?&]{8,}")

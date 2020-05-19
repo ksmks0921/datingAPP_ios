@@ -7,11 +7,12 @@
 //
 
 import UIKit
-import HCSStarRatingView
+import Cosmos
 class selfEvaluationCell: UITableViewCell {
 
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var ratingView: HCSStarRatingView!
+   
+    @IBOutlet weak var ratingView: CosmosView!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

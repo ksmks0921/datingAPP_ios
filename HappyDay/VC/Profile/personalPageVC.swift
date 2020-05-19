@@ -12,11 +12,14 @@ class personalPageVC: UIViewController {
 
     @IBOutlet weak var collectioView: UICollectionView!
     @IBOutlet weak var uploadPhotoView: UIView!
-    @IBOutlet weak var photoview: DesinableView!
     @IBOutlet weak var userProfileView: UIView!
+    @IBOutlet weak var commentEditView: DesinableView!
+    
+    @IBOutlet weak var photoview: DesinableView!
+    
     @IBOutlet weak var profileEditView: DesinableView!
     @IBOutlet weak var commentView: UIView!
-    @IBOutlet weak var commentEditView: DesinableView!
+    
     @IBOutlet weak var adView: UIView!
     @IBOutlet weak var avatarImageView: DesinableImageView!
     
@@ -30,7 +33,7 @@ class personalPageVC: UIViewController {
     var screenSize: CGRect!
     var screenWidth: CGFloat!
     var screenHeight: CGFloat!
-    
+    var likes : Int!
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -43,6 +46,7 @@ class personalPageVC: UIViewController {
         collectioView.register(nibCell, forCellWithReuseIdentifier: "personalPageCollectionCell")
         
         
+        //set collectionview layout
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         screenSize = UIScreen.main.bounds
         screenWidth = screenSize.width
@@ -54,7 +58,7 @@ class personalPageVC: UIViewController {
         collectioView!.collectionViewLayout = layout
         
         
-        
+        // set the tap function of photo select view
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(uploadPhotoTapped(_:)))
         tapGesture.delegate = self as? UIGestureRecognizerDelegate
         uploadPhotoView.addGestureRecognizer(tapGesture)
@@ -63,7 +67,11 @@ class personalPageVC: UIViewController {
         tapGesture_2.delegate = self as? UIGestureRecognizerDelegate
         userProfileView.addGestureRecognizer(tapGesture_2)
         
-       
+        
+        let tapGesture_3 = UITapGestureRecognizer(target: self, action: #selector(profileBtnTapped(_:)))
+        tapGesture_3.delegate = self as? UIGestureRecognizerDelegate
+        commentEditView.addGestureRecognizer(tapGesture_3)
+        // set init data of this page
         if DataManager.points != nil {
             pointLabel.text = String(DataManager.points) + " " + "PT"
         }
@@ -72,6 +80,7 @@ class personalPageVC: UIViewController {
             
             avatarImageView.sd_setImage(with: URL(string: user!.user_avatar![0]), placeholderImage: UIImage(named: "avatar_woman"))
             nameLabel.text = UserVM.current_user.user_nickName
+            
         }
         
     }
@@ -96,11 +105,11 @@ class personalPageVC: UIViewController {
                 let VC_2 = self.storyboard?.instantiateViewController(withIdentifier: "mainProfileVC") as! mainProfileVC
                 navigationController?.pushViewController(VC_2, animated: true)
     }
-    @objc func pointerAddTapped(_ sender: UIView) {
-       
-                let VC_3 = self.storyboard?.instantiateViewController(withIdentifier: "pointChangeVC") as! pointChangeVC
-                navigationController?.pushViewController(VC_3, animated: true)
+    @objc func commentViewTapped(_ sender: UIView) {
+                let VC_2 = self.storyboard?.instantiateViewController(withIdentifier: "mainProfileVC") as! mainProfileVC
+                navigationController?.pushViewController(VC_2, animated: true)
     }
+    
     @objc func pointerChangeTapped(_ sender: UIView) {
                 let VC_4 = self.storyboard?.instantiateViewController(withIdentifier: "pointChangeVC") as! pointChangeVC
                 navigationController?.pushViewController(VC_4, animated: true)
@@ -126,7 +135,12 @@ extension personalPageVC: UICollectionViewDelegate, UICollectionViewDataSource, 
          if indexPath.row != 0 && indexPath.row != 6{
             cell.badgeHeight.constant = CGFloat(0)
          }
-             
+         else {
+            if indexPath.row == 0 {
+                cell.otherText.text = String(UserVM.likes.count) + " 명"
+            }
+                cell.otherText.text = String(UserVM.likes.count) + " 개"
+         }
             return cell
        
               

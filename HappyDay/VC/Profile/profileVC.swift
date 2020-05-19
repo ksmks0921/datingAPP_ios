@@ -207,9 +207,9 @@ extension profileVC:  UITableViewDelegate, UITableViewDataSource {
             if indexPath.section == 3 {
                 let cell = userinfotableview.dequeueReusableCell(withIdentifier: "selfEvaluationCell", for: indexPath as IndexPath) as! selfEvaluationCell
                 cell.titleLabel.text = self.sections[indexPath.section].items[data_index]
-                cell.ratingView.isEnabled = false
-                let rating_value = Float(self.sections[indexPath.section].values[data_index])
-                cell.ratingView.value = CGFloat(rating_value!)
+                cell.ratingView.settings.updateOnTouch = false
+                let rating_value = Double(self.sections[indexPath.section].values[data_index])
+                cell.ratingView.rating = rating_value!
                 return cell
                 
             }
