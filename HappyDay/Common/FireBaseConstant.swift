@@ -18,7 +18,10 @@ class FireBaseConstant{
     static let Chats        = "Chats"
     static let Chatlist     = "Chatlist"
     static let Points       = "Points"
-
+    static let Memos        = "Memos"
+    static let Ignores      = "Ignores"
+    static let Blocks       = "Blocks"
+    
     static let name         = "name"
     
     //********************** Settings *********************
@@ -130,5 +133,34 @@ class FireBaseConstant{
     static let LikeName                 = "LikeName"
     static let UserSex                  = "UserSex"
     
+    //****************************** Memos ****************
+    static let MemoAge                  = "MemoAge"
+    static let MemoAvatar               = "MemoAvatar"
+    static let MemoCity                 = "MemoCity"
+    static let MemoDate                 = "MemoDate"
+    static let MemoID                   = "MemoID"
+    static let MemoInfo                 = "MemoInfo"
+    static let MemoName                 = "MemoName"
+    static let MemoUserSex              = "UserSex"
+    
+    //****************************** Memos ****************
+    static let IgnoreAge                  = "IgnoreAge"
+    static let IgnoreAvatar               = "IgnoreAvatar"
+    static let IgnoreCity                 = "IgnoreCity"
+    static let IgnoreDate                 = "IgnoreDate"
+    static let IgnoreID                   = "IgnoreID"
+    static let IgnoreInfo                 = "IgnoreInfo"
+    static let IgnoreName                 = "IgnoreName"
+    static let IgnoreUserSex              = "UserSex"
+    
+    //****************************** Memos ****************
+    static let BlockAge                  = "BlockAge"
+    static let BlockAvatar               = "BlockAvatar"
+    static let BlockCity                 = "BlockCity"
+    static let BlockDate                 = "BlockDate"
+    static let BlockID                   = "BlockID"
+    static let BlockInfo                 = "BlockInfo"
+    static let BlockName                 = "BlockName"
+    static let BlockUserSex              = "UserSex"
     
 }

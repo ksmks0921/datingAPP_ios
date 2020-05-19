@@ -68,7 +68,7 @@ class mainProfileVC: BaseVC {
                 return false
             }
         }
-        UserVM.shared.updateUserData(city: value_profile[5], age: value_profile[1], job: value_profile[9], blood: value_profile[4], star: value_profile[3], tall: value_profile[7], user_style: value_profile[8], life_style: value_profile[10], user_outside: value_profile[6], sex: sex(), nick_name: value_profile[0], style_1: value_profile[11], style_2: value_profile[12], style_3: value_profile[13], style_4: value_profile[14], require_age: value_profile[16], is_approved: self.user.is_approved!, updated_at: user.updated_at!, created_at: user!.created_at!, require_style: value_profile[18], require_tall: value_profile[17], status: user!.user_status!, introduce: user!.user_introduce!, date: user!.user_date!) {(success, message, error) in
+        UserVM.shared.updateUserData(city: value_profile[5], age: value_profile[1], job: value_profile[9], blood: value_profile[4], star: value_profile[3], tall: value_profile[7], user_style: value_profile[8], life_style: value_profile[10], user_outside: value_profile[6], sex: sex(), nick_name: value_profile[0], style_1: value_profile[11], style_2: value_profile[12], style_3: value_profile[13], style_4: value_profile[14], require_age: value_profile[16], is_approved: self.user.is_approved!, updated_at: user.updated_at!, created_at: user!.created_at!, require_style: value_profile[18], require_tall: value_profile[17], status: user!.user_status!, introduce: user!.user_introduce!, date: user!.user_date!, user_avatar: user.user_avatar!) {(success, message, error) in
             if error == nil {
                 if success {
                     self.showAlert(message: "성공!")
@@ -103,7 +103,7 @@ extension mainProfileVC:  UITableViewDelegate, UITableViewDataSource {
                 cell.titleLabel.text = self.properties_profile[indexPath.row]
                 cell.ratingView.settings.updateOnTouch  = true
                 cell.selectionStyle = .none
-                
+                cell.titleLabel.textColor = UIColor.darkGray
                 cell.ratingView.rating = Double(value_profile[indexPath.row])!
                 cell.ratingView.settings.fillMode = .full
                 cell.ratingView.didFinishTouchingCosmos = { rating in

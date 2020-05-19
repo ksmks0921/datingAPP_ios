@@ -20,7 +20,12 @@ class UserVM {
     static var search_result = [person]()
     static var eventPosts = [PostEvent]()
     static var filtered_eventPosts = [PostEvent]()
-    static var likes = [Like]()
+    
+    static var likes    = [Like]()  // used same class "Like" for likes , ignores, blocks and memos
+    static var memos    = [Like]()
+    static var ignores  = [Like]()
+    static var blocks   = [Like]()
+    
     static var current_user: person!
     let ref : DatabaseReference = Database.database().reference()
     static var user_points: Int!
@@ -79,12 +84,12 @@ class UserVM {
             }
         }
     }
-    func updateUserData(city: String,age: String, job: String, blood: String, star: String, tall: String,user_style: String, life_style: String, user_outside: String, sex: Bool, nick_name: String, style_1: String, style_2 : String, style_3: String, style_4: String,require_age: String, is_approved:String, updated_at: String, created_at: String, require_style: String, require_tall: String, status: String, introduce: String, date: String, response: @escaping responseCallBack){
+    func updateUserData(city: String,age: String, job: String, blood: String, star: String, tall: String,user_style: String, life_style: String, user_outside: String, sex: Bool, nick_name: String, style_1: String, style_2 : String, style_3: String, style_4: String,require_age: String, is_approved:String, updated_at: String, created_at: String, require_style: String, require_tall: String, status: String, introduce: String, date: String, user_avatar: [String], response: @escaping responseCallBack){
         
         
-        let updateUserAvatar = [FireBaseConstant.kStyle1 : style_1,
-                                FireBaseConstant.kStyle2 : style_2,
-                                FireBaseConstant.kStyle3 : style_3,
+        let updateUserAvatar = [FireBaseConstant.kUserAvatar1 : user_avatar[0],
+                                FireBaseConstant.kUserAvatar2 : user_avatar[1],
+                                FireBaseConstant.kUserAvatar3 : user_avatar[2],
         ]
 
         let updateUser = [FireBaseConstant.kEmail     : DataManager.email!,
@@ -109,8 +114,8 @@ class UserVM {
                       FireBaseConstant.kStyle2        : style_2,
                       FireBaseConstant.kStyle3        : style_3,
                       FireBaseConstant.kStyle4        : style_4,
-                      FireBaseConstant.kCreatedAt     : Int(created_at),
-                      FireBaseConstant.kUpdatedAt     : Int(updated_at),
+                      FireBaseConstant.kCreatedAt     : Int(created_at)!,
+                      FireBaseConstant.kUpdatedAt     : Int(updated_at)!,
                       FireBaseConstant.kIsApproved    : is_approved,
                       FireBaseConstant.kRequireAge    : require_age,
                       FireBaseConstant.kRequireStyle  : require_style,
@@ -211,9 +216,7 @@ class UserVM {
                             
                             let updated_at = restDict[FireBaseConstant.kUpdatedAt] as? Int
                             let created_at = restDict[FireBaseConstant.kCreatedAt] as? Int
-                    print(":LLLLLL")
-                    print(updated_at)
-                    print(created_at)
+                   
                             let user_sex : String!
                           
                            
@@ -617,7 +620,90 @@ class UserVM {
             completion(true)
         }
     }
-    
+    func getMemos(user_id: String, completion: @escaping (Bool) -> Void) {
+        
+        ref.child(FireBaseConstant.Memos).child(user_id).observe(.value) { (snapShot) in
+
+            let children = snapShot.children
+            UserVM.memos.removeAll()
+            while let rest = children.nextObject() as? DataSnapshot {
+                if let restDict = rest.value as? NSDictionary{
+
+                        let memo_age = restDict[FireBaseConstant.MemoAge] as? String
+                        let memo_avatar = restDict[FireBaseConstant.MemoAvatar] as? String
+                        let memo_city = restDict[FireBaseConstant.MemoCity] as? String
+                        let memo_date = restDict[FireBaseConstant.MemoDate] as? String
+                        let memo_id = restDict[FireBaseConstant.MemoID] as? String
+                        let memo_info = restDict[FireBaseConstant.MemoInfo] as? String
+                        let memo_name = restDict[FireBaseConstant.MemoName] as? String
+                        let user_sex = restDict[FireBaseConstant.MemoUserSex] as? Bool
+                    
+                    let memo_item = Like(like_age: memo_age!, like_avatar: memo_avatar!, like_city: memo_city!, like_date: memo_date!, like_id: memo_id!, like_info: memo_info!, like_name: memo_name!, user_sex: user_sex!)
+                        
+                        UserVM.likes.append(memo_item)
+                    
+                    }
+
+            }
+            completion(true)
+        }
+    }
+    func getIgnores(user_id: String, completion: @escaping (Bool) -> Void) {
+        
+        ref.child(FireBaseConstant.Ignores).child(user_id).observe(.value) { (snapShot) in
+
+            let children = snapShot.children
+            UserVM.ignores.removeAll()
+            while let rest = children.nextObject() as? DataSnapshot {
+                if let restDict = rest.value as? NSDictionary{
+
+                        let ignore_age = restDict[FireBaseConstant.IgnoreAge] as? String
+                        let ignore_avatar = restDict[FireBaseConstant.IgnoreAvatar] as? String
+                        let ignore_city = restDict[FireBaseConstant.IgnoreCity] as? String
+                        let ignore_date = restDict[FireBaseConstant.IgnoreDate] as? String
+                        let ignore_id = restDict[FireBaseConstant.IgnoreID] as? String
+                        let ignore_info = restDict[FireBaseConstant.IgnoreInfo] as? String
+                        let ignore_name = restDict[FireBaseConstant.IgnoreName] as? String
+                        let ignore_user_sex = restDict[FireBaseConstant.IgnoreUserSex] as? Bool
+                    
+                    let ignore_item = Like(like_age: ignore_age!, like_avatar: ignore_avatar!, like_city: ignore_city!, like_date: ignore_date!, like_id: ignore_id!, like_info: ignore_info!, like_name: ignore_name!, user_sex: ignore_user_sex!)
+                        
+                        UserVM.ignores.append(ignore_item)
+                    
+                    }
+
+            }
+            completion(true)
+        }
+    }
+    func getBlocks(user_id: String, completion: @escaping (Bool) -> Void) {
+        
+        ref.child(FireBaseConstant.Blocks).child(user_id).observe(.value) { (snapShot) in
+
+            let children = snapShot.children
+            UserVM.blocks.removeAll()
+            while let rest = children.nextObject() as? DataSnapshot {
+                if let restDict = rest.value as? NSDictionary{
+
+                        let block_age = restDict[FireBaseConstant.BlockAge] as? String
+                        let block_avatar = restDict[FireBaseConstant.BlockAvatar] as? String
+                        let block_city = restDict[FireBaseConstant.BlockCity] as? String
+                        let block_date = restDict[FireBaseConstant.BlockDate] as? String
+                        let block_id = restDict[FireBaseConstant.BlockID] as? String
+                        let block_info = restDict[FireBaseConstant.BlockInfo] as? String
+                        let block_name = restDict[FireBaseConstant.BlockName] as? String
+                        let block_user_sex = restDict[FireBaseConstant.BlockUserSex] as? Bool
+                    
+                    let block_item = Like(like_age: block_age!, like_avatar: block_avatar!, like_city: block_city!, like_date: block_date!, like_id: block_id!, like_info: block_info!, like_name: block_name!, user_sex: block_user_sex!)
+                        
+                        UserVM.blocks.append(block_item)
+                    
+                    }
+
+            }
+            completion(true)
+        }
+    }
     static func isPasswordValid(_ password : String) -> Bool {
         
         let passwordTest = NSPredicate(format: "SELF MATCHES %@", "^(?=.*[a-z])(?=.*[$@$#!%*?&])[A-Za-z\\d$$@$#!%*?&]{8,}")

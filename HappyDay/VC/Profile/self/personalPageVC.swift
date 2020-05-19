@@ -68,9 +68,11 @@ class personalPageVC: UIViewController {
         userProfileView.addGestureRecognizer(tapGesture_2)
         
         
-        let tapGesture_3 = UITapGestureRecognizer(target: self, action: #selector(profileBtnTapped(_:)))
+        let tapGesture_3 = UITapGestureRecognizer(target: self, action: #selector(commentViewTapped(_:)))
         tapGesture_3.delegate = self as? UIGestureRecognizerDelegate
-        commentEditView.addGestureRecognizer(tapGesture_3)
+        commentView.addGestureRecognizer(tapGesture_3)
+        
+        
         // set init data of this page
         if DataManager.points != nil {
             pointLabel.text = String(DataManager.points) + " " + "PT"
@@ -106,14 +108,11 @@ class personalPageVC: UIViewController {
                 navigationController?.pushViewController(VC_2, animated: true)
     }
     @objc func commentViewTapped(_ sender: UIView) {
-                let VC_2 = self.storyboard?.instantiateViewController(withIdentifier: "mainProfileVC") as! mainProfileVC
+                let VC_2 = self.storyboard?.instantiateViewController(withIdentifier: "personalDataVC") as! personalDataVC
                 navigationController?.pushViewController(VC_2, animated: true)
     }
     
-    @objc func pointerChangeTapped(_ sender: UIView) {
-                let VC_4 = self.storyboard?.instantiateViewController(withIdentifier: "pointChangeVC") as! pointChangeVC
-                navigationController?.pushViewController(VC_4, animated: true)
-    }
+    
 }
 extension personalPageVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     
@@ -154,25 +153,34 @@ extension personalPageVC: UICollectionViewDelegate, UICollectionViewDataSource, 
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.row == 0 {
-            let VC = self.storyboard?.instantiateViewController(withIdentifier: "footVC") as! footVC
+            let VC = self.storyboard?.instantiateViewController(withIdentifier: "personalPageItemVC") as! personalPageItemVC
+            VC.items = UserVM.likes
+            VC.titleText = "라이크 목록"
             navigationController?.pushViewController(VC, animated: true)
         }
         if indexPath.row == 1 {
-            let VC = self.storyboard?.instantiateViewController(withIdentifier: "memoListVC") as! memoListVC
+            
+            let VC = self.storyboard?.instantiateViewController(withIdentifier: "personalPageItemVC") as! personalPageItemVC
+            VC.items = UserVM.memos
+            VC.titleText = "메모 목록"
             navigationController?.pushViewController(VC, animated: true)
         }
         if indexPath.row == 2 {
-            let VC = self.storyboard?.instantiateViewController(withIdentifier: "ignoreListVC") as! ignoreListVC
+            let VC = self.storyboard?.instantiateViewController(withIdentifier: "personalPageItemVC") as! personalPageItemVC
+            VC.items = UserVM.ignores
+            VC.titleText = "무시 목록"
             navigationController?.pushViewController(VC, animated: true)
         }
         if indexPath.row == 3 {
-            let VC = self.storyboard?.instantiateViewController(withIdentifier: "noSeeVC") as! noSeeVC
+            let VC = self.storyboard?.instantiateViewController(withIdentifier: "personalPageItemVC") as! personalPageItemVC
+            VC.items = UserVM.blocks
+            VC.titleText = "블록 목록"
             navigationController?.pushViewController(VC, animated: true)
         }
         if indexPath.row == 4 {
                    let VC = self.storyboard?.instantiateViewController(withIdentifier: "favoriteListVC") as! favoriteListVC
                    navigationController?.pushViewController(VC, animated: true)
-               }
+        }
         if indexPath.row == 5 {
             let VC = self.storyboard?.instantiateViewController(withIdentifier: "friendListVC") as! friendListVC
             navigationController?.pushViewController(VC, animated: true)

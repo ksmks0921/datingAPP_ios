@@ -47,11 +47,8 @@
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gdX-Id-vP9">
-                        <rect key="frame" x="88" y="13.5" width="39.5" height="19.5"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="39.5" id="qxF-mS-sYw"/>
-                        </constraints>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gdX-Id-vP9">
+                        <rect key="frame" x="88" y="13.5" width="137" height="19.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
@@ -89,6 +86,7 @@
                     <constraint firstItem="7Gm-Ws-iBq" firstAttribute="leading" secondItem="gdX-Id-vP9" secondAttribute="leading" id="Tcf-sp-SwL"/>
                     <constraint firstItem="Bwv-u5-D5m" firstAttribute="top" secondItem="JRw-Bw-E6Z" secondAttribute="top" id="bbZ-J8-lxI"/>
                     <constraint firstItem="gdX-Id-vP9" firstAttribute="leading" secondItem="JRw-Bw-E6Z" secondAttribute="trailing" constant="10" id="iU5-H4-a1H"/>
+                    <constraint firstAttribute="trailing" secondItem="gdX-Id-vP9" secondAttribute="trailing" constant="30" id="lYy-fN-qEk"/>
                     <constraint firstItem="0sE-i9-7Yx" firstAttribute="centerY" secondItem="7Gm-Ws-iBq" secondAttribute="centerY" id="vXA-xj-cUj"/>
                     <constraint firstItem="JRw-Bw-E6Z" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="wE0-t8-Kyq"/>
                     <constraint firstItem="Bwv-u5-D5m" firstAttribute="leading" secondItem="JRw-Bw-E6Z" secondAttribute="leading" id="wft-Jx-VU5"/>

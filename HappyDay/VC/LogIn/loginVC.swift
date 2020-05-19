@@ -112,7 +112,9 @@ extension loginVC {
                                 
                                 self.getPoints()
                                 self.getLikes()
-                            
+                                self.getMemos()
+                                self.getIgnores()
+                                self.getBlocks()
                                 let VC = self.storyboard?.instantiateViewController(withIdentifier: "customTabBarVC") as! customTabBarVC
                                 self.navigationController?.pushViewController(VC, animated: true)
                                 
@@ -136,7 +138,22 @@ extension loginVC {
     }
     func getLikes() {
         UserVM.shared.getLikes(user_id: DataManager.userId!, completion: {_ in
-            print("added successfully!")
+            print("Likes added successfully!")
+        })
+    }
+    func getMemos() {
+        UserVM.shared.getMemos(user_id: DataManager.userId!, completion: {_ in
+            print("Memos added successfully!")
+        })
+    }
+    func getIgnores() {
+        UserVM.shared.getIgnores(user_id: DataManager.userId!, completion: {_ in
+            print("Ignores added successfully!")
+        })
+    }
+    func getBlocks() {
+        UserVM.shared.getBlocks(user_id: DataManager.userId!, completion: {_ in
+            print("Blocks added successfully!")
         })
     }
 }

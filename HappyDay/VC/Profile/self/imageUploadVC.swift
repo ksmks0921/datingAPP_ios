@@ -8,8 +8,9 @@
 
 import UIKit
 import PopupDialog
+import FirebaseStorage
 
-class imageUploadVC: UIViewController {
+class imageUploadVC: BaseVC {
 
     
     @IBOutlet weak var imageUploadView_1: DesinableView!
@@ -20,6 +21,8 @@ class imageUploadVC: UIViewController {
     @IBOutlet weak var imageView3: UIImageView!
     
     var image_index:Int?
+    var avatars = [String]()
+    var user: person!
     override func viewDidLoad() {
         super.viewDidLoad()
        
@@ -51,7 +54,30 @@ class imageUploadVC: UIViewController {
         tapGesture_6.delegate = self as? UIGestureRecognizerDelegate
         imageView3.isUserInteractionEnabled = true
         imageView3.addGestureRecognizer(tapGesture_6)
-       
+        
+        
+        if UserVM.current_user != nil {
+            user = UserVM.current_user
+            avatars = user.user_avatar!
+        }
+        if avatars[0] != nil && avatars[0] != "" {
+            imageUploadView_1.isHidden = true
+            imageView1.isHidden = false
+            imageView1.sd_setImage(with: URL(string: avatars[0]),  placeholderImage: UIImage(named: "avatar_woman"))
+          
+        }
+        if avatars[1] != nil && avatars[1] != "" {
+            imageUploadView_2.isHidden = true
+            imageView2.isHidden = false
+            imageView2.sd_setImage(with: URL(string: avatars[1]),  placeholderImage: UIImage(named: "avatar_woman"))
+          
+        }
+        if avatars[2] != nil && avatars[2] != "" {
+            imageUploadView_3.isHidden = true
+            imageView3.isHidden = false
+            imageView3.sd_setImage(with: URL(string: avatars[2]),  placeholderImage: UIImage(named: "avatar_woman"))
+          
+        }
     }
     @IBAction func backBtnTapped(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
@@ -77,7 +103,66 @@ class imageUploadVC: UIViewController {
         self.image_index = 3
         showImagePickerControllerActionSheet()
     }
-  
+    
+    func savePhoto(url: URL, index: Int, completion: @escaping (Bool) -> Void) {
+        
+        let url_string = url.absoluteString
+        self.avatars[index] = url_string
+        let sex = { () -> Bool in
+            if self.user.user_sex == "남자" {
+                return true
+            }
+            else {
+                return false
+            }
+        }
+        UserVM.shared.updateUserData(city: user.user_city!, age: user.user_age!, job: user.user_job!, blood: user.user_blood!, star: user.user_star!, tall: user.user_tall!, user_style: user.user_style!, life_style: user.user_lifestyle!, user_outside: user.user_outside!, sex: sex(), nick_name: user.user_nickName!, style_1: user.style_1!, style_2: user.style_2!, style_3: user.style_3!, style_4: user.style_4!, require_age: user.required_age!, is_approved: user.is_approved!, updated_at: user.updated_at!, created_at: user!.created_at!, require_style: user.require_style!, require_tall: user.require_tall!, status: user!.user_status!, introduce: user!.user_introduce!, date: user!.user_date!, user_avatar: self.avatars) {(success, message, error) in
+                   if error == nil {
+                       if success {
+                            completion(true)
+                           
+                       }
+                       else {
+                           self.showAlert(message: "error")
+                       }
+                   }
+                   else {
+                       print(error)
+                   }
+                   
+        }
+        
+    }
+    func uploadImage(image_index: Int, imageData: UIImage, completion: @escaping (Bool) -> Void) {
+        
+               Indicator.sharedInstance.showIndicator()
+               let storageRef = Storage.storage().reference().child("media").child(UUID().uuidString)
+                    if let uploadData = imageData.pngData() {
+                   
+                   storageRef.putData(uploadData, metadata: nil) { (metadata, error) in
+                       Indicator.sharedInstance.hideIndicator()
+                       if error != nil {
+                           print("error")
+                           
+                       } else {
+                           storageRef.downloadURL { (url, error) in
+                            guard let downloadURL = url else {return}
+                               
+                            self.savePhoto(url: downloadURL, index: image_index, completion: {_ in
+                                completion(true)
+                            })
+                            
+                   
+                           }
+        
+                       }
+                   }
+        }
+        
+        
+    }
+    
+    
 
 }
 
@@ -117,17 +202,24 @@ extension imageUploadVC: UIImagePickerControllerDelegate, UINavigationController
             if self.image_index == 1 {
                 imageUploadView_1.isHidden = true
                 imageView1.isHidden = false
-                imageView1.image = editedImage
+                self.uploadImage(image_index: 0, imageData: editedImage, completion: {_ in
+                    self.imageView1.image = editedImage
+                })
+                
             }
             else if self.image_index == 2 {
                 imageUploadView_2.isHidden = true
                 imageView2.isHidden = false
-                imageView2.image = editedImage
+                self.uploadImage(image_index: 1, imageData: editedImage, completion: {_ in
+                    self.imageView2.image = editedImage
+                })
             }
             else {
                 imageUploadView_3.isHidden = true
                 imageView3.isHidden = false
-                imageView3.image = editedImage
+                self.uploadImage(image_index: 2, imageData: editedImage, completion: {_ in
+                    self.imageView3.image = editedImage
+                })
             }
             
         }
@@ -135,17 +227,23 @@ extension imageUploadVC: UIImagePickerControllerDelegate, UINavigationController
             if self.image_index == 1 {
                 imageUploadView_1.isHidden = true
                 imageView1.isHidden = false
-                imageView1.image = originalImage
+                self.uploadImage(image_index: 0, imageData: originalImage, completion: {_ in
+                    self.imageView2.image = originalImage
+                })
             }
             else if self.image_index == 2 {
                 imageUploadView_2.isHidden = true
                 imageView2.isHidden = false
-                imageView2.image = originalImage
+                self.uploadImage(image_index: 1, imageData: originalImage, completion: {_ in
+                    self.imageView2.image = originalImage
+                })
             }
             else {
-//                imageUploadView_3.isHidden = true
+                imageUploadView_3.isHidden = true
                 imageView3.isHidden = false
-                imageView3.image = originalImage
+                self.uploadImage(image_index: 2, imageData: originalImage, completion: {_ in
+                    self.imageView3.image = originalImage
+                })
             }
         }
         dismiss(animated: true, completion: nil)
