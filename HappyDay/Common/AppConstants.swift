@@ -23,12 +23,18 @@ class AppConstant {
     static let kUserEmail = "userEmail"
     static let kDeviceToken = "deviceToken"
     static let UserFcmIds = "user-fcm-ids"
-    
+    static let LanguageEnglish = "english"
+    static let LanguageJapanese = "japanese"
+    static let LanguageKorean = "korean"
+    static let LanguageChinse = "chinese"
+    static let languages = ["조선어", "中文", "日本語", "English"]
     static let kShowingSearch = "kSearch"
     static let kIsAutoLogin = "kIsAutoLogin"
     static let kMessageAlarm = "kMessageAlarm"
     static let kReportAlarm = "kReportAlarm"
     static let kShowingFilter = "kFilter"
+ 
+    static let API_KEY_TRANSLATE = "AIzaSyBNoD64Un372JgIMHQMQ0ODF9eBsq59GIM"
     
     static let eVideo = "video"
     static let eImage = "image"

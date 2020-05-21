@@ -13,7 +13,7 @@ class ChatList {
     
     var id: String!
     var status: String!
-   
+  
 
     
     

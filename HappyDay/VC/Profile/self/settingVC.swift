@@ -89,7 +89,10 @@ extension settingVC: UITableViewDelegate, UITableViewDataSource {
             let VC = self.storyboard?.instantiateViewController(withIdentifier: "passwordChangeVC") as! passwordChangeVC
             navigationController?.pushViewController(VC, animated: true)
         }
-            
+        if indexPath.row == 2 {
+            let VC = self.storyboard?.instantiateViewController(withIdentifier: "alarmSettingVC") as! alarmSettingVC
+            navigationController?.pushViewController(VC, animated: true)
+        }
     }
     
 }

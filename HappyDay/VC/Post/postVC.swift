@@ -233,7 +233,9 @@ extension postVC: JXSegmentedListContainerViewDataSource {
     func listContainerView(_ listContainerView: JXSegmentedListContainerView, initListAt index: Int) -> JXSegmentedListContainerViewListDelegate {
         
         let controller = self.storyboard?.instantiateViewController(withIdentifier: "contentforpostVC") as! contentforpostVC
+        controller.height_table = Int(self.contentview.frame.size.height)        
         controller.pageType = index
         return controller
     }
+  
 }

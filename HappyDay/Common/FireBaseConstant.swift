@@ -21,7 +21,7 @@ class FireBaseConstant{
     static let Memos        = "Memos"
     static let Ignores      = "Ignores"
     static let Blocks       = "Blocks"
-    
+    static let Reports      = "Reports"
     static let name         = "name"
     
     //********************** Settings *********************
@@ -143,7 +143,7 @@ class FireBaseConstant{
     static let MemoName                 = "MemoName"
     static let MemoUserSex              = "UserSex"
     
-    //****************************** Memos ****************
+    //****************************** Ignores ****************
     static let IgnoreAge                  = "IgnoreAge"
     static let IgnoreAvatar               = "IgnoreAvatar"
     static let IgnoreCity                 = "IgnoreCity"
@@ -153,7 +153,7 @@ class FireBaseConstant{
     static let IgnoreName                 = "IgnoreName"
     static let IgnoreUserSex              = "UserSex"
     
-    //****************************** Memos ****************
+    //****************************** Blocks ****************
     static let BlockAge                  = "BlockAge"
     static let BlockAvatar               = "BlockAvatar"
     static let BlockCity                 = "BlockCity"
@@ -162,5 +162,16 @@ class FireBaseConstant{
     static let BlockInfo                 = "BlockInfo"
     static let BlockName                 = "BlockName"
     static let BlockUserSex              = "UserSex"
+    
+    //****************************** Reports ****************
+    static let Rdate                    = "date"
+    static let Rreason                  = "reason"
+    static let Rreceiver                = "receiver"
+    static let RreceiverImage           = "receiver_image"
+    static let RreceiverName            = "receiver_name"
+    static let RsenderID                = "sender_id"
+    static let RsenderImage             = "sender_image"
+    static let RsenderName              = "sender_name"
+    
     
 }

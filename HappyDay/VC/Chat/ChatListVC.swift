@@ -22,20 +22,24 @@ class chatListVC: UIViewController {
          let nib = UINib.init(nibName: "chatTableCell", bundle: nil)
          self.chatListTableView.register(nib, forCellReuseIdentifier: "chatTableCell")
          chatListTableView.reloadData()
-        
-         
-        MessageVM.shared.getChatListContents(completion: {_ in
-            self.lists = MessageVM.shared.chatListItems
-            self.chatListTableView.reloadData()
+        MessageVM.shared.geAllData(sender_id: UserVM.current_user.user_id!, completion: {_ in
+            MessageVM.shared.getChatListContents(completion: {_ in
+                       self.lists = MessageVM.shared.chatListItems
+                       self.chatListTableView.reloadData()
+            })
         })
+         
+       
 
-        let backItem = UIBarButtonItem()
-        backItem.title = "뒤로"
-        backItem.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-        navigationItem.backBarButtonItem = backItem // This will show in the next view controller being pushed
+        navigationItem.backBarButtonItem = UIBarButtonItem(
+        title: "Something Else", style: .plain, target: nil, action: nil)
 
     }
-    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let backItem = UIBarButtonItem()
+        backItem.title = "Something Else"
+        navigationItem.backBarButtonItem = backItem // This will show in the next view controller being pushed
+    }
     override func viewWillAppear(_ animated: Bool) {
            super.viewWillAppear(animated)
            navigationController?.setNavigationBarHidden(true, animated: animated)
@@ -81,8 +85,10 @@ extension chatListVC:  UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
             
             let connect_user = MessageVM.shared.getDataFromUsers(id: lists[indexPath.row].id!)
-            let privateChatView = MKPrivateChatView(chatId: UserVM.current_user.user_id!, connectedPerson: connect_user)
-
+//            let privateChatView = MKPrivateChatView()
+        guard let privateChatView = storyboard?.instantiateViewController(withIdentifier: "MKPrivateChatView") as? MKPrivateChatView else { return }
+            privateChatView.chatId = UserVM.current_user.user_id!
+            privateChatView.connectedPerson = connect_user
             privateChatView.chat_title = connect_user.user_nickName
             let backItem = UIBarButtonItem()
             backItem.title = "뒤로"

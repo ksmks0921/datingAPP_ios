@@ -20,7 +20,7 @@ class BaseVC: UIViewController {
     }
     
     //MARK: *************   Show Alert   ***************
-    func showAlert(message: String?, title:String = "Information", otherButtons:[String:((UIAlertAction)-> ())]? = nil, cancelTitle: String = "Okay", cancelAction: ((UIAlertAction)-> ())? = nil) {
+    func showAlert(message: String?, title:String = "알림", otherButtons:[String:((UIAlertAction)-> ())]? = nil, cancelTitle: String = "예", cancelAction: ((UIAlertAction)-> ())? = nil) {
         let newTitle = title.capitalized
         let newMessage = message
         let alert = UIAlertController(title: newTitle, message: newMessage, preferredStyle: .alert)
@@ -35,8 +35,8 @@ class BaseVC: UIViewController {
     }
     
     func showErrorMessage(error: NSError?, cancelAction: ((UIAlertAction)-> ())? = nil) {
-        var title = "Error"
-        var message = "Something Went Wrong"
+        var title = "오유"
+        var message = "오유가 발생했습니다."
         if error != nil {
             title = error!.domain
             message = error!.userInfo["message"] as? String ?? ""
@@ -44,7 +44,7 @@ class BaseVC: UIViewController {
         let newTitle = title.capitalized
         let newMessage = message.capitalized
         let alert = UIAlertController(title: newTitle, message: newMessage, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Okay", style: .cancel, handler: cancelAction))
+        alert.addAction(UIAlertAction(title: "예", style: .cancel, handler: cancelAction))
         present(alert, animated: true, completion: nil)
     }
     

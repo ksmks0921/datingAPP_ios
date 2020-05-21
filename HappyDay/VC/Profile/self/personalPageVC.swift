@@ -178,7 +178,7 @@ extension personalPageVC: UICollectionViewDelegate, UICollectionViewDataSource, 
             navigationController?.pushViewController(VC, animated: true)
         }
         if indexPath.row == 4 {
-           let VC = self.storyboard?.instantiateViewController(withIdentifier: "favoriteListVC") as! favoriteListVC
+           let VC = self.storyboard?.instantiateViewController(withIdentifier: "reportListVC") as! reportListVC
            navigationController?.pushViewController(VC, animated: true)
         }
         if indexPath.row == 5 {

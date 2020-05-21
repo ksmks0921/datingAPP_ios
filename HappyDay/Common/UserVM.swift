@@ -9,7 +9,7 @@
 import Foundation
 import FirebaseDatabase
 import FirebaseAuth
-
+import SwiftGoogleTranslate
 typealias responseCallBack = ((Bool, String?, NSError?) -> ())
 
 
@@ -610,26 +610,56 @@ class UserVM {
         response(true, "Registered Successfully.", nil)
         
     }
+
     
     func sendMessage(sender_id: String, receiver_id: String, text: String, sourceType: String, sourcePath: String, thumb_path: String, time: String, date: String,  response: @escaping responseCallBack) {
         
-        let newMessage = [    FireBaseConstant.lang_chinese                 : "",
-                              FireBaseConstant.lang_korean                  : "",
-                              FireBaseConstant.lang_japanese                : "",
-                              FireBaseConstant.lang_english                 : "",
-                              FireBaseConstant.mdate                        : date,
-                              FireBaseConstant.misseen                      : false,
-                              FireBaseConstant.message                      : text,
-                              FireBaseConstant.mreceiver                    : receiver_id,
-                              FireBaseConstant.msender                      : sender_id,
-                              FireBaseConstant.msource_path                 : sourcePath,
-                              FireBaseConstant.msource_type                 : sourceType,
-                              FireBaseConstant.mthumb_path                  : thumb_path,
-                              FireBaseConstant.mtime                        : time
-                    
-         ] as [String : Any]
+        SwiftGoogleTranslate.shared.start(with: AppConstant.API_KEY_TRANSLATE)
+        let message_content = text
+        var lang_chinese : String!
+        var lang_korean : String!
+        var lang_japanese : String!
+        let lang_english : String!
+
+        SwiftGoogleTranslate.shared.translate(message_content, "ko", "en") { (text, error) in
+          if let t_ko = text {
+            lang_korean = t_ko
+            SwiftGoogleTranslate.shared.translate(message_content, "ja", "en") { (text, error) in
+                     if let t_ja = text {
+                       lang_japanese = t_ja
+                        SwiftGoogleTranslate.shared.translate(message_content, "zh", "en") { (text, error) in
+                          if let t_cn = text {
+                            lang_chinese = t_cn
+                            let newMessage = [    FireBaseConstant.lang_chinese                 : lang_chinese!,
+                                                  FireBaseConstant.lang_korean                  : lang_korean!,
+                                                  FireBaseConstant.lang_japanese                : lang_japanese!,
+                                                  FireBaseConstant.lang_english                 : message_content,
+                                                  FireBaseConstant.mdate                        : date,
+                                                  FireBaseConstant.misseen                      : false,
+                                                  FireBaseConstant.message                      : message_content,
+                                                  FireBaseConstant.mreceiver                    : receiver_id,
+                                                  FireBaseConstant.msender                      : sender_id,
+                                                  FireBaseConstant.msource_path                 : sourcePath,
+                                                  FireBaseConstant.msource_type                 : sourceType,
+                                                  FireBaseConstant.mthumb_path                  : thumb_path,
+                                                  FireBaseConstant.mtime                        : time
+                                        
+                                
+                             ] as [String : Any]
+                            
+                            self.ref.child(FireBaseConstant.Chats).childByAutoId().setValue(newMessage)
+                            print(t_cn)
+                          }
+                        }
+                       print(t_ja)
+                     }
+                   }
+            print(t_ko)
+          }
+        }
+       
         
-        self.ref.child(FireBaseConstant.Chats).childByAutoId().setValue(newMessage)
+        
         
         
         let newChatList = [ FireBaseConstant.l_id       : receiver_id,
@@ -637,7 +667,7 @@ class UserVM {
         ]
        
         self.ref.child(FireBaseConstant.Chatlist).child(sender_id).child(receiver_id).setValue(newChatList)
-        response(true, "sent Successfully.", nil)
+        response(true, "Sent Successfully.", nil)
     }
     
     func getPoint(user_id: String, completion: @escaping (Bool) -> Void) {
@@ -648,6 +678,23 @@ class UserVM {
             UserVM.self.user_points = value
                 completion(true)
         }
+    }
+    func reportSomeone(reason: String, receiver_id: String, receiver_image: String, receiver_name: String, sender_id: String, sender_image: String, sender_name: String, completion: @escaping (Bool) -> Void) {
+        let date = 123213
+        let newReport = [     FireBaseConstant.Rdate                    : date,
+                              FireBaseConstant.Rreason                  : reason,
+                              FireBaseConstant.Rreceiver                : receiver_id,
+                              FireBaseConstant.RreceiverImage           : receiver_image,
+                              FireBaseConstant.RreceiverName            : receiver_name,
+                              FireBaseConstant.RsenderID                : sender_id,
+                              FireBaseConstant.RsenderImage             : sender_image,
+                              FireBaseConstant.RsenderName              : sender_name
+                              
+                    
+            ] as [String : Any]
+        
+        self.ref.child(FireBaseConstant.Reports).childByAutoId().setValue(newReport)
+        completion(true)
     }
     
     func getLikes(user_id: String, completion: @escaping (Bool) -> Void) {

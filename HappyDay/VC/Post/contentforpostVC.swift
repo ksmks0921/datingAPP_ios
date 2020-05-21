@@ -14,10 +14,11 @@ class contentforpostVC: UIViewController {
    
     @IBOutlet weak var altertview: UIView!
     
+    @IBOutlet weak var hegiht_tableView: NSLayoutConstraint!
     @IBOutlet weak var postTableView: UITableView!
     var pageType:Int?
     var event_post = [PostEvent]()
-    
+    var height_table : Int!
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -27,6 +28,9 @@ class contentforpostVC: UIViewController {
         
         let nib = UINib.init(nibName: "postTableViewCell", bundle: nil)
         self.postTableView.register(nib, forCellReuseIdentifier: "postTableViewCell")
+   
+        hegiht_tableView.constant = CGFloat(height_table - 15)
+        
         
         if DataManager.isShowingFilterResult! {
             self.event_post = UserVM.filtered_eventPosts

@@ -243,6 +243,7 @@ extension searchVC:  UITableViewDelegate, UITableViewDataSource {
     }
     
     func showSelectView(type_index: Int, items: [String]) {
+        
         guard let popupVC = storyboard?.instantiateViewController(withIdentifier: "otherSettingVC") as? otherSettingVC else { return }
         
         let height_view = self.view.frame.size.height

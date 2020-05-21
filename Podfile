@@ -21,18 +21,14 @@ target 'HappyDay' do
   	pod 'Firebase/Database'
 	pod 'Firebase/Core' 
 	pod 'SDWebImage', '~> 5.0'
-	pod 'HCSStarRatingView', '~> 1.5'
-	pod 'RealmSwift'
-	pod 'ProgressHUD'
-	pod 'Kingfisher'
-	pod 'CryptoSwift'
-	pod 'OneSignal'
-	pod 'RNCryptor-objc'
-	pod 'Reachability'
-	pod 'Cosmos', '~> 21.0'
+	
 
-	pod 'Chatto', '= 3.6.0'
-	pod 'ChattoAdditions', '= 3.6.0'
+	pod 'Kingfisher'
+	
+	pod 'Cosmos', '~> 21.0'
+	pod 'SwiftGoogleTranslate'
+
+	
   target 'HappyDayTests' do
     inherit! :search_paths
     # Pods for testing

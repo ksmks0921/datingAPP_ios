@@ -14,7 +14,7 @@ class profileContentVC: BaseVC {
     @IBOutlet weak var contentView: UIView!
     var currentViewControllerIndex: Int?
     var partners = [person]()
-    
+    var items = ["블록 등록", "무시 등록", "메모 등록", "신고 하기"]
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -36,8 +36,10 @@ class profileContentVC: BaseVC {
     @IBAction func sendMessageBtnTapped(_ sender: Any) {
 
 
-        let privateChatView = MKPrivateChatView(chatId: UserVM.current_user.user_id!, connectedPerson: partners[currentViewControllerIndex!])
-
+//        let privateChatView = MKPrivateChatView(chatId: UserVM.current_user.user_id!, connectedPerson: partners[currentViewControllerIndex!])
+         guard let privateChatView = storyboard?.instantiateViewController(withIdentifier: "MKPrivateChatView") as? MKPrivateChatView else { return }
+        privateChatView.chatId = UserVM.current_user.user_id!
+        privateChatView.connectedPerson = partners[currentViewControllerIndex!]
         privateChatView.chat_title = partners[currentViewControllerIndex!].user_nickName
         let backItem = UIBarButtonItem()
         backItem.title = "뒤로"
@@ -51,15 +53,14 @@ class profileContentVC: BaseVC {
     @IBAction func otherBtnTapped(_ sender: Any) {
         
         guard let popupVC = storyboard?.instantiateViewController(withIdentifier: "otherSettingVC") as? otherSettingVC else { return }
-        let items = ["블록 등록", "무시 등록", "메모 등록", "신고 하기"]
+        
         popupVC.items = items
         popupVC.height = CGFloat((items.count + 1) * 60)
         popupVC.topCornerRadius = 10
         popupVC.presentDuration = 1
         popupVC.dismissDuration = 1
-        popupVC.shouldDismissInteractivelty = true
-        
-       
+        popupVC.shouldDismissInteractivelty = true      
+        popupVC.delegate = self
       
         present(popupVC, animated: true, completion: nil)
         
@@ -84,6 +85,7 @@ class profileContentVC: BaseVC {
         }
         
     }
+    
     private func configurePageViewController(){
         
         guard let pageViewController = storyboard?.instantiateViewController(withIdentifier: String(describing: profilePageViewController.self)) as? profilePageViewController else {
@@ -145,38 +147,53 @@ extension profileContentVC: UIPageViewControllerDelegate, UIPageViewControllerDa
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        
-        
+
         let profileVC = viewController as? profileVC
-        
         guard var currentIndex = profileVC?.index else {
             return nil
         }
-        
         currentViewControllerIndex = currentIndex
-        
         if currentIndex == 0 {
             return nil
         }
-        
         currentIndex -= 1
-        
         return detailViewControllerAt(index: currentIndex)
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         
         let profileVC = viewController as? profileVC
-        
         guard var currentIndex = profileVC?.index else {
             return nil
         }
-        
         currentIndex += 1
         currentViewControllerIndex = currentIndex
-        
         return detailViewControllerAt(index: currentIndex)
         
     }
+    
+}
+extension profileContentVC : SearchTypeDelegate{
+    func selectSearchType(index: Int, type: String) {
+        if type == self.items[0] {
+            
+        }
+        else if type == self.items[1] {
+            
+        }
+        else if type == self.items[2] {
+            
+        }
+        else if type == self.items[3] {
+            let VC = self.storyboard?.instantiateViewController(withIdentifier: "personalDataVC") as! personalDataVC
+            VC.report_person = partners[currentViewControllerIndex!]
+            VC.from = "report"
+            navigationController?.pushViewController(VC, animated: true)
+        }
+        else if type == self.items[4] {
+            print("Cancel clicked")
+        }
+    }
+    
     
 }

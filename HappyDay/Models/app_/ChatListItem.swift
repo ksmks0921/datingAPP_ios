@@ -20,9 +20,9 @@ class ChatListItem {
     var last_connect_time: String!
     var last_connect_date: String!
     var id : String!
+    var chats: [MessageItem]!
     
-    
-    init(avatar: String, nick_name:String,  age:String, region:String, last_message:String, last_connect_time:String, last_connect_date: String, id: String){
+    init(avatar: String, nick_name:String,  age:String, region:String, last_message:String, last_connect_time:String, last_connect_date: String, id: String, chats: [MessageItem]){
         
         self.avatar             = avatar
         self.nick_name          = nick_name
@@ -32,6 +32,7 @@ class ChatListItem {
         self.last_connect_time  = last_connect_time
         self.last_connect_date  = last_connect_date
         self.id                 = id
+        self.chats              = chats
     }
 }
 
