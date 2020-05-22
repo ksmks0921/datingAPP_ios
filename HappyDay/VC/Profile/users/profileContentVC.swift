@@ -66,12 +66,19 @@ class profileContentVC: BaseVC {
         
     }
     @IBAction func likeBtnTapped(_ sender: Any) {
-        
+        let user_sex = { () -> Bool in
+            if self.partners[self.currentViewControllerIndex!].user_sex == "남자" {
+                return true
+            }
+            else {
+                return false
+            }
+        }
         Indicator.sharedInstance.showIndicator()
-        UserVM.shared.likeUser(like_age: partners[currentViewControllerIndex!].user_age!, like_avatar: partners[currentViewControllerIndex!].user_avatar![0], like_city: partners[currentViewControllerIndex!].user_city!, like_date: partners[currentViewControllerIndex!].user_date!, like_id: partners[currentViewControllerIndex!].user_id!, like_info: partners[currentViewControllerIndex!].user_introduce!, like_name: partners[currentViewControllerIndex!].user_nickName!, like_sex: partners[currentViewControllerIndex!].user_sex! ) { (success, message, error) in
+        UserVM.shared.likeUser(like_age: partners[currentViewControllerIndex!].user_age!, like_avatar: partners[currentViewControllerIndex!].user_avatar![0], like_city: partners[currentViewControllerIndex!].user_city!, like_date: partners[currentViewControllerIndex!].user_date!, like_id: partners[currentViewControllerIndex!].user_id!, like_info: partners[currentViewControllerIndex!].user_introduce!, like_name: partners[currentViewControllerIndex!].user_nickName!, like_sex: user_sex() ) { (success, message, error) in
                    if error == nil{
                        if success{
-                            self.showAlert(message: "You liked me!")
+                            self.showAlert(message: "성공!")
                             Indicator.sharedInstance.hideIndicator()
                         
                         
@@ -176,13 +183,58 @@ extension profileContentVC: UIPageViewControllerDelegate, UIPageViewControllerDa
 extension profileContentVC : SearchTypeDelegate{
     func selectSearchType(index: Int, type: String) {
         if type == self.items[0] {
-            
+            let avatar = partners[currentViewControllerIndex!].user_avatar
+            let date = Date()
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd"
+            let date_result = formatter.string(from: date)
+            let user_sex = { () -> Bool in
+                if self.partners[self.currentViewControllerIndex!].user_sex == "남자" {
+                    return true
+                }
+                else {
+                    return false
+                }
+            }
+            UserVM.shared.blockSomeone(block_age: partners[currentViewControllerIndex!].user_age!, block_avatar: avatar![0], block_city: partners[currentViewControllerIndex!].user_city!, block_date: date_result, block_id: partners[currentViewControllerIndex!].user_id!, block_info: "test", block_name: partners[currentViewControllerIndex!].user_nickName!, block_user_sex: user_sex()){_ in
+                    self.showAlert(message: "성공!")
+            }
         }
         else if type == self.items[1] {
-            
+            let avatar = partners[currentViewControllerIndex!].user_avatar
+            let date = Date()
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd"
+            let date_result = formatter.string(from: date)
+            let user_sex = { () -> Bool in
+                if self.partners[self.currentViewControllerIndex!].user_sex == "남자" {
+                    return true
+                }
+                else {
+                    return false
+                }
+            }
+            UserVM.shared.ignoreSomeone(ignore_age: partners[currentViewControllerIndex!].user_age!, ignore_avatar: avatar![0], ignore_city: partners[currentViewControllerIndex!].user_city!, ignore_date: date_result, ignore_id: partners[currentViewControllerIndex!].user_id!, ignore_info: "test", ignore_name: partners[currentViewControllerIndex!].user_nickName!, ignore_user_sex: user_sex()){_ in
+                self.showAlert(message: "성공!")
+            }
         }
         else if type == self.items[2] {
-            
+            let avatar = partners[currentViewControllerIndex!].user_avatar
+            let date = Date()
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd"
+            let date_result = formatter.string(from: date)
+            let user_sex = { () -> Bool in
+                if self.partners[self.currentViewControllerIndex!].user_sex == "남자" {
+                    return true
+                }
+                else {
+                    return false
+                }
+            }
+            UserVM.shared.memoSomeone(memo_age: partners[currentViewControllerIndex!].user_age!, memo_avatar: avatar![0], memo_city: partners[currentViewControllerIndex!].user_city!, memo_date: date_result, memo_id: partners[currentViewControllerIndex!].user_id!, memo_info: "test", memo_name: partners[currentViewControllerIndex!].user_nickName!, memo_user_sex: user_sex()){_ in
+                    self.showAlert(message: "성공!")
+            }
         }
         else if type == self.items[3] {
             let VC = self.storyboard?.instantiateViewController(withIdentifier: "personalDataVC") as! personalDataVC

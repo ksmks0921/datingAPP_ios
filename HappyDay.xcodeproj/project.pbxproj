@@ -500,6 +500,7 @@
 		6741F46B246AD34E007E9B93 /* Chat */ = {
 			isa = PBXGroup;
 			children = (
+				67D4A3FF2476D18000FFF70E /* chatCell */,
 				67D4A3F62475E76500FFF70E /* backgroundSelect */,
 				67303F42246F35EF00B571FD /* Stickers */,
 				674B9DA523D68DC700FD2C48 /* chatListCell */,
@@ -762,6 +763,13 @@
 				67D4A3F82475E7AB00FFF70E /* backgroundImageCell.xib */,
 			);
 			path = backgroundSelect;
+			sourceTree = "<group>";
+		};
+		67D4A3FF2476D18000FFF70E /* chatCell */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = chatCell;
 			sourceTree = "<group>";
 		};
 		67F294DF246AE7EC0036BA5C /* FirstPage */ = {
@@ -1350,7 +1358,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7V4WMR5FKB;
+				DEVELOPMENT_TEAM = 428L9X45XN;
 				INFOPLIST_FILE = HappyDay/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1372,7 +1380,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7V4WMR5FKB;
+				DEVELOPMENT_TEAM = 428L9X45XN;
 				INFOPLIST_FILE = HappyDay/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

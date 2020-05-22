@@ -79,7 +79,7 @@
 //
 //    var now = Date()
 //
-//    let messageImages: [UIImage] = [#imageLiteral(resourceName: "logo_temp"), #imageLiteral(resourceName: "third")]
+    let messageImages: [UIImage] = [#imageLiteral(resourceName: "logo_temp"), #imageLiteral(resourceName: "third")]
 //    let emojis = [
 //        "👍",
 //        "😂😂😂",
@@ -677,21 +677,57 @@ final internal class MessageVM {
                                             let uniqueID = UUID().uuidString
                                             let date = self.dateAddingRandomTime()
                                             let original_message : MockMessage!
-                                        if language == AppConstant.LanguageEnglish {
+                                        if custom_message_item.source_type == AppConstant.eText{
+                                            if language == AppConstant.LanguageEnglish {
+                                                
+                                                 original_message = MockMessage(text: custom_message_item.english!, user: user!, messageId: uniqueID, date: date)
+                                            }
+                                            else if language == AppConstant.LanguageKorean {
+                                                  original_message = MockMessage(text: custom_message_item.korean!, user: user!, messageId: uniqueID, date: date)
+                                            }
+                                            else if language == AppConstant.LanguageJapanese {
+                                                 original_message = MockMessage(text: custom_message_item.japanese!, user: user!, messageId: uniqueID, date: date)
+                                            }
+                                            else  {
+                                                original_message = MockMessage(text: custom_message_item.chinese!, user: user!, messageId: uniqueID, date: date)
+                                            }
+                                            self.messages.append(original_message)
+                                        }
+                                        else if custom_message_item.source_type == AppConstant.eImage{
                                             
-                                             original_message = MockMessage(text: custom_message_item.english!, user: user!, messageId: uniqueID, date: date)
+                                            let url = URL(string:custom_message_item.source_path!)
+                                            if let data = try? Data(contentsOf: url!)
+                                            {
+                                                let image: UIImage = UIImage(data: data)!
+                                                original_message = MockMessage(image: image, user: user, messageId: uniqueID, date: date)
+                                                self.messages.append(original_message)
+                                            }
+                                            
+                                              
+                                   
+                                            
                                         }
-                                        else if language == AppConstant.LanguageKorean {
-                                              original_message = MockMessage(text: custom_message_item.korean!, user: user!, messageId: uniqueID, date: date)
-                                        }
-                                        else if language == AppConstant.LanguageJapanese {
-                                             original_message = MockMessage(text: custom_message_item.japanese!, user: user!, messageId: uniqueID, date: date)
+                                        else if custom_message_item.source_type == AppConstant.eVideo{
+
+                                             let url = URL(string:custom_message_item.thumb_path!)
+                                           if let data = try? Data(contentsOf: url!)
+                                           {
+                                               let image: UIImage = UIImage(data: data)!
+                                               original_message = MockMessage(image: image, user: user, messageId: uniqueID, date: date)
+                                            self.messages.append(original_message)
+                                           }
                                         }
                                         else {
-                                            original_message = MockMessage(text: custom_message_item.chinese!, user: user!, messageId: uniqueID, date: date)
-                                        }
                                             
-                                        self.messages.append(original_message)
+                                             let url = URL(string:custom_message_item.source_path!)
+                                           if let data = try? Data(contentsOf: url!)
+                                           {
+                                               let image: UIImage = UIImage(data: data)!
+                                               original_message = MockMessage(image: image, user: user, messageId: uniqueID, date: date)
+                                            self.messages.append(original_message)
+                                           }
+                                        }
+                                      
                                        
     
     
@@ -755,6 +791,8 @@ final internal class MessageVM {
                     
     
     }
+    
+    
     func getChatListId(completion: @escaping (Bool) -> Void){
             
         ref.child(FireBaseConstant.Chatlist).child(UserVM.current_user.user_id!).observe(.value) { (snapShot) in
@@ -825,73 +863,11 @@ final internal class MessageVM {
         }
     }
     
-    func getLastMessageData(sender_id: String, connectedPerson: person) -> MessageItem {
-    
-    
-                    var return_data : MessageItem!
-                    self.currentSender = MockUser(senderId: sender_id, displayName: UserVM.current_user.user_nickName!)
-                    self.currentConnectedPerson = MockUser(senderId: connectedPerson.user_id!, displayName: connectedPerson.user_nickName!)
-
-                    // get message data
-                    ref.child(FireBaseConstant.Chats).observe(.value) { (snapShot) in
-                
-                           let children = snapShot.children
-                        
-                           self.custom_messages.removeAll()
-                           self.messages.removeAll()
-                           while let rest = children.nextObject() as? DataSnapshot {
-                               if let restDict = rest.value as? NSDictionary{
-    
-                                        let chinese = restDict[FireBaseConstant.lang_chinese] as? String
-                                        let date = restDict[FireBaseConstant.mdate] as? String
-                                        let english = restDict[FireBaseConstant.lang_english] as? String
-                                        let is_seen = restDict[FireBaseConstant.misseen] as? Bool
-                                        let japanese = restDict[FireBaseConstant.lang_japanese] as? String
-                                        let korean = restDict[FireBaseConstant.lang_korean] as? String
-                                        let message = restDict[FireBaseConstant.message] as? String
-                                        let receiver = restDict[FireBaseConstant.mreceiver] as? String
-                                        let sender = restDict[FireBaseConstant.msender] as? String
-                                        let source_path = restDict[FireBaseConstant.msource_path] as? String
-                                        let source_type = restDict[FireBaseConstant.msource_type] as? String
-                                        let thumb_path = restDict[FireBaseConstant.mthumb_path] as? String
-                                        let time = restDict[FireBaseConstant.mtime] as? String
-                                        let custom_message_item = MessageItem(chinese: chinese!, date: date!, english: english!, isseen: is_seen!, japanese: japanese!, korean: korean!, message: message!, receiver: receiver!, sender: sender!, source_path: source_path!, source_type: source_type!, thumb_path: thumb_path!, time:time!)
-                                
-                                if (custom_message_item.receiver == sender_id && custom_message_item.sender == connectedPerson.user_id) || (custom_message_item.receiver == connectedPerson.user_id && custom_message_item.sender == sender_id) {
-                                            
-                                   
-                                            self.custom_messages.append(custom_message_item)
-                                            let user: MockUser!
-                                            if custom_message_item.sender == sender_id {
-                                                user = MessageVM.shared.currentSender
-                                            }
-                                            else {
-                                                user = MessageVM.shared.currentConnectedPerson
-                                            }
-                                            let uniqueID = UUID().uuidString
-                                            let date = self.dateAddingRandomTime()
-                                                let original_message = MockMessage(text: custom_message_item.message!, user: user!, messageId: uniqueID, date: date)
-                                            self.messages.append(original_message)
-                                       
-    
-    
-                                        }
-    
-    
-                                }
-    
-                           }
-                    return_data = self.custom_messages[self.custom_messages.count - 1]
-               
-                   
-                }
-                return return_data
-    
-    }
+ 
     
     func getDataFromUsers(id: String) -> person{
         var target_user: person!
-        for user_item in UserVM.users {
+        for user_item in UserVM.all_users {
             
             if user_item.user_id == id {
                 
@@ -900,6 +876,7 @@ final internal class MessageVM {
             }
             
         }
+        
         return target_user
     }
 

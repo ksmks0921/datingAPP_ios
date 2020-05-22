@@ -46,7 +46,7 @@ class ChatViewController: MessagesViewController, MessagesDataSource {
     
     var chatId = ""
     var connectedPerson: person!
-    
+     
     let refreshControl = UIRefreshControl()
     
     let formatter: DateFormatter = {
@@ -81,7 +81,7 @@ class ChatViewController: MessagesViewController, MessagesDataSource {
         audioController.stopAnyOngoingPlaying()
     }
     
-   
+  
     
     @objc
     func loadMoreMessages() {
@@ -299,6 +299,32 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
 
     func inputBar(_ inputBar: InputBarAccessoryView, didPressSendButtonWith text: String) {
 
+        let components = inputBar.inputTextView.components
+
+        if UserVM.current_user.user_sex == "녀자" {
+            sendMessage()
+        }
+        else {
+            if UserVM.user_points < 20 {
+                
+                self.showAlert(message: "포인트가 모자랍니다. 추가하시겠습니까?", title: "알림", otherButtons: ["확인": {(action) in
+                
+                      print("_______")
+                }], cancelTitle: "취소", cancelAction: { (Acrion) in
+                    print("cancel clicked____")
+                })
+            }
+            else {
+                sendMessage()
+            }
+        }
+        
+        
+        
+            
+    }
+        
+    func sendMessage() {
         // Here we can parse for which substrings were autocompleted
         let attributedText = messageInputBar.inputTextView.attributedText!
         let range = NSRange(location: 0, length: attributedText.length)
@@ -309,7 +335,7 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
             print("Autocompleted: `", substring, "` with context: ", context ?? [])
         }
 
-        let components = inputBar.inputTextView.components
+        
         let message_content  = messageInputBar.inputTextView.text
         messageInputBar.inputTextView.text = String()
         messageInputBar.invalidatePlugins()
@@ -322,42 +348,50 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
         formatter.dateFormat = "h:mm a"
         formatter.amSymbol = "AM"
         formatter.pmSymbol = "PM"
-
         let time_string = formatter.string(from: Date())
 
-        let calendar = Calendar.current
+       let calendar = Calendar.current
 
-        let month_string = calendar.component(.month, from: Date())
-        let date_string = calendar.component(.day, from: Date())
-        let date = String(month_string) + "월 " +  String(date_string) + "일"
+       let month_string = calendar.component(.month, from: Date())
+       let date_string = calendar.component(.day, from: Date())
+       let date = String(month_string) + "월 " +  String(date_string) + "일"
+        UserVM.shared.sendMessage(sender_id: chatId, receiver_id: connectedPerson.user_id!, text: message_content!, sourceType: AppConstant.eText, sourcePath: "", thumb_path: "", time: time_string, date: date) { (success, message, error) in
+               
+               
+                                  if error == nil{
+                                   if success{
+               
+                                       DispatchQueue.global(qos: .default).async {
+                                           // fake send request task
+                                           sleep(1)
+                                           DispatchQueue.main.async { [weak self] in
+                                               self?.messageInputBar.sendButton.stopAnimating()
+                                               self?.messageInputBar.inputTextView.placeholder = "메쎄지를 입력하세요."
+                                               self?.messagesCollectionView.scrollToBottom(animated: true)
+                                           }
+                                       }
+                                   }
+                           }
+               
+                       }
+               
         
-        
-        
-        
-        
-        UserVM.shared.sendMessage(sender_id: chatId, receiver_id: connectedPerson.user_id!, text: message_content!, sourceType: "text", sourcePath: "", thumb_path: "", time: time_string, date: date) { (success, message, error) in
-        
-        
-                           if error == nil{
-                            if success{
-        
-                                DispatchQueue.global(qos: .default).async {
-                                    // fake send request task
-                                    sleep(1)
-                                    DispatchQueue.main.async { [weak self] in
-                                        self?.messageInputBar.sendButton.stopAnimating()
-                                        self?.messageInputBar.inputTextView.placeholder = "메쎄지를 입력하세요."
-//                                        self?.insertMessages(components)
-                                        self?.messagesCollectionView.scrollToBottom(animated: true)
-                                    }
-                                }
-                            }
-                    }
-        
-                }
-        
- 
+           
     }
+    
+//    func showAlert(message: String?, title:String = "알림", otherButtons:[String:((UIAlertAction)-> ())]? = nil, cancelTitle: String = "취소", cancelAction: ((UIAlertAction)-> ())? = nil) {
+//        let newTitle = title.capitalized
+//        let newMessage = message
+//        let alert = UIAlertController(title: newTitle, message: newMessage, preferredStyle: .alert)
+//        alert.addAction(UIAlertAction(title: cancelTitle, style: .cancel, handler: cancelAction))
+//        
+//        if otherButtons != nil {
+//            for key in otherButtons!.keys {
+//                alert.addAction(UIAlertAction(title: key, style: .default, handler: otherButtons![key]))
+//            }
+//        }
+//        present(alert, animated: true, completion: nil)
+//    }
 
     private func insertMessages(_ data: [Any]) {
         for component in data {
@@ -366,9 +400,24 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
                 let message = MockMessage(text: str, user: user!, messageId: UUID().uuidString, date: Date())
                 insertMessage(message)
             } else if let img = component as? UIImage {
-                let message = MockMessage(image: img, user: user!, messageId: UUID().uuidString, date: Date())
-                insertMessage(message)
+//                let message = MockMessage(image: img, user: user!, messageId: UUID().uuidString, date: Date())
+//                insertMessage(message)
             }
         }
+    }
+}
+extension ChatViewController {
+    func showAlert(message: String?, title:String = "알림", otherButtons:[String:((UIAlertAction)-> ())]? = nil, cancelTitle: String = "취소", cancelAction: ((UIAlertAction)-> ())? = nil) {
+        let newTitle = title.capitalized
+        let newMessage = message
+        let alert = UIAlertController(title: newTitle, message: newMessage, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: cancelTitle, style: .cancel, handler: cancelAction))
+        
+        if otherButtons != nil {
+            for key in otherButtons!.keys {
+                alert.addAction(UIAlertAction(title: key, style: .default, handler: otherButtons![key]))
+            }
+        }
+        present(alert, animated: true, completion: nil)
     }
 }

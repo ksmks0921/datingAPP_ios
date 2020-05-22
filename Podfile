@@ -20,6 +20,7 @@ target 'HappyDay' do
 	pod 'Firebase/Storage'
   	pod 'Firebase/Database'
 	pod 'Firebase/Core' 
+	pod 'Firebase/Messaging'
 	pod 'SDWebImage', '~> 5.0'
 	
 

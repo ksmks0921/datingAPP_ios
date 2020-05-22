@@ -78,7 +78,7 @@ class MKPrivateChatView: ChatViewController {
            self.title = chat_title
            self.navigationItem.rightBarButtonItems = [button_translate, button_setting]
         
- 
+        messagesCollectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "CustomImageCell")
     }
     
     @objc
@@ -273,6 +273,8 @@ class MKPrivateChatView: ChatViewController {
         present(alert, animated: true)
     }
     
+
+    
     func actionStickers() {
 
         let stickersView = StickersView()
@@ -399,6 +401,19 @@ class MKPrivateChatView: ChatViewController {
             cell.configure(with: message, at: indexPath, and: messagesCollectionView)
             return cell
         }
+//        if case .photo = message.kind {
+////             let cell = messagesCollectionView.dequeueReusableCell(withReuseIdentifier: "CustomImageCell", for: indexPath)
+//            let cell = messagesCollectionView.dequeueReusableCell(MediaMessageCell.self, for: indexPath)
+//   //        cell.imageView.sd_setImage(with: message.url, placeholderImage: UIImage(named: "avatar_woman"))
+//            cell.configure(with: message, at: indexPath, and: messagesCollectionView)
+//              return cell
+//        }
+//        if case .video = message.kind {
+//            let cell = messagesCollectionView.dequeueReusableCell(MediaMessageCell.self, for: indexPath)
+//   //        cell.imageView.sd_setImage(with: message.url, placeholderImage: UIImage(named: "avatar_woman"))
+//            cell.configure(with: message, at: indexPath, and: messagesCollectionView)
+//              return cell
+//        }
         return super.collectionView(collectionView, cellForItemAt: indexPath)
     }
 
@@ -587,6 +602,9 @@ extension MKPrivateChatView: MessagesLayoutDelegate {
     }
 
 }
+
+
+
 extension MKPrivateChatView: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
@@ -645,9 +663,51 @@ extension MKPrivateChatView {
     
     func send(chatId: String, text: String?, photo: UIImage?, video: URL?, audio: String?) {
         
+        if UserVM.current_user.user_sex == "녀자" || UserVM.user_points > 20{
+                   let formatter = DateFormatter()
+                   formatter.locale = Locale(identifier: "en_US_POSIX")
+                   formatter.dateFormat = "h:mm a"
+                   formatter.amSymbol = "AM"
+                   formatter.pmSymbol = "PM"
+
+                   let time_string = formatter.string(from: Date())
+
+                   let calendar = Calendar.current
+
+                   let month_string = calendar.component(.month, from: Date())
+                   let date_string = calendar.component(.day, from: Date())
+                   let date = String(month_string) + "월 " +  String(date_string) + "일"
+           
+                   Indicator.sharedInstance.showIndicator()
+                   UserVM.shared.sendImageMessage(sender_id: chatId, receiver_id: connectedPerson.user_id!, text: "", sourceType: AppConstant.eImage, sourcePath: "", thumb_path: "", time: time_string, date: date,imageData: photo!, completion: {_ in
+                       Indicator.sharedInstance.hideIndicator()
+                       self.messageInputBar.sendButton.stopAnimating()
+                       self.messageInputBar.inputTextView.placeholder = "메쎄지를 입력하세요."
+
+                       self.messagesCollectionView.scrollToBottom(animated: true)
+
+                   })
+        }
+        else {
+            self.showAlert(message: "포인트가 모자랍니다. 추가하시겠습니까?", title: "알림", otherButtons: ["확인": {(action) in
+            
+                  print("_______")
+            }], cancelTitle: "취소", cancelAction: { (Acrion) in
+                  print("cancel clicked____")
+            })
+        }
         
+        
+        
+                
+                
+                
+      
 
     }
+    
+    
+    
 }
 extension MKPrivateChatView : ImageSelectProtocol{
     func SelectBackgroundImage(data: String) {

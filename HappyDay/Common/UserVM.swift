@@ -10,6 +10,7 @@ import Foundation
 import FirebaseDatabase
 import FirebaseAuth
 import SwiftGoogleTranslate
+import FirebaseStorage
 typealias responseCallBack = ((Bool, String?, NSError?) -> ())
 
 
@@ -17,7 +18,9 @@ class UserVM {
     private init(){}
     static let shared = UserVM()
     static var users = [person]()
+    static var all_users = [person]()
     static var search_result = [person]()
+    static var block_list = [person]()
     static var eventPosts = [PostEvent]()
     static var my_eventPosts = [PostEvent]()
     static var filtered_eventPosts = [PostEvent]()
@@ -28,6 +31,7 @@ class UserVM {
     static var blocks   = [Like]()
     
     static var current_user: person!
+    static var admin: person!
     let ref : DatabaseReference = Database.database().reference()
     static var user_points: Int!
     
@@ -48,7 +52,7 @@ class UserVM {
         
     }
     
-    func likeUser(like_age: String, like_avatar: String, like_city: String, like_date: String, like_id: String, like_info: String, like_name: String, like_sex: String, response: @escaping responseCallBack) {
+    func likeUser(like_age: String, like_avatar: String, like_city: String, like_date: String, like_id: String, like_info: String, like_name: String, like_sex: Bool, response: @escaping responseCallBack) {
         
         let updateUser = [  FireBaseConstant.lAge           : like_age,
                             FireBaseConstant.lAvatar        : like_avatar,
@@ -59,7 +63,7 @@ class UserVM {
                             FireBaseConstant.lName          : like_name,
                             FireBaseConstant.lSex           : like_sex
                            
-        ]
+            ] as [String : Any]
         self.ref.child(FireBaseConstant.Likes).child(DataManager.userId!).child(like_id).setValue(updateUser)
         response(true, "success", nil)
     }
@@ -181,6 +185,13 @@ class UserVM {
                                   FireBaseConstant.kRequireTall   : ""
                     ] as [String : Any]
                 self.ref.child(FireBaseConstant.UserNode).child(user_id).setValue(updateUser)
+                
+                let free_points = [
+                                  FireBaseConstant.Ppoint   :  100,
+                                  FireBaseConstant.Pupdated_at : 10000000
+                ]
+                self.ref.child(FireBaseConstant.Points).child(user_id).setValue(free_points)
+                
                 response(true, "Registered Successfully.", nil)
             }else{
                 response(false, error?.localizedDescription, nil)
@@ -251,25 +262,43 @@ class UserVM {
                             
                             let user_status = restDict[FireBaseConstant.kStatus] as? String
                     let person_item = person(required_age: required_age!, require_style: require_style!, require_tall: require_tall!, style_1: style_1!, style_2: style_2!, style_3: style_3!,  style_4: style_4!, user_age: user_age!, user_avatar: user_avatar_list, user_blood: user_blood!, user_city: user_city!, user_date: user_date!, user_email: user_email!, user_id: user_id!, user_introduce : user_introduce!,user_job: user_job!, user_lifestyle: user_lifestyle!, user_nickName: user_nickName!, user_outside: user_outside!, user_sex: user_sex!, user_star: user_star!, user_style: user_style!, user_tall: user_tall!,  user_status : user_status!, is_approved: is_approved!, updated_at: String(updated_at!), created_at: String(created_at!))
+                    
                             if person_item.user_id == DataManager.userId {
+                                
+                                
                                 UserVM.current_user = person_item
                             }
-                            else {
+                            else if person_item.is_approved == "admin" {
+                                UserVM.admin = person_item
+                            }
+                                
+                            else if person_item.is_approved == "approved" &&  !self.isBlockedByMe(person: person_item){
                                 UserVM.users.append(person_item)
                             }
+                            UserVM.all_users.append(person_item)
                             
-                    
 
                    }
                   
             }
-            
+            print("_____blockList")
+            print(UserVM.block_list.count)
              completion(true)
         }
     
         
         
         
+    }
+    
+    func isBlockedByMe(person: person)-> Bool {
+        for block_item in UserVM.blocks {
+            if block_item.like_id == person.user_id {
+                return false
+              
+            }
+        }
+        return true
     }
     
     
@@ -610,9 +639,48 @@ class UserVM {
         response(true, "Registered Successfully.", nil)
         
     }
+    
+    func sendImageMessage(sender_id: String, receiver_id: String, text: String, sourceType: String, sourcePath: String,thumb_path: String,  time: String, date: String, imageData: UIImage, completion: @escaping (Bool) -> Void) {
+        
+               Indicator.sharedInstance.showIndicator()
+               let storageRef = Storage.storage().reference().child("media").child(UUID().uuidString)
+                    if let uploadData = imageData.pngData() {
+                   
+                   storageRef.putData(uploadData, metadata: nil) { (metadata, error) in
+                       Indicator.sharedInstance.hideIndicator()
+                       if error != nil {
+                           print("error")
+                           
+                       } else {
+                           storageRef.downloadURL { (url, error) in
+                            guard let downloadURL = url else {return}
+                               
+                            UserVM.shared.sendMessage(sender_id: sender_id, receiver_id: receiver_id, text: "", sourceType: sourceType, sourcePath: downloadURL.absoluteString, thumb_path: "", time: time, date: date) { (success, message, error) in
 
+                                                   if error == nil{
+                                                    if success{
+                                                        
+                                                        completion(true)
+                                                    }
+                                            }
+                                
+                                }
+                                
+
+                            
+                   
+                           }
+        
+                       }
+                   }
+        }
+        
+        
+    }
+    
     
     func sendMessage(sender_id: String, receiver_id: String, text: String, sourceType: String, sourcePath: String, thumb_path: String, time: String, date: String,  response: @escaping responseCallBack) {
+        
         
         SwiftGoogleTranslate.shared.start(with: AppConstant.API_KEY_TRANSLATE)
         let message_content = text
@@ -667,9 +735,30 @@ class UserVM {
         ]
        
         self.ref.child(FireBaseConstant.Chatlist).child(sender_id).child(receiver_id).setValue(newChatList)
+        
+        let updated_points = [
+                            FireBaseConstant.Ppoint   :  UserVM.user_points - 20,
+                            FireBaseConstant.Pupdated_at : 10000000
+        ]
+        self.ref.child(FireBaseConstant.Points).child(sender_id).setValue(updated_points)
+        
+        
         response(true, "Sent Successfully.", nil)
     }
-    
+    func checkPoints()-> Bool {
+        if UserVM.current_user.user_sex == "녀자" {
+            return true
+        }
+        else {
+            if UserVM.user_points < 20 {
+                
+                return false
+            }
+            else {
+                return false
+            }
+        }
+    }
     func getPoint(user_id: String, completion: @escaping (Bool) -> Void) {
         
         ref.child(FireBaseConstant.Points).child(user_id).child(FireBaseConstant.p_point).observe(.value) { (snapShot) in
@@ -678,6 +767,59 @@ class UserVM {
             UserVM.self.user_points = value
                 completion(true)
         }
+        
+    }
+
+    func ignoreSomeone(ignore_age: String, ignore_avatar: String, ignore_city: String, ignore_date: String, ignore_id: String, ignore_info: String, ignore_name: String, ignore_user_sex: Bool, completion: @escaping (Bool) -> Void) {
+        
+        let newIgnore = [
+                                     FireBaseConstant.IgnoreAge                     : ignore_age,
+                                     FireBaseConstant.IgnoreAvatar                  : ignore_avatar,
+                                     FireBaseConstant.IgnoreCity                    : ignore_city,
+                                     FireBaseConstant.IgnoreDate                    : ignore_date,
+                                     FireBaseConstant.IgnoreID                      : ignore_id,
+                                     FireBaseConstant.IgnoreInfo                    : ignore_info,
+                                     FireBaseConstant.IgnoreName                    : ignore_name,
+                                     FireBaseConstant.IgnoreUserSex                 : ignore_user_sex
+                                     
+                           
+                   ] as [String : Any]
+        self.ref.child(FireBaseConstant.Ignores).child(UserVM.current_user.user_id!).child(ignore_id).setValue(newIgnore)
+        completion(true)
+    }
+    func blockSomeone(block_age: String, block_avatar: String, block_city: String, block_date: String, block_id: String, block_info: String, block_name: String, block_user_sex: Bool, completion: @escaping (Bool) -> Void) {
+        
+        let newBlock = [
+                                     FireBaseConstant.BlockAge                     : block_age,
+                                     FireBaseConstant.BlockAvatar                  : block_avatar,
+                                     FireBaseConstant.BlockCity                    : block_city,
+                                     FireBaseConstant.BlockDate                    : block_date,
+                                     FireBaseConstant.BlockID                      : block_id,
+                                     FireBaseConstant.BlockInfo                    : block_info,
+                                     FireBaseConstant.BlockName                    : block_name,
+                                     FireBaseConstant.BlockUserSex                 : block_user_sex
+                                     
+                           
+                   ] as [String : Any]
+        self.ref.child(FireBaseConstant.Blocks).child(UserVM.current_user.user_id!).child(block_id).setValue(newBlock)
+        completion(true)
+    }
+    func memoSomeone(memo_age: String, memo_avatar: String, memo_city: String, memo_date: String, memo_id: String, memo_info: String, memo_name: String, memo_user_sex: Bool, completion: @escaping (Bool) -> Void) {
+        
+        let newMemo = [
+                                     FireBaseConstant.MemoAge                     : memo_age,
+                                     FireBaseConstant.MemoAvatar                  : memo_avatar,
+                                     FireBaseConstant.MemoCity                    : memo_city,
+                                     FireBaseConstant.MemoDate                    : memo_date,
+                                     FireBaseConstant.MemoID                      : memo_id,
+                                     FireBaseConstant.MemoInfo                    : memo_info,
+                                     FireBaseConstant.MemoName                    : memo_name,
+                                     FireBaseConstant.MemoUserSex                 : memo_user_sex
+                                     
+                           
+                   ] as [String : Any]
+        self.ref.child(FireBaseConstant.Memos).child(UserVM.current_user.user_id!).child(memo_id).setValue(newMemo)
+        completion(true)
     }
     func reportSomeone(reason: String, receiver_id: String, receiver_image: String, receiver_name: String, sender_id: String, sender_image: String, sender_name: String, completion: @escaping (Bool) -> Void) {
         let date = 123213

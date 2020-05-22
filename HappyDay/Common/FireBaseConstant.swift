@@ -22,6 +22,8 @@ class FireBaseConstant{
     static let Ignores      = "Ignores"
     static let Blocks       = "Blocks"
     static let Reports      = "Reports"
+ 
+    
     static let name         = "name"
     
     //********************** Settings *********************
@@ -173,5 +175,8 @@ class FireBaseConstant{
     static let RsenderImage             = "sender_image"
     static let RsenderName              = "sender_name"
     
-    
+    //****************************** Points ****************
+    static let Ppoint                       = "point"
+    static let Pupdated_at                  = "updated_at"
+   
 }

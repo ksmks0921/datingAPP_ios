@@ -33,11 +33,13 @@ class AppConstant {
     static let kMessageAlarm = "kMessageAlarm"
     static let kReportAlarm = "kReportAlarm"
     static let kShowingFilter = "kFilter"
- 
+
+    
     static let API_KEY_TRANSLATE = "AIzaSyBNoD64Un372JgIMHQMQ0ODF9eBsq59GIM"
     
     static let eVideo = "video"
     static let eImage = "image"
+    static let eText = "text"
     static let points = "points"
     static let eAll = "전체"
     static let eType = ["전체", "메일친구 모집", "지금부터 즐기는", "친구 모집", "성인, 나이많은", "애호가", "연인모집"]

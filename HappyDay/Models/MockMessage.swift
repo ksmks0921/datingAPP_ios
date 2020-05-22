@@ -51,6 +51,7 @@ private struct ImageMediaItem: MediaItem {
         self.size = CGSize(width: 240, height: 240)
         self.placeholderImage = UIImage()
     }
+   
 
 }
 
@@ -116,16 +117,23 @@ internal struct MockMessage: MessageType {
         self.init(kind: .attributedText(attributedText), user: user, messageId: messageId, date: date)
     }
 
+//    init(image: UIImage, user: MockUser, messageId: String, date: Date) {
+//        let mediaItem = ImageMediaItem(url: image)
+//        self.init(kind: .photo(mediaItem), user: user, messageId: messageId, date: date)
+//    }
     init(image: UIImage, user: MockUser, messageId: String, date: Date) {
         let mediaItem = ImageMediaItem(image: image)
         self.init(kind: .photo(mediaItem), user: user, messageId: messageId, date: date)
     }
 
+//    init(thumbnail: UIImage, user: MockUser, messageId: String, date: Date) {
+//        let mediaItem = ImageMediaItem(image: thumbnail)
+//        self.init(kind: .video(mediaItem), user: user, messageId: messageId, date: date)
+//    }
     init(thumbnail: UIImage, user: MockUser, messageId: String, date: Date) {
         let mediaItem = ImageMediaItem(image: thumbnail)
-        self.init(kind: .video(mediaItem), user: user, messageId: messageId, date: date)
+            self.init(kind: .video(mediaItem), user: user, messageId: messageId, date: date)
     }
-
     init(location: CLLocation, user: MockUser, messageId: String, date: Date) {
         let locationItem = CoordinateItem(location: location)
         self.init(kind: .location(locationItem), user: user, messageId: messageId, date: date)

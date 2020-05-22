@@ -52,7 +52,7 @@ class profileVC: UIViewController {
         if person != nil {
             sections = [
                 
-                Section(title: "자기소개", items: ["나는 어떤사람인가?"], values: ["what are you doing?"]),
+                Section(title: "자기소개", items: [person.user_introduce!], values: ["what are you doing?"]),
                 Section(title: "기본정보", items: ["별명" , "성별", "년령", "거주지", "생활스타일", "혈액형", "별자리"], values: [person.user_nickName!, person.user_sex!, person.user_age!, person.user_city!, person.user_lifestyle!, person.user_blood!, person.user_star!]),
                 Section(title: "외모", items: ["신장" , "스타일", "외모", "직업"], values: [person.user_tall!, person.user_style!, person.style_1!, person.user_job!]),
                 Section(title: "자체평가", items: ["멋" ,"멋쟁이도", "부자도", "부드러움"], values: [person.style_1!, person.style_2!, person.style_3!, person.style_4!])
@@ -199,6 +199,7 @@ extension profileVC:  UITableViewDelegate, UITableViewDataSource {
             
             let cell = userinfotableview.dequeueReusableCell(withIdentifier: "profileTableSectionCell", for: indexPath as IndexPath) as! profileTableSectionCell
             cell.titleLabel.text = sections[indexPath.section].title
+            cell.selectionStyle = .none
             return cell
             
         }
@@ -210,12 +211,14 @@ extension profileVC:  UITableViewDelegate, UITableViewDataSource {
                 cell.ratingView.settings.updateOnTouch = false
                 let rating_value = Double(self.sections[indexPath.section].values[data_index])
                 cell.ratingView.rating = rating_value!
+                cell.selectionStyle = .none
                 return cell
                 
             }
             else if indexPath.section == 0 {
                 let cell = userinfotableview.dequeueReusableCell(withIdentifier: "aboutMeCell", for: indexPath as IndexPath) as! aboutMeCell
                 cell.aboutMeText.text = self.sections[indexPath.section].items[data_index]
+                cell.selectionStyle = .none
                 return cell
             }
             else {
@@ -223,6 +226,7 @@ extension profileVC:  UITableViewDelegate, UITableViewDataSource {
                 let cell = userinfotableview.dequeueReusableCell(withIdentifier: "profileTableViewCell", for: indexPath as IndexPath) as! profileTableViewCell
                 cell.propertyLabel?.text = self.sections[indexPath.section].items[data_index]
                 cell.valueLabel?.text = self.sections[indexPath.section].values[data_index]
+                cell.selectionStyle = .none
                 return cell
             }
             

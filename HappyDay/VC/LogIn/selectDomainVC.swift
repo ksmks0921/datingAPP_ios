@@ -19,7 +19,7 @@ class selectDomainVC: UIViewController{
     var delegate: loginVCDelegate?
    
     
-    var selectedIndex: IndexPath?
+    var selectedIndex: Int?
     var page_from: String?
     @IBOutlet weak var custom_title: UILabel!
     
@@ -28,7 +28,7 @@ class selectDomainVC: UIViewController{
         super.viewDidLoad()
  
         setUpTitle()
-        
+        selectedIndex = 0
         let nib = UINib.init(nibName: "MyCustomCell", bundle: nil)
         self.tableview.register(nib, forCellReuseIdentifier: "MyCustomCell")
         
@@ -52,7 +52,7 @@ class selectDomainVC: UIViewController{
     }
     override func viewDidDisappear(_ animated: Bool) {
         if page_from == "login"{
-            self.delegate?.selectDomainDismiss(domain: domains[selectedIndex!.row] )
+            self.delegate?.selectDomainDismiss(domain: domains[selectedIndex!] )
         }
        
     }
@@ -79,7 +79,7 @@ extension selectDomainVC: UITableViewDelegate, UITableViewDataSource {
            
            cell.label?.text = self.domains[indexPath.row]
               
-           if (selectedIndex == indexPath) {
+            if (selectedIndex == indexPath.row) {
               cell.radioBtn.setImage(UIImage(named: "sharp_radio_button_checked_black_18dp"),for:.normal)
                  } else {
               cell.radioBtn.setImage(UIImage(named: "sharp_radio_button_unchecked_black_18dp"),for:.normal)
@@ -91,7 +91,7 @@ extension selectDomainVC: UITableViewDelegate, UITableViewDataSource {
             
              cell.label?.text = self.categories[indexPath.row]
                 
-             if (selectedIndex == indexPath) {
+            if (selectedIndex == indexPath.row) {
                 cell.radioBtn.setImage(UIImage(named: "sharp_radio_button_checked_black_18dp"),for:.normal)
                    } else {
                 cell.radioBtn.setImage(UIImage(named: "sharp_radio_button_unchecked_black_18dp"),for:.normal)
@@ -101,7 +101,7 @@ extension selectDomainVC: UITableViewDelegate, UITableViewDataSource {
          }
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.selectedIndex = indexPath
+        self.selectedIndex = indexPath.row
         tableview.reloadData()
     }
        
