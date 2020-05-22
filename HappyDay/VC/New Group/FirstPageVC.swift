@@ -42,6 +42,10 @@ class FirstPageVC: UIViewController {
         DispatchQueue.main.async {
             self.timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.changeImage), userInfo: nil, repeats: true)
         }
+        
+        
+        let nibCell = UINib(nibName: "firstPageCell", bundle: nil)
+        pageCollection.register(nibCell, forCellWithReuseIdentifier: "firstPageCell")
 
     }
     @objc func changeImage(){
@@ -100,11 +104,13 @@ extension FirstPageVC: UICollectionViewDelegate, UICollectionViewDataSource{
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-                      let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? firstCollectionCell
-        
-                        cell?.img.image = imgArr[indexPath.row]
-                        cell?.txt.text = txtArr[indexPath.row]
-                        return cell!
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "firstPageCell", for: indexPath) as! firstPageCell
+        let size = collectionView.frame.size
+        cell.fullImage.image = imgArr[indexPath.row]
+        cell.text.text = txtArr[indexPath.row]
+        cell.height.constant = size.height + 10
+        cell.width.constant = size.width
+        return cell
     }
     
     
@@ -114,7 +120,7 @@ extension FirstPageVC: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout:
         UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets{
-        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        return UIEdgeInsets(top: -55, left: 0, bottom: -50, right: 0)
     }
     
     

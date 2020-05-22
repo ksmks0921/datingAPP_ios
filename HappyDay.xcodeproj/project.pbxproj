@@ -43,6 +43,8 @@
 		6775362323CC1DBE003B844E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6775362123CC1DBE003B844E /* LaunchScreen.storyboard */; };
 		6775362E23CC1DBE003B844E /* HappyDayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6775362D23CC1DBE003B844E /* HappyDayTests.swift */; };
 		6775363923CC1DBE003B844E /* HappyDayUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6775363823CC1DBE003B844E /* HappyDayUITests.swift */; };
+		677E7D2C24781BE500170DEA /* firstPageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 677E7D2A24781BE500170DEA /* firstPageCell.swift */; };
+		677E7D2D24781BE500170DEA /* firstPageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 677E7D2B24781BE500170DEA /* firstPageCell.xib */; };
 		6780C8CB23CC26E000A54733 /* FirstPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6780C8CA23CC26E000A54733 /* FirstPageVC.swift */; };
 		6780C8CD23CC4E5C00A54733 /* firstCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6780C8CC23CC4E5C00A54733 /* firstCollectionCell.swift */; };
 		6780C8CF23CC63CC00A54733 /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6780C8CE23CC63CC00A54733 /* RoundButton.swift */; };
@@ -203,6 +205,8 @@
 		6775363423CC1DBE003B844E /* HappyDayUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HappyDayUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6775363823CC1DBE003B844E /* HappyDayUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HappyDayUITests.swift; sourceTree = "<group>"; };
 		6775363A23CC1DBE003B844E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		677E7D2A24781BE500170DEA /* firstPageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = firstPageCell.swift; sourceTree = "<group>"; };
+		677E7D2B24781BE500170DEA /* firstPageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = firstPageCell.xib; sourceTree = "<group>"; };
 		6780C8CA23CC26E000A54733 /* FirstPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FirstPageVC.swift; path = "../New Group/FirstPageVC.swift"; sourceTree = "<group>"; };
 		6780C8CC23CC4E5C00A54733 /* firstCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = firstCollectionCell.swift; sourceTree = "<group>"; };
 		6780C8CE23CC63CC00A54733 /* RoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
@@ -287,6 +291,7 @@
 		67D4A3F82475E7AB00FFF70E /* backgroundImageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = backgroundImageCell.xib; sourceTree = "<group>"; };
 		67D4A3FB2475E85E00FFF70E /* backgroundImageSelectVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = backgroundImageSelectVC.swift; sourceTree = "<group>"; };
 		67D4A3FD247625F900FFF70E /* UITextViewPlaceholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextViewPlaceholder.swift; sourceTree = "<group>"; };
+		67D4A4042477F22B00FFF70E /* HappyDay.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HappyDay.entitlements; sourceTree = "<group>"; };
 		67F294E0246AE84E0036BA5C /* BaseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseVC.swift; sourceTree = "<group>"; };
 		67F294E3246AEA4E0036BA5C /* UserVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserVM.swift; sourceTree = "<group>"; };
 		67F294E5246AEB7F0036BA5C /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
@@ -566,6 +571,7 @@
 		6775361523CC1DB7003B844E /* HappyDay */ = {
 			isa = PBXGroup;
 			children = (
+				67D4A4042477F22B00FFF70E /* HappyDay.entitlements */,
 				67F294F1246AFBB30036BA5C /* refer */,
 				67F294E2246AEA2B0036BA5C /* Common */,
 				6783EBF023D7FD8C009DC0A3 /* Sounds */,
@@ -638,6 +644,8 @@
 				6780C8DF23CD0E9F00A54733 /* CustomTableViewCell.swift */,
 				6780C90023CD6DD500A54733 /* MyCustomCell.xib */,
 				6792003923CEB1F700C4872B /* profileImageCollectionCell.swift */,
+				677E7D2A24781BE500170DEA /* firstPageCell.swift */,
+				677E7D2B24781BE500170DEA /* firstPageCell.xib */,
 			);
 			path = Items;
 			sourceTree = "<group>";
@@ -949,6 +957,7 @@
 				6783EBF323D7FD8C009DC0A3 /* sound2.m4a in Resources */,
 				6741F470246AD64C007E9B93 /* GoogleService-Info.plist in Resources */,
 				6780C90123CD6DD500A54733 /* MyCustomCell.xib in Resources */,
+				677E7D2D24781BE500170DEA /* firstPageCell.xib in Resources */,
 				67D4A3FA2475E7AB00FFF70E /* backgroundImageCell.xib in Resources */,
 				678C199F23D271B700906A8D /* profileItemTableViewCell.xib in Resources */,
 				6792002E23CE793900C4872B /* galleryCollectionViewCell.xib in Resources */,
@@ -1115,6 +1124,7 @@
 				6792003D23CF944300C4872B /* profileTableViewCell.swift in Sources */,
 				67F294E8246AEC000036BA5C /* DataManager.swift in Sources */,
 				6780C8E023CD0E9F00A54733 /* CustomTableViewCell.swift in Sources */,
+				677E7D2C24781BE500170DEA /* firstPageCell.swift in Sources */,
 				6783EBD523D7FB3C009DC0A3 /* BottomPopupDismissInteractionController.swift in Sources */,
 				6792004E23D0EF0A00C4872B /* createpostVC.swift in Sources */,
 				6783EBD823D7FB3C009DC0A3 /* BottomPopupPresentAnimator.swift in Sources */,
@@ -1357,6 +1367,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = HappyDay/HappyDay.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 428L9X45XN;
 				INFOPLIST_FILE = HappyDay/Info.plist;
@@ -1366,6 +1378,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.phone.HappyDay;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "HappyDay/refer/HappyDay-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -1379,6 +1392,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = HappyDay/HappyDay.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 428L9X45XN;
 				INFOPLIST_FILE = HappyDay/Info.plist;
@@ -1388,6 +1403,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.phone.HappyDay;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "HappyDay/refer/HappyDay-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
