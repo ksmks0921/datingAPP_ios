@@ -723,6 +723,7 @@ final internal class MessageVM {
                                            if let data = try? Data(contentsOf: url!)
                                            {
                                                let image: UIImage = UIImage(data: data)!
+//                                            MockMessage(emoji: emojis[randomNumberEmoji], user: user, messageId: uniqueID, date: date)
                                                original_message = MockMessage(image: image, user: user, messageId: uniqueID, date: date)
                                             self.messages.append(original_message)
                                            }

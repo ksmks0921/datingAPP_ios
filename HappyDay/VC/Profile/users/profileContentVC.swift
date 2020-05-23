@@ -80,6 +80,8 @@ class profileContentVC: BaseVC {
                        if success{
                             self.showAlert(message: "성공!")
                             Indicator.sharedInstance.hideIndicator()
+                            let sender = PushNotificationSender()
+                            sender.sendPushNotification(to: "token", title: "Notification title", body: "Notification body")
                         
                         
                         } else {

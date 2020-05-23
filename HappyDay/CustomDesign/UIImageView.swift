@@ -36,6 +36,7 @@ extension UIViewController {
 }
 extension UIColor {
     static let primaryColor = UIColor(red: 69/255, green: 193/255, blue: 89/255, alpha: 1)
+    static let clearColor = UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 0)
 }
 
 

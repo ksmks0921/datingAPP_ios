@@ -642,12 +642,12 @@ class UserVM {
     
     func sendImageMessage(sender_id: String, receiver_id: String, text: String, sourceType: String, sourcePath: String,thumb_path: String,  time: String, date: String, imageData: UIImage, completion: @escaping (Bool) -> Void) {
         
-               Indicator.sharedInstance.showIndicator()
+               
                let storageRef = Storage.storage().reference().child("media").child(UUID().uuidString)
                     if let uploadData = imageData.pngData() {
                    
-                   storageRef.putData(uploadData, metadata: nil) { (metadata, error) in
-                       Indicator.sharedInstance.hideIndicator()
+                    storageRef.putData(uploadData, metadata: nil) { (metadata, error) in
+                     
                        if error != nil {
                            print("error")
                            
@@ -678,6 +678,68 @@ class UserVM {
         
     }
     
+    func sendVideoMessage(sender_id: String, receiver_id: String, text: String, sourceType: String, sourcePath: String, thumb_path: String,  time: String, date: String, thumb_imageData: UIImage,  video: URL, completion: @escaping (Bool) -> Void) {
+        
+               // upload video file
+               let storageRef_video = Storage.storage().reference().child("media").child(UUID().uuidString)
+               
+                   
+                    storageRef_video.putFile(from: video as URL, metadata: nil) { (metadata, error) in
+                       
+                       if error != nil {
+                           print("error")
+                           
+                       } else {
+                            storageRef_video.downloadURL { (url, error) in
+                            guard let video_downloadURL = url else {return}
+                            
+                            //upload thumb_image
+                            let storageRef_thumb = Storage.storage().reference().child("media").child(UUID().uuidString)
+                            if let uploadData = thumb_imageData.pngData() {
+                            
+                                
+                                
+                               storageRef_thumb.putData(uploadData, metadata: nil) { (metadata, error) in
+                                
+                                      if error != nil {
+                                          print("error")
+                                          
+                                      } else {
+                                            storageRef_thumb.downloadURL { (url, error) in
+                                                guard let thumb_downloadURL = url else {return}
+                                                
+                                                //send message
+                                                UserVM.shared.sendMessage(sender_id: sender_id, receiver_id: receiver_id, text: "", sourceType: sourceType, sourcePath: video_downloadURL.absoluteString, thumb_path: thumb_downloadURL.absoluteString, time: time, date: date) { (success, message, error) in
+
+                                                            if error == nil{
+                                                                    if success{
+                                                                        
+                                                                        completion(true)
+                                                                    }
+                                                            }
+                                                
+                                                }// end of send message
+                                                
+                                                
+                                                
+                                            }
+                                      }
+                                }
+                                
+                                
+                                        
+                                
+
+                            
+                   
+                           }// end of thumb upload
+        
+                       }
+                   }
+        
+        }// end of video upload
+        
+    }
     
     func sendMessage(sender_id: String, receiver_id: String, text: String, sourceType: String, sourcePath: String, thumb_path: String, time: String, date: String,  response: @escaping responseCallBack) {
         

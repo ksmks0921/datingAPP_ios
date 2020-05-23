@@ -65,10 +65,14 @@ extension userPostsVC: UITableViewDelegate, UITableViewDataSource {
         cell.hobbyLabel.text = items[indexPath.row].event_type
         cell.nickname.text = items[indexPath.row].nick_name
         if items[indexPath.row].thumb_path != nil {
-            cell.postImageView.sd_setImage(with: URL(string: items[indexPath.row].thumb_path), placeholderImage: UIImage(systemName: "photo"))
+           
+                cell.postImageView.sd_setImage(with: URL(string: items[indexPath.row].thumb_path), placeholderImage: UIImage(systemName: "photo"))
+           
         }
         else {
-            cell.postImageView.image = UIImage(systemName: "photo")
+            
+                cell.postImageView.image = UIImage(systemName: "photo")
+           
         }
         if items[indexPath.row].gender == true {
             cell.nickname.textColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)

@@ -29,6 +29,7 @@ import UIKit
 import MapKit
 import MessageKit
 import InputBarAccessoryView
+import AVFoundation
 
 class MKPrivateChatView: ChatViewController {
     
@@ -473,7 +474,14 @@ extension MKPrivateChatView: MessagesDisplayDelegate {
     // MARK: - All Messages
     
     func backgroundColor(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> UIColor {
-        return isFromCurrentSender(message: message) ? .primaryColor : UIColor(red: 230/255, green: 230/255, blue: 230/255, alpha: 1)
+        switch message.kind {
+        case .photo:
+            return isFromCurrentSender(message: message) ? .clearColor : .clearColor
+        default:
+            return isFromCurrentSender(message: message) ? .primaryColor : UIColor(red: 230/255, green: 230/255, blue: 230/255, alpha: 1)
+        }
+        
+
     }
 
     func messageStyle(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageStyle {
@@ -539,7 +547,9 @@ extension MKPrivateChatView: MessagesDisplayDelegate {
         button.frame = accessoryView.bounds
         button.isUserInteractionEnabled = false // respond to accessoryView tap through `MessageCellDelegate`
         accessoryView.layer.cornerRadius = accessoryView.frame.height / 2
+        
         accessoryView.backgroundColor = UIColor.primaryColor.withAlphaComponent(0.3)
+//         accessoryView.backgroundColor = #colorLiteral(red: 0.8549019694, green: 0.250980407, blue: 0.4784313738, alpha: 1)
     }
     
     // MARK: - Location Messages
@@ -679,14 +689,31 @@ extension MKPrivateChatView {
                    let date = String(month_string) + "월 " +  String(date_string) + "일"
            
                    Indicator.sharedInstance.showIndicator()
-                   UserVM.shared.sendImageMessage(sender_id: chatId, receiver_id: connectedPerson.user_id!, text: "", sourceType: AppConstant.eImage, sourcePath: "", thumb_path: "", time: time_string, date: date,imageData: photo!, completion: {_ in
-                       Indicator.sharedInstance.hideIndicator()
-                       self.messageInputBar.sendButton.stopAnimating()
-                       self.messageInputBar.inputTextView.placeholder = "메쎄지를 입력하세요."
+                   if photo != nil {
+                    UserVM.shared.sendImageMessage(sender_id: chatId, receiver_id: connectedPerson.user_id!, text: "", sourceType: AppConstant.eImage, sourcePath: "", thumb_path: "", time: time_string, date: date,imageData: photo!, completion: {_ in
+                           Indicator.sharedInstance.hideIndicator()
+                           self.messageInputBar.sendButton.stopAnimating()
+                           self.messageInputBar.inputTextView.placeholder = "메쎄지를 입력하세요."
 
-                       self.messagesCollectionView.scrollToBottom(animated: true)
+                           self.messagesCollectionView.scrollToBottom(animated: true)
 
-                   })
+                       })
+                   }
+                   if video != nil {
+                    self.getThumbnailImageFromVideoUrl(url: video!) { (thumbImage) in
+                        let video_thumbImage = thumbImage
+                        UserVM.shared.sendVideoMessage(sender_id: chatId, receiver_id: self.connectedPerson.user_id!, text: "", sourceType: AppConstant.eVideo, sourcePath: "", thumb_path: "", time: time_string, date: date, thumb_imageData:video_thumbImage!,  video: video!, completion: {_ in
+                                Indicator.sharedInstance.hideIndicator()
+                                self.messageInputBar.sendButton.stopAnimating()
+                                self.messageInputBar.inputTextView.placeholder = "메쎄지를 입력하세요."
+
+                                self.messagesCollectionView.scrollToBottom(animated: true)
+
+                            })
+                        }
+                    }
+                    
+                  
         }
         else {
             self.showAlert(message: "포인트가 모자랍니다. 추가하시겠습니까?", title: "알림", otherButtons: ["확인": {(action) in
@@ -705,7 +732,26 @@ extension MKPrivateChatView {
       
 
     }
-    
+    func getThumbnailImageFromVideoUrl(url: URL, completion: @escaping ((_ image: UIImage?)->Void)) {
+        DispatchQueue.global().async { //1
+            let asset = AVAsset(url: url) //2
+            let avAssetImageGenerator = AVAssetImageGenerator(asset: asset) //3
+            avAssetImageGenerator.appliesPreferredTrackTransform = true //4
+            let thumnailTime = CMTimeMake(value: 2, timescale: 1) //5
+            do {
+                let cgThumbImage = try avAssetImageGenerator.copyCGImage(at: thumnailTime, actualTime: nil) //6
+                let thumbImage = UIImage(cgImage: cgThumbImage) //7
+                DispatchQueue.main.async { //8
+                    completion(thumbImage) //9
+                }
+            } catch {
+                print(error.localizedDescription) //10
+                DispatchQueue.main.async {
+                    completion(nil) //11
+                }
+            }
+        }
+    }
     
     
 }
