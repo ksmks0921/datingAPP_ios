@@ -9,6 +9,14 @@
 import UIKit
 import JXSegmentedView
 
+
+
+protocol SearchPostDelegate
+{
+    func searchBtnTapped(data: Bool)
+    
+}
+
 class postVC: UIViewController {
     
     
@@ -27,7 +35,7 @@ class postVC: UIViewController {
     
     @IBOutlet weak var videoSelectBtn: RoundButton!
     
-    var selected_type = "전체"
+    var selected_type = AppConstant.eAll
     var selected_source_type = AppConstant.eAll
     var selected_location = AppConstant.eAll
     var titles = AppConstant.eType
@@ -63,7 +71,8 @@ class postVC: UIViewController {
          segmentedView.listContainer = listContainerView
          contentview.addSubview(listContainerView)
 
-
+        
+            
     }
     @IBAction func selectRegionTapped(_ sender: Any) {
         
@@ -159,8 +168,10 @@ class postVC: UIViewController {
         listContainerView.frame = CGRect(x: 0, y: 0, width: view.bounds.size.width, height: view.bounds.size.height)
     }
     @IBAction func postsearch(_ sender: Any) {
+        
         let VC = self.storyboard?.instantiateViewController(withIdentifier: "searchTypeVC") as! searchTypeVC
-        navigationController?.pushViewController(VC, animated: true)
+        VC.delegate = self
+        present(VC, animated: true)
     }
     
     @IBAction func createpost(_ sender: Any) {
@@ -173,10 +184,12 @@ class postVC: UIViewController {
 }
 extension postVC: SearchTypeDelegate{
     func selectSearchType(index: Int, type: String) {
+        
         self.selected_location = type
+        DataManager.isShowingFilterResult = true
         Indicator.sharedInstance.showIndicator()
-        UserVM.shared.filterEvents(location: self.selected_location, type: self.selected_type, source_type: self.selected_source_type, age: AppConstant.eAll, tall: AppConstant.eAll, style: AppConstant.eAll, job: AppConstant.eAll, nick_name: AppConstant.eAll, completion: {_ in
-            
+        UserVM.shared.filterEvents(location: type, type: self.selected_type, source_type: self.selected_source_type, age: AppConstant.eAll, tall: AppConstant.eAll, style: AppConstant.eAll, job: AppConstant.eAll, nick_name: AppConstant.eAll, completion: {_ in
+                print("SOK_____")
                 Indicator.sharedInstance.hideIndicator()
                 self.listContainerView.reloadData()
           
@@ -238,4 +251,13 @@ extension postVC: JXSegmentedListContainerViewDataSource {
         return controller
     }
   
+}
+extension postVC: SearchPostDelegate {
+    func searchBtnTapped(data: Bool) {
+        self.segmentedView.reloadData()
+        self.listContainerView.reloadData()
+        print("111111")
+    }
+    
+    
 }

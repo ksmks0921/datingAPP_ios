@@ -272,9 +272,12 @@ class UserVM {
                                 UserVM.admin = person_item
                             }
                                 
-                            else if person_item.is_approved == "approved" &&  !self.isBlockedByMe(person: person_item){
-                                UserVM.users.append(person_item)
-                            }
+//                            else if person_item.is_approved == "approved" &&  !self.isBlockedByMe(person: person_item){
+//                                UserVM.users.append(person_item)
+//                            }
+                            else if person_item.is_approved == "approved" {
+                                                    UserVM.users.append(person_item)
+                                                }
                             UserVM.all_users.append(person_item)
                             
 
@@ -480,8 +483,9 @@ class UserVM {
     }
     func filterEvents(location: String, type: String, source_type: String, age: String, tall: String, style: String, job: String, nick_name: String, completion: @escaping (Bool) -> Void){
         UserVM.filtered_eventPosts = UserVM.eventPosts
-        if location != AppConstant.eAll {
         
+        if location != AppConstant.eAll {
+            print("_____no all")
             UserVM.filtered_eventPosts = doFilter(init_data: UserVM.filtered_eventPosts , key: FireBaseConstant.EventCity, value: location)
         }
         if type != AppConstant.eAll {
@@ -523,7 +527,8 @@ class UserVM {
                     
                     if item.region == value  {
                         result.append(item)
-
+                        print("________0000000")
+                        print(item.region)
                     }
                     
                 }
@@ -635,7 +640,7 @@ class UserVM {
                         FireBaseConstant.thumb_path               : thumb_path,
                         FireBaseConstant.view_counts              : views_counts
             ] as [String : Any]
-        self.ref.child(FireBaseConstant.Events).child(user_id).setValue(newEvent)
+        self.ref.child(FireBaseConstant.Events).childByAutoId().setValue(newEvent)
         response(true, "Registered Successfully.", nil)
         
     }

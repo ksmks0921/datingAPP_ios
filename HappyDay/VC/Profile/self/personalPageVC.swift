@@ -209,7 +209,7 @@ extension personalPageVC: UICollectionViewDelegate, UICollectionViewDataSource, 
                                            Indicator.sharedInstance.hideIndicator()
                                            DataManager.isLogin = false
                                            
-                                           let VC = self.storyboard?.instantiateViewController(withIdentifier: "customTabBarVC") as! customTabBarVC
+                                           let VC = self.storyboard?.instantiateViewController(withIdentifier: "FirstPageVC") as! FirstPageVC
                                            self.navigationController?.pushViewController(VC, animated: true)
                                            
                                        

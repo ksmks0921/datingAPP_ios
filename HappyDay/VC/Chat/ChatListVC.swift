@@ -44,6 +44,13 @@ class chatListVC: UIViewController {
            super.viewWillAppear(animated)
            navigationController?.setNavigationBarHidden(true, animated: animated)
     }
+//    override func viewWillDisappear(_ animated: Bool) {
+//        let backItem = UIBarButtonItem()
+//        backItem.title = "뒤로"
+//        backItem.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+//        navigationItem.backBarButtonItem = backItem // This will show in the next view controller being pushed
+//        navigationController?.setNavigationBarHidden(false, animated: animated)
+//    }
    
 
 }

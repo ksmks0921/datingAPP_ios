@@ -211,7 +211,7 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y2z-81-GQB">
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y2z-81-GQB">
                                         <rect key="frame" x="370" y="10" width="24" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="24" id="SG0-Ke-VCI"/>
@@ -220,7 +220,7 @@
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" image="trash" catalog="system"/>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lob-Gm-cjY">
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lob-Gm-cjY">
                                         <rect key="frame" x="328" y="10.5" width="24" height="23"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="24" id="Wf1-Ar-9dU"/>
@@ -993,17 +993,38 @@
                                     <outlet property="delegate" destination="EWj-ht-XaR" id="1IT-pd-dnA"/>
                                 </connections>
                             </tableView>
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="94b-db-Vag">
+                                <rect key="frame" x="0.0" y="44" width="414" height="648"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="검색결과가 없습니다." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rrS-w5-tyQ">
+                                        <rect key="frame" x="136" y="313.5" width="142" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstItem="rrS-w5-tyQ" firstAttribute="centerY" secondItem="94b-db-Vag" secondAttribute="centerY" id="CFp-9f-2zP"/>
+                                    <constraint firstItem="rrS-w5-tyQ" firstAttribute="centerX" secondItem="94b-db-Vag" secondAttribute="centerX" id="t3a-Kj-h2o"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="2pl-Ri-cmb" firstAttribute="top" secondItem="DaG-G2-mV4" secondAttribute="top" constant="8" id="5H0-Qn-rKN"/>
                             <constraint firstItem="2pl-Ri-cmb" firstAttribute="trailing" secondItem="DaG-G2-mV4" secondAttribute="trailing" id="7cH-c8-dNC"/>
+                            <constraint firstItem="94b-db-Vag" firstAttribute="height" secondItem="2pl-Ri-cmb" secondAttribute="height" id="E8c-BA-wYr"/>
+                            <constraint firstItem="94b-db-Vag" firstAttribute="leading" secondItem="DaG-G2-mV4" secondAttribute="leading" id="Hmp-co-qLg"/>
+                            <constraint firstItem="94b-db-Vag" firstAttribute="trailing" secondItem="DaG-G2-mV4" secondAttribute="trailing" id="i1F-AX-YPc"/>
                             <constraint firstItem="2pl-Ri-cmb" firstAttribute="leading" secondItem="DaG-G2-mV4" secondAttribute="leading" id="pqx-HL-M3B"/>
+                            <constraint firstItem="94b-db-Vag" firstAttribute="top" secondItem="DaG-G2-mV4" secondAttribute="top" id="qdq-uP-2jY"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="DaG-G2-mV4"/>
                     </view>
                     <connections>
                         <outlet property="hegiht_tableView" destination="hNy-Hf-gdU" id="BHW-gK-m0x"/>
+                        <outlet property="noResultView" destination="94b-db-Vag" id="gfW-be-QVW"/>
                         <outlet property="postTableView" destination="2pl-Ri-cmb" id="MoR-D5-511"/>
                     </connections>
                 </viewController>
@@ -3774,7 +3795,7 @@
                                 <rect key="frame" x="0.0" y="799.5" width="414" height="62.5"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Hg-9c-oBU">
-                                        <rect key="frame" x="16" y="9" width="83" height="44"/>
+                                        <rect key="frame" x="14" y="9" width="130" height="44"/>
                                         <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                                         <state key="normal" title="재설정">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -3784,7 +3805,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q9f-wQ-roC">
-                                        <rect key="frame" x="206" y="9" width="192" height="44"/>
+                                        <rect key="frame" x="208" y="9" width="192" height="44"/>
                                         <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" title="  검색하기" image="magnifyingglass" catalog="system">
@@ -3794,30 +3815,16 @@
                                             <action selector="searchBtnTapped:" destination="Ryl-QF-hxc" eventType="touchUpInside" id="oVh-3E-Q0u"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="853-jO-9NK">
-                                        <rect key="frame" x="111" y="9" width="83" height="44"/>
-                                        <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <state key="normal" title="검색조건">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="TypeBtnTapped:" destination="Ryl-QF-hxc" eventType="touchUpInside" id="2bh-XE-Gx4"/>
-                                            <action selector="resetBtnTapped:" destination="Ryl-QF-hxc" eventType="touchUpInside" id="17O-O5-VsM"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
-                                    <constraint firstItem="853-jO-9NK" firstAttribute="leading" secondItem="5Hg-9c-oBU" secondAttribute="trailing" constant="12" id="3ps-2n-BRL"/>
-                                    <constraint firstItem="5Hg-9c-oBU" firstAttribute="leading" secondItem="dom-f8-nIl" secondAttribute="leading" constant="16" id="9cq-Ps-FTO"/>
-                                    <constraint firstItem="853-jO-9NK" firstAttribute="height" secondItem="5Hg-9c-oBU" secondAttribute="height" id="HeE-8w-4Sl"/>
-                                    <constraint firstItem="5Hg-9c-oBU" firstAttribute="width" secondItem="853-jO-9NK" secondAttribute="width" id="Rcj-DM-czL"/>
+                                    <constraint firstItem="5Hg-9c-oBU" firstAttribute="leading" secondItem="dom-f8-nIl" secondAttribute="leading" constant="14" id="9cq-Ps-FTO"/>
                                     <constraint firstItem="Q9f-wQ-roC" firstAttribute="centerY" secondItem="dom-f8-nIl" secondAttribute="centerY" id="T5f-Gq-7lJ"/>
                                     <constraint firstItem="5Hg-9c-oBU" firstAttribute="centerY" secondItem="dom-f8-nIl" secondAttribute="centerY" id="UgD-sp-LnI"/>
                                     <constraint firstItem="Q9f-wQ-roC" firstAttribute="height" secondItem="5Hg-9c-oBU" secondAttribute="height" id="aDO-Ob-y1D"/>
+                                    <constraint firstItem="5Hg-9c-oBU" firstAttribute="width" secondItem="dom-f8-nIl" secondAttribute="width" multiplier="0.314" id="aRe-hW-aKo"/>
                                     <constraint firstItem="5Hg-9c-oBU" firstAttribute="height" secondItem="dom-f8-nIl" secondAttribute="height" multiplier="0.7" id="bz7-EM-xhg"/>
-                                    <constraint firstAttribute="trailing" secondItem="Q9f-wQ-roC" secondAttribute="trailing" constant="16" id="iNP-V6-sLn"/>
-                                    <constraint firstItem="853-jO-9NK" firstAttribute="centerY" secondItem="dom-f8-nIl" secondAttribute="centerY" id="joC-yE-Fek"/>
+                                    <constraint firstAttribute="trailing" secondItem="Q9f-wQ-roC" secondAttribute="trailing" constant="14" id="iNP-V6-sLn"/>
                                     <constraint firstItem="Q9f-wQ-roC" firstAttribute="width" secondItem="dom-f8-nIl" secondAttribute="width" multiplier="0.463768" id="ka3-RU-eKB"/>
                                 </constraints>
                             </view>
@@ -3950,7 +3957,6 @@
                         <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="D47-Xw-kOg" firstAttribute="trailing" secondItem="zJw-ZE-Ie6" secondAttribute="trailing" id="5WV-y4-OYm"/>
-                            <constraint firstItem="853-jO-9NK" firstAttribute="width" secondItem="KKs-mg-VtI" secondAttribute="width" multiplier="0.200483" id="9OR-Qr-k61"/>
                             <constraint firstItem="dom-f8-nIl" firstAttribute="height" secondItem="KKs-mg-VtI" secondAttribute="height" multiplier="0.07" id="Bpg-HF-9M8"/>
                             <constraint firstItem="dom-f8-nIl" firstAttribute="bottom" secondItem="D47-Xw-kOg" secondAttribute="bottom" id="HQa-xV-XtK"/>
                             <constraint firstItem="LWQ-Ds-cNe" firstAttribute="leading" secondItem="D47-Xw-kOg" secondAttribute="leading" id="O1u-Qk-OI2"/>

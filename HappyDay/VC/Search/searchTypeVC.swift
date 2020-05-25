@@ -25,8 +25,9 @@ class searchTypeVC: UIViewController {
     var TallList = [String]()
     var StyleList = [String]()
     var JobList = [String]()
+    var RegionList = [String]()
     var searchType: SearchType?
-    
+    var delegate: SearchPostDelegate!
 
     
     override func viewDidLoad() {
@@ -35,7 +36,8 @@ class searchTypeVC: UIViewController {
         
         getSettingData()
         searchType = .PROFILE
-        
+        print("___")
+        print(searchType)
         
         
         let nib = UINib.init(nibName: "searchTableViewCell", bundle: nil)
@@ -44,21 +46,39 @@ class searchTypeVC: UIViewController {
     }
     
     func getSettingData() {
+        
         SettingVM.shared.getTallSetting(completion: {_ in
             self.TallList = SettingVM.AgeList
+            print("Tall list added successfully!")
         })
         SettingVM.shared.getStyleSetting(completion: {_ in
             self.StyleList = SettingVM.AgeList
+            
+            print("Style list added successfully!")
         })
+        
         SettingVM.shared.getJobSetting(completion: {_ in
             self.JobList = SettingVM.AgeList
+            
+            print("Job list added successfully!")
         })
-       
+        SettingVM.shared.getSelectingRegions(completion: {_ in
+            self.RegionList = SettingVM.RegionList
+            
+            print("Cities list added successfully!")
+        })
+        SettingVM.shared.getSelectingAges(completion: {_ in
+//            self.RegionList = SettingVM.RegionList
+            
+            print("Age list added successfully!")
+        })
+      
     }
     
     
     @IBAction func backBtnTapped(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
+//        self.navigationController?.popViewController(animated: true)
+        dismiss(animated: true, completion: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -76,6 +96,7 @@ class searchTypeVC: UIViewController {
         saveBtn.setTitleColor(#colorLiteral(red: 0.2039215686, green: 0.7803921569, blue: 0.3490196078, alpha: 1), for: .normal)
         self.searchType = .PROFILE
         self.tableView.reloadData()
+        print(searchType)
     }
     @IBAction func saveBtnTapped(_ sender: Any) {
         saveBtn.backgroundColor = #colorLiteral(red: 0.2039215686, green: 0.7803921569, blue: 0.3490196078, alpha: 1)
@@ -84,28 +105,35 @@ class searchTypeVC: UIViewController {
         searchTypeBtn.setTitleColor(#colorLiteral(red: 0.2039215686, green: 0.7803921569, blue: 0.3490196078, alpha: 1), for: .normal)
         self.searchType = .NICKNAME
         self.tableView.reloadData()
+        print(searchType)
     }
     
     @IBAction func searchBtnTapped(_ sender: Any) {
             Indicator.sharedInstance.showIndicator()
-        
+            
             switch self.searchType {
                 case .PROFILE:
-                    UserVM.shared.filterEvents(location: self.search_typye_value_nick[1], type: AppConstant.eAll, source_type: AppConstant.eAll, age: self.search_typye_value[2], tall: self.search_typye_value_nick[3], style: self.search_typye_value_nick[4], job: self.search_typye_value_nick[5], nick_name: "String", completion: {_ in
+                    UserVM.shared.filterEvents(location: self.search_typye_value_nick[1], type: AppConstant.eAll, source_type: AppConstant.eAll, age: self.search_typye_value[2], tall: self.search_typye_value_nick[3], style: self.search_typye_value_nick[4], job: self.search_typye_value_nick[5], nick_name: AppConstant.eAll, completion: {_ in
                         
                             Indicator.sharedInstance.hideIndicator()
                             
-                      
+                            DataManager.isShowingFilterResult = true
+                            self.delegate.searchBtnTapped(data: true)
+                            self.dismiss(animated: true, completion: nil)
                     })
-                    break
+                   
                 case .NICKNAME:
-                    UserVM.shared.filterEvents(location: self.search_typye_value[2], type: AppConstant.eAll, source_type: AppConstant.eAll, age: self.search_typye_value[1], tall: AppConstant.eAll, style: AppConstant.eAll, job: AppConstant.eAll, nick_name: "", completion: {_ in
+                    
+                    UserVM.shared.filterEvents(location: self.search_typye_value[2], type: AppConstant.eAll, source_type: AppConstant.eAll, age: self.search_typye_value[1], tall: AppConstant.eAll, style: AppConstant.eAll, job: AppConstant.eAll, nick_name: AppConstant.eAll, completion: {_ in
                         
                             Indicator.sharedInstance.hideIndicator()
+                            DataManager.isShowingFilterResult = true
+                            self.delegate.searchBtnTapped(data: true)
+                            self.dismiss(animated: true, completion: nil)
                             
                       
                     })
-                    break
+                    
                 default:
                     break
             }
@@ -115,11 +143,12 @@ class searchTypeVC: UIViewController {
     @IBAction func resetBtnTapped(_ sender: Any) {
             switch self.searchType {
               case .PROFILE:
-                  search_typye_value = ["전체", "전체", "전체", "전체"]
-                  break
-              case .NICKNAME:
                   search_typye_value_nick = ["전체", "전체", "전체", "전체", "전체", "전체"]
-                  break
+                  
+              case .NICKNAME:
+                  
+                  search_typye_value = ["전체", "전체", "전체", "전체"]
+                  
               default:
                   break
               }
@@ -140,10 +169,11 @@ extension searchTypeVC:  UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
        switch searchType {
         case .PROFILE:
-            return search_type.count
+            return properties_nickname.count
            
         case .NICKNAME:
-            return properties_nickname.count
+            return search_type.count
+            
          
         default:
             return 0
@@ -156,26 +186,40 @@ extension searchTypeVC:  UITableViewDelegate, UITableViewDataSource {
         switch searchType {
             case .PROFILE:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "searchTableViewCell", for: indexPath as IndexPath) as! searchTableViewCell
-                cell.property?.text = self.search_type[indexPath.row]
-                cell.value?.text = self.search_typye_value[indexPath.row]
+                cell.property?.text = self.properties_nickname[indexPath.row]
+                cell.value?.text = self.search_typye_value_nick[indexPath.row]
+                cell.value.isHidden = false
+                cell.inputTextField.isHidden = true
+                cell.selectionStyle = .none
+                
                 
                 cell.value?.textColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
                 
                 
                 return cell
-            default:
+            case .NICKNAME:
                 if indexPath.row == 3 {
                     let cell = tableView.dequeueReusableCell(withIdentifier: "searchTableViewCell", for: indexPath as IndexPath) as! searchTableViewCell
-                    cell.property?.text = self.properties_nickname[indexPath.row]
-                    
+                    cell.property?.text = self.search_type[indexPath.row]
+                    cell.value.isHidden = true
+                    cell.inputTextField.isHidden = false
+                    cell.selectionStyle = .none
                     return cell
                 }
                 else {
                     let cell = tableView.dequeueReusableCell(withIdentifier: "searchTableViewCell", for: indexPath as IndexPath) as! searchTableViewCell
-                    cell.property?.text = self.properties_nickname[indexPath.row]
-                    cell.value?.text = self.search_typye_value_nick[indexPath.row]
+                    cell.value.isHidden = false
+                    cell.inputTextField.isHidden = true
+                    cell.selectionStyle = .none
+                    cell.property?.text = self.search_type[indexPath.row]
+                    cell.value?.text = self.search_typye_value[indexPath.row]
                     return cell
                 }
+            
+            case .none:
+                let cell = tableView.dequeueReusableCell(withIdentifier: "searchTableViewCell", for: indexPath as IndexPath) as! searchTableViewCell
+          
+                return cell
             
         }
             
@@ -183,28 +227,31 @@ extension searchTypeVC:  UITableViewDelegate, UITableViewDataSource {
         
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return CGFloat(AppConstant.height_50)
+    }
      func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
            switch searchType {
            case .PROFILE:
                switch indexPath.row {
                    case 0:
                        showSelectView(type_index: indexPath.row, items: ["남자", "녀자"])
-                       break
+                       
                    case 1:
                        showSelectView(type_index: indexPath.row, items: SettingVM.RegionList)
-                       break
+                      
                    case 2:
                        showSelectView(type_index: indexPath.row, items: SettingVM.AgeList)
-                       break
+                       
                    case 3:
                        showSelectView(type_index: indexPath.row, items: SettingVM.TallList)
-                       break
+                       
                    case 4:
                        showSelectView(type_index: indexPath.row, items: SettingVM.StyleList)
-                       break
+                       
                    case 5:
                        showSelectView(type_index: indexPath.row, items: SettingVM.JobList)
-                       break
+                       
                    default:
                        break
                }
@@ -213,18 +260,18 @@ extension searchTypeVC:  UITableViewDelegate, UITableViewDataSource {
                switch indexPath.row {
                case 0:
                    showSelectView(type_index: indexPath.row, items: ["남자", "녀자"])
-                   break
+                   
                case 1:
                    showSelectView(type_index: indexPath.row, items: SettingVM.AgeList)
-                   break
+                   
                case 2:
                    showSelectView(type_index: indexPath.row, items: SettingVM.RegionList)
-                   break
+                  
                          
                default:
                    break
                }
-               break
+              
            default:
                break
                
@@ -237,11 +284,13 @@ extension searchTypeVC:  UITableViewDelegate, UITableViewDataSource {
         
         let height_view = self.view.frame.size.height
         let height_bottom_view = (items.count + 1) * height_of_table
-        if height_bottom_view > Int(height_view) {
-            popupVC.height = CGFloat(height_view)
+        if height_bottom_view + 50 > Int(height_view) {
+            popupVC.height = CGFloat(height_view - 50)
         }
         else {
-            popupVC.height = CGFloat(height_bottom_view)        }
+            popupVC.height = CGFloat(height_bottom_view)
+            
+        }
         popupVC.topCornerRadius = 10
         popupVC.presentDuration = 1
         popupVC.dismissDuration = 1
@@ -261,11 +310,11 @@ extension searchTypeVC: SearchTypeDelegate {
         let selected_item = type
         switch searchType {
         case .PROFILE:
-            search_typye_value[index] = selected_item
-            break
-        case .NICKNAME:
             search_typye_value_nick[index] = selected_item
-            break
+          
+        case .NICKNAME:
+            search_typye_value[index] = selected_item
+        
         default:
             break
         }

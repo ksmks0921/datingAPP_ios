@@ -29,7 +29,8 @@ class createpostVC: BaseVC {
     @IBOutlet weak var eventTypeLabel: UILabel!
     @IBOutlet weak var phoneSettingView: UIView!
     @IBOutlet weak var phoneSettingTextField: UILabel!
-   
+    var media : String!
+    var video_url: URL!
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -137,6 +138,7 @@ class createpostVC: BaseVC {
     }
     
     func registerEvent(url: URL) {
+        
         let date = Date()
         let formatter = DateFormatter()
         formatter.dateFormat = "dd.MM.yyyy"
@@ -178,14 +180,20 @@ class createpostVC: BaseVC {
         let user_tall = UserVM.current_user.user_tall
         let user_id = UserVM.current_user.user_id
         let row_key = ""
-        let source_type = ""
+        let source_type = self.media
+        let thumb_path : String!
+        if media == "image" {
+             thumb_path = ""
+        }
+        else {
+             thumb_path = url.absoluteString
+        }
         
-        
-        let thumb_path = url.absoluteString
         
         
         Indicator.sharedInstance.showIndicator()
-        UserVM.shared.registerEvent(event_city: regionTextField.text!, create_date: date_result, event_des: eventTextField.text! , event_phone: phoneSettingTextField.text!, event_title: eventTitleField.text!, event_type: eventTypeLabel.text!, user_age: user_age!, user_avatar: user_avatar![0], user_city: regionTextField.text!, user_gender: user_gender!, user_job: user_job!, user_name: user_name!, user_style: user_style!, user_tall: user_tall!, user_id: user_id!, created_at: "", row_key: row_key, source_type: source_type, thumb_path: thumb_path, views_counts: "0" ) { (success, message, error) in
+        
+        UserVM.shared.registerEvent(event_city: regionTextField.text!, create_date: date_result, event_des: eventTextField.text! , event_phone: phoneSettingTextField.text!, event_title: eventTitleField.text!, event_type: eventTypeLabel.text!, user_age: user_age!, user_avatar: user_avatar![0], user_city: regionTextField.text!, user_gender: user_gender!, user_job: user_job!, user_name: user_name!, user_style: user_style!, user_tall: user_tall!, user_id: user_id!, created_at: "", row_key: row_key, source_type: source_type!, thumb_path: thumb_path, views_counts: "0" ) { (success, message, error) in
              
             Indicator.sharedInstance.hideIndicator()
             if error == nil{
@@ -276,17 +284,31 @@ extension createpostVC: UIImagePickerControllerDelegate, UINavigationControllerD
             self.present(imagePickerController, animated: true, completion: nil)
         }
         func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+            
+            video_url = info[.mediaURL] as? URL
+            
+            if video_url != nil {
+                SettingVM.shared.getThumbnailImageFromVideoUrl(url: video_url!) { (thumbImage) in
+                let video_thumbImage = thumbImage
+                    self.imageShowView.image = video_thumbImage
+                    self.imageShowView.isHidden = false
+                    self.imageSelectView.alpha = 0
+                    self.media = "video"
+                }
+            }
+            
             if let editedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
                 imageShowView.image = editedImage
                 imageShowView.isHidden = false
                 imageSelectView.alpha = 0
-             
+                media = "image"
                 
             }
             else if let originalImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
                 imageShowView.image = originalImage
                 imageShowView.isHidden = false
                 imageSelectView.alpha = 0
+                media = "image"
               
             }
             dismiss(animated: true, completion: nil)

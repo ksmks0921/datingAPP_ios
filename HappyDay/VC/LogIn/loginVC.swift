@@ -137,6 +137,11 @@ extension loginVC {
             DataManager.points = UserVM.user_points
         })
     }
+    func getRegions() {
+        UserVM.shared.getLikes(user_id: DataManager.userId!, completion: {_ in
+            print("Likes added successfully!")
+        })
+    }
     func getLikes() {
         UserVM.shared.getLikes(user_id: DataManager.userId!, completion: {_ in
             print("Likes added successfully!")

@@ -14,6 +14,7 @@ class contentforpostVC: UIViewController {
    
     @IBOutlet weak var altertview: UIView!
     
+    @IBOutlet weak var noResultView: UIView!
     @IBOutlet weak var hegiht_tableView: NSLayoutConstraint!
     @IBOutlet weak var postTableView: UITableView!
     var pageType:Int?
@@ -31,12 +32,19 @@ class contentforpostVC: UIViewController {
    
         hegiht_tableView.constant = CGFloat(height_table - 15)
         
-        
+
         if DataManager.isShowingFilterResult! {
             self.event_post = UserVM.filtered_eventPosts
+            if self.event_post.count == 0 {
+                self.noResultView.alpha = 1
+                  }
+                  else {
+            self.noResultView.alpha = 0
+                  }
             self.postTableView.reloadData()
         }
         else {
+            
             getData()
         }
         
@@ -52,6 +60,12 @@ class contentforpostVC: UIViewController {
         UserVM.shared.getEventPosts(completion:  {_ in
               Indicator.sharedInstance.hideIndicator()
               self.event_post = UserVM.eventPosts
+                    if self.event_post.count == 0 {
+                        self.noResultView.alpha = 1
+                          }
+                          else {
+                    self.noResultView.alpha = 0
+                          }
               self.postTableView.reloadData()
         })
     }

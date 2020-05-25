@@ -164,6 +164,10 @@ extension searchVC:  UITableViewDelegate, UITableViewDataSource {
         
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return CGFloat(AppConstant.height_50)
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         switch searchType {
@@ -173,7 +177,7 @@ extension searchVC:  UITableViewDelegate, UITableViewDataSource {
                 cell.value?.text = search_typye_value[indexPath.row]
                 return cell
 
-        default:
+        case .NICKNAME:
              if indexPath.row == properties_nickname.count - 1 {
                let cell = tableView.dequeueReusableCell(withIdentifier: "searchTableViewCell", for: indexPath as IndexPath) as! searchTableViewCell
                cell.property?.text = self.properties_nickname[indexPath.row]
@@ -189,6 +193,10 @@ extension searchVC:  UITableViewDelegate, UITableViewDataSource {
            }
                       
          
+        case .none:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "searchTableViewCell", for: indexPath as IndexPath) as! searchTableViewCell
+                         
+            return cell
         }
   
         
@@ -199,42 +207,41 @@ extension searchVC:  UITableViewDelegate, UITableViewDataSource {
             switch indexPath.row {
                 case 0:
                     showSelectView(type_index: indexPath.row, items: ["남자", "녀자"])
-                    break
+                    
                 case 1:
                     showSelectView(type_index: indexPath.row, items: SettingVM.RegionList)
-                    break
+                    
                 case 2:
                     showSelectView(type_index: indexPath.row, items: SettingVM.AgeList)
-                    break
+                    
                 case 3:
                     showSelectView(type_index: indexPath.row, items: SettingVM.TallList)
-                    break
+                    
                 case 4:
                     showSelectView(type_index: indexPath.row, items: SettingVM.StyleList)
-                    break
+                    
                 case 5:
                     showSelectView(type_index: indexPath.row, items: SettingVM.JobList)
-                    break
+                    
                 default:
                     break
             }
-            break
+            
         case .NICKNAME:
             switch indexPath.row {
             case 0:
                 showSelectView(type_index: indexPath.row, items: ["남자", "녀자"])
-                break
+                
             case 1:
                 showSelectView(type_index: indexPath.row, items: SettingVM.AgeList)
-                break
+                
             case 2:
                 showSelectView(type_index: indexPath.row, items: SettingVM.RegionList)
-                break
+                
                       
             default:
                 break
             }
-            break
         default:
             break
             

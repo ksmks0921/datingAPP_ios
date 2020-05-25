@@ -74,14 +74,17 @@ class MKPrivateChatView: ChatViewController {
                target: self,
                action: #selector(showSetting)
            )
+        
            button_setting.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
            button_translate.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
            self.title = chat_title
            self.navigationItem.rightBarButtonItems = [button_translate, button_setting]
         
         messagesCollectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "CustomImageCell")
+       
+        self.navigationController?.navigationBar.tintColor = UIColor.white
     }
-    
+  
     @objc
     private func selectLanguage() {
       
@@ -120,6 +123,10 @@ class MKPrivateChatView: ChatViewController {
 //                    self?.insertMessage(message)
 //                })
 //        }
+        
+        let backBarBtnItem = UIBarButtonItem()
+               backBarBtnItem.title = "뒤로"
+               navigationController?.navigationBar.backItem?.backBarButtonItem = backBarBtnItem
         
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -700,7 +707,7 @@ extension MKPrivateChatView {
                        })
                    }
                    if video != nil {
-                    self.getThumbnailImageFromVideoUrl(url: video!) { (thumbImage) in
+                    SettingVM.shared.getThumbnailImageFromVideoUrl(url: video!) { (thumbImage) in
                         let video_thumbImage = thumbImage
                         UserVM.shared.sendVideoMessage(sender_id: chatId, receiver_id: self.connectedPerson.user_id!, text: "", sourceType: AppConstant.eVideo, sourcePath: "", thumb_path: "", time: time_string, date: date, thumb_imageData:video_thumbImage!,  video: video!, completion: {_ in
                                 Indicator.sharedInstance.hideIndicator()
@@ -732,26 +739,26 @@ extension MKPrivateChatView {
       
 
     }
-    func getThumbnailImageFromVideoUrl(url: URL, completion: @escaping ((_ image: UIImage?)->Void)) {
-        DispatchQueue.global().async { //1
-            let asset = AVAsset(url: url) //2
-            let avAssetImageGenerator = AVAssetImageGenerator(asset: asset) //3
-            avAssetImageGenerator.appliesPreferredTrackTransform = true //4
-            let thumnailTime = CMTimeMake(value: 2, timescale: 1) //5
-            do {
-                let cgThumbImage = try avAssetImageGenerator.copyCGImage(at: thumnailTime, actualTime: nil) //6
-                let thumbImage = UIImage(cgImage: cgThumbImage) //7
-                DispatchQueue.main.async { //8
-                    completion(thumbImage) //9
-                }
-            } catch {
-                print(error.localizedDescription) //10
-                DispatchQueue.main.async {
-                    completion(nil) //11
-                }
-            }
-        }
-    }
+//    func getThumbnailImageFromVideoUrl(url: URL, completion: @escaping ((_ image: UIImage?)->Void)) {
+//        DispatchQueue.global().async { //1
+//            let asset = AVAsset(url: url) //2
+//            let avAssetImageGenerator = AVAssetImageGenerator(asset: asset) //3
+//            avAssetImageGenerator.appliesPreferredTrackTransform = true //4
+//            let thumnailTime = CMTimeMake(value: 2, timescale: 1) //5
+//            do {
+//                let cgThumbImage = try avAssetImageGenerator.copyCGImage(at: thumnailTime, actualTime: nil) //6
+//                let thumbImage = UIImage(cgImage: cgThumbImage) //7
+//                DispatchQueue.main.async { //8
+//                    completion(thumbImage) //9
+//                }
+//            } catch {
+//                print(error.localizedDescription) //10
+//                DispatchQueue.main.async {
+//                    completion(nil) //11
+//                }
+//            }
+//        }
+//    }
     
     
 }

@@ -54,6 +54,9 @@ class mainPageVC: BaseVC {
             if self.partners.count == 0 {
                 noResultLabel.isHidden = false
             }
+            else {
+                noResultLabel.isHidden = true
+            }
             self.collectionView.reloadData()
         }
         else {
