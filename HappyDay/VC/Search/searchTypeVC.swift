@@ -230,7 +230,7 @@ extension searchTypeVC:  UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return CGFloat(AppConstant.height_50)
     }
-     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
            switch searchType {
            case .PROFILE:
                switch indexPath.row {
