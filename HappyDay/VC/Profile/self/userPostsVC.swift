@@ -66,12 +66,12 @@ extension userPostsVC: UITableViewDelegate, UITableViewDataSource {
         cell.nickname.text = items[indexPath.row].nick_name
         if items[indexPath.row].thumb_path != nil {
            
-                cell.postImageView.sd_setImage(with: URL(string: items[indexPath.row].thumb_path), placeholderImage: UIImage(systemName: "photo"))
+                cell.postImageView.sd_setImage(with: URL(string: items[indexPath.row].thumb_path), placeholderImage: UIImage(named: "default"))
            
         }
         else {
             
-                cell.postImageView.image = UIImage(systemName: "photo")
+                cell.postImageView.image = UIImage(named: "default")
            
         }
         if items[indexPath.row].gender == true {

@@ -28,8 +28,8 @@ class personalPageVC: UIViewController {
     @IBOutlet weak var pointLabel: UILabel!
     
     let properties_profile: [String] = ["좋아하는", "메모 목록", "무시 목록", "블록 목록", "신고 목록", "자기 게시물보기", "알림 보기", "각종 설정", "도움말", "로그 아웃"]
-    let icon_strings = ["heart.fill", "square.and.pencil", "xmark.octagon", "nosign", "star.fill", "table", "bell", "gear", "questionmark.circle.fill", "escape"]
-    let icons: [UIImage] = [#imageLiteral(resourceName: "step"), #imageLiteral(resourceName: "memo-1"), #imageLiteral(resourceName: "forbidden"),#imageLiteral(resourceName: "shield"),#imageLiteral(resourceName: "star"),#imageLiteral(resourceName: "love"), #imageLiteral(resourceName: "love"), #imageLiteral(resourceName: "love"), #imageLiteral(resourceName: "love"), #imageLiteral(resourceName: "love")]
+    let icon_strings = ["icon_heart", "icon_memo", "icon_block", "icon_misi", "icon_favourite", "feedon", "feedon", "feedon", "icon_helper", "icon_logout"]
+   
     var screenSize: CGRect!
     var screenWidth: CGFloat!
     var screenHeight: CGFloat!
@@ -126,7 +126,7 @@ extension personalPageVC: UICollectionViewDelegate, UICollectionViewDataSource, 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
          let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "personalPageCollectionCell", for: indexPath) as! personalPageCollectionCell
          cell.txt.text = properties_profile[indexPath.row]
-        cell.icon.image = UIImage(systemName: icon_strings[indexPath.row])
+        cell.icon.image = UIImage(named: icon_strings[indexPath.row])
 
              
          cell.layer.borderColor = UIColor.lightGray.cgColor

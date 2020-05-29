@@ -30,7 +30,7 @@ class signUpVC: BaseVC {
     @IBOutlet weak var ageUIView: DesinableView!
     @IBOutlet weak var passwordTxt: UITextField!
     @IBOutlet weak var passwordAgainTxt: UITextField!
- 
+    @IBOutlet weak var contentScroll : UIScrollView!
     var gender = true
     var selectedImage = UIImage(named: "sharp_check_white_18dp")?.withRenderingMode(.alwaysTemplate)
     var location: String?
@@ -44,36 +44,54 @@ class signUpVC: BaseVC {
         super.viewDidLoad()
 
         
-        setUpViewClick()
+                setUpViewClick()
         
-        if DataManager.isLogin! {
-            
-            
-            
-        } else {
-            UserVM.shared.AnonymousLogin{(success, message, error) in
-                if error == nil {
+                if DataManager.isLogin! {
+                    
+                    
+                    
+                } else {
+                    UserVM.shared.AnonymousLogin{(success, message, error) in
+                        if error == nil {
 
-                           SettingVM.shared.getSelectingAges(completion: {_ in
-                                self.AgeList = SettingVM.AgeList
-                           })
-                           SettingVM.shared.getSelectingRegions(completion: {_ in
-                                self.RegionList = SettingVM.RegionList
-                           })
+                                   SettingVM.shared.getSelectingAges(completion: {_ in
+                                        self.AgeList = SettingVM.AgeList
+                                   })
+                                   SettingVM.shared.getSelectingRegions(completion: {_ in
+                                        self.RegionList = SettingVM.RegionList
+                                   })
 
-                }else {
-                    self.showAlert(message: "_____error____")
+                        }else {
+                            self.showAlert(message: "_____error____")
+                        }
                 }
-        }
+                    
+                NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name:UIResponder.keyboardWillShowNotification, object: nil)
+                NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:UIResponder.keyboardWillHideNotification, object: nil)
+               
+                           
+            }
        
-                   
-    }
-       
         
         
         
     }
-    
+    @objc func keyboardWillShow(notification:NSNotification){
+
+        let userInfo = notification.userInfo!
+        var keyboardFrame:CGRect = (userInfo[UIResponder.keyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
+        keyboardFrame = self.view.convert(keyboardFrame, from: nil)
+
+        var contentInset:UIEdgeInsets = self.contentScroll.contentInset
+        contentInset.bottom = keyboardFrame.size.height + 20
+        contentScroll.contentInset = contentInset
+    }
+
+    @objc func keyboardWillHide(notification:NSNotification){
+
+        let contentInset:UIEdgeInsets = UIEdgeInsets.zero
+        contentScroll.contentInset = contentInset
+    }
     func setUpViewClick() {
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(clickView_1(_:)))
@@ -144,6 +162,7 @@ class signUpVC: BaseVC {
         manBtn.setImage(selectedImage, for: .normal)
         womanBtn.setImage(nil, for: .normal)
         womanBtn.backgroundColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
+       
         self.gender = true
     }
     @IBAction func womanSelect(_ sender: Any) {

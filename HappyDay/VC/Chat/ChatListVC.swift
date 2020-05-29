@@ -68,11 +68,44 @@ extension chatListVC:  UITableViewDelegate, UITableViewDataSource {
              return CGSize(width: self.chatListTableView.frame.size.width, height: 100)
         
 
-     }
+    }
+    func getDataFromUsers(id: String) -> person{
+        var target_user: person!
+        for user_item in UserVM.all_users {
+            
+            if user_item.user_id == id {
+                
+               target_user = user_item
+                
+            }
+            
+        }
+        
+        return target_user
+    }
+    @objc func imageTapped(_ gesture : UITapGestureRecognizer) {
+        let v = gesture.view!
+        let tag = v.tag
+        let VC = self.storyboard?.instantiateViewController(withIdentifier: "profileVC") as! profileVC
+        let selected_person = getDataFromUsers(id: lists[tag].id)
+        VC.person = selected_person
+
+        navigationController?.pushViewController(VC, animated: true)
+        
+    }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
        
         let cell = chatListTableView.dequeueReusableCell(withIdentifier: "chatTableCell", for: indexPath as IndexPath) as! chatTableCell
+        
         cell.photo.sd_setImage(with: URL(string: lists[indexPath.row].avatar), placeholderImage: UIImage(named: "avatar_woman"))
+        
+        
+        let singleTap = UITapGestureRecognizer(target: self, action: #selector(imageTapped(_:)))
+        cell.photo.tag = indexPath.row
+        cell.photo.isUserInteractionEnabled = true
+        cell.photo.addGestureRecognizer(singleTap)
+        
+        
         cell.name.text = lists[indexPath.row].nick_name
         let age_region: String!
         age_region = lists[indexPath.row].age + " " + lists[indexPath.row].region
@@ -93,7 +126,7 @@ extension chatListVC:  UITableViewDelegate, UITableViewDataSource {
             
             let connect_user = MessageVM.shared.getDataFromUsers(id: lists[indexPath.row].id!)
 //            let privateChatView = MKPrivateChatView()
-        guard let privateChatView = storyboard?.instantiateViewController(withIdentifier: "MKPrivateChatView") as? MKPrivateChatView else { return }
+            guard let privateChatView = storyboard?.instantiateViewController(withIdentifier: "MKPrivateChatView") as? MKPrivateChatView else { return }
             privateChatView.chatId = UserVM.current_user.user_id!
             privateChatView.connectedPerson = connect_user
             privateChatView.chat_title = connect_user.user_nickName

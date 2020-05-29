@@ -29,12 +29,36 @@ class createpostVC: BaseVC {
     @IBOutlet weak var eventTypeLabel: UILabel!
     @IBOutlet weak var phoneSettingView: UIView!
     @IBOutlet weak var phoneSettingTextField: UILabel!
+    @IBOutlet weak var contentScroll: UIScrollView!
     var media : String!
     var video_url: URL!
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupViewTap()
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name:UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:UIResponder.keyboardWillHideNotification, object: nil)
         
+        
+ 
+    }
+    @objc func keyboardWillShow(notification:NSNotification){
+
+        let userInfo = notification.userInfo!
+        var keyboardFrame:CGRect = (userInfo[UIResponder.keyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
+        keyboardFrame = self.view.convert(keyboardFrame, from: nil)
+
+        var contentInset:UIEdgeInsets = self.contentScroll.contentInset
+        contentInset.bottom = keyboardFrame.size.height + 20
+        contentScroll.contentInset = contentInset
+    }
+
+    @objc func keyboardWillHide(notification:NSNotification){
+
+        let contentInset:UIEdgeInsets = UIEdgeInsets.zero
+        contentScroll.contentInset = contentInset
+    }
+    func setupViewTap() {
         let tapGesture_type = UITapGestureRecognizer(target: self, action: #selector(selectEventType(_:)))
         tapGesture_type.delegate = self as? UIGestureRecognizerDelegate
         eventTypeView.addGestureRecognizer(tapGesture_type)
@@ -50,7 +74,6 @@ class createpostVC: BaseVC {
         let tapGesture_image = UITapGestureRecognizer(target: self, action: #selector(imageUpload(_:)))
         tapGesture_image.delegate = self as? UIGestureRecognizerDelegate
         imageSelect.addGestureRecognizer(tapGesture_image)
- 
     }
     @objc func selectEventType(_ sender: UIView) {
         
@@ -112,37 +135,32 @@ class createpostVC: BaseVC {
         
     }
     @IBAction func registerBtnTapped(_ sender: Any) {
-        
-        Indicator.sharedInstance.showIndicator()
-               let storageRef = Storage.storage().reference().child("media").child(UUID().uuidString)
-                    if let uploadData = imageShowView.image!.pngData() {
-                   
-                   storageRef.putData(uploadData, metadata: nil) { (metadata, error) in
-                       Indicator.sharedInstance.hideIndicator()
-                       if error != nil {
-                           print("error")
-                           
-                       } else {
-                           storageRef.downloadURL { (url, error) in
-                               guard let downloadURL = url else {return}
-                            self.registerEvent(url: downloadURL)
+        if imageShowView.image != nil {
+            Indicator.sharedInstance.showIndicator()
+                   let storageRef = Storage.storage().reference().child("media").child(UUID().uuidString)
+                        if let uploadData = imageShowView.image!.pngData() {
+                       
+                       storageRef.putData(uploadData, metadata: nil) { (metadata, error) in
+                           Indicator.sharedInstance.hideIndicator()
+                           if error != nil {
+                               print("error")
                                
-                   
+                           } else {
+                               storageRef.downloadURL { (url, error) in
+                                   guard let downloadURL = url else {return}
+                                self.registerEvent(url: downloadURL)
+                                   
+                       
+                               }
+            
                            }
-        
                        }
-                   }
+            }
+            
         }
-        
-        
-    }
-    
-    func registerEvent(url: URL) {
-        
-        let date = Date()
-        let formatter = DateFormatter()
-        formatter.dateFormat = "dd.MM.yyyy"
-        let date_result = formatter.string(from: date)
+        else {
+            self.showAlert(message: "이메지 또는 동영상을 압로드하십시오.")
+        }
         if eventTitleField.text == "" {
             self.showAlert(message: "제목란을 채우세요.")
             return
@@ -164,6 +182,16 @@ class createpostVC: BaseVC {
             
             return
         }
+        
+    }
+    
+    func registerEvent(url: URL) {
+        
+        let date = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd.MM.yyyy"
+        let date_result = formatter.string(from: date)
+        
         let user_age = UserVM.current_user.user_age
         let user_avatar =  UserVM.current_user.user_avatar
         let user_gender: Bool!

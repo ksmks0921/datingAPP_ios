@@ -68,15 +68,16 @@ class mainPageVC: BaseVC {
             
             })
         }
-        
+        setupUI()
         
        
+  
         
         
-
-        print(UserVM.users.count)
         
         
+    }
+    func setupUI() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(selectViewType(_:)))
         tapGesture.delegate = self as? UIGestureRecognizerDelegate
         selectView.addGestureRecognizer(tapGesture)
@@ -108,10 +109,7 @@ class mainPageVC: BaseVC {
         tapGestureSearch.delegate = self as? UIGestureRecognizerDelegate
         searchTypeView.isUserInteractionEnabled = true
         searchTypeView.addGestureRecognizer(tapGestureSearch)
-        
-        
     }
-    
     override func viewWillAppear(_ animated: Bool) {
           super.viewWillAppear(animated)
           navigationController?.setNavigationBarHidden(true, animated: animated)
@@ -141,7 +139,7 @@ class mainPageVC: BaseVC {
            let nibCell = UINib(nibName: "largeCollectionViewCell", bundle: nil)
            collectionView.register(nibCell, forCellWithReuseIdentifier: largeCollectioinViewCellId)
            collectionView.reloadData()
-           TypeImageView.image = UIImage(systemName: "square.grid.2x2.fill")
+           TypeImageView.image = UIImage(named: "gallary_big")
         
     }
     @objc func showAsListCell(_ sender: UIView) {
@@ -151,7 +149,7 @@ class mainPageVC: BaseVC {
            let nibCell = UINib(nibName: "listCollectionViewCell", bundle: nil)
            collectionView.register(nibCell, forCellWithReuseIdentifier: listCollectionViewCellId)
            collectionView.reloadData()
-           TypeImageView.image = UIImage(systemName: "rectangle.grid.1x2.fill")
+           TypeImageView.image = UIImage(named: "gallary_list")
     
     }
     @objc func showAsGalleryCell(_ sender: UIView) {
@@ -161,7 +159,7 @@ class mainPageVC: BaseVC {
            let nibCell = UINib(nibName: "galleryCollectionViewCell", bundle: nil)
            collectionView.register(nibCell, forCellWithReuseIdentifier: galleryCollectionViewCellId)
            collectionView.reloadData()
-           TypeImageView.image = UIImage(systemName: "square.grid.3x2.fill")
+           TypeImageView.image = UIImage(named: "gallary_gallary")
     
     }
     @objc func cancelCustomPopup(_ sender: UIView) {
@@ -270,12 +268,10 @@ extension mainPageVC: UICollectionViewDelegate, UICollectionViewDataSource, UICo
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        let VC = self.storyboard?.instantiateViewController(withIdentifier: "profileContentVC") as! profileContentVC
-        VC.currentViewControllerIndex = indexPath.row
-        VC.partners = partners
+        let VC = self.storyboard?.instantiateViewController(withIdentifier: "profileVC") as! profileVC
+        VC.person = partners[indexPath.row]
         navigationController?.pushViewController(VC, animated: true)
-
-        
+ 
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout:
         UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets{

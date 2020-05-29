@@ -190,6 +190,9 @@ extension ChatViewController: MessageCellDelegate {
     
     func didTapAvatar(in cell: MessageCollectionViewCell) {
         print("Avatar tapped")
+        let VC = self.storyboard?.instantiateViewController(withIdentifier: "profileVC") as! profileVC
+        VC.person = self.connectedPerson
+        navigationController?.pushViewController(VC, animated: true)
     }
     
     func didTapMessage(in cell: MessageCollectionViewCell) {

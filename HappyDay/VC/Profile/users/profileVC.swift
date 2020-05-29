@@ -8,7 +8,7 @@
 
 import UIKit
 
-class profileVC: UIViewController {
+class profileVC: BaseVC {
 
     @IBOutlet weak var sliderCollectionView: UICollectionView!
     @IBOutlet weak var name_birth: UILabel!
@@ -20,11 +20,12 @@ class profileVC: UIViewController {
     
     @IBOutlet weak var height_of_tableView: NSLayoutConstraint!
     var counter = 0
- 
+    var items = ["블록 등록", "무시 등록", "메모 등록", "신고 하기"]
     var height_row = 50
     var index: Int?
     var person : person!
     let properties_personalData: [String] = ["성별", "년령", "거주지", "닉네임"]
+    @IBOutlet weak var titleLabel: UILabel!
     
     var values_personalData: [String]!
     var sections = [Section]()
@@ -62,13 +63,74 @@ class profileVC: UIViewController {
         
         
     }
+    @IBAction func backBtnTapped(_ sender: Any) {
+        
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    @IBAction func otherBtnTapped(_ sender: Any) {
+        
+        guard let popupVC = storyboard?.instantiateViewController(withIdentifier: "otherSettingVC") as? otherSettingVC else { return }
+          
+          popupVC.items = items
+          popupVC.height = CGFloat((items.count + 1) * 60)
+          popupVC.topCornerRadius = 10
+          popupVC.presentDuration = 1
+          popupVC.dismissDuration = 1
+          popupVC.shouldDismissInteractivelty = true
+          popupVC.delegate = self
+        
+          present(popupVC, animated: true, completion: nil)
+    }
+    
+    @IBAction func sendMessageBtnTapped(_ sender: Any) {
+        guard let privateChatView = storyboard?.instantiateViewController(withIdentifier: "MKPrivateChatView") as? MKPrivateChatView else { return }
+        privateChatView.chatId = UserVM.current_user.user_id!
+        privateChatView.connectedPerson = person
+        privateChatView.chat_title = person.user_nickName
+        let backItem = UIBarButtonItem()
+        backItem.title = "뒤로"
+        backItem.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        navigationItem.backBarButtonItem = backItem // This will show in the next view controller being pushed
+        self.navigationController?.pushViewController(privateChatView, animated: true)
+    }
+    @IBAction func likeBtnTapped(_ sender: Any) {
+        
+        let user_sex = { () -> Bool in
+            if self.person.user_sex == "남자" {
+                return true
+            }
+            else {
+                return false
+            }
+        }
+        Indicator.sharedInstance.showIndicator()
+        UserVM.shared.likeUser(like_age: person.user_age!, like_avatar: person.user_avatar![0], like_city: person.user_city!, like_date: person.user_date!, like_id: person.user_id!, like_info: person.user_introduce!, like_name: person.user_nickName!, like_sex: user_sex() ) { (success, message, error) in
+                   if error == nil{
+                       if success{
+                            self.showAlert(message: "성공!")
+                            Indicator.sharedInstance.hideIndicator()
+                            let sender = PushNotificationSender()
+                            sender.sendPushNotification(to: "token", title: "Notification title", body: "Notification body")
+                        
+                        
+                        } else {
+                            self.showAlert(message: message)
+                        }
+                    
+                }else {
+                    self.showAlert(message: message)
+                }
+        }
+        
+    }
     
     private func setUpValue() {
         name_birth.text = person?.user_nickName
         birthday.text = person?.user_date
         age_location.text = person?.user_sex
         location.text = person?.user_city
-
+        titleLabel.text = person?.user_nickName
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -140,7 +202,7 @@ extension profileVC: UICollectionViewDelegate, UICollectionViewDataSource, UICol
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
         
-                return 3.0
+        return 3.0
       
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout:
@@ -234,4 +296,73 @@ extension profileVC:  UITableViewDelegate, UITableViewDataSource {
         }
             
     }
+}
+extension profileVC : SearchTypeDelegate{
+    func selectSearchType(index: Int, type: String) {
+        if type == self.items[0] {
+            let avatar = person.user_avatar
+            let date = Date()
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd"
+            let date_result = formatter.string(from: date)
+            let user_sex = { () -> Bool in
+                if self.person.user_sex == "남자" {
+                    return true
+                }
+                else {
+                    return false
+                }
+            }
+            UserVM.shared.blockSomeone(block_age: person.user_age!, block_avatar: avatar![0], block_city: person.user_city!, block_date: date_result, block_id: person.user_id!, block_info: "test", block_name: person.user_nickName!, block_user_sex: user_sex()){_ in
+                    self.showAlert(message: "성공!")
+            }
+        }
+        else if type == self.items[1] {
+            let avatar = person.user_avatar
+            let date = Date()
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd"
+            let date_result = formatter.string(from: date)
+            let user_sex = { () -> Bool in
+                if self.person.user_sex == "남자" {
+                    return true
+                }
+                else {
+                    return false
+                }
+            }
+            UserVM.shared.ignoreSomeone(ignore_age: person.user_age!, ignore_avatar: avatar![0], ignore_city: person.user_city!, ignore_date: date_result, ignore_id: person.user_id!, ignore_info: "test", ignore_name: person.user_nickName!, ignore_user_sex: user_sex()){_ in
+                self.showAlert(message: "성공!")
+            }
+        }
+        else if type == self.items[2] {
+            let avatar = person.user_avatar
+            let date = Date()
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd"
+            let date_result = formatter.string(from: date)
+            let user_sex = { () -> Bool in
+                if self.person.user_sex == "남자" {
+                    return true
+                }
+                else {
+                    return false
+                }
+            }
+            UserVM.shared.memoSomeone(memo_age: person.user_age!, memo_avatar: avatar![0], memo_city: person.user_city!, memo_date: date_result, memo_id: person.user_id!, memo_info: "test", memo_name: person.user_nickName!, memo_user_sex: user_sex()){_ in
+                    self.showAlert(message: "성공!")
+            }
+        }
+        else if type == self.items[3] {
+            let VC = self.storyboard?.instantiateViewController(withIdentifier: "personalDataVC") as! personalDataVC
+            VC.report_person = person
+            VC.from = "report"
+            navigationController?.pushViewController(VC, animated: true)
+        }
+        else if type == self.items[4] {
+            print("Cancel clicked")
+        }
+    }
+    
+    
 }

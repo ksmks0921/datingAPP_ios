@@ -1,30 +1,6 @@
 
 
 
-/*
- MIT License
- 
- Copyright (c) 2017-2019 MessageKit
- 
- Permission is hereby granted, free of charge, to any person obtaining a copy
- of this software and associated documentation files (the "Software"), to deal
- in the Software without restriction, including without limitation the rights
- to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- copies of the Software, and to permit persons to whom the Software is
- furnished to do so, subject to the following conditions:
- 
- The above copyright notice and this permission notice shall be included in all
- copies or substantial portions of the Software.
- 
- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- SOFTWARE.
- */
-
 import UIKit
 import MapKit
 import MessageKit
@@ -36,7 +12,7 @@ class MKPrivateChatView: ChatViewController {
 
     
     @IBOutlet weak var contentView: UIView!
-    let outgoingAvatarOverlap: CGFloat = 17.5
+    let outgoingAvatarOverlap: CGFloat = 0
     var chat_title: String!
     var background_image = UIImageView()
     private var isBlocker = false
@@ -46,45 +22,49 @@ class MKPrivateChatView: ChatViewController {
 
         super.viewDidLoad()
         
+        setupUI()
+        setupNavigationButton()
+        Indicator.sharedInstance.showIndicator()
+        MessageVM.shared.geData(language: AppConstant.LanguageEnglish ,sender_id: chatId, connectedPerson: connectedPerson, completion: {_ in
+             Indicator.sharedInstance.hideIndicator()
+             self.loadFirstMessages()
+        })
+         
         
+        messagesCollectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "CustomImageCell")
+        
+    }
+    func setupNavigationButton() {
+        
+         let button_translate = UIBarButtonItem(
+              image: UIImage(named: "translate_icon"),
+              style: .plain,
+              target: self,
+              
+              action: #selector(selectLanguage)
+          )
+          let button_setting = UIBarButtonItem(
+              image: UIImage(named: "rsz_icon_setting_white"),
+              style: .plain,
+              target: self,
+              action: #selector(showSetting)
+          )
+       
+          button_setting.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+          button_translate.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+          self.title = chat_title
+          self.navigationItem.rightBarButtonItems = [button_translate, button_setting]
+          self.navigationController?.navigationBar.tintColor = UIColor.white
+    }
+    func setupUI() {
         let height_of_view = self.messagesCollectionView.frame.size.height
         let width_of_view = self.messagesCollectionView.frame.size.width
         background_image.frame = CGRect(x: 0, y: 0, width: width_of_view, height: height_of_view)
         background_image.image = UIImage(named: "person_2")
-        
         view.addSubview(background_image)
-//        background_image.layer.zPosition = 7
-//        messagesCollectionView.layer.zPosition = 3
         messagesCollectionView.backgroundColor = UIColor(white: 1, alpha: 0.5)
         messagesCollectionView.backgroundView = background_image
-        MessageVM.shared.geData(language: AppConstant.LanguageEnglish ,sender_id: chatId, connectedPerson: connectedPerson, completion: {_ in
-            self.loadFirstMessages()
-        })
-          // set navigation button
-          let button_translate = UIBarButtonItem(
-               image: UIImage(named: "translate_icon"),
-               style: .plain,
-               target: self,
-               
-               action: #selector(selectLanguage)
-           )
-           let button_setting = UIBarButtonItem(
-               image: UIImage(systemName: "gear"),
-               style: .plain,
-               target: self,
-               action: #selector(showSetting)
-           )
-        
-           button_setting.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-           button_translate.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-           self.title = chat_title
-           self.navigationItem.rightBarButtonItems = [button_translate, button_setting]
-        
-        messagesCollectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "CustomImageCell")
-       
-        self.navigationController?.navigationBar.tintColor = UIColor.white
     }
-  
     @objc
     private func selectLanguage() {
       
@@ -98,7 +78,6 @@ class MKPrivateChatView: ChatViewController {
         popupVC.shouldDismissInteractivelty = true
         popupVC.items = items
         popupVC.delegate = self
-//      self.navigationController?.pushViewController(popupVC, animated: true)
         present(popupVC, animated: true, completion: nil)
         
     }
@@ -125,8 +104,8 @@ class MKPrivateChatView: ChatViewController {
 //        }
         
         let backBarBtnItem = UIBarButtonItem()
-               backBarBtnItem.title = "뒤로"
-               navigationController?.navigationBar.backItem?.backBarButtonItem = backBarBtnItem
+        backBarBtnItem.title = "뒤로"
+        navigationController?.navigationBar.backItem?.backBarButtonItem = backBarBtnItem
         
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -178,20 +157,29 @@ class MKPrivateChatView: ChatViewController {
         layout?.sectionInset = UIEdgeInsets(top: 1, left: 8, bottom: 1, right: 8)
         
         // Hide the outgoing avatar and adjust the label alignment to line up with the messages
-        layout?.setMessageOutgoingAvatarSize(.zero)
-        layout?.setMessageOutgoingMessageTopLabelAlignment(LabelAlignment(textAlignment: .right, textInsets: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 8)))
+        
+        
+        
+//        layout?.setMessageOutgoingAvatarSize(.zero)
+        layout?.setMessageOutgoingAvatarSize(CGSize(width: 40, height: 40))
+        layout?.setMessageOutgoingMessageTopLabelAlignment(LabelAlignment(textAlignment: .right, textInsets: UIEdgeInsets(top: 0, left: 0, bottom: outgoingAvatarOverlap, right: 8)))
         layout?.setMessageOutgoingMessageBottomLabelAlignment(LabelAlignment(textAlignment: .right, textInsets: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 8)))
-
+        layout?.setMessageOutgoingMessagePadding(UIEdgeInsets(top: -outgoingAvatarOverlap, left: 18, bottom: outgoingAvatarOverlap, right: -18))
+        
+        
+        
+        
         // Set outgoing avatar to overlap with the message bubble
+        layout?.setMessageIncomingAvatarSize(CGSize(width: 40, height: 40))
         layout?.setMessageIncomingMessageTopLabelAlignment(LabelAlignment(textAlignment: .left, textInsets: UIEdgeInsets(top: 0, left: 18, bottom: outgoingAvatarOverlap, right: 0)))
-        layout?.setMessageIncomingAvatarSize(CGSize(width: 30, height: 30))
+       
         layout?.setMessageIncomingMessagePadding(UIEdgeInsets(top: -outgoingAvatarOverlap, left: -18, bottom: outgoingAvatarOverlap, right: 18))
         
-        layout?.setMessageIncomingAccessoryViewSize(CGSize(width: 30, height: 30))
-        layout?.setMessageIncomingAccessoryViewPadding(HorizontalEdgeInsets(left: 8, right: 0))
-        layout?.setMessageIncomingAccessoryViewPosition(.messageBottom)
-        layout?.setMessageOutgoingAccessoryViewSize(CGSize(width: 30, height: 30))
-        layout?.setMessageOutgoingAccessoryViewPadding(HorizontalEdgeInsets(left: 0, right: 8))
+//        layout?.setMessageIncomingAccessoryViewSize(CGSize(width: 30, height: 30))
+//        layout?.setMessageIncomingAccessoryViewPadding(HorizontalEdgeInsets(left: 8, right: 0))
+//        layout?.setMessageIncomingAccessoryViewPosition(.messageBottom)
+//        layout?.setMessageOutgoingAccessoryViewSize(CGSize(width: 30, height: 30))
+//        layout?.setMessageOutgoingAccessoryViewPadding(HorizontalEdgeInsets(left: 0, right: 8))
 
         messagesCollectionView.messagesLayoutDelegate = self
         messagesCollectionView.messagesDisplayDelegate = self
@@ -217,8 +205,9 @@ class MKPrivateChatView: ChatViewController {
         
         
         let button = InputBarButtonItem()
-        button.image = UIImage(systemName: "plus.circle.fill")
-        button.setSize(CGSize(width: 42, height: 42), animated: false)
+        button.contentEdgeInsets = UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2)
+        button.image = UIImage(named: "icon_add")
+        button.setSize(CGSize(width: 36, height: 36), animated: false)
         button.tintColor = #colorLiteral(red: 0.2039215686, green: 0.7803921569, blue: 0.3490196078, alpha: 1)
         button.onKeyboardSwipeGesture { item, gesture in
             if (gesture.direction == .left)     { item.inputBarAccessoryView?.setLeftStackViewWidthConstant(to: 0, animated: true)        }
@@ -261,14 +250,19 @@ class MKPrivateChatView: ChatViewController {
 ////            self.actionLocation()
 //        }
 
-        let configuration    = UIImage.SymbolConfiguration(pointSize: 25, weight: .regular)
-        let imageCamera        = UIImage(systemName: "camera", withConfiguration: configuration)
-        let imagePhoto        = UIImage(systemName: "photo", withConfiguration: configuration)
-        let imageVideo        = UIImage(systemName: "play.rectangle", withConfiguration: configuration)
-        let imageAudio        = UIImage(systemName: "music.mic", withConfiguration: configuration)
-        let imageStickers    = UIImage(systemName: "tortoise", withConfiguration: configuration)
-        let imageLocation    = UIImage(systemName: "location", withConfiguration: configuration)
-
+//        let configuration    = UIImage.SymbolConfiguration(pointSize: 25, weight: .regular)
+//        let imageCamera        = UIImage(systemName: "camera")
+//        let imagePhoto        = UIImage(systemName: "photo")
+//        let imageVideo        = UIImage(systemName: "play.rectangle")
+////        let imageAudio        = UIImage(systemName: "music.mic")
+//        let imageStickers    = UIImage(systemName: "tortoise")
+//        let imageLocation    = UIImage(systemName: "location")
+        let imageCamera        = UIImage(named: "rsz_icon_camera1")
+        let imagePhoto        = UIImage(named: "rsz_icon_fileattach")
+        let imageVideo        = UIImage(named: "rsz_icon_camera1")
+//        let imageAudio        = UIImage(systemName: "music.mic")
+        let imageStickers    = UIImage(named: "rsz_icon_smile")
+        
         alertCamera.setValue(imageCamera, forKey: "image");     alert.addAction(alertCamera)
         alertPhoto.setValue(imagePhoto, forKey: "image");        alert.addAction(alertPhoto)
         alertVideo.setValue(imageVideo, forKey: "image");        alert.addAction(alertVideo)
@@ -298,7 +292,7 @@ class MKPrivateChatView: ChatViewController {
         messageInputBar.sendButton.imageView?.backgroundColor = #colorLiteral(red: 0.2039215686, green: 0.7803921569, blue: 0.3490196078, alpha: 1)
         messageInputBar.sendButton.contentEdgeInsets = UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2)
         messageInputBar.sendButton.setSize(CGSize(width: 36, height: 36), animated: false)
-        messageInputBar.sendButton.setImage(UIImage(named: "right-arrow"), for: .normal)
+        messageInputBar.sendButton.setImage(UIImage(named: "icon_send"), for: .normal)
         messageInputBar.sendButton.title = nil
         messageInputBar.sendButton.imageView?.layer.cornerRadius = 16
         messageInputBar.middleContentViewPadding.right = 2
@@ -498,21 +492,21 @@ extension MKPrivateChatView: MessagesDisplayDelegate {
         if isFromCurrentSender(message: message) {
             corners.formUnion(.topLeft)
             corners.formUnion(.bottomLeft)
-            if !isPreviousMessageSameSender(at: indexPath) {
-                corners.formUnion(.topRight)
-            }
-            if !isNextMessageSameSender(at: indexPath) {
-                corners.formUnion(.bottomRight)
-            }
+//            if !isPreviousMessageSameSender(at: indexPath) {
+//                corners.formUnion(.topRight)
+//            }
+//            if !isNextMessageSameSender(at: indexPath) {
+//                corners.formUnion(.bottomRight)
+//            }
         } else {
             corners.formUnion(.topRight)
             corners.formUnion(.bottomRight)
-            if !isPreviousMessageSameSender(at: indexPath) {
-                corners.formUnion(.topLeft)
-            }
-            if !isNextMessageSameSender(at: indexPath) {
-                corners.formUnion(.bottomLeft)
-            }
+//            if !isPreviousMessageSameSender(at: indexPath) {
+//                corners.formUnion(.topLeft)
+//            }
+//            if !isNextMessageSameSender(at: indexPath) {
+//                corners.formUnion(.bottomLeft)
+//            }
         }
         
         return .custom { view in
@@ -526,16 +520,23 @@ extension MKPrivateChatView: MessagesDisplayDelegate {
     
     func configureAvatarView(_ avatarView: AvatarView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
         
-        
+       if isFromCurrentSender(message: message) {
+            avatarView.sd_setImage(with: URL(string: UserVM.current_user.user_avatar![0]), placeholderImage: UIImage(named: "avatar_woman"))
+            avatarView.layer.borderColor = UIColor.primaryColor.cgColor
+        }
+       else {
+             avatarView.sd_setImage(with: URL(string: connectedPerson.user_avatar![0]), placeholderImage: UIImage(named: "avatar_woman"))
+             avatarView.layer.borderColor = UIColor.primaryColor.cgColor
+        }
         
 //        let avatar = MessageVM.shared.getAvatarFor(sender: message.sender)
         
-       avatarView.sd_setImage(with: URL(string: connectedPerson.user_avatar![0]), placeholderImage: UIImage(named: "avatar_woman"))
+      
         
 //        avatarView.set(avatar: avatar)
-        avatarView.isHidden = isNextMessageSameSender(at: indexPath)
+//        avatarView.isHidden = isNextMessageSameSender(at: indexPath)
         avatarView.layer.borderWidth = 2
-        avatarView.layer.borderColor = UIColor.primaryColor.cgColor
+        
         
     }
     
@@ -608,14 +609,19 @@ extension MKPrivateChatView: MessagesLayoutDelegate {
     
     func messageTopLabelHeight(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> CGFloat {
         if isFromCurrentSender(message: message) {
-            return !isPreviousMessageSameSender(at: indexPath) ? 20 : 0
+            
+            return  0
         } else {
-            return !isPreviousMessageSameSender(at: indexPath) ? (20 + outgoingAvatarOverlap) : 0
+            return  0
+//            return !isPreviousMessageSameSender(at: indexPath) ? (20 + outgoingAvatarOverlap) : 0
         }
+        
+        
     }
 
     func messageBottomLabelHeight(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> CGFloat {
-        return (!isNextMessageSameSender(at: indexPath) && isFromCurrentSender(message: message)) ? 16 : 0
+//        return (!isNextMessageSameSender(at: indexPath) && isFromCurrentSender(message: message)) ? 16 : 0
+        return 0
     }
 
 }
@@ -652,24 +658,51 @@ extension MKPrivateChatView: SearchTypeDelegate{
     func selectSearchType(index: Int, type: String) {
         
         if type == AppConstant.languages[0] {
-            MessageVM.shared.geData(language: AppConstant.LanguageKorean ,sender_id: chatId, connectedPerson: connectedPerson, completion: {_ in
-                self.loadFirstMessages()
-            })
+            
+            DispatchQueue.global(qos: .userInitiated).async {
+//                let count = UserDefaults.standard.mockMessagesCount()
+                MessageVM.shared.changeLanguage(language: AppConstant.LanguageKorean) { messages in
+                    DispatchQueue.main.async {
+                        self.messageList = messages
+                        self.messagesCollectionView.reloadData()
+                        self.messagesCollectionView.scrollToBottom()
+                    }
+                }
+            }
+            
         }
         else if type == AppConstant.languages[1] {
-            MessageVM.shared.geData(language: AppConstant.LanguageChinse ,sender_id: chatId, connectedPerson: connectedPerson, completion: {_ in
-                self.loadFirstMessages()
-            })
+            DispatchQueue.global(qos: .userInitiated).async {
+                MessageVM.shared.changeLanguage(language: AppConstant.LanguageChinese) { messages in
+                    DispatchQueue.main.async {
+                        self.messageList = messages
+                        self.messagesCollectionView.reloadData()
+                        self.messagesCollectionView.scrollToBottom()
+                    }
+                }
+            }
         }
         else if type == AppConstant.languages[2] {
-            MessageVM.shared.geData(language: AppConstant.LanguageJapanese ,sender_id: chatId, connectedPerson: connectedPerson, completion: {_ in
-                self.loadFirstMessages()
-            })
+             DispatchQueue.global(qos: .userInitiated).async {
+                           MessageVM.shared.changeLanguage(language: AppConstant.LanguageJapanese) { messages in
+                               DispatchQueue.main.async {
+                                   self.messageList = messages
+                                   self.messagesCollectionView.reloadData()
+                                   self.messagesCollectionView.scrollToBottom()
+                               }
+                           }
+                       }
         }
         else {
-            MessageVM.shared.geData(language: AppConstant.LanguageEnglish ,sender_id: chatId, connectedPerson: connectedPerson, completion: {_ in
-                self.loadFirstMessages()
-            })
+             DispatchQueue.global(qos: .userInitiated).async {
+               MessageVM.shared.changeLanguage(language: AppConstant.LanguageEnglish) { messages in
+                   DispatchQueue.main.async {
+                       self.messageList = messages
+                       self.messagesCollectionView.reloadData()
+                       self.messagesCollectionView.scrollToBottom()
+                   }
+               }
+             }
         }
         
     }

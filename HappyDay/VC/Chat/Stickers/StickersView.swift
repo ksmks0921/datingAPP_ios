@@ -18,7 +18,7 @@ import UIKit
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------
-class StickersView: UIViewController {
+class StickersView: BaseVC {
 
 	@IBOutlet weak var delegate: StickersDelegate?
 
@@ -38,15 +38,24 @@ class StickersView: UIViewController {
 
 		loadStickers()
 	}
-
+    override func viewWillAppear(_ animated: Bool) {
+           
+             super.viewWillAppear(animated)
+             navigationController?.setNavigationBarHidden(false, animated: animated)
+             navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.2039215686, green: 0.7803921569, blue: 0.3490196078, alpha: 1)
+             navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)]
+           
+    }
 	// MARK: - Load stickers
 	//---------------------------------------------------------------------------------------------------------------------------------------------
 	func loadStickers() {
 
-		for index in 1...78 {
-			let sticker = String(format: "https://relatedcode.com/stickers/sticker%02d.png", index)
-			stickers.append(sticker)
-		}
+//		for index in 1...78 {
+//			let sticker = String(format: "https://relatedcode.com/stickers/sticker%02d.png", index)
+//			stickers.append(sticker)
+//		}
+        
+        stickers = AppConstant.stickers
 	}
 
 	// MARK: - User actions

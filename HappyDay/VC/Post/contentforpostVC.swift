@@ -98,10 +98,10 @@ extension contentforpostVC:  UITableViewDelegate, UITableViewDataSource {
             cell.hobbyLabel.text = event_post[indexPath.row].event_type
             cell.nickname.text = event_post[indexPath.row].nick_name
             if event_post[indexPath.row].thumb_path != nil {
-                cell.postImageView.sd_setImage(with: URL(string: event_post[indexPath.row].thumb_path), placeholderImage: UIImage(systemName: "photo"))
+                cell.postImageView.sd_setImage(with: URL(string: event_post[indexPath.row].thumb_path), placeholderImage: UIImage(named: "default"))
             }
             else {
-                cell.postImageView.image = UIImage(systemName: "photo")
+                cell.postImageView.image = UIImage(named: "default")
             }
             if event_post[indexPath.row].gender == true {
                 cell.nickname.textColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
