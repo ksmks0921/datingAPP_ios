@@ -224,9 +224,9 @@ class MKPrivateChatView: ChatViewController {
 
         messageInputBar.inputTextView.resignFirstResponder()
         
-        let attributedString = NSAttributedString(string: "Title", attributes: [
+        let attributedString = NSAttributedString(string: "옵션선택", attributes: [
             NSAttributedString.Key.font : UIFont.systemFont(ofSize: 15), //your font here
-            NSAttributedString.Key.foregroundColor : #colorLiteral(red: 0.2039215686, green: 0.7803921569, blue: 0.3490196078, alpha: 1)
+            
         ])
         
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
@@ -272,6 +272,7 @@ class MKPrivateChatView: ChatViewController {
     
         alert.addAction(UIAlertAction(title: "취 소", style: .cancel))
         alert.setValue(attributedString, forKey: "attributedTitle")
+        alert.view.tintColor = #colorLiteral(red: 0.2039215686, green: 0.7803921569, blue: 0.3490196078, alpha: 1)
         present(alert, animated: true)
     }
     
@@ -289,7 +290,7 @@ class MKPrivateChatView: ChatViewController {
         
         messageInputBar.setRightStackViewWidthConstant(to: 36, animated: false)
         messageInputBar.setLeftStackViewWidthConstant(to: 36, animated: false)
-        messageInputBar.sendButton.imageView?.backgroundColor = #colorLiteral(red: 0.2039215686, green: 0.7803921569, blue: 0.3490196078, alpha: 1)
+//        messageInputBar.sendButton.imageView?.backgroundColor = #colorLiteral(red: 0.2039215686, green: 0.7803921569, blue: 0.3490196078, alpha: 1)
         messageInputBar.sendButton.contentEdgeInsets = UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2)
         messageInputBar.sendButton.setSize(CGSize(width: 36, height: 36), animated: false)
         messageInputBar.sendButton.setImage(UIImage(named: "icon_send"), for: .normal)
@@ -635,23 +636,25 @@ extension MKPrivateChatView: UIImagePickerControllerDelegate, UINavigationContro
         let video = info[.mediaURL] as? URL
         let photo = info[.editedImage] as? UIImage
 
-        messageSend(text: nil, photo: photo, video: video, audio: nil)
+        messageSend(text: nil, photo: photo, sticker: nil, video: video, audio: nil)
 
         picker.dismiss(animated: true)
     }
     
-    func messageSend(text: String?, photo: UIImage?, video: URL?, audio: String?) {
-
-        self.send(chatId: chatId, text: text, photo: photo, video: video, audio: audio)
+    func messageSend(text: String?, photo: UIImage?, sticker: String?, video: URL?, audio: String?) {
+       
+        self.send(chatId: chatId, text: text, photo: photo, video: video, audio: audio, sticker: sticker)
     }
 }
 extension MKPrivateChatView: StickersDelegate {
 
     //---------------------------------------------------------------------------------------------------------------------------------------------
-    func didSelectSticker(sticker: UIImage) {
-
+    func didSelectSticker(sticker: String) {
+      
+        messageSend(text: nil, photo: nil, sticker: sticker, video: nil, audio: nil)
 //        messageSend(text: nil, photo: sticker, video: nil, audio: nil)
     }
+    
 }
 extension MKPrivateChatView: SearchTypeDelegate{
     
@@ -711,9 +714,10 @@ extension MKPrivateChatView: SearchTypeDelegate{
 }
 extension MKPrivateChatView {
     
-    func send(chatId: String, text: String?, photo: UIImage?, video: URL?, audio: String?) {
+    func send(chatId: String, text: String?, photo: UIImage?, video: URL?, audio: String?, sticker: String?) {
         
         if UserVM.current_user.user_sex == "녀자" || UserVM.user_points > 20{
+                 print("______sending image_________")
                    let formatter = DateFormatter()
                    formatter.locale = Locale(identifier: "en_US_POSIX")
                    formatter.dateFormat = "h:mm a"
@@ -752,11 +756,23 @@ extension MKPrivateChatView {
                             })
                         }
                     }
+                    if sticker != nil {
+                        UserVM.shared.sendEmojMessage(sender_id: chatId, receiver_id: connectedPerson.user_id!, sourceType: AppConstant.eEmoji, sourcePath: sticker!, time: time_string, date: date, completion: {_ in
+                            Indicator.sharedInstance.hideIndicator()
+                            self.messageInputBar.sendButton.stopAnimating()
+                            self.messageInputBar.inputTextView.placeholder = "메쎄지를 입력하세요."
+
+                            self.messagesCollectionView.scrollToBottom(animated: true)
+
+                        })
+                        
+                    }
                     
                   
         }
         else {
-            self.showAlert(message: "포인트가 모자랍니다. 추가하시겠습니까?", title: "알림", otherButtons: ["확인": {(action) in
+            print("______not sending image_________")
+            self.showAlertPoints(message: "포인트가 모자랍니다. 추가하시겠습니까?", title: "알림", otherButtons: ["확인": {(action) in
             
                   print("_______")
             }], cancelTitle: "취소", cancelAction: { (Acrion) in
@@ -802,4 +818,19 @@ extension MKPrivateChatView : ImageSelectProtocol{
     }
     
     
+}
+extension MKPrivateChatView {
+    func showAlertPoints(message: String?, title:String = "알림", otherButtons:[String:((UIAlertAction)-> ())]? = nil, cancelTitle: String = "취소", cancelAction: ((UIAlertAction)-> ())? = nil) {
+        let newTitle = title.capitalized
+        let newMessage = message
+        let alert = UIAlertController(title: newTitle, message: newMessage, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: cancelTitle, style: .cancel, handler: cancelAction))
+        
+        if otherButtons != nil {
+            for key in otherButtons!.keys {
+                alert.addAction(UIAlertAction(title: key, style: .default, handler: otherButtons![key]))
+            }
+        }
+        present(alert, animated: true, completion: nil)
+    }
 }

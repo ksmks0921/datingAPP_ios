@@ -682,7 +682,21 @@ class UserVM {
         
         
     }
-    
+    func sendEmojMessage(sender_id: String, receiver_id: String, sourceType: String, sourcePath: String,  time: String, date: String, completion: @escaping (Bool) -> Void) {
+        
+               
+               UserVM.shared.sendMessage(sender_id: sender_id, receiver_id: receiver_id, text: "", sourceType: sourceType, sourcePath: sourcePath, thumb_path: "", time: time, date: date) { (success, message, error) in
+
+                                  if error == nil{
+                                   if success{
+                                       
+                                       completion(true)
+                                   }
+                           }
+               
+               }
+        
+    }
     func sendVideoMessage(sender_id: String, receiver_id: String, text: String, sourceType: String, sourcePath: String, thumb_path: String,  time: String, date: String, thumb_imageData: UIImage,  video: URL, completion: @escaping (Bool) -> Void) {
         
                // upload video file

@@ -14,7 +14,7 @@ import UIKit
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 @objc protocol StickersDelegate: class {
 
-	func didSelectSticker(sticker: UIImage)
+	func didSelectSticker(sticker: String)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------
@@ -30,9 +30,10 @@ class StickersView: BaseVC {
 	override func viewDidLoad() {
 
 		super.viewDidLoad()
-		title = "Stickers"
-
-		navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(actionDismiss))
+		title = "스틱커"
+        let cancelBtn =  UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(actionDismiss))
+        cancelBtn.title = "취소"
+		navigationItem.leftBarButtonItem = cancelBtn
 
 		collectionView.register(UINib(nibName: "StickersCell", bundle: nil), forCellWithReuseIdentifier: "StickersCell")
 
@@ -113,13 +114,9 @@ extension StickersView: UICollectionViewDelegate {
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
 		collectionView.deselectItem(at: indexPath, animated: true)
-
-		if let cell = collectionView.cellForItem(at: indexPath) as? StickersCell {
-			if let image = cell.imageItem.image {
-				delegate?.didSelectSticker(sticker: image)
-			}
-		}
-
+        print("_____________")
+        print(stickers[indexPath.row])
+        delegate?.didSelectSticker(sticker: stickers[indexPath.row])
 		dismiss(animated: true)
 	}
 }

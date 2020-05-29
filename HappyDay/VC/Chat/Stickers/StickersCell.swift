@@ -9,8 +9,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-import Kingfisher
-
+import SDWebImage
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 class StickersCell: UICollectionViewCell {
 
@@ -19,7 +18,10 @@ class StickersCell: UICollectionViewCell {
 	//---------------------------------------------------------------------------------------------------------------------------------------------
 	func bindData(sticker: String) {
 
-		let url = URL(string: sticker)
-		imageItem.kf.setImage(with: url, placeholder: nil)
+//		let url = URL(string: sticker)
+//		imageItem.kf.setImage(with: url, placeholder: nil)
+      
+        
+        imageItem.sd_setImage(with: URL(string: sticker), placeholderImage: nil)
 	}
 }
