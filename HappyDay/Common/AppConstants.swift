@@ -30,6 +30,7 @@ class AppConstant {
     static let languages = ["조선어", "中文", "日本語", "English"]
     static let kShowingSearch = "kSearch"
     static let kIsAutoLogin = "kIsAutoLogin"
+    static let kIsScreenLock = "kIsScreenLock"
     static let kMessageAlarm = "kMessageAlarm"
     static let kReportAlarm = "kReportAlarm"
     static let kShowingFilter = "kFilter"

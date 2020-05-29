@@ -296,13 +296,18 @@ extension mainProfileVC:  UITableViewDelegate, UITableViewDataSource {
         
         guard let popupVC = storyboard?.instantiateViewController(withIdentifier: "BottomeSelectVC") as? BottomeSelectVC else { return }
         
-        let height_view = self.view.frame.size.height
-        let height_bottom_view = (items.count + 1) * AppConstant.height_60 
-        if height_bottom_view > Int(height_view) {
-            popupVC.height = CGFloat(height_view - 50)
+        let bounds = UIScreen.main.bounds
+      
+        let height_view = bounds.size.height
+        let height_bottom_view = (items.count + 1) * AppConstant.height_60
+ 
+        if (height_bottom_view + 70) > Int(height_view) {
+           
+            popupVC.height = CGFloat(height_view - 70)
         }
         else {
-            popupVC.height = CGFloat(height_bottom_view + 70)
+            
+            popupVC.height = CGFloat(height_bottom_view)
             
         }
         popupVC.topCornerRadius = 10

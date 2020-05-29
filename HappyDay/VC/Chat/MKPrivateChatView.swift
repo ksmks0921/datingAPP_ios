@@ -154,7 +154,7 @@ class MKPrivateChatView: ChatViewController {
         super.configureMessageCollectionView()
         
         let layout = messagesCollectionView.collectionViewLayout as? MessagesCollectionViewFlowLayout
-        layout?.sectionInset = UIEdgeInsets(top: 1, left: 8, bottom: 1, right: 8)
+        layout?.sectionInset = UIEdgeInsets(top: 0, left: 8, bottom: 1, right: 8)
         
         // Hide the outgoing avatar and adjust the label alignment to line up with the messages
         

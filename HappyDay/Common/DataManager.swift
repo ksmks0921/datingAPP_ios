@@ -84,6 +84,15 @@ class DataManager {
             return UserDefaults.standard.bool(forKey: AppConstant.kIsAutoLogin)
         }
     }
+    static var isLockScreen: Bool!{
+        set{
+            UserDefaults.standard.setValue(newValue, forKey: AppConstant.kIsScreenLock)
+            UserDefaults.standard.synchronize()
+        }
+        get{
+            return UserDefaults.standard.bool(forKey: AppConstant.kIsScreenLock)
+        }
+    }
     static var messageAlarm: Bool!{
         set{
             UserDefaults.standard.setValue(newValue, forKey: AppConstant.kIsAutoLogin)

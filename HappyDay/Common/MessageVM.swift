@@ -439,21 +439,26 @@ final internal class MessageVM {
               
                             
                         let chats = self.all_custom_messages
-                        var chats_for_list =  [MessageItem]()
-                        for chats_item in chats {
-                            if chats_item.receiver == id || chats_item.sender == id {
-                                chats_for_list.append(chats_item)
-                            }
+                        if chats.count != 0 {
+                            
+               
+                               var chats_for_list =  [MessageItem]()
+                               for chats_item in chats {
+                                   if chats_item.receiver == id || chats_item.sender == id {
+                                       chats_for_list.append(chats_item)
+                                   }
+                               }
+                               let last_message: String!
+                               if chats_for_list[chats_for_list.count - 1].message != "" {
+                                   last_message = chats_for_list[chats_for_list.count - 1].message
+                               }
+                               else {
+                                last_message = "(" + chats_for_list[chats_for_list.count - 1].source_type! + ")"
+                               }
+                               let list_item = ChatListItem(avatar: avatar![0], nick_name: nick_name!,  age: age!, region:region!, last_message: last_message, last_connect_time: chats_for_list[0].time!, last_connect_date: chats_for_list[chats_for_list.count - 1].date!, id: person_item.user_id!, chats: chats_for_list)
+                               self.chatListItems.append(list_item)
                         }
-                        let last_message: String!
-                        if chats_for_list[chats_for_list.count - 1].message != "" {
-                            last_message = chats_for_list[chats_for_list.count - 1].message
-                        }
-                        else {
-                            last_message = chats_for_list[chats_for_list.count - 1].source_type
-                        }
-                        let list_item = ChatListItem(avatar: avatar![0], nick_name: nick_name!,  age: age!, region:region!, last_message: last_message, last_connect_time: chats_for_list[0].time!, last_connect_date: chats_for_list[chats_for_list.count - 1].date!, id: person_item.user_id!, chats: chats_for_list)
-                        self.chatListItems.append(list_item)
+                       
                        
                    
                         

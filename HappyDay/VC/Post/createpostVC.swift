@@ -9,6 +9,7 @@
 import UIKit
 import PopupDialog
 import FirebaseStorage
+import AVFoundation
 
 class createpostVC: BaseVC {
 
@@ -288,18 +289,22 @@ extension createpostVC: UIImagePickerControllerDelegate, UINavigationControllerD
             let popup = PopupDialog(title: title, message: "")
 
             let buttonOne = DefaultButton(title: "카메라", dismissOnTap: true) {
-                self.showImagePickerController(sourceType: .camera)
+//                self.showImagePickerController(sourceType: .camera)
+                ImagePicker.cameraMulti(target: self, edit: true)
             }
-
-            let buttonTwo = DefaultButton(title: "이미지 갤러리", dismissOnTap: true) {
-                
-                self.showImagePickerController(sourceType: .photoLibrary)
+            let buttonThree = DefaultButton(title: "사진", dismissOnTap: true) {
+                ImagePicker.photoLibrary(target: self, edit: true)
+//                self.showImagePickerController(sourceType: .photoLibrary)
             }
+            let buttonTwo = DefaultButton(title: "비디오", dismissOnTap: true) {
+                ImagePicker.videoLibrary(target: self, edit: true)
+            }
+            
 
-            let buttonThree = CancelButton(title: "취소", height: 60) {
+            let buttonFour = CancelButton(title: "취소", height: 60) {
                
             }
-            popup.addButtons([buttonOne, buttonTwo, buttonThree])
+            popup.addButtons([buttonOne, buttonTwo, buttonThree, buttonFour])
 
             self.present(popup, animated: true, completion: nil)
         }
@@ -309,8 +314,10 @@ extension createpostVC: UIImagePickerControllerDelegate, UINavigationControllerD
             imagePickerController.delegate = self
             imagePickerController.allowsEditing = true
             imagePickerController.sourceType = sourceType
+//            imagePickerController.mediaTypes =  [kUTTypeImage as String, kUTTypeMovie as String]
             self.present(imagePickerController, animated: true, completion: nil)
         }
+
         func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
             
             video_url = info[.mediaURL] as? URL

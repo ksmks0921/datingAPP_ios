@@ -13,7 +13,7 @@ class settingVC: UIViewController {
     @IBOutlet weak var contentTableView: UITableView!
     @IBOutlet weak var titleLabel: UILabel!
     
-    let items = ["자동로그인", "암호설정", "알림설정", "허가번호 상태"]
+    let items = ["자동로그인", "화면 잠금", "암호설정", "알림설정", "허가번호 상태"]
     
     
     override func viewDidLoad() {
@@ -35,7 +35,7 @@ class settingVC: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
-    @objc func switchValueDidChange(_ sender: UISwitch) {
+    @objc func switchAutoLogin(_ sender: UISwitch) {
         if sender.isOn == true {
             DataManager.isAutoLogin = true
           
@@ -45,6 +45,16 @@ class settingVC: UIViewController {
          
         }
         
+    }
+    @objc func switchScreenLock(_ sender: UISwitch) {
+        if sender.isOn == true {
+            DataManager.isLockScreen = true
+          
+        }
+        else {
+            DataManager.isLockScreen = false
+         
+        }
     }
 
 }
@@ -65,7 +75,21 @@ extension settingVC: UITableViewDelegate, UITableViewDataSource {
             else {
                 cell.switchButton.isOn = false
             }
-            cell.switchButton.addTarget(self, action: #selector(switchValueDidChange(_:)), for: .valueChanged)
+            cell.switchButton.addTarget(self, action: #selector(switchAutoLogin(_:)), for: .valueChanged)
+            return cell
+            
+        }
+        else if indexPath.row == 1 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "settingCellSwitch", for: indexPath as IndexPath) as! settingCellSwitch
+            cell.nameLabel.text = items[indexPath.row]
+            cell.selectionStyle = .none
+            if DataManager.isAutoLogin == true {
+                cell.switchButton.isOn = true
+            }
+            else {
+                cell.switchButton.isOn = false
+            }
+            cell.switchButton.addTarget(self, action: #selector(switchScreenLock(_:)), for: .valueChanged)
             return cell
             
         }
@@ -85,11 +109,11 @@ extension settingVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-        if indexPath.row == 1 {
+        if indexPath.row == 2 {
             let VC = self.storyboard?.instantiateViewController(withIdentifier: "passwordChangeVC") as! passwordChangeVC
             navigationController?.pushViewController(VC, animated: true)
         }
-        if indexPath.row == 2 {
+        if indexPath.row == 3 {
             let VC = self.storyboard?.instantiateViewController(withIdentifier: "alarmSettingVC") as! alarmSettingVC
             navigationController?.pushViewController(VC, animated: true)
         }
