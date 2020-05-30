@@ -104,8 +104,12 @@ class profileVC: BaseVC {
                 return false
             }
         }
+        let date = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        let date_result = formatter.string(from: date)
         Indicator.sharedInstance.showIndicator()
-        UserVM.shared.likeUser(like_age: person.user_age!, like_avatar: person.user_avatar![0], like_city: person.user_city!, like_date: person.user_date!, like_id: person.user_id!, like_info: person.user_introduce!, like_name: person.user_nickName!, like_sex: user_sex() ) { (success, message, error) in
+        UserVM.shared.likeUser(like_age: person.user_age!, like_avatar: person.user_avatar![0], like_city: person.user_city!, like_date: date_result, like_id: person.user_id!, like_info: person.user_introduce!, like_name: person.user_nickName!, like_sex: user_sex() ) { (success, message, error) in
                    if error == nil{
                        if success{
                             self.showAlert(message: "성공!")
@@ -305,6 +309,8 @@ extension profileVC : SearchTypeDelegate{
             let formatter = DateFormatter()
             formatter.dateFormat = "yyyy-MM-dd"
             let date_result = formatter.string(from: date)
+            
+            
             let user_sex = { () -> Bool in
                 if self.person.user_sex == "남자" {
                     return true

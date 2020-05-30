@@ -40,8 +40,31 @@ class personalPageItemVC: UIViewController {
         self.navigationController?.popViewController(animated: true)
         
     }
+    
+    @objc func imageTapped(_ gesture : UITapGestureRecognizer) {
+        let v = gesture.view!
+        let tag = v.tag
+        let VC = self.storyboard?.instantiateViewController(withIdentifier: "profileVC") as! profileVC
+        let selected_person = getDataFromUsers(id: items[tag].like_id)
+        VC.person = selected_person
 
-
+        navigationController?.pushViewController(VC, animated: true)
+        
+    }
+    func getDataFromUsers(id: String) -> person{
+           var target_user: person!
+           for user_item in UserVM.all_users {
+               
+               if user_item.user_id == id {
+                   
+                  target_user = user_item
+                   
+               }
+               
+           }
+           
+           return target_user
+    }
 }
 extension personalPageItemVC: UITableViewDelegate, UITableViewDataSource {
     
@@ -57,12 +80,21 @@ extension personalPageItemVC: UITableViewDelegate, UITableViewDataSource {
         let cell = contentTable.dequeueReusableCell(withIdentifier: "chatTableCell", for: indexPath as IndexPath) as! chatTableCell
        
         cell.photo.sd_setImage(with: URL(string: items[indexPath.row].like_avatar), placeholderImage: UIImage(named: "avatar_woman"))
+        let singleTap = UITapGestureRecognizer(target: self, action: #selector(imageTapped(_:)))
+        cell.photo.tag = indexPath.row
+        cell.photo.isUserInteractionEnabled = true
+        cell.photo.addGestureRecognizer(singleTap)
+        
+        
         cell.name.text = items[indexPath.row].like_name
        
         cell.age_region_label.text = items[indexPath.row].like_age
         cell.last_chat_label.text = items[indexPath.row].like_city
         cell.statusView.isHidden = true
-       
+        
+        
+        let time_text = items[indexPath.row].like_date
+        
         cell.time_label.text = items[indexPath.row].like_date
        
         if items[indexPath.row].user_sex == true {
@@ -78,6 +110,19 @@ extension personalPageItemVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 90
     }
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let connect_user = MessageVM.shared.getDataFromUsers(id: items[indexPath.row].like_date!)
+
+        guard let privateChatView = storyboard?.instantiateViewController(withIdentifier: "MKPrivateChatView") as? MKPrivateChatView else { return }
+        privateChatView.chatId = UserVM.current_user.user_id!
+        privateChatView.connectedPerson = connect_user
+        privateChatView.chat_title = connect_user.user_nickName
+        let backItem = UIBarButtonItem()
+        backItem.title = "뒤로"
+        backItem.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        navigationItem.backBarButtonItem = backItem // This will show in the next view controller being pushed
+        self.navigationController?.pushViewController(privateChatView, animated: true)
+    }
     
 }

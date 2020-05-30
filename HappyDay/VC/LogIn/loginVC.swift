@@ -22,7 +22,7 @@ class loginVC: BaseVC {
     @IBOutlet weak var passwordTextField: UITextField!
     var domain: String?
     @IBOutlet weak var emailTextField: UITextField!
-    
+     @IBOutlet weak var ScrollContent: UIScrollView!
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -33,11 +33,27 @@ class loginVC: BaseVC {
         tapGesture.delegate = self as? UIGestureRecognizerDelegate
         gotodomain.addGestureRecognizer(tapGesture)
         
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name:UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:UIResponder.keyboardWillHideNotification, object: nil)
 
     }
    
-    
+    @objc func keyboardWillShow(notification:NSNotification){
+
+           let userInfo = notification.userInfo!
+           var keyboardFrame:CGRect = (userInfo[UIResponder.keyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
+           keyboardFrame = self.view.convert(keyboardFrame, from: nil)
+
+           var contentInset:UIEdgeInsets = self.ScrollContent.contentInset
+           contentInset.bottom = keyboardFrame.size.height + 20
+           ScrollContent.contentInset = contentInset
+       }
+
+       @objc func keyboardWillHide(notification:NSNotification){
+
+           let contentInset:UIEdgeInsets = UIEdgeInsets.zero
+           ScrollContent.contentInset = contentInset
+       }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         

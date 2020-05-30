@@ -7,7 +7,7 @@ import MessageKit
 import InputBarAccessoryView
 import AVFoundation
 
-class MKPrivateChatView: ChatViewController {
+class MKPrivateChatView: ChatViewController  , UITextViewDelegate {
     
 
     
@@ -30,7 +30,7 @@ class MKPrivateChatView: ChatViewController {
              self.loadFirstMessages()
         })
          
-        
+        messageInputBar.inputTextView.delegate = self as UITextViewDelegate
         messagesCollectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "CustomImageCell")
         
     }
@@ -154,14 +154,14 @@ class MKPrivateChatView: ChatViewController {
         super.configureMessageCollectionView()
         
         let layout = messagesCollectionView.collectionViewLayout as? MessagesCollectionViewFlowLayout
-        layout?.sectionInset = UIEdgeInsets(top: 0, left: 8, bottom: 1, right: 8)
+        layout?.sectionInset = UIEdgeInsets(top: 1, left: 8, bottom: 1, right: 8)
         
         // Hide the outgoing avatar and adjust the label alignment to line up with the messages
         
         
         
 //        layout?.setMessageOutgoingAvatarSize(.zero)
-        layout?.setMessageOutgoingAvatarSize(CGSize(width: 40, height: 40))
+        layout?.setMessageOutgoingAvatarSize(CGSize(width: 36, height: 36))
         layout?.setMessageOutgoingMessageTopLabelAlignment(LabelAlignment(textAlignment: .right, textInsets: UIEdgeInsets(top: 0, left: 0, bottom: outgoingAvatarOverlap, right: 8)))
         layout?.setMessageOutgoingMessageBottomLabelAlignment(LabelAlignment(textAlignment: .right, textInsets: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 8)))
         layout?.setMessageOutgoingMessagePadding(UIEdgeInsets(top: -outgoingAvatarOverlap, left: 18, bottom: outgoingAvatarOverlap, right: -18))
@@ -170,7 +170,7 @@ class MKPrivateChatView: ChatViewController {
         
         
         // Set outgoing avatar to overlap with the message bubble
-        layout?.setMessageIncomingAvatarSize(CGSize(width: 40, height: 40))
+        layout?.setMessageIncomingAvatarSize(CGSize(width: 36, height: 36))
         layout?.setMessageIncomingMessageTopLabelAlignment(LabelAlignment(textAlignment: .left, textInsets: UIEdgeInsets(top: 0, left: 18, bottom: outgoingAvatarOverlap, right: 0)))
        
         layout?.setMessageIncomingMessagePadding(UIEdgeInsets(top: -outgoingAvatarOverlap, left: -18, bottom: outgoingAvatarOverlap, right: 18))
@@ -259,9 +259,9 @@ class MKPrivateChatView: ChatViewController {
 //        let imageLocation    = UIImage(systemName: "location")
         let imageCamera        = UIImage(named: "rsz_icon_camera1")
         let imagePhoto        = UIImage(named: "rsz_icon_fileattach")
-        let imageVideo        = UIImage(named: "rsz_icon_camera1")
+        let imageVideo        = UIImage(named: "youtube")
 //        let imageAudio        = UIImage(systemName: "music.mic")
-        let imageStickers    = UIImage(named: "rsz_icon_smile")
+        let imageStickers    = UIImage(named: "smile")
         
         alertCamera.setValue(imageCamera, forKey: "image");     alert.addAction(alertCamera)
         alertPhoto.setValue(imagePhoto, forKey: "image");        alert.addAction(alertPhoto)
@@ -276,7 +276,13 @@ class MKPrivateChatView: ChatViewController {
         present(alert, animated: true)
     }
     
-
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+          if(text == "\n") {
+              textView.resignFirstResponder()
+              return false
+          }
+          return true
+    }
     
     func actionStickers() {
 
@@ -359,7 +365,10 @@ class MKPrivateChatView: ChatViewController {
             }
         }
     }
-    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
+    }
     private func makeButton(named: String) -> InputBarButtonItem {
         return InputBarButtonItem()
             .configure {
@@ -400,23 +409,26 @@ class MKPrivateChatView: ChatViewController {
 
         let message = messagesDataSource.messageForItem(at: indexPath, in: messagesCollectionView)
         if case .custom = message.kind {
+         
             let cell = messagesCollectionView.dequeueReusableCell(CustomCell.self, for: indexPath)
             cell.configure(with: message, at: indexPath, and: messagesCollectionView)
             return cell
         }
-//        if case .photo = message.kind {
-////             let cell = messagesCollectionView.dequeueReusableCell(withReuseIdentifier: "CustomImageCell", for: indexPath)
-//            let cell = messagesCollectionView.dequeueReusableCell(MediaMessageCell.self, for: indexPath)
-//   //        cell.imageView.sd_setImage(with: message.url, placeholderImage: UIImage(named: "avatar_woman"))
-//            cell.configure(with: message, at: indexPath, and: messagesCollectionView)
-//              return cell
-//        }
-//        if case .video = message.kind {
-//            let cell = messagesCollectionView.dequeueReusableCell(MediaMessageCell.self, for: indexPath)
-//   //        cell.imageView.sd_setImage(with: message.url, placeholderImage: UIImage(named: "avatar_woman"))
-//            cell.configure(with: message, at: indexPath, and: messagesCollectionView)
-//              return cell
-//        }
+        if case .photo = message.kind {
+           
+//             let cell = messagesCollectionView.dequeueReusableCell(withReuseIdentifier: "CustomImageCell", for: indexPath)
+            let cell = messagesCollectionView.dequeueReusableCell(MediaMessageCell.self, for: indexPath)
+   //        cell.imageView.sd_setImage(with: message.url, placeholderImage: UIImage(named: "avatar_woman"))
+            cell.configure(with: message, at: indexPath, and: messagesCollectionView)
+              return cell
+        }
+        if case .video = message.kind {
+            
+            let cell = messagesCollectionView.dequeueReusableCell(MediaMessageCell.self, for: indexPath)
+   //        cell.imageView.sd_setImage(with: message.url, placeholderImage: UIImage(named: "avatar_woman"))
+            cell.configure(with: message, at: indexPath, and: messagesCollectionView)
+              return cell
+        }
         return super.collectionView(collectionView, cellForItemAt: indexPath)
     }
 
@@ -527,7 +539,8 @@ extension MKPrivateChatView: MessagesDisplayDelegate {
         }
        else {
              avatarView.sd_setImage(with: URL(string: connectedPerson.user_avatar![0]), placeholderImage: UIImage(named: "avatar_woman"))
-             avatarView.layer.borderColor = UIColor.primaryColor.cgColor
+            avatarView.layer.borderColor = (UIColor(red: 230/255, green: 230/255, blue: 230/255, alpha: 1) as! CGColor)
+        
         }
         
 //        let avatar = MessageVM.shared.getAvatarFor(sender: message.sender)

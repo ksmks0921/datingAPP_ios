@@ -284,8 +284,7 @@ class UserVM {
                    }
                   
             }
-            print("_____blockList")
-            print(UserVM.block_list.count)
+        
              completion(true)
         }
     

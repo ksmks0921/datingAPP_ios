@@ -305,7 +305,7 @@ final internal class MessageVM {
                                            if let data = try? Data(contentsOf: url!)
                                            {
                                                let image: UIImage = UIImage(data: data)!
-                                               original_message = MockMessage(image: image, user: user, messageId: uniqueID, date: date)
+                                               original_message = MockMessage(thumbnail: image, user: user, messageId: uniqueID, date: date)
                                             self.messages.append(original_message)
                                             self.messages_korean.append(original_message)
                                             self.messages_japanese.append(original_message)
@@ -317,9 +317,9 @@ final internal class MessageVM {
                                              let url = URL(string:custom_message_item.source_path!)
                                            if let data = try? Data(contentsOf: url!)
                                            {
-                                               let image: UIImage = UIImage(data: data)!
+                                            let image: UIImage = UIImage.sd_image(withGIFData: data)!
 //                                            MockMessage(emoji: emojis[randomNumberEmoji], user: user, messageId: uniqueID, date: date)
-                                               original_message = MockMessage(image: image, user: user, messageId: uniqueID, date: date)
+                                            original_message = MockMessage(image: image, user: user, messageId: uniqueID, date: date)
                                             self.messages.append(original_message)
                                             self.messages_korean.append(original_message)
                                             self.messages_japanese.append(original_message)
