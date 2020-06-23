@@ -56,7 +56,15 @@ class DataManager {
             return UserDefaults.standard.string(forKey: AppConstant.kUserEmail)
         }
     }
-    
+    static var password:String? {
+        set {
+            UserDefaults.standard.setValue(newValue, forKey: AppConstant.kUserPassword)
+            UserDefaults.standard.synchronize()
+        }
+        get {
+            return UserDefaults.standard.string(forKey: AppConstant.kUserPassword)
+        }
+    }
     static var deviceToken:String? {
         set {
             UserDefaults.standard.setValue(newValue, forKey: AppConstant.kDeviceToken)
@@ -95,20 +103,20 @@ class DataManager {
     }
     static var messageAlarm: Bool!{
         set{
-            UserDefaults.standard.setValue(newValue, forKey: AppConstant.kIsAutoLogin)
-            UserDefaults.standard.synchronize()
-        }
-        get{
-            return UserDefaults.standard.bool(forKey: AppConstant.kIsAutoLogin)
-        }
-    }
-    static var likeAlarm: Bool!{
-        set{
             UserDefaults.standard.setValue(newValue, forKey: AppConstant.kMessageAlarm)
             UserDefaults.standard.synchronize()
         }
         get{
             return UserDefaults.standard.bool(forKey: AppConstant.kMessageAlarm)
+        }
+    }
+    static var likeAlarm: Bool!{
+        set{
+            UserDefaults.standard.setValue(newValue, forKey: AppConstant.kLikeAlarm)
+            UserDefaults.standard.synchronize()
+        }
+        get{
+            return UserDefaults.standard.bool(forKey: AppConstant.kLikeAlarm)
         }
     }
     static var reportAlarm: Bool!{
@@ -118,6 +126,16 @@ class DataManager {
         }
         get{
             return UserDefaults.standard.bool(forKey: AppConstant.kReportAlarm)
+        }
+    }
+   
+    static var screenLockPass: String!{
+        set{
+            UserDefaults.standard.setValue(newValue, forKey: AppConstant.screenLockPass)
+            UserDefaults.standard.synchronize()
+        }
+        get{
+            return UserDefaults.standard.string(forKey: AppConstant.screenLockPass)
         }
     }
 }

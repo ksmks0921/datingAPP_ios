@@ -10,7 +10,7 @@ import UIKit
 import AVKit
 import AVFoundation
 
-class FirstPageVC: UIViewController {
+class FirstPageVC: BaseVC {
 
     @IBOutlet weak var alertView: UIImageView!
     @IBOutlet weak var alertViewCloseBtn: UIButton!
@@ -36,7 +36,9 @@ class FirstPageVC: UIViewController {
         if DataManager.reportAlarm == nil {
             DataManager.reportAlarm = false
         }
-        
+        if DataManager.isLockScreen == nil {
+            DataManager.isLockScreen = false
+        }
 
     }
 
@@ -62,9 +64,39 @@ class FirstPageVC: UIViewController {
         showVideo()
     }
     @IBAction func gotoLogin(_ sender: Any) {
-       
-        let VC = self.storyboard?.instantiateViewController(withIdentifier: "loginVC") as! loginVC
-        navigationController?.pushViewController(VC, animated: true)
+        if DataManager.isAutoLogin {
+                      Indicator.sharedInstance.showIndicator()
+            UserVM.shared.login(email: DataManager.email!, password: DataManager.password!) { (success, message, error) in
+                                 if error == nil{
+                                     if success{
+                                          Indicator.sharedInstance.hideIndicator()
+                                          DataManager.isLogin = true
+                                          DataManager.isShowingSearchResult = false
+                                      
+                                          SettingVM.shared.getPoints()
+                                          SettingVM.shared.getLikes()
+                                          SettingVM.shared.getMemos()
+                                          SettingVM.shared.getIgnores()
+                                          SettingVM.shared.getBlocks()
+                                          let VC = self.storyboard?.instantiateViewController(withIdentifier: "customTabBarVC") as! customTabBarVC
+                                          self.navigationController?.pushViewController(VC, animated: true)
+                                          
+                                      
+                                      
+                                      } else {
+                                          self.showAlert(message: message)
+                                      }
+                                  
+                              }else {
+                                  self.showAlert(message: message)
+                              }
+                      }
+        }
+        else {
+            let VC = self.storyboard?.instantiateViewController(withIdentifier: "loginVC") as! loginVC
+            navigationController?.pushViewController(VC, animated: true)
+        }
+        
        
                
     }

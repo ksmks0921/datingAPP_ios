@@ -43,8 +43,8 @@ class mainPageVC: BaseVC {
         
         
         
-        let nibCell = UINib(nibName: "largeCollectionViewCell", bundle: nil)
-        collectionView.register(nibCell, forCellWithReuseIdentifier: largeCollectioinViewCellId)
+        
+       
       
         if DataManager.isShowingSearchResult! {
             self.partners = UserVM.search_result
@@ -70,13 +70,13 @@ class mainPageVC: BaseVC {
         }
         setupUI()
         
-       
-  
         
+
         
         
         
     }
+    
     func setupUI() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(selectViewType(_:)))
         tapGesture.delegate = self as? UIGestureRecognizerDelegate
@@ -109,11 +109,28 @@ class mainPageVC: BaseVC {
         tapGestureSearch.delegate = self as? UIGestureRecognizerDelegate
         searchTypeView.isUserInteractionEnabled = true
         searchTypeView.addGestureRecognizer(tapGestureSearch)
+        
+        let nibCell = UINib(nibName: "largeCollectionViewCell", bundle: nil)
+        collectionView.register(nibCell, forCellWithReuseIdentifier: largeCollectioinViewCellId)
     }
     override func viewWillAppear(_ animated: Bool) {
+        
           super.viewWillAppear(animated)
           navigationController?.setNavigationBarHidden(true, animated: animated)
-      }
+         
+          if DataManager.isLockScreen {
+              NotificationCenter.default.addObserver(self, selector: #selector(applicationDidBecomeActive), name: UIApplication.didBecomeActiveNotification, object: nil)
+          }
+          else {
+              NotificationCenter.default.removeObserver(self, name: UIApplication.didBecomeActiveNotification, object: nil)
+          }
+    }
+    @objc func applicationDidBecomeActive(notification:NSNotification){
+         
+             let VC = self.storyboard?.instantiateViewController(withIdentifier: "ScreenLockVC") as! ScreenLockVC
+             navigationController?.pushViewController(VC, animated: true)
+  
+    }
     override func viewDidLayoutSubviews() {
         topTapCustomView.frame.size.height = navbarHeight
     }

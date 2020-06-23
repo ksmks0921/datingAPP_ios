@@ -25,6 +25,36 @@ class SettingVM {
     static var OurStyleList = [String]()
     static var LifeStyleList = [String]()
     
+    func getPoints() {
+        UserVM.shared.getPoint(user_id: DataManager.userId!, completion: {_ in
+            DataManager.points = UserVM.user_points
+        })
+    }
+    func getRegions() {
+        UserVM.shared.getLikes(user_id: DataManager.userId!, completion: {_ in
+            print("Likes added successfully!")
+        })
+    }
+    func getLikes() {
+        UserVM.shared.getLikes(user_id: DataManager.userId!, completion: {_ in
+            print("Likes added successfully!")
+        })
+    }
+    func getMemos() {
+        UserVM.shared.getMemos(user_id: DataManager.userId!, completion: {_ in
+            print("Memos added successfully!")
+        })
+    }
+    func getIgnores() {
+        UserVM.shared.getIgnores(user_id: DataManager.userId!, completion: {_ in
+            print("Ignores added successfully!")
+        })
+    }
+    func getBlocks() {
+        UserVM.shared.getBlocks(user_id: DataManager.userId!, completion: {_ in
+            print("Blocks added successfully!")
+        })
+    }
     func getSelectingAges(completion: @escaping (Bool) -> Void){
         
        

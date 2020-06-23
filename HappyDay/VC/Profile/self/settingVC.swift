@@ -69,7 +69,7 @@ extension settingVC: UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: "settingCellSwitch", for: indexPath as IndexPath) as! settingCellSwitch
             cell.nameLabel.text = items[indexPath.row]
             cell.selectionStyle = .none
-            if DataManager.isAutoLogin == true {
+            if DataManager.isAutoLogin {
                 cell.switchButton.isOn = true
             }
             else {
@@ -83,7 +83,7 @@ extension settingVC: UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: "settingCellSwitch", for: indexPath as IndexPath) as! settingCellSwitch
             cell.nameLabel.text = items[indexPath.row]
             cell.selectionStyle = .none
-            if DataManager.isAutoLogin == true {
+            if DataManager.isLockScreen == true {
                 cell.switchButton.isOn = true
             }
             else {

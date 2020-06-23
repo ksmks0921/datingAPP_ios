@@ -21,6 +21,7 @@ class AppConstant {
     static let kUserId = "userId"
     static let kLoginStatus = "loginStatus"
     static let kUserEmail = "userEmail"
+    static let kUserPassword = "kUserPassword"
     static let kDeviceToken = "deviceToken"
     static let UserFcmIds = "user-fcm-ids"
     static let LanguageEnglish = "english"
@@ -33,8 +34,10 @@ class AppConstant {
     static let kIsScreenLock = "kIsScreenLock"
     static let kMessageAlarm = "kMessageAlarm"
     static let kReportAlarm = "kReportAlarm"
+    static let kLikeAlarm = "kLikeAlarm"
     static let kShowingFilter = "kFilter"
-
+  
+    static let screenLockPass = "screenLockPass"
     
     static let API_KEY_TRANSLATE = "AIzaSyBNoD64Un372JgIMHQMQ0ODF9eBsq59GIM"
     

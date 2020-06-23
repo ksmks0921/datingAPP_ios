@@ -221,36 +221,98 @@
             </objects>
             <point key="canvasLocation" x="1769.5652173913045" y="2156.9196428571427"/>
         </scene>
-        <!--View Controller-->
+        <!--Screen LockVC-->
         <scene sceneID="7vE-bw-gvT">
             <objects>
-                <viewController id="5Zh-sg-Y94" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ScreenLockVC" id="5Zh-sg-Y94" customClass="ScreenLockVC" customModule="HappyDay" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="owh-YJ-S7P">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="d0F-wo-y4M">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LN7-or-QPg">
+                                <rect key="frame" x="0.0" y="44" width="414" height="50"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="パスワード確認" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q7H-zQ-X0E">
+                                        <rect key="frame" x="146" y="14.5" width="122" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="Q7H-zQ-X0E" firstAttribute="centerX" secondItem="LN7-or-QPg" secondAttribute="centerX" id="Cdr-Pa-Zot"/>
+                                    <constraint firstItem="Q7H-zQ-X0E" firstAttribute="centerY" secondItem="LN7-or-QPg" secondAttribute="centerY" id="P1U-uz-dLU"/>
+                                    <constraint firstAttribute="height" constant="50" id="g4d-dV-IIR"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GyK-kc-SqU">
+                                <rect key="frame" x="0.0" y="94" width="414" height="768"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="パスワード確認" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O3O-4a-a3f">
+                                        <rect key="frame" x="30" y="28" width="122" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="******" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Z8X-Io-D7O">
+                                        <rect key="frame" x="30" y="71" width="354" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="66d-QS-6sf"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dLi-kY-7cQ" customClass="RoundButton" customModule="HappyDay" customModuleProvider="target">
+                                        <rect key="frame" x="30" y="141" width="354" height="44"/>
+                                        <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="lCK-HP-Z0v"/>
+                                        </constraints>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="パスワード確認"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="4"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="confirmButtonTapped:" destination="5Zh-sg-Y94" eventType="touchUpInside" id="iQf-F4-Uh5"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="5Zh-sg-Y94" id="e9o-KX-j1h"/>
-                                    <outlet property="delegate" destination="5Zh-sg-Y94" id="TNz-ez-6AS"/>
-                                </connections>
-                            </tableView>
+                                <constraints>
+                                    <constraint firstItem="dLi-kY-7cQ" firstAttribute="top" secondItem="Z8X-Io-D7O" secondAttribute="bottom" constant="30" id="7tM-ch-D9B"/>
+                                    <constraint firstItem="O3O-4a-a3f" firstAttribute="leading" secondItem="GyK-kc-SqU" secondAttribute="leading" constant="30" id="EKd-Z9-tUz"/>
+                                    <constraint firstItem="dLi-kY-7cQ" firstAttribute="trailing" secondItem="Z8X-Io-D7O" secondAttribute="trailing" id="Gid-UB-MWS"/>
+                                    <constraint firstItem="O3O-4a-a3f" firstAttribute="top" secondItem="GyK-kc-SqU" secondAttribute="top" constant="28" id="LtD-QM-tDG"/>
+                                    <constraint firstItem="Z8X-Io-D7O" firstAttribute="centerX" secondItem="GyK-kc-SqU" secondAttribute="centerX" id="RXi-3g-RJK"/>
+                                    <constraint firstItem="Z8X-Io-D7O" firstAttribute="leading" secondItem="O3O-4a-a3f" secondAttribute="leading" id="bLM-l4-y9e"/>
+                                    <constraint firstItem="Z8X-Io-D7O" firstAttribute="top" secondItem="O3O-4a-a3f" secondAttribute="bottom" constant="22" id="dDa-rs-nSG"/>
+                                    <constraint firstItem="dLi-kY-7cQ" firstAttribute="leading" secondItem="Z8X-Io-D7O" secondAttribute="leading" id="gQu-yl-md4"/>
+                                </constraints>
+                            </view>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="d0F-wo-y4M" firstAttribute="bottom" secondItem="IiW-kc-9fG" secondAttribute="bottom" id="9vM-ql-mhI"/>
-                            <constraint firstItem="d0F-wo-y4M" firstAttribute="leading" secondItem="IiW-kc-9fG" secondAttribute="leading" id="IJ0-Iz-hxM"/>
-                            <constraint firstItem="d0F-wo-y4M" firstAttribute="top" secondItem="IiW-kc-9fG" secondAttribute="top" id="ZZn-yi-t9d"/>
-                            <constraint firstItem="d0F-wo-y4M" firstAttribute="trailing" secondItem="IiW-kc-9fG" secondAttribute="trailing" id="z0f-J3-FBK"/>
+                            <constraint firstItem="GyK-kc-SqU" firstAttribute="leading" secondItem="IiW-kc-9fG" secondAttribute="leading" id="2ca-iw-imO"/>
+                            <constraint firstItem="GyK-kc-SqU" firstAttribute="bottom" secondItem="IiW-kc-9fG" secondAttribute="bottom" id="53H-f0-kYR"/>
+                            <constraint firstItem="GyK-kc-SqU" firstAttribute="top" secondItem="LN7-or-QPg" secondAttribute="bottom" id="FwE-7p-aaE"/>
+                            <constraint firstItem="LN7-or-QPg" firstAttribute="trailing" secondItem="IiW-kc-9fG" secondAttribute="trailing" id="HEO-To-cVQ"/>
+                            <constraint firstItem="LN7-or-QPg" firstAttribute="leading" secondItem="IiW-kc-9fG" secondAttribute="leading" id="Ic6-IW-VKp"/>
+                            <constraint firstItem="GyK-kc-SqU" firstAttribute="trailing" secondItem="IiW-kc-9fG" secondAttribute="trailing" id="b2g-wF-ufs"/>
+                            <constraint firstItem="LN7-or-QPg" firstAttribute="top" secondItem="IiW-kc-9fG" secondAttribute="top" id="rw3-Ze-3wO"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="IiW-kc-9fG"/>
                     </view>
+                    <connections>
+                        <outlet property="passwordTextField" destination="Z8X-Io-D7O" id="9Hb-H8-Xaa"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tZN-xL-YJO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5068" y="4272"/>
+            <point key="canvasLocation" x="4757.971014492754" y="4258.9285714285716"/>
         </scene>
         <!--Private Chat View-->
         <scene sceneID="k42-TV-Jjp">
@@ -3502,14 +3564,14 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V0F-sj-ots">
-                                                    <rect key="frame" x="30" y="-6.5" width="72" height="72"/>
+                                                    <rect key="frame" x="30" y="11.5" width="36" height="36"/>
                                                     <color key="tintColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <state key="normal" image="sharp_radio_button_unchecked_black_18dp">
                                                         <color key="titleColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </state>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uUE-vE-E7w">
-                                                    <rect key="frame" x="117" y="19" width="42" height="21"/>
+                                                    <rect key="frame" x="81" y="19" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -4982,10 +5044,10 @@
                                         <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XcZ-tS-YGB" customClass="RoundButton" customModule="HappyDay" customModuleProvider="target">
-                                        <rect key="frame" x="30" y="254" width="354" height="46"/>
+                                        <rect key="frame" x="30" y="254" width="354" height="44"/>
                                         <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="46" id="g1h-7l-P6d"/>
+                                            <constraint firstAttribute="height" constant="44" id="g1h-7l-P6d"/>
                                         </constraints>
                                         <state key="normal" title="保存">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -4998,7 +5060,7 @@
                                                 <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                <real key="value" value="1"/>
+                                                <real key="value" value="0.0"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>

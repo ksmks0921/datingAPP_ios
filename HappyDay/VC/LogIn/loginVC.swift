@@ -26,18 +26,18 @@ class loginVC: BaseVC {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-     
         
-        //select domain function
+        
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(selectDomain(_:)))
         tapGesture.delegate = self as? UIGestureRecognizerDelegate
         gotodomain.addGestureRecognizer(tapGesture)
+
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name:UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:UIResponder.keyboardWillHideNotification, object: nil)
 
     }
-   
+    
     @objc func keyboardWillShow(notification:NSNotification){
 
        let userInfo = notification.userInfo!
@@ -125,12 +125,14 @@ extension loginVC {
                                 Indicator.sharedInstance.hideIndicator()
                                 DataManager.isLogin = true
                                 DataManager.isShowingSearchResult = false
-                                
-                                self.getPoints()
-                                self.getLikes()
-                                self.getMemos()
-                                self.getIgnores()
-                                self.getBlocks()
+                                DataManager.email = self.emailTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+                                DataManager.password = self.passwordTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+                            
+                                SettingVM.shared.getPoints()
+                                SettingVM.shared.getLikes()
+                                SettingVM.shared.getMemos()
+                                SettingVM.shared.getIgnores()
+                                SettingVM.shared.getBlocks()
                                 let VC = self.storyboard?.instantiateViewController(withIdentifier: "customTabBarVC") as! customTabBarVC
                                 self.navigationController?.pushViewController(VC, animated: true)
                                 
@@ -148,36 +150,7 @@ extension loginVC {
 
     }
     
-    func getPoints() {
-        UserVM.shared.getPoint(user_id: DataManager.userId!, completion: {_ in
-            DataManager.points = UserVM.user_points
-        })
-    }
-    func getRegions() {
-        UserVM.shared.getLikes(user_id: DataManager.userId!, completion: {_ in
-            print("Likes added successfully!")
-        })
-    }
-    func getLikes() {
-        UserVM.shared.getLikes(user_id: DataManager.userId!, completion: {_ in
-            print("Likes added successfully!")
-        })
-    }
-    func getMemos() {
-        UserVM.shared.getMemos(user_id: DataManager.userId!, completion: {_ in
-            print("Memos added successfully!")
-        })
-    }
-    func getIgnores() {
-        UserVM.shared.getIgnores(user_id: DataManager.userId!, completion: {_ in
-            print("Ignores added successfully!")
-        })
-    }
-    func getBlocks() {
-        UserVM.shared.getBlocks(user_id: DataManager.userId!, completion: {_ in
-            print("Blocks added successfully!")
-        })
-    }
+    
 }
 
 extension loginVC: loginVCDelegate {
