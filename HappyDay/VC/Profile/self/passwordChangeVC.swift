@@ -8,10 +8,11 @@
 
 import UIKit
 
-class passwordChangeVC: BaseVC {
+class passwordChangeVC: BaseVC, UITextFieldDelegate{
     
     @IBOutlet weak var passwordText: UITextField!
     @IBOutlet weak var passwordAgainText: UITextField!
+    var count_password: Int!
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -20,7 +21,7 @@ class passwordChangeVC: BaseVC {
         super.viewWillAppear(animated)
         
         navigationController?.setNavigationBarHidden(true, animated: animated)
-       
+        passwordText.delegate = self
                 
     }
     @IBAction func backBtnTapped(_ sender: Any) {
@@ -31,14 +32,20 @@ class passwordChangeVC: BaseVC {
     @IBAction func saveBtnTapped(_ sender: Any) {
         if passwordText.text != "" {
             if passwordAgainText.text == passwordText.text {
-               savePassword()
+                if count_password < 6 {
+                    self.showAlert(message: "半角英数字6文字以上で入力してください")
+                }
+                else {
+                    savePassword()
+                }
+               
             }
             else {
-               self.showAlert(message: "암호를 확인하세요.")
+               self.showAlert(message: "パスワードを再度確認してください")
             }
         }
         else {
-            self.showAlert(message: "암호를 확인하세요.")
+            self.showAlert(message: "パスワードを再度確認してください")
         }
     }
     
@@ -51,4 +58,20 @@ class passwordChangeVC: BaseVC {
             
         }
     }
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        // get the current text, or use an empty string if that failed
+        let currentText = textField.text ?? ""
+        let newLength = textField.text?.count
+        count_password = newLength
+        // attempt to read the range they are trying to change, or exit if we can't
+        guard let stringRange = Range(range, in: currentText) else { return false }
+
+        // add their new text to the existing text
+        let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
+
+        // make sure the result is under 16 characters
+        return updatedText.count <= 8
+    }
+
+   
 }

@@ -37,7 +37,7 @@ class selectDomainVC: UIViewController{
     
     private func setUpTitle(){
         if page_from == "login"{
-            custom_title.text = "도메인 선택"
+            custom_title.text = "ドメイン選択"
        }
        else {
             custom_title.text = "카테고리 선택"

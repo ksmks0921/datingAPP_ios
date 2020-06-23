@@ -25,26 +25,24 @@ class contentforpostVC: UIViewController {
         
         navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.2039215686, green: 0.7803921569, blue: 0.3490196078, alpha: 1)
         UINavigationBar.appearance().tintColor = UIColor.white
-        self.title = "게시판"
+        self.title = "掲示板"
         
         let nib = UINib.init(nibName: "postTableViewCell", bundle: nil)
         self.postTableView.register(nib, forCellReuseIdentifier: "postTableViewCell")
-   
-        hegiht_tableView.constant = CGFloat(height_table - 15)
-        
 
         if DataManager.isShowingFilterResult! {
             self.event_post = UserVM.filtered_eventPosts
             if self.event_post.count == 0 {
                 self.noResultView.alpha = 1
-                  }
-                  else {
-            self.noResultView.alpha = 0
-                  }
+            }
+            else {
+                self.noResultView.alpha = 0
+            }
             self.postTableView.reloadData()
+//            hegiht_tableView.constant = CGFloat(height_table - 50)
         }
         else {
-            
+//            hegiht_tableView.constant = CGFloat(height_table - 50)
             getData()
         }
         
@@ -53,6 +51,7 @@ class contentforpostVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
           super.viewWillAppear(animated)
           navigationController?.setNavigationBarHidden(true, animated: animated)
+//          hegiht_tableView.constant = CGFloat(height_table - 50)
     }
     
     func getData() {
@@ -62,10 +61,11 @@ class contentforpostVC: UIViewController {
               self.event_post = UserVM.eventPosts
                     if self.event_post.count == 0 {
                         self.noResultView.alpha = 1
-                          }
-                          else {
-                    self.noResultView.alpha = 0
-                          }
+                    }
+                    else {
+                        self.noResultView.alpha = 0
+                    }
+//              self.hegiht_tableView.constant = CGFloat(self.height_table - 50)
               self.postTableView.reloadData()
         })
     }

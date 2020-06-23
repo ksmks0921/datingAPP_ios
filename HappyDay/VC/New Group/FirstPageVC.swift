@@ -7,24 +7,22 @@
 //
 
 import UIKit
+import AVKit
+import AVFoundation
 
 class FirstPageVC: UIViewController {
 
-    @IBOutlet weak var pageCollection: UICollectionView!
-    @IBOutlet weak var pageView: UIPageControl!
-    var timer = Timer()
-    var counter = 0
-    
-    var imgArr = [ UIImage(named: "first"),
-                   UIImage(named: "second"),
-                   UIImage(named: "third")]
-    var txtArr = ["해피데이에 오신것을 환영합니다.", "바라는 류형의 사람을 쉽게...", "매칭이 필요 없이도..."]
+    @IBOutlet weak var alertView: UIImageView!
+    @IBOutlet weak var alertViewCloseBtn: UIButton!
+    var player : AVPlayer!
+    var avAssets : AVAsset!
+    @IBOutlet weak var videoView: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        pageView.numberOfPages = imgArr.count
-        pageView.currentPage = 0
-        
+        alertView.isHidden = false
+        alertViewCloseBtn.isHidden = false
+
         
         if DataManager.isAutoLogin == nil {
             DataManager.isAutoLogin = false
@@ -39,32 +37,9 @@ class FirstPageVC: UIViewController {
             DataManager.reportAlarm = false
         }
         
-        DispatchQueue.main.async {
-            self.timer = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(self.changeImage), userInfo: nil, repeats: true)
-        }
-        
-        
-        let nibCell = UINib(nibName: "firstPageCell", bundle: nil)
-        pageCollection.register(nibCell, forCellWithReuseIdentifier: "firstPageCell")
 
     }
-    @objc func changeImage(){
-        if counter < imgArr.count{
-            let index = IndexPath.init(item: counter, section: 0)
-            self.pageCollection.scrollToItem(at: index, at: .centeredHorizontally, animated: true)
-            pageView.currentPage = counter
-            counter += 1
 
-        }
-        else {
-            counter = 0
-            let index = IndexPath.init(item: counter, section: 0)
-            self.pageCollection.scrollToItem(at: index, at: .centeredHorizontally, animated: true)
-            pageView.currentPage = counter
-        }
-    }
-    
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
@@ -78,7 +53,14 @@ class FirstPageVC: UIViewController {
         return .lightContent
     }
     
-    
+    override func viewDidLayoutSubviews() {
+       
+    }
+    @IBAction func alertCloseBtnTapped(_ sender: Any) {
+        alertView.isHidden = true
+        alertViewCloseBtn.isHidden = true
+        showVideo()
+    }
     @IBAction func gotoLogin(_ sender: Any) {
        
         let VC = self.storyboard?.instantiateViewController(withIdentifier: "loginVC") as! loginVC
@@ -94,48 +76,68 @@ class FirstPageVC: UIViewController {
         let VC = self.storyboard?.instantiateViewController(withIdentifier: "facebookLoginVC") as! facebookLoginVC
         navigationController?.pushViewController(VC, animated: true)
     }
-    
+    private func showVideo(){
+            let videoURL = Bundle.main.url(forResource: "splash", withExtension: "mp4") // Get video url
+             
+           player = AVPlayer(url: videoURL!)
+           avAssets = AVAsset(url: videoURL!)
+           let playerLayer = AVPlayerLayer(player: player)
+           playerLayer.frame = self.videoView.bounds
+           playerLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
+           self.videoView.layer.addSublayer(playerLayer)
+            player.play()
+            player.addPeriodicTimeObserver(forInterval: CMTime(seconds: 1, preferredTimescale: 1) , queue: .main) { [weak self] time in
+                
+                if time == self!.avAssets.duration {
+                    
+                    
+                }
+                
+            }
+       
+        
+    }
   
 
 }
-extension FirstPageVC: UICollectionViewDelegate, UICollectionViewDataSource{
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return imgArr.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "firstPageCell", for: indexPath) as! firstPageCell
-        let size = collectionView.frame.size
-        cell.fullImage.image = imgArr[indexPath.row]
-        cell.text.text = txtArr[indexPath.row]
-        cell.height.constant = size.height + 10
-        cell.width.constant = size.width
-        return cell
-    }
-    
-    
-    
-}
-extension FirstPageVC: UICollectionViewDelegateFlowLayout {
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout:
-        UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets{
-        return UIEdgeInsets(top: -55, left: 0, bottom: -50, right: 0)
-    }
-    
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        let size = pageCollection.frame.size
-        return CGSize(width: size.width, height: size.height)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
-    }
-    
-}
+//extension FirstPageVC: UICollectionViewDelegate, UICollectionViewDataSource{
+//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+//        return imgArr.count
+//    }
+//
+//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "firstPageCell", for: indexPath) as! firstPageCell
+//        let size = collectionView.frame.size
+//        cell.fullImage.image = imgArr[indexPath.row]
+//        cell.text.text = txtArr[indexPath.row]
+//        cell.height.constant = size.height + 10
+//        cell.width.constant = size.width
+//        return cell
+//    }
+//
+//
+//
+//}
+//extension FirstPageVC: UICollectionViewDelegateFlowLayout {
+//
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout:
+//        UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets{
+//        return UIEdgeInsets(top: -55, left: 0, bottom: -50, right: 0)
+//    }
+//
+//
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//
+//        let size = pageCollection.frame.size
+//        return CGSize(width: size.width, height: size.height)
+//    }
+//
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+//        return 0
+//    }
+//
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+//        return 0
+//    }
+//
+//}

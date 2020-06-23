@@ -70,8 +70,15 @@ class MKPrivateChatView: ChatViewController  , UITextViewDelegate {
       
         guard let popupVC = storyboard?.instantiateViewController(withIdentifier: "otherSettingVC") as? otherSettingVC else { return }
         let items = AppConstant.languages
-        let height_bottom_view = (items.count + 1) * AppConstant.height_60
-        popupVC.height = CGFloat(height_bottom_view)
+        
+        let height_view = self.view.frame.size.height
+        let height_bottom_view = (items.count + 1) * 60
+        if height_bottom_view > Int(height_view) {
+            popupVC.height = CGFloat(height_view)
+        }
+        else {
+            popupVC.height = CGFloat(height_bottom_view)
+        }
         popupVC.topCornerRadius = 10
         popupVC.presentDuration = 1
         popupVC.dismissDuration = 1
@@ -224,26 +231,26 @@ class MKPrivateChatView: ChatViewController  , UITextViewDelegate {
 
         messageInputBar.inputTextView.resignFirstResponder()
         
-        let attributedString = NSAttributedString(string: "옵션선택", attributes: [
+        let attributedString = NSAttributedString(string: "ション", attributes: [
             NSAttributedString.Key.font : UIFont.systemFont(ofSize: 15), //your font here
             
         ])
         
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
-        let alertCamera = UIAlertAction(title: "카메라", style: .default) { action in
+        let alertCamera = UIAlertAction(title: "ビデオ", style: .default) { action in
             ImagePicker.cameraMulti(target: self, edit: true)
         }
-        let alertPhoto = UIAlertAction(title: "사진", style: .default) { action in
+        let alertPhoto = UIAlertAction(title: "画像", style: .default) { action in
             ImagePicker.photoLibrary(target: self, edit: true)
         }
-        let alertVideo = UIAlertAction(title: "비디오", style: .default) { action in
+        let alertVideo = UIAlertAction(title: "ビデオ", style: .default) { action in
             ImagePicker.videoLibrary(target: self, edit: true)
         }
 //        let alertAudio = UIAlertAction(title: "Audio", style: .default) { action in
 ////            self.actionAudio()
 //        }
-        let alertStickers = UIAlertAction(title: "스틱커", style: .default) { action in
+        let alertStickers = UIAlertAction(title: "ステッカー", style: .default) { action in
             self.actionStickers()
         }
 //        let alertLocation = UIAlertAction(title: "Location", style: .default) { action in
@@ -270,7 +277,7 @@ class MKPrivateChatView: ChatViewController  , UITextViewDelegate {
         alertStickers.setValue(imageStickers, forKey: "image");    alert.addAction(alertStickers)
 //        alertLocation.setValue(imageLocation, forKey: "image");    alert.addAction(alertLocation)
     
-        alert.addAction(UIAlertAction(title: "취 소", style: .cancel))
+        alert.addAction(UIAlertAction(title: "キャンセル", style: .cancel))
         alert.setValue(attributedString, forKey: "attributedTitle")
         alert.view.tintColor = #colorLiteral(red: 0.2039215686, green: 0.7803921569, blue: 0.3490196078, alpha: 1)
         present(alert, animated: true)
@@ -358,7 +365,7 @@ class MKPrivateChatView: ChatViewController  , UITextViewDelegate {
     }
     
     func setTypingIndicatorViewHidden(_ isHidden: Bool, performUpdates updates: (() -> Void)? = nil) {
-        updateTitleView(title: "김똘똘", subtitle: isHidden ? "2 온라인" : "입력중...")
+//        updateTitleView(title: "김똘똘", subtitle: isHidden ? "2 온라인" : "입력중...")
         setTypingIndicatorViewHidden(isHidden, animated: true, whilePerforming: updates) { [weak self] success in
             if success, self?.isLastSectionVisible() == true {
                 self?.messagesCollectionView.scrollToBottom(animated: true)
@@ -452,7 +459,7 @@ class MKPrivateChatView: ChatViewController  , UITextViewDelegate {
     override func messageBottomLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {
 
         if !isNextMessageSameSender(at: indexPath) && isFromCurrentSender(message: message) {
-            return NSAttributedString(string: "전송됨", attributes: [NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .caption1)])
+            return NSAttributedString(string: "送信され", attributes: [NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .caption1)])
         }
         return nil
     }
@@ -750,7 +757,7 @@ extension MKPrivateChatView {
                     UserVM.shared.sendImageMessage(sender_id: chatId, receiver_id: connectedPerson.user_id!, text: "", sourceType: AppConstant.eImage, sourcePath: "", thumb_path: "", time: time_string, date: date,imageData: photo!, completion: {_ in
                            Indicator.sharedInstance.hideIndicator()
                            self.messageInputBar.sendButton.stopAnimating()
-                           self.messageInputBar.inputTextView.placeholder = "메쎄지를 입력하세요."
+                           self.messageInputBar.inputTextView.placeholder = "メールを入力してください."
 
                            self.messagesCollectionView.scrollToBottom(animated: true)
 
@@ -762,7 +769,7 @@ extension MKPrivateChatView {
                         UserVM.shared.sendVideoMessage(sender_id: chatId, receiver_id: self.connectedPerson.user_id!, text: "", sourceType: AppConstant.eVideo, sourcePath: "", thumb_path: "", time: time_string, date: date, thumb_imageData:video_thumbImage!,  video: video!, completion: {_ in
                                 Indicator.sharedInstance.hideIndicator()
                                 self.messageInputBar.sendButton.stopAnimating()
-                                self.messageInputBar.inputTextView.placeholder = "메쎄지를 입력하세요."
+                                self.messageInputBar.inputTextView.placeholder = "メールを入力してください."
 
                                 self.messagesCollectionView.scrollToBottom(animated: true)
 
@@ -773,7 +780,7 @@ extension MKPrivateChatView {
                         UserVM.shared.sendEmojMessage(sender_id: chatId, receiver_id: connectedPerson.user_id!, sourceType: AppConstant.eEmoji, sourcePath: sticker!, time: time_string, date: date, completion: {_ in
                             Indicator.sharedInstance.hideIndicator()
                             self.messageInputBar.sendButton.stopAnimating()
-                            self.messageInputBar.inputTextView.placeholder = "메쎄지를 입력하세요."
+                            self.messageInputBar.inputTextView.placeholder = "メールを入力してください."
 
                             self.messagesCollectionView.scrollToBottom(animated: true)
 
@@ -785,10 +792,10 @@ extension MKPrivateChatView {
         }
         else {
             print("______not sending image_________")
-            self.showAlertPoints(message: "포인트가 모자랍니다. 추가하시겠습니까?", title: "알림", otherButtons: ["확인": {(action) in
+            self.showAlertPoints(message: "ポイントが足りないのでメールを送信できません", title: "通知", otherButtons: ["確認": {(action) in
             
                   print("_______")
-            }], cancelTitle: "취소", cancelAction: { (Acrion) in
+            }], cancelTitle: "キャンセル", cancelAction: { (Acrion) in
                   print("cancel clicked____")
             })
         }
@@ -833,7 +840,7 @@ extension MKPrivateChatView : ImageSelectProtocol{
     
 }
 extension MKPrivateChatView {
-    func showAlertPoints(message: String?, title:String = "알림", otherButtons:[String:((UIAlertAction)-> ())]? = nil, cancelTitle: String = "취소", cancelAction: ((UIAlertAction)-> ())? = nil) {
+    func showAlertPoints(message: String?, title:String = "通知", otherButtons:[String:((UIAlertAction)-> ())]? = nil, cancelTitle: String = "キャンセル", cancelAction: ((UIAlertAction)-> ())? = nil) {
         let newTitle = title.capitalized
         let newMessage = message
         let alert = UIAlertController(title: newTitle, message: newMessage, preferredStyle: .alert)

@@ -310,10 +310,10 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
         else {
             if UserVM.user_points < 20 {
                 
-                self.showAlert(message: "포인트가 모자랍니다. 추가하시겠습니까?", title: "알림", otherButtons: ["확인": {(action) in
+                self.showAlert(message: "ポイントが足りないのでメールを送信できません", title: "通知", otherButtons: ["確認": {(action) in
                 
                       print("_______")
-                }], cancelTitle: "취소", cancelAction: { (Acrion) in
+                }], cancelTitle: "キャンセル", cancelAction: { (Acrion) in
                     print("cancel clicked____")
                 })
             }
@@ -345,7 +345,7 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
 
         // Send button activity animation
         messageInputBar.sendButton.startAnimating()
-        messageInputBar.inputTextView.placeholder = "전송중..."
+        messageInputBar.inputTextView.placeholder = "....."
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "en_US_POSIX")
         formatter.dateFormat = "h:mm a"
@@ -357,7 +357,7 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
 
        let month_string = calendar.component(.month, from: Date())
        let date_string = calendar.component(.day, from: Date())
-       let date = String(month_string) + "월 " +  String(date_string) + "일"
+       let date = String(month_string) + "月" +  String(date_string) + "日"
         UserVM.shared.sendMessage(sender_id: chatId, receiver_id: connectedPerson.user_id!, text: message_content!, sourceType: AppConstant.eText, sourcePath: "", thumb_path: "", time: time_string, date: date) { (success, message, error) in
                
                
@@ -369,7 +369,7 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
                                            sleep(1)
                                            DispatchQueue.main.async { [weak self] in
                                                self?.messageInputBar.sendButton.stopAnimating()
-                                               self?.messageInputBar.inputTextView.placeholder = "메쎄지를 입력하세요."
+                                               self?.messageInputBar.inputTextView.placeholder = "メールを入力してください"
                                                self?.messagesCollectionView.scrollToBottom(animated: true)
                                            }
                                        }
@@ -410,7 +410,7 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
     }
 }
 extension ChatViewController {
-    func showAlert(message: String?, title:String = "알림", otherButtons:[String:((UIAlertAction)-> ())]? = nil, cancelTitle: String = "취소", cancelAction: ((UIAlertAction)-> ())? = nil) {
+    func showAlert(message: String?, title:String = "通知", otherButtons:[String:((UIAlertAction)-> ())]? = nil, cancelTitle: String = "キャンセル", cancelAction: ((UIAlertAction)-> ())? = nil) {
         let newTitle = title.capitalized
         let newMessage = message
         let alert = UIAlertController(title: newTitle, message: newMessage, preferredStyle: .alert)

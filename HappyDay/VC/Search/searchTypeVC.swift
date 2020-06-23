@@ -14,12 +14,12 @@ class searchTypeVC: UIViewController {
     
     @IBOutlet weak var saveBtn: UIButton!
     
-    let properties_nickname: [String] = ["성별", "거주지", "년령", "신장", "스타일",  "직업"]
-    var search_typye_value_nick : [String] = ["전체", "전체", "전체", "전체", "전체", "전체"]
+    let properties_nickname: [String] = ["性別", "居住地", "年齢", "身長", "スタイル",  "職業"]
+    var search_typye_value_nick : [String] = ["全体", "全体", "全体", "全体", "全体", "全体"]
     
-    let search_type: [String] = ["성별", "년령", "거주지", "닉네임"]
+    let search_type: [String] = ["職業", "年齢", "居住地", "ニックネーム"]
     
-    var search_typye_value : [String] = ["전체", "전체", "전체", "전체"]
+    var search_typye_value : [String] = ["全体", "全体", "全体", "全体"]
     
     var height_of_table = 60
     var TallList = [String]()
@@ -143,11 +143,11 @@ class searchTypeVC: UIViewController {
     @IBAction func resetBtnTapped(_ sender: Any) {
             switch self.searchType {
               case .PROFILE:
-                  search_typye_value_nick = ["전체", "전체", "전체", "전체", "전체", "전체"]
+                  search_typye_value_nick = ["全体", "全体", "全体", "全体", "全体", "全体"]
                   
               case .NICKNAME:
                   
-                  search_typye_value = ["전체", "전체", "전체", "전체"]
+                  search_typye_value = ["全体", "全体", "全体", "全体"]
                   
               default:
                   break
@@ -235,7 +235,7 @@ extension searchTypeVC:  UITableViewDelegate, UITableViewDataSource {
            case .PROFILE:
                switch indexPath.row {
                    case 0:
-                       showSelectView(type_index: indexPath.row, items: ["남자", "녀자"])
+                       showSelectView(type_index: indexPath.row, items: ["男性", "女性"])
                        
                    case 1:
                        showSelectView(type_index: indexPath.row, items: SettingVM.RegionList)
@@ -259,7 +259,7 @@ extension searchTypeVC:  UITableViewDelegate, UITableViewDataSource {
            case .NICKNAME:
                switch indexPath.row {
                case 0:
-                   showSelectView(type_index: indexPath.row, items: ["남자", "녀자"])
+                   showSelectView(type_index: indexPath.row, items: ["男性", "女性"])
                    
                case 1:
                    showSelectView(type_index: indexPath.row, items: SettingVM.AgeList)

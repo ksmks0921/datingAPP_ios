@@ -20,11 +20,11 @@ class profileVC: BaseVC {
     
     @IBOutlet weak var height_of_tableView: NSLayoutConstraint!
     var counter = 0
-    var items = ["블록 등록", "무시 등록", "메모 등록", "신고 하기"]
+    var items = ["見ちゃイヤ", "無視する", "メモ編集", "通報する"]
     var height_row = 50
     var index: Int?
     var person : person!
-    let properties_personalData: [String] = ["성별", "년령", "거주지", "닉네임"]
+    let properties_personalData: [String] = ["性別", "年齢", "居住地", "ニックネーム"]
     @IBOutlet weak var titleLabel: UILabel!
     
     var values_personalData: [String]!
@@ -50,16 +50,16 @@ class profileVC: BaseVC {
         userinfotableview.reloadData()
 
 
-        if person != nil {
-            sections = [
-                
-                Section(title: "자기소개", items: [person.user_introduce!], values: ["what are you doing?"]),
-                Section(title: "기본정보", items: ["별명" , "성별", "년령", "거주지", "생활스타일", "혈액형", "별자리"], values: [person.user_nickName!, person.user_sex!, person.user_age!, person.user_city!, person.user_lifestyle!, person.user_blood!, person.user_star!]),
-                Section(title: "외모", items: ["신장" , "스타일", "외모", "직업"], values: [person.user_tall!, person.user_style!, person.style_1!, person.user_job!]),
-                Section(title: "자체평가", items: ["멋" ,"멋쟁이도", "부자도", "부드러움"], values: [person.style_1!, person.style_2!, person.style_3!, person.style_4!])
-                
-            ]
-        }
+//        if person != nil {
+//            sections = [
+//
+//                Section(title: "自己紹介", items: [person.user_introduce!], values: ["what are you doing?"]),
+//                Section(title: "기본정보", items: ["별명" , "성별", "년령", "거주지", "생활스타일", "혈액형", "별자리"], values: [person.user_nickName!, person.user_sex!, person.user_age!, person.user_city!, person.user_lifestyle!, person.user_blood!, person.user_star!]),
+//                Section(title: "외모", items: ["신장" , "스타일", "외모", "직업"], values: [person.user_tall!, person.user_style!, person.style_1!, person.user_job!]),
+//                Section(title: "자체평가", items: ["멋" ,"멋쟁이도", "부자도", "부드러움"], values: [person.style_1!, person.style_2!, person.style_3!, person.style_4!])
+//
+//            ]
+//        }
         
         
     }
@@ -73,7 +73,15 @@ class profileVC: BaseVC {
         guard let popupVC = storyboard?.instantiateViewController(withIdentifier: "otherSettingVC") as? otherSettingVC else { return }
           
           popupVC.items = items
-          popupVC.height = CGFloat((items.count + 1) * 60)
+          
+          let height_view = self.view.frame.size.height
+          let height_bottom_view = (items.count + 1) * 60
+          if height_bottom_view > Int(height_view) {
+              popupVC.height = CGFloat(height_view)
+          }
+          else {
+              popupVC.height = CGFloat(height_bottom_view)
+          }
           popupVC.topCornerRadius = 10
           popupVC.presentDuration = 1
           popupVC.dismissDuration = 1
@@ -89,7 +97,7 @@ class profileVC: BaseVC {
         privateChatView.connectedPerson = person
         privateChatView.chat_title = person.user_nickName
         let backItem = UIBarButtonItem()
-        backItem.title = "뒤로"
+        backItem.title = ""
         backItem.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         navigationItem.backBarButtonItem = backItem // This will show in the next view controller being pushed
         self.navigationController?.pushViewController(privateChatView, animated: true)
@@ -97,7 +105,7 @@ class profileVC: BaseVC {
     @IBAction func likeBtnTapped(_ sender: Any) {
         
         let user_sex = { () -> Bool in
-            if self.person.user_sex == "남자" {
+            if self.person.user_sex == "男性" {
                 return true
             }
             else {
@@ -112,7 +120,7 @@ class profileVC: BaseVC {
         UserVM.shared.likeUser(like_age: person.user_age!, like_avatar: person.user_avatar![0], like_city: person.user_city!, like_date: date_result, like_id: person.user_id!, like_info: person.user_introduce!, like_name: person.user_nickName!, like_sex: user_sex() ) { (success, message, error) in
                    if error == nil{
                        if success{
-                            self.showAlert(message: "성공!")
+                            self.showAlert(message: "成功!")
                             Indicator.sharedInstance.hideIndicator()
                             let sender = PushNotificationSender()
                             sender.sendPushNotification(to: "token", title: "Notification title", body: "Notification body")
@@ -312,7 +320,7 @@ extension profileVC : SearchTypeDelegate{
             
             
             let user_sex = { () -> Bool in
-                if self.person.user_sex == "남자" {
+                if self.person.user_sex == "男性" {
                     return true
                 }
                 else {
@@ -320,7 +328,7 @@ extension profileVC : SearchTypeDelegate{
                 }
             }
             UserVM.shared.blockSomeone(block_age: person.user_age!, block_avatar: avatar![0], block_city: person.user_city!, block_date: date_result, block_id: person.user_id!, block_info: "test", block_name: person.user_nickName!, block_user_sex: user_sex()){_ in
-                    self.showAlert(message: "성공!")
+                    self.showAlert(message: "成功!")
             }
         }
         else if type == self.items[1] {
@@ -330,7 +338,7 @@ extension profileVC : SearchTypeDelegate{
             formatter.dateFormat = "yyyy-MM-dd"
             let date_result = formatter.string(from: date)
             let user_sex = { () -> Bool in
-                if self.person.user_sex == "남자" {
+                if self.person.user_sex == "男性" {
                     return true
                 }
                 else {
@@ -338,7 +346,7 @@ extension profileVC : SearchTypeDelegate{
                 }
             }
             UserVM.shared.ignoreSomeone(ignore_age: person.user_age!, ignore_avatar: avatar![0], ignore_city: person.user_city!, ignore_date: date_result, ignore_id: person.user_id!, ignore_info: "test", ignore_name: person.user_nickName!, ignore_user_sex: user_sex()){_ in
-                self.showAlert(message: "성공!")
+                self.showAlert(message: "成功!")
             }
         }
         else if type == self.items[2] {
@@ -348,7 +356,7 @@ extension profileVC : SearchTypeDelegate{
             formatter.dateFormat = "yyyy-MM-dd"
             let date_result = formatter.string(from: date)
             let user_sex = { () -> Bool in
-                if self.person.user_sex == "남자" {
+                if self.person.user_sex == "男性" {
                     return true
                 }
                 else {
@@ -356,7 +364,7 @@ extension profileVC : SearchTypeDelegate{
                 }
             }
             UserVM.shared.memoSomeone(memo_age: person.user_age!, memo_avatar: avatar![0], memo_city: person.user_city!, memo_date: date_result, memo_id: person.user_id!, memo_info: "test", memo_name: person.user_nickName!, memo_user_sex: user_sex()){_ in
-                    self.showAlert(message: "성공!")
+                    self.showAlert(message: "成功!")
             }
         }
         else if type == self.items[3] {

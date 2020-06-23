@@ -83,8 +83,15 @@ class createpostVC: BaseVC {
         for i in 1...AppConstant.eType.count - 1 {
             items.append(AppConstant.eType[i])
         }
+        let height_view = self.view.frame.size.height
+        let height_bottom_view = (items.count + 1) * 60
+        if height_bottom_view > Int(height_view) {
+            popupVC.height = CGFloat(height_view)
+        }
+        else {
+            popupVC.height = CGFloat(height_bottom_view)
+        }
        
-        popupVC.height = CGFloat((items.count + 1 ) * 60)
         popupVC.topCornerRadius = 10
         popupVC.presentDuration = 1
         popupVC.dismissDuration = 1
@@ -99,8 +106,15 @@ class createpostVC: BaseVC {
         
          SettingVM.shared.getSelectingRegions(completion: {_ in
                    guard let popupVC = self.storyboard?.instantiateViewController(withIdentifier: "otherSettingVC") as? otherSettingVC else { return }
-
-                   popupVC.height = CGFloat((SettingVM.RegionList.count + 1 ) * 60)
+                   let height_view = self.view.frame.size.height
+                   let height_bottom_view = (SettingVM.RegionList.count + 1) * 60
+                   if height_bottom_view > Int(height_view) {
+                       popupVC.height = CGFloat(height_view)
+                   }
+                   else {
+                       popupVC.height = CGFloat(height_bottom_view)
+                   }
+                  
                    popupVC.topCornerRadius = 10
                    popupVC.presentDuration = 1
                    popupVC.dismissDuration = 1
@@ -117,7 +131,15 @@ class createpostVC: BaseVC {
          SettingVM.shared.getSelectingRegions(completion: {_ in
                    guard let popupVC = self.storyboard?.instantiateViewController(withIdentifier: "otherSettingVC") as? otherSettingVC else { return }
                    let items = AppConstant.phoneSetting
-                   popupVC.height = CGFloat((items.count + 1 ) * 60)
+                   let height_view = self.view.frame.size.height
+                   let height_bottom_view = (items.count + 1) * 60
+                   if height_bottom_view > Int(height_view) {
+                       popupVC.height = CGFloat(height_view)
+                   }
+                   else {
+                       popupVC.height = CGFloat(height_bottom_view)
+                   }
+                   
                    popupVC.topCornerRadius = 10
                    popupVC.presentDuration = 1
                    popupVC.dismissDuration = 1
@@ -160,26 +182,26 @@ class createpostVC: BaseVC {
             
         }
         else {
-            self.showAlert(message: "이메지 또는 동영상을 압로드하십시오.")
+            self.showAlert(message: "画像或ビデオを選んでください")
         }
         if eventTitleField.text == "" {
-            self.showAlert(message: "제목란을 채우세요.")
+            self.showAlert(message: "件名を記入下さい。")
             return
         }
         if regionTextField.text == "" {
-            self.showAlert(message: "지역을 선택해주세요.")
+            self.showAlert(message: "地域を選んでください")
             return
         }
         if phoneSettingTextField.text == "" {
-            self.showAlert(message: "전화접수 설정을 선택해주세요.")
+            self.showAlert(message: "電話受付の設定を選択してください。")
             return
         }
         if eventTypeLabel.text == "" {
-            self.showAlert(message: "이벤트형을 선택해주세요.")
+            self.showAlert(message: "イベント型を選択してください。")
             return
         }
         if eventTextField.text == "" {
-            self.showAlert(message: "이벤트 본문을 입력해주세요.")
+            self.showAlert(message: "イベントの本文を入力してください。")
             
             return
         }
@@ -196,7 +218,7 @@ class createpostVC: BaseVC {
         let user_age = UserVM.current_user.user_age
         let user_avatar =  UserVM.current_user.user_avatar
         let user_gender: Bool!
-        if UserVM.current_user.user_sex == "녀자" {
+        if UserVM.current_user.user_sex == "女性" {
            user_gender = false
         }
         else {
@@ -227,7 +249,7 @@ class createpostVC: BaseVC {
             Indicator.sharedInstance.hideIndicator()
             if error == nil{
                 if success{
-                    self.showAlert(message: "이벤트가 성과적으로 등록되였습니다.")
+                    self.showAlert(message: "イベントが成功裏に登録されました。")
                     self.regionTextField.text = ""
                     self.eventTextField.text = ""
                     self.phoneSettingTextField.text = ""
@@ -284,24 +306,24 @@ extension createpostVC: SearchTypeDelegate {
 extension createpostVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func showImagePickerControllerActionSheet(){
-            let title = "이미지 압로드 옵션"
+            let title = "画像アップオプション"
 
             let popup = PopupDialog(title: title, message: "")
 
-            let buttonOne = DefaultButton(title: "카메라", dismissOnTap: true) {
+            let buttonOne = DefaultButton(title: "ビデオ", dismissOnTap: true) {
 //                self.showImagePickerController(sourceType: .camera)
                 ImagePicker.cameraMulti(target: self, edit: true)
             }
-            let buttonThree = DefaultButton(title: "사진", dismissOnTap: true) {
+            let buttonThree = DefaultButton(title: "画像", dismissOnTap: true) {
                 ImagePicker.photoLibrary(target: self, edit: true)
 //                self.showImagePickerController(sourceType: .photoLibrary)
             }
-            let buttonTwo = DefaultButton(title: "비디오", dismissOnTap: true) {
+            let buttonTwo = DefaultButton(title: "ビデオ", dismissOnTap: true) {
                 ImagePicker.videoLibrary(target: self, edit: true)
             }
             
 
-            let buttonFour = CancelButton(title: "취소", height: 60) {
+            let buttonFour = CancelButton(title: "キャンセル", height: 60) {
                
             }
             popup.addButtons([buttonOne, buttonTwo, buttonThree, buttonFour])

@@ -25,11 +25,11 @@ class personalDataVC: BaseVC {
             
             if from == "report" {
                
-                titleLabel.text = "신고:" + String(report_person.user_nickName!)
-                dataContentView.customplaceholder = "신고내용을 입력하세요."
+                titleLabel.text = "通報:" + String(report_person.user_nickName!)
+                dataContentView.customplaceholder = "通報内容を入力してください。"
             }
             else {
-                titleLabel.text = "나의 개인정보"
+                titleLabel.text = "自己紹介"
                 dataContentView.text = user.user_introduce
             }
             
@@ -49,7 +49,7 @@ class personalDataVC: BaseVC {
     @IBAction func sendBtnTapped(_ sender: Any) {
         if from == "personal" {
             let sex = { () -> Bool in
-                if self.user.user_sex == "남자" {
+                if self.user.user_sex == "男性" {
                     return true
                 }
                 else {
@@ -61,7 +61,7 @@ class personalDataVC: BaseVC {
                 Indicator.sharedInstance.hideIndicator()
                 if error == nil {
                     if success {
-                        self.showAlert(message: "성공!")
+                        self.showAlert(message: "成功!")
                     }
                     else {
                         self.showAlert(message: "error")
@@ -79,7 +79,7 @@ class personalDataVC: BaseVC {
             Indicator.sharedInstance.showIndicator()
             UserVM.shared.reportSomeone(reason: self.dataContentView.text, receiver_id: report_person.user_id!, receiver_image: report_avatar![0], receiver_name: report_person.user_nickName!, sender_id: user.user_id!, sender_image: user_avatar![0], sender_name: user.user_nickName!) {_ in
                 Indicator.sharedInstance.hideIndicator()
-                self.showAlert(message: "성공!")
+                self.showAlert(message: "成功!")
                 
             }
             

@@ -109,7 +109,7 @@ class imageUploadVC: BaseVC {
         let url_string = url.absoluteString
         self.avatars[index] = url_string
         let sex = { () -> Bool in
-            if self.user.user_sex == "남자" {
+            if self.user.user_sex == "男性" {
                 return true
             }
             else {
@@ -169,20 +169,20 @@ class imageUploadVC: BaseVC {
 extension imageUploadVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func showImagePickerControllerActionSheet(){
-        let title = "이미지 압로드 옵션"
+        let title = "画像アップオプション"
 
         let popup = PopupDialog(title: title, message: "")
 
-        let buttonOne = DefaultButton(title: "카메라", dismissOnTap: true) {
+        let buttonOne = DefaultButton(title: "ビデオ", dismissOnTap: true) {
             self.showImagePickerController(sourceType: .camera)
         }
 
-        let buttonTwo = DefaultButton(title: "이미지 갤러리", dismissOnTap: true) {
+        let buttonTwo = DefaultButton(title: "ライブラリ", dismissOnTap: true) {
             
             self.showImagePickerController(sourceType: .photoLibrary)
         }
 
-        let buttonThree = CancelButton(title: "취소", height: 60) {
+        let buttonThree = CancelButton(title: "キャンセル", height: 60) {
            
         }
         popup.addButtons([buttonOne, buttonTwo, buttonThree])

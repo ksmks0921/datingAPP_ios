@@ -22,7 +22,7 @@ class personalPageItemVC: UIViewController {
         self.contentTable.register(nib, forCellReuseIdentifier: "chatTableCell")
         
        
-        alertLabel.text = String(items.count) + "명을 기록하고 있습니다."
+        alertLabel.text = String(items.count) + "　人からいいねされました"
         titleLabel.text = titleText
         
         
@@ -119,7 +119,7 @@ extension personalPageItemVC: UITableViewDelegate, UITableViewDataSource {
         privateChatView.connectedPerson = connect_user
         privateChatView.chat_title = connect_user.user_nickName
         let backItem = UIBarButtonItem()
-        backItem.title = "뒤로"
+        backItem.title = ""
         backItem.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         navigationItem.backBarButtonItem = backItem // This will show in the next view controller being pushed
         self.navigationController?.pushViewController(privateChatView, animated: true)

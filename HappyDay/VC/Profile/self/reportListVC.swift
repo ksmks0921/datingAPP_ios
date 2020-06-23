@@ -19,7 +19,7 @@ class reportListVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
   
-        alertLabel.text = String(items.count) + "명을 기록하고 있습니다."
+        alertLabel.text = String(items.count) + "人からいいねされました"
     
     }
     

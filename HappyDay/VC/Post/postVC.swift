@@ -70,17 +70,24 @@ class postVC: UIViewController {
 
          segmentedView.listContainer = listContainerView
          contentview.addSubview(listContainerView)
-
-        
-            
+         initData()
     }
+    
     @IBAction func selectRegionTapped(_ sender: Any) {
         
         
         SettingVM.shared.getSelectingRegions(completion: {_ in
             guard let popupVC = self.storyboard?.instantiateViewController(withIdentifier: "otherSettingVC") as? otherSettingVC else { return }
 
-            popupVC.height = CGFloat((SettingVM.RegionList.count + 1 ) * 60)
+            
+            let height_view = self.view.frame.size.height
+            let height_bottom_view = (SettingVM.RegionList.count + 1) * 60
+            if height_bottom_view > Int(height_view) {
+                popupVC.height = CGFloat(height_view)
+            }
+            else {
+                popupVC.height = CGFloat(height_bottom_view)
+            }
             popupVC.topCornerRadius = 10
             popupVC.presentDuration = 1
             popupVC.dismissDuration = 1
@@ -90,14 +97,9 @@ class postVC: UIViewController {
             popupVC.index_type = 0  // for using searchType delegate..... possible to ignore this
             self.present(popupVC, animated: true, completion: nil)
         })
-        
-        
-        
-        
+
     }
-   
-    @IBAction func allSelectTapped(_ sender: Any) {
-        
+    func initData() {
         allSectBtn.backgroundColor = #colorLiteral(red: 0.1521415114, green: 0.7645066977, blue: 0.3480054438, alpha: 1)
         allSectBtn.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: .normal)
         imageSelectBtn.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
@@ -106,7 +108,7 @@ class postVC: UIViewController {
         videoSelectBtn.setTitleColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), for: .normal)
         self.selected_source_type = AppConstant.eAll
         
-        DataManager.isShowingFilterResult = true
+        
         Indicator.sharedInstance.showIndicator()
         UserVM.shared.filterEvents(location: self.selected_location, type: self.selected_type, source_type: self.selected_source_type, age: AppConstant.eAll, tall: AppConstant.eAll, style: AppConstant.eAll, job: AppConstant.eAll, nick_name: AppConstant.eAll, completion: {_ in
             
@@ -114,6 +116,10 @@ class postVC: UIViewController {
                 self.listContainerView.reloadData()
           
         })
+    }
+    @IBAction func allSelectTapped(_ sender: Any) {
+        DataManager.isShowingFilterResult = true
+        initData()
     }
     @IBAction func videoSelectTapped(_ sender: Any) {
         
@@ -158,13 +164,13 @@ class postVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
            super.viewWillAppear(animated)
            navigationController?.setNavigationBarHidden(false, animated: animated)
+           
     }
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         customNavBar.frame.size.height = navbarHeight
         segmentedView.frame = CGRect(x: 0, y: 0, width: view.bounds.size.width, height: 40)
-        
         listContainerView.frame = CGRect(x: 0, y: 0, width: view.bounds.size.width, height: view.bounds.size.height)
     }
     @IBAction func postsearch(_ sender: Any) {
@@ -189,7 +195,7 @@ extension postVC: SearchTypeDelegate{
         DataManager.isShowingFilterResult = true
         Indicator.sharedInstance.showIndicator()
         UserVM.shared.filterEvents(location: type, type: self.selected_type, source_type: self.selected_source_type, age: AppConstant.eAll, tall: AppConstant.eAll, style: AppConstant.eAll, job: AppConstant.eAll, nick_name: AppConstant.eAll, completion: {_ in
-                print("SOK_____")
+              
                 Indicator.sharedInstance.hideIndicator()
                 self.listContainerView.reloadData()
           
@@ -222,13 +228,14 @@ extension postVC: JXSegmentedViewDelegate {
             
         }
         for indicaotr in (segmentedView.indicators as! [JXSegmentedIndicatorBaseView]) {
-           
 
                indicaotr.indicatorColor = #colorLiteral(red: 0.1521415114, green: 0.7645066977, blue: 0.3480054438, alpha: 1)
 
         }
-       segmentedView.reloadDataWithoutListContainer()
+       
        navigationController?.interactivePopGestureRecognizer?.isEnabled = (segmentedView.selectedIndex == 0)
+       segmentedView.reloadDataWithoutListContainer()
+       
 
     }
     
@@ -256,7 +263,7 @@ extension postVC: SearchPostDelegate {
     func searchBtnTapped(data: Bool) {
         self.segmentedView.reloadData()
         self.listContainerView.reloadData()
-        print("111111")
+       
     }
     
     

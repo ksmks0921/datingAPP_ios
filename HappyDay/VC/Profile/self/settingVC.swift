@@ -13,7 +13,7 @@ class settingVC: UIViewController {
     @IBOutlet weak var contentTableView: UITableView!
     @IBOutlet weak var titleLabel: UILabel!
     
-    let items = ["자동로그인", "화면 잠금", "암호설정", "알림설정", "허가번호 상태"]
+    let items = ["自動ログイン", "画面のロック", "パスワード設定", "通知設定", "ライセンス"]
     
     
     override func viewDidLoad() {

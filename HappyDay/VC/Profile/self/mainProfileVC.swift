@@ -17,7 +17,7 @@ class mainProfileVC: BaseVC {
     @IBOutlet weak var settingBtn: UIButton!
     
     
-    let properties_profile: [String] = ["닉명", "년령", "성별", "별자리", "피형", "거주지", "외모", "신장", "스타일", "직업", "생활스타일", "멋", "멋쟁이도", "부자도", "부드러움", "상대방에게 요구하는 조건", "년령", "신장", "스타일"]
+    let properties_profile: [String] = ["ニックネーム", "年齢", "性別", "星座", "血液型", "居住地", "外見", "身長", "スタイル", "職業", "ライフスタイル", "かわいさ", "おしゃれ度", "お金持ち度", "やさしさ", "相手に求める条件", "年齢", "身長", "スタイル"]
     var value_profile : [String]!
     var selected_item: Int!
     var user: person!
@@ -26,7 +26,7 @@ class mainProfileVC: BaseVC {
         //set title and change back button title
     
         let backButton = UIBarButtonItem()
-        backButton.title = "뒤로"
+        backButton.title = ""
         self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
         
         
@@ -61,7 +61,7 @@ class mainProfileVC: BaseVC {
     @IBAction func finishBtnTapped(_ sender: Any) {
         
         let sex = { () -> Bool in
-            if self.value_profile[2] == "남자" {
+            if self.value_profile[2] == "男性" {
                 return true
             }
             else {
@@ -71,7 +71,7 @@ class mainProfileVC: BaseVC {
         UserVM.shared.updateUserData(city: value_profile[5], age: value_profile[1], job: value_profile[9], blood: value_profile[4], star: value_profile[3], tall: value_profile[7], user_style: value_profile[8], life_style: value_profile[10], user_outside: value_profile[6], sex: sex(), nick_name: value_profile[0], style_1: value_profile[11], style_2: value_profile[12], style_3: value_profile[13], style_4: value_profile[14], require_age: value_profile[16], is_approved: self.user.is_approved!, updated_at: user.updated_at!, created_at: user!.created_at!, require_style: value_profile[18], require_tall: value_profile[17], status: user!.user_status!, introduce: user!.user_introduce!, date: user!.user_date!, user_avatar: user.user_avatar!) {(success, message, error) in
             if error == nil {
                 if success {
-                    self.showAlert(message: "성공!")
+                    self.showAlert(message: "成功!")
                 }
                 else {
                     self.showAlert(message: "error")
@@ -172,7 +172,7 @@ extension mainProfileVC:  UITableViewDelegate, UITableViewDataSource {
         }
         else if indexPath.row == 2 {
             
-            showSlectViewWithRadio(items: ["남자", "녀자"])
+            showSlectViewWithRadio(items: ["男性", "女性"])
             
         }
         else if indexPath.row == 3 {
@@ -186,7 +186,7 @@ extension mainProfileVC:  UITableViewDelegate, UITableViewDataSource {
             })
         }
         else if indexPath.row == 4 {
-            self.showSelectView(items: ["O형", "A형", "B형", "AB형"])
+            self.showSelectView(items: ["O型", "A型", "B型", "AB型"])
         }
         else if indexPath.row == 5 {
             
@@ -281,8 +281,16 @@ extension mainProfileVC:  UITableViewDelegate, UITableViewDataSource {
         
           guard let popupVC = storyboard?.instantiateViewController(withIdentifier: "otherSettingVC") as? otherSettingVC else { return }
                   
-                
-          popupVC.height = CGFloat((items.count + 1) * AppConstant.height_60)
+
+          let height_view = self.view.frame.size.height
+          let height_bottom_view = (items.count + 1) * 60
+          if height_bottom_view > Int(height_view) {
+             popupVC.height = CGFloat(height_view)
+          }
+          else {
+             popupVC.height = CGFloat(height_bottom_view)
+          }
+          
           popupVC.topCornerRadius = 10
           popupVC.presentDuration = 1
           popupVC.dismissDuration = 1

@@ -27,7 +27,7 @@ class personalPageVC: UIViewController {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var pointLabel: UILabel!
     
-    let properties_profile: [String] = ["좋아하는", "메모 목록", "무시 목록", "블록 목록", "신고 목록", "자기 게시물보기", "알림 보기", "각종 설정", "도움말", "로그 아웃"]
+    let properties_profile: [String] = ["お気に入り", "メモリスト", "無視リスト", "見ちゃイヤ", "通報リスト", "掲示板履歴", "お知らせ", "各種設定", "お問い合わせ", "ログアウト"]
     let icon_strings = ["icon_heart", "icon_memo", "icon_block", "icon_misi", "icon_favourite", "feedon", "notification", "gear", "icon_helper", "icon_logout"]
    
     var screenSize: CGRect!
@@ -136,9 +136,9 @@ extension personalPageVC: UICollectionViewDelegate, UICollectionViewDataSource, 
          }
          else {
             if indexPath.row == 0 {
-                cell.otherText.text = String(UserVM.likes.count) + " 명"
+                cell.otherText.text = String(UserVM.likes.count) + "人"
             }
-                cell.otherText.text = String(UserVM.likes.count) + " 개"
+                cell.otherText.text = String(UserVM.likes.count) + "個"
          }
             return cell
        
@@ -155,26 +155,26 @@ extension personalPageVC: UICollectionViewDelegate, UICollectionViewDataSource, 
         if indexPath.row == 0 {
             let VC = self.storyboard?.instantiateViewController(withIdentifier: "personalPageItemVC") as! personalPageItemVC
             VC.items = UserVM.likes
-            VC.titleText = "라이크 목록"
+            VC.titleText = "お気に入り"
             navigationController?.pushViewController(VC, animated: true)
         }
         if indexPath.row == 1 {
             
             let VC = self.storyboard?.instantiateViewController(withIdentifier: "personalPageItemVC") as! personalPageItemVC
             VC.items = UserVM.memos
-            VC.titleText = "메모 목록"
+            VC.titleText = "メモリスト"
             navigationController?.pushViewController(VC, animated: true)
         }
         if indexPath.row == 2 {
             let VC = self.storyboard?.instantiateViewController(withIdentifier: "personalPageItemVC") as! personalPageItemVC
             VC.items = UserVM.ignores
-            VC.titleText = "무시 목록"
+            VC.titleText = "無視リスト"
             navigationController?.pushViewController(VC, animated: true)
         }
         if indexPath.row == 3 {
             let VC = self.storyboard?.instantiateViewController(withIdentifier: "personalPageItemVC") as! personalPageItemVC
             VC.items = UserVM.blocks
-            VC.titleText = "블록 목록"
+            VC.titleText = properties_profile[indexPath.row]
             navigationController?.pushViewController(VC, animated: true)
         }
         if indexPath.row == 4 {
@@ -184,7 +184,7 @@ extension personalPageVC: UICollectionViewDelegate, UICollectionViewDataSource, 
         if indexPath.row == 5 {
             
             let VC = self.storyboard?.instantiateViewController(withIdentifier: "userPostsVC") as! userPostsVC
-            VC.titleText = "게시물 보기"
+            VC.titleText = properties_profile[indexPath.row]
             navigationController?.pushViewController(VC, animated: true)
         }
         if indexPath.row == 6 {

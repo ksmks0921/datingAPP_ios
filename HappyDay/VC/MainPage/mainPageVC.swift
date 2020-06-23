@@ -211,7 +211,7 @@ extension mainPageVC: UICollectionViewDelegate, UICollectionViewDataSource, UICo
              cell.region.text = partner.user_city!
              cell.age.text = partner.user_age
              cell.image.sd_setImage(with: URL(string: partner.user_avatar![0]), placeholderImage: UIImage(named: "avatar_woman"))
-             if partners[indexPath.row].user_sex == "남자" {
+             if partners[indexPath.row].user_sex == "男性" {
                 cell.region.textColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
                 cell.age.textColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
              }
@@ -227,7 +227,7 @@ extension mainPageVC: UICollectionViewDelegate, UICollectionViewDataSource, UICo
              let partner = partners[indexPath.row]
              cell.region.text = partner.user_city!
              cell.image.sd_setImage(with: URL(string: partner.user_avatar![0]), placeholderImage: UIImage(named: "avatar_woman"))
-             if partners[indexPath.row].user_sex == "남자" {
+             if partners[indexPath.row].user_sex == "男性" {
                  cell.region.textColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
                  cell.age.textColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
              }

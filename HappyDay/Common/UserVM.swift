@@ -251,10 +251,10 @@ class UserVM {
                           
                            
                             if (restDict[FireBaseConstant.kUserSex] as? Bool)! {
-                                user_sex = "남자"
+                                user_sex = "男性"
                             }
                             else {
-                                user_sex = "녀자"
+                                user_sex = "女性"
                             }
                             let user_star = restDict[FireBaseConstant.kUserStar] as? String
                             let user_style = restDict[FireBaseConstant.kUserStyle] as? String

@@ -11,7 +11,7 @@ import UIKit
 class backgroundImageSelectVC: UIViewController {
 
     @IBOutlet weak var imageCollection: UICollectionView!
-    var images = ["person_2", "person_2", "person_4", "person_2", "person_2", "person_4"]
+    var images = ["back1", "back2", "back3", "back4", "back5", "back6", "back7", "back8", "back9", "back10", "back11", "back12"]
     var delegate: ImageSelectProtocol!
     override func viewDidLoad() {
         super.viewDidLoad()

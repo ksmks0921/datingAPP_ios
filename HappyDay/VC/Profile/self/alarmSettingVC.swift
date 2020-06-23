@@ -11,7 +11,7 @@ import UIKit
 class alarmSettingVC: UIViewController {
     
     @IBOutlet weak var contentTableView: UITableView!
-    var items = ["메쎄지 알림", "라이크 알림", "공지사항 알림"]
+    var items = ["メール通知", "いいね通知", "お知らせ通知"]
     override func viewDidLoad() {
         super.viewDidLoad()
         

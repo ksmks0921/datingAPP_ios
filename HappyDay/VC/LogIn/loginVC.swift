@@ -40,20 +40,20 @@ class loginVC: BaseVC {
    
     @objc func keyboardWillShow(notification:NSNotification){
 
-           let userInfo = notification.userInfo!
-           var keyboardFrame:CGRect = (userInfo[UIResponder.keyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
-           keyboardFrame = self.view.convert(keyboardFrame, from: nil)
+       let userInfo = notification.userInfo!
+       var keyboardFrame:CGRect = (userInfo[UIResponder.keyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
+       keyboardFrame = self.view.convert(keyboardFrame, from: nil)
 
-           var contentInset:UIEdgeInsets = self.ScrollContent.contentInset
-           contentInset.bottom = keyboardFrame.size.height + 20
-           ScrollContent.contentInset = contentInset
-       }
+       var contentInset:UIEdgeInsets = self.ScrollContent.contentInset
+       contentInset.bottom = keyboardFrame.size.height + 20
+       ScrollContent.contentInset = contentInset
+   }
 
-       @objc func keyboardWillHide(notification:NSNotification){
+   @objc func keyboardWillHide(notification:NSNotification){
 
-           let contentInset:UIEdgeInsets = UIEdgeInsets.zero
-           ScrollContent.contentInset = contentInset
-       }
+       let contentInset:UIEdgeInsets = UIEdgeInsets.zero
+       ScrollContent.contentInset = contentInset
+   }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         

@@ -14,7 +14,7 @@ class profileContentVC: BaseVC {
     @IBOutlet weak var contentView: UIView!
     var currentViewControllerIndex: Int?
     var partners = [person]()
-    var items = ["블록 등록", "무시 등록", "메모 등록", "신고 하기"]
+    var items = ["見ちゃイヤ", "無視する", "メモ編集", "通報する"]
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -42,7 +42,7 @@ class profileContentVC: BaseVC {
         privateChatView.connectedPerson = partners[currentViewControllerIndex!]
         privateChatView.chat_title = partners[currentViewControllerIndex!].user_nickName
         let backItem = UIBarButtonItem()
-        backItem.title = "뒤로"
+        backItem.title = ""
         backItem.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         navigationItem.backBarButtonItem = backItem // This will show in the next view controller being pushed
         self.navigationController?.pushViewController(privateChatView, animated: true)
@@ -55,7 +55,15 @@ class profileContentVC: BaseVC {
         guard let popupVC = storyboard?.instantiateViewController(withIdentifier: "otherSettingVC") as? otherSettingVC else { return }
         
         popupVC.items = items
-        popupVC.height = CGFloat((items.count + 1) * 60)
+        
+        let height_view = self.view.frame.size.height
+        let height_bottom_view = (items.count + 1) * 60
+        if height_bottom_view > Int(height_view) {
+            popupVC.height = CGFloat(height_view)
+        }
+        else {
+            popupVC.height = CGFloat(height_bottom_view)
+        }
         popupVC.topCornerRadius = 10
         popupVC.presentDuration = 1
         popupVC.dismissDuration = 1
@@ -67,7 +75,7 @@ class profileContentVC: BaseVC {
     }
     @IBAction func likeBtnTapped(_ sender: Any) {
         let user_sex = { () -> Bool in
-            if self.partners[self.currentViewControllerIndex!].user_sex == "남자" {
+            if self.partners[self.currentViewControllerIndex!].user_sex == "男性" {
                 return true
             }
             else {
@@ -78,7 +86,7 @@ class profileContentVC: BaseVC {
         UserVM.shared.likeUser(like_age: partners[currentViewControllerIndex!].user_age!, like_avatar: partners[currentViewControllerIndex!].user_avatar![0], like_city: partners[currentViewControllerIndex!].user_city!, like_date: partners[currentViewControllerIndex!].user_date!, like_id: partners[currentViewControllerIndex!].user_id!, like_info: partners[currentViewControllerIndex!].user_introduce!, like_name: partners[currentViewControllerIndex!].user_nickName!, like_sex: user_sex() ) { (success, message, error) in
                    if error == nil{
                        if success{
-                            self.showAlert(message: "성공!")
+                            self.showAlert(message: "成功!")
                             Indicator.sharedInstance.hideIndicator()
                             let sender = PushNotificationSender()
                             sender.sendPushNotification(to: "token", title: "Notification title", body: "Notification body")
@@ -191,7 +199,7 @@ extension profileContentVC : SearchTypeDelegate{
             formatter.dateFormat = "yyyy-MM-dd"
             let date_result = formatter.string(from: date)
             let user_sex = { () -> Bool in
-                if self.partners[self.currentViewControllerIndex!].user_sex == "남자" {
+                if self.partners[self.currentViewControllerIndex!].user_sex == "男性" {
                     return true
                 }
                 else {
@@ -199,7 +207,7 @@ extension profileContentVC : SearchTypeDelegate{
                 }
             }
             UserVM.shared.blockSomeone(block_age: partners[currentViewControllerIndex!].user_age!, block_avatar: avatar![0], block_city: partners[currentViewControllerIndex!].user_city!, block_date: date_result, block_id: partners[currentViewControllerIndex!].user_id!, block_info: "test", block_name: partners[currentViewControllerIndex!].user_nickName!, block_user_sex: user_sex()){_ in
-                    self.showAlert(message: "성공!")
+                    self.showAlert(message: "成功!")
             }
         }
         else if type == self.items[1] {
@@ -209,7 +217,7 @@ extension profileContentVC : SearchTypeDelegate{
             formatter.dateFormat = "yyyy-MM-dd"
             let date_result = formatter.string(from: date)
             let user_sex = { () -> Bool in
-                if self.partners[self.currentViewControllerIndex!].user_sex == "남자" {
+                if self.partners[self.currentViewControllerIndex!].user_sex == "男性" {
                     return true
                 }
                 else {
@@ -217,7 +225,7 @@ extension profileContentVC : SearchTypeDelegate{
                 }
             }
             UserVM.shared.ignoreSomeone(ignore_age: partners[currentViewControllerIndex!].user_age!, ignore_avatar: avatar![0], ignore_city: partners[currentViewControllerIndex!].user_city!, ignore_date: date_result, ignore_id: partners[currentViewControllerIndex!].user_id!, ignore_info: "test", ignore_name: partners[currentViewControllerIndex!].user_nickName!, ignore_user_sex: user_sex()){_ in
-                self.showAlert(message: "성공!")
+                self.showAlert(message: "成功!")
             }
         }
         else if type == self.items[2] {
@@ -227,7 +235,7 @@ extension profileContentVC : SearchTypeDelegate{
             formatter.dateFormat = "yyyy-MM-dd"
             let date_result = formatter.string(from: date)
             let user_sex = { () -> Bool in
-                if self.partners[self.currentViewControllerIndex!].user_sex == "남자" {
+                if self.partners[self.currentViewControllerIndex!].user_sex == "男性" {
                     return true
                 }
                 else {
@@ -235,7 +243,7 @@ extension profileContentVC : SearchTypeDelegate{
                 }
             }
             UserVM.shared.memoSomeone(memo_age: partners[currentViewControllerIndex!].user_age!, memo_avatar: avatar![0], memo_city: partners[currentViewControllerIndex!].user_city!, memo_date: date_result, memo_id: partners[currentViewControllerIndex!].user_id!, memo_info: "test", memo_name: partners[currentViewControllerIndex!].user_nickName!, memo_user_sex: user_sex()){_ in
-                    self.showAlert(message: "성공!")
+                    self.showAlert(message: "成功!")
             }
         }
         else if type == self.items[3] {

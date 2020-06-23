@@ -15,12 +15,11 @@ protocol PopUpDelegate
 {
     func PopupWillDismissForData(data: String)
     
-    
 }
 
 class signUpVC: BaseVC {
 
-    let domains: [String] = ["Horse", "Cow", "Camel", "Sheep", "Goat"]
+    var domains : [String]!
     var selectedElement = [Int : String]()
     @IBOutlet weak var womanBtn: UIButton!
     @IBOutlet weak var manBtn: UIButton!
@@ -44,34 +43,32 @@ class signUpVC: BaseVC {
         super.viewDidLoad()
 
         
-                setUpViewClick()
-        
-                if DataManager.isLogin! {
-                    
-                    
-                    
-                } else {
-                    UserVM.shared.AnonymousLogin{(success, message, error) in
-                        if error == nil {
+            setUpViewClick()
+    
+            if DataManager.isLogin! {
+                
+                
+                
+            } else {
+                UserVM.shared.AnonymousLogin{(success, message, error) in
+                    if error == nil {
 
-                                   SettingVM.shared.getSelectingAges(completion: {_ in
-                                        self.AgeList = SettingVM.AgeList
-                                   })
-                                   SettingVM.shared.getSelectingRegions(completion: {_ in
-                                        self.RegionList = SettingVM.RegionList
-                                   })
+                               SettingVM.shared.getSelectingAges(completion: {_ in
+                                    self.AgeList = SettingVM.AgeList
+                               })
+                               SettingVM.shared.getSelectingRegions(completion: {_ in
+                                    self.RegionList = SettingVM.RegionList
+                               })
 
-                        }else {
-                            self.showAlert(message: "_____error____")
-                        }
+                    }else {
+                        self.showAlert(message: "_____error____")
+                    }
                 }
-                    
-                NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name:UIResponder.keyboardWillShowNotification, object: nil)
-                NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:UIResponder.keyboardWillHideNotification, object: nil)
-               
-                           
+      
             }
-       
+        
+            NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name:UIResponder.keyboardWillShowNotification, object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:UIResponder.keyboardWillHideNotification, object: nil)
         
         
         
@@ -188,10 +185,10 @@ extension signUpVC {
             if passwordTxt.text?.trimmingCharacters(in: .whitespacesAndNewlines) != passwordAgainTxt.text?.trimmingCharacters(in: .whitespacesAndNewlines) {
                 passwordTxt.textColor = #colorLiteral(red: 0.7450980392, green: 0.04899250873, blue: 0, alpha: 1)
                 passwordAgainTxt.textColor = #colorLiteral(red: 0.7450980392, green: 0.04899250873, blue: 0, alpha: 1)
-                return "암호를 확인하세요."
+                return "パスワード確認入力"
             }
             if emailTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines) == "" || passwordTxt.text!.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
-                return "빈칸을 채워주세요."
+                return "Please fill the field"
             }
 
             

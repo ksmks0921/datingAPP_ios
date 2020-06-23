@@ -43,9 +43,9 @@ class AppConstant {
     static let eText = "text"
     static let eEmoji  = "emoji"
     static let points = "points"
-    static let eAll = "전체"
-    static let eType = ["전체", "메일친구 모집", "지금부터 즐기는", "친구 모집", "성인, 나이많은", "애호가", "연인모집"]
-    static let phoneSetting = ["1시간 후까지 받음", "2시간 후까지 받음", "3시간 후까지 받음", "4시간 후까지 받음", "5시간 후까지 받음"]
+    static let eAll = "全体"
+    static let eType = ["全体", "メール友募集", "今からあそぼ", "友達募集", "ミドルエイジ", "すぐ会いたい", "すぐ会いたい"]
+    static let phoneSetting = ["1時間後まで受ける", "2時間後まで受ける", "3時間後まで受ける", "4時間後まで受ける", "5時間後まで受ける"]
     static let height_60 = 60
     static let height_50 = 50
     static let height_40 = 40

@@ -24,7 +24,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
         let pushManager = PushNotificationManager(userID: "currently_logged_in_user_id")
         pushManager.registerForPushNotifications()
-
+        
+        
         return true
     }
 

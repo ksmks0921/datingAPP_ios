@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -27,13 +28,16 @@
                         <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TPu-Lr-YW0">
-                        <rect key="frame" x="8" y="11.5" width="42" height="21"/>
+                        <rect key="frame" x="8" y="11.5" width="122" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <textField hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="닉네임을 입력하세요." minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tcC-D6-6nT">
-                        <rect key="frame" x="90" y="5" width="135" height="34"/>
+                    <textField hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="新規会員登録" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tcC-D6-6nT">
+                        <rect key="frame" x="138" y="5" width="120" height="34"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="120" id="KpZ-NC-PGN"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits"/>
                     </textField>
@@ -43,9 +47,9 @@
                     <constraint firstItem="dJs-3f-tIh" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="9QT-h1-f9b"/>
                     <constraint firstItem="TPu-Lr-YW0" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Lou-tO-WOb"/>
                     <constraint firstItem="dJs-3f-tIh" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="138" id="OlL-8Q-HFc"/>
-                    <constraint firstItem="tcC-D6-6nT" firstAttribute="leading" secondItem="TPu-Lr-YW0" secondAttribute="trailing" constant="40" id="RKx-S8-rlq"/>
+                    <constraint firstItem="tcC-D6-6nT" firstAttribute="leading" secondItem="dJs-3f-tIh" secondAttribute="leading" id="Ry6-Vd-C8U"/>
                     <constraint firstItem="tcC-D6-6nT" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Yrl-dW-wZT"/>
-                    <constraint firstItem="tcC-D6-6nT" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="bXB-rb-FTu"/>
+                    <constraint firstItem="dJs-3f-tIh" firstAttribute="leading" secondItem="TPu-Lr-YW0" secondAttribute="trailing" constant="8" id="fx9-8A-2de"/>
                     <constraint firstItem="tcC-D6-6nT" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="mAI-0P-3T4"/>
                     <constraint firstAttribute="trailing" secondItem="s4A-MA-soC" secondAttribute="trailing" constant="20" id="sJt-q5-AXA"/>
                     <constraint firstItem="TPu-Lr-YW0" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="zrP-xk-cXD"/>

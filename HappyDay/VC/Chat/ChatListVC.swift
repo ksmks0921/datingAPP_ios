@@ -131,7 +131,7 @@ extension chatListVC:  UITableViewDelegate, UITableViewDataSource {
             privateChatView.connectedPerson = connect_user
             privateChatView.chat_title = connect_user.user_nickName
             let backItem = UIBarButtonItem()
-            backItem.title = "뒤로"
+            backItem.title = ""
             backItem.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
             navigationItem.backBarButtonItem = backItem // This will show in the next view controller being pushed
             self.navigationController?.pushViewController(privateChatView, animated: true)
