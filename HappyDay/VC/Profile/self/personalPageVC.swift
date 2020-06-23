@@ -86,12 +86,27 @@ class personalPageVC: UIViewController {
         }
         
     }
+    override func viewDidDisappear(_ animated: Bool) {
+    
+        NotificationCenter.default.removeObserver(self, name: UIApplication.didBecomeActiveNotification, object: nil)
+    }
     override func viewWillAppear(_ animated: Bool) {
+          
         super.viewWillAppear(animated)
-        
         navigationController?.setNavigationBarHidden(true, animated: animated)
-        
-                
+       
+        if DataManager.isLockScreen {
+            NotificationCenter.default.addObserver(self, selector: #selector(applicationDidBecomeActive), name: UIApplication.didBecomeActiveNotification, object: nil)
+        }
+        else {
+            NotificationCenter.default.removeObserver(self, name: UIApplication.didBecomeActiveNotification, object: nil)
+        }
+    }
+    @objc func applicationDidBecomeActive(notification:NSNotification){
+       
+           let VC = self.storyboard?.instantiateViewController(withIdentifier: "ScreenLockVC") as! ScreenLockVC
+           navigationController?.pushViewController(VC, animated: true)
+
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)

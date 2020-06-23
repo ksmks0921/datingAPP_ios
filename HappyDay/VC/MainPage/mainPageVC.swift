@@ -113,6 +113,10 @@ class mainPageVC: BaseVC {
         let nibCell = UINib(nibName: "largeCollectionViewCell", bundle: nil)
         collectionView.register(nibCell, forCellWithReuseIdentifier: largeCollectioinViewCellId)
     }
+    override func viewDidDisappear(_ animated: Bool) {
+    
+        NotificationCenter.default.removeObserver(self, name: UIApplication.didBecomeActiveNotification, object: nil)
+    }
     override func viewWillAppear(_ animated: Bool) {
         
           super.viewWillAppear(animated)
@@ -121,9 +125,7 @@ class mainPageVC: BaseVC {
           if DataManager.isLockScreen {
               NotificationCenter.default.addObserver(self, selector: #selector(applicationDidBecomeActive), name: UIApplication.didBecomeActiveNotification, object: nil)
           }
-          else {
-              NotificationCenter.default.removeObserver(self, name: UIApplication.didBecomeActiveNotification, object: nil)
-          }
+         
     }
     @objc func applicationDidBecomeActive(notification:NSNotification){
          

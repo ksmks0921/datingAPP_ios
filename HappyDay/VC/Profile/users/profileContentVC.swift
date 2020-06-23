@@ -24,8 +24,22 @@ class profileContentVC: BaseVC {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-           super.viewWillAppear(animated)
-           navigationController?.setNavigationBarHidden(true, animated: animated)
+          
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+       
+        if DataManager.isLockScreen {
+            NotificationCenter.default.addObserver(self, selector: #selector(applicationDidBecomeActive), name: UIApplication.didBecomeActiveNotification, object: nil)
+        }
+        else {
+            NotificationCenter.default.removeObserver(self, name: UIApplication.didBecomeActiveNotification, object: nil)
+        }
+    }
+    @objc func applicationDidBecomeActive(notification:NSNotification){
+       
+           let VC = self.storyboard?.instantiateViewController(withIdentifier: "ScreenLockVC") as! ScreenLockVC
+           navigationController?.pushViewController(VC, animated: true)
+
     }
     
   
@@ -59,7 +73,7 @@ class profileContentVC: BaseVC {
         let height_view = self.view.frame.size.height
         let height_bottom_view = (items.count + 1) * 60
         if height_bottom_view > Int(height_view) {
-            popupVC.height = CGFloat(height_view)
+            popupVC.height = CGFloat(height_view - 80)
         }
         else {
             popupVC.height = CGFloat(height_bottom_view)

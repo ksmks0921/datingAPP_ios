@@ -48,11 +48,7 @@ class contentforpostVC: UIViewController {
         
        
     }
-    override func viewWillAppear(_ animated: Bool) {
-          super.viewWillAppear(animated)
-          navigationController?.setNavigationBarHidden(true, animated: animated)
-//          hegiht_tableView.constant = CGFloat(height_table - 50)
-    }
+  
     
     func getData() {
         Indicator.sharedInstance.showIndicator()
