@@ -50,16 +50,19 @@ class profileVC: BaseVC {
         userinfotableview.reloadData()
 
 
-//        if person != nil {
-//            sections = [
-//
-//                Section(title: "自己紹介", items: [person.user_introduce!], values: ["what are you doing?"]),
-//                Section(title: "기본정보", items: ["별명" , "성별", "년령", "거주지", "생활스타일", "혈액형", "별자리"], values: [person.user_nickName!, person.user_sex!, person.user_age!, person.user_city!, person.user_lifestyle!, person.user_blood!, person.user_star!]),
-//                Section(title: "외모", items: ["신장" , "스타일", "외모", "직업"], values: [person.user_tall!, person.user_style!, person.style_1!, person.user_job!]),
-//                Section(title: "자체평가", items: ["멋" ,"멋쟁이도", "부자도", "부드러움"], values: [person.style_1!, person.style_2!, person.style_3!, person.style_4!])
-//
-//            ]
-//        }
+        if person != nil {
+            sections = [
+
+                Section(title: "自己紹介", items: [person.user_introduce!], values: ["what are you doing?"]),
+                //기본정보   : "별명" , "성별", "년령", "거주지", "생활스타일", "혈액형", "별자리"
+                Section(title: "基本情報", items: ["ニックネーム" , "性別", "年齢", "居住地", "ライフスタイル", "血液型", "星座"], values: [person.user_nickName!, person.user_sex!, person.user_age!, person.user_city!, person.user_lifestyle!, person.user_blood!, person.user_star!]),
+                // 외모 : "신장" , "스타일", "외모", "직업"
+                Section(title: "外見", items: ["身長" , "スタイル", "外見", "職業"], values: [person.user_tall!, person.user_style!, person.style_1!, person.user_job!]),
+                // 자체평가 :  "멋" ,"멋쟁이도", "부자도", "부드러움"
+                Section(title: "自己評価", items: ["かわいさ" ,"おしゃれ度", "お金持ち度", "やさしさ"], values: [person.style_1!, person.style_2!, person.style_3!, person.style_4!])
+
+            ]
+        }
         
         
     }

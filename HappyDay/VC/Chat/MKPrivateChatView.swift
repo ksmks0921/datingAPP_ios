@@ -24,17 +24,20 @@ class MKPrivateChatView: ChatViewController  , UITextViewDelegate {
         
         setupUI()
         setupNavigationButton()
-        Indicator.sharedInstance.showIndicator()
-        MessageVM.shared.geData(language: AppConstant.LanguageEnglish ,sender_id: chatId, connectedPerson: connectedPerson, completion: {_ in
-             Indicator.sharedInstance.hideIndicator()
-             self.loadFirstMessages()
-        })
-         
-        messageInputBar.inputTextView.delegate = self as UITextViewDelegate
-        messagesCollectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "CustomImageCell")
-        
+        loadFirstMessages()
+
     }
-   
+    func setupUI() {
+        let height_of_view = self.messagesCollectionView.frame.size.height
+        let width_of_view = self.messagesCollectionView.frame.size.width
+        background_image.frame = CGRect(x: 0, y: 0, width: width_of_view, height: height_of_view)
+        background_image.image = UIImage(named: "person_2")
+        view.addSubview(background_image)
+        messagesCollectionView.backgroundColor = UIColor(white: 1, alpha: 0.5)
+        messagesCollectionView.backgroundView = background_image
+        messageInputBar.inputTextView.delegate = self
+        messagesCollectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "CustomImageCell")
+    }
     func setupNavigationButton() {
         
          let button_translate = UIBarButtonItem(
@@ -57,14 +60,25 @@ class MKPrivateChatView: ChatViewController  , UITextViewDelegate {
           self.navigationItem.rightBarButtonItems = [button_translate, button_setting]
           self.navigationController?.navigationBar.tintColor = UIColor.white
     }
-    func setupUI() {
-        let height_of_view = self.messagesCollectionView.frame.size.height
-        let width_of_view = self.messagesCollectionView.frame.size.width
-        background_image.frame = CGRect(x: 0, y: 0, width: width_of_view, height: height_of_view)
-        background_image.image = UIImage(named: "person_2")
-        view.addSubview(background_image)
-        messagesCollectionView.backgroundColor = UIColor(white: 1, alpha: 0.5)
-        messagesCollectionView.backgroundView = background_image
+    func loadFirstMessages() {
+           
+        DispatchQueue.global(qos: .userInitiated).async {
+            Indicator.sharedInstance.showIndicator()
+            MessageVM.shared.geData(language: AppConstant.LanguageEnglish ,sender_id: self.chatId, connectedPerson: self.connectedPerson, completion: {_ in
+                    let count = UserDefaults.standard.mockMessagesCount()
+                    MessageVM.shared.getMessages(count: count) { messages in
+                        Indicator.sharedInstance.hideIndicator()
+                        DispatchQueue.main.async {
+                            self.messageList = messages
+                            self.messagesCollectionView.reloadData()
+                            self.messagesCollectionView.scrollToBottom()
+                        }
+                    }
+             })
+               
+        }
+           
+           
     }
     @objc
     private func selectLanguage() {
@@ -112,7 +126,7 @@ class MKPrivateChatView: ChatViewController  , UITextViewDelegate {
 //        }
         
         let backBarBtnItem = UIBarButtonItem()
-        backBarBtnItem.title = "뒤로"
+        backBarBtnItem.title = ""
         navigationController?.navigationBar.backItem?.backBarButtonItem = backBarBtnItem
         
     }
@@ -123,10 +137,9 @@ class MKPrivateChatView: ChatViewController  , UITextViewDelegate {
     override func viewWillAppear(_ animated: Bool) {
           
         super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(true, animated: animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
         navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.2039215686, green: 0.7803921569, blue: 0.3490196078, alpha: 1)
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)]
-        
         if DataManager.isLockScreen {
             NotificationCenter.default.addObserver(self, selector: #selector(applicationDidBecomeActive), name: UIApplication.didBecomeActiveNotification, object: nil)
         }
@@ -134,6 +147,7 @@ class MKPrivateChatView: ChatViewController  , UITextViewDelegate {
             NotificationCenter.default.removeObserver(self, name: UIApplication.didBecomeActiveNotification, object: nil)
         }
     }
+    
     @objc func applicationDidBecomeActive(notification:NSNotification){
        
            let VC = self.storyboard?.instantiateViewController(withIdentifier: "ScreenLockVC") as! ScreenLockVC
@@ -146,25 +160,10 @@ class MKPrivateChatView: ChatViewController  , UITextViewDelegate {
         self.navigationController?.popViewController(animated: true)
     }
     
-    func loadFirstMessages() {
-
-           
-           DispatchQueue.global(qos: .userInitiated).async {
-               let count = UserDefaults.standard.mockMessagesCount()
-               MessageVM.shared.getMessages(count: count) { messages in
-                   DispatchQueue.main.async {
-                       self.messageList = messages
-                       self.messagesCollectionView.reloadData()
-                       self.messagesCollectionView.scrollToBottom()
-                   }
-               }
-           }
-           
-           
-    }
     
-//    override func loadMoreMessages() {
-//        DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: .now() + 1) {
+    
+    override func loadMoreMessages() {
+        DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: .now() + 1) {
 //            SampleData.shared.getAdvancedMessages(count: 20) { messages in
 //                DispatchQueue.main.async {
 //                    self.messageList.insert(contentsOf: messages, at: 0)
@@ -172,8 +171,8 @@ class MKPrivateChatView: ChatViewController  , UITextViewDelegate {
 //                    self.refreshControl.endRefreshing()
 //                }
 //            }
-//        }
-//    }
+        }
+    }
     
     override func configureMessageCollectionView() {
         super.configureMessageCollectionView()
@@ -190,10 +189,7 @@ class MKPrivateChatView: ChatViewController  , UITextViewDelegate {
         layout?.setMessageOutgoingMessageTopLabelAlignment(LabelAlignment(textAlignment: .right, textInsets: UIEdgeInsets(top: 0, left: 0, bottom: outgoingAvatarOverlap, right: 8)))
         layout?.setMessageOutgoingMessageBottomLabelAlignment(LabelAlignment(textAlignment: .right, textInsets: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 8)))
         layout?.setMessageOutgoingMessagePadding(UIEdgeInsets(top: -outgoingAvatarOverlap, left: 18, bottom: outgoingAvatarOverlap, right: -18))
-        
-        
-        
-        
+
         // Set outgoing avatar to overlap with the message bubble
         layout?.setMessageIncomingAvatarSize(CGSize(width: 36, height: 36))
         layout?.setMessageIncomingMessageTopLabelAlignment(LabelAlignment(textAlignment: .left, textInsets: UIEdgeInsets(top: 0, left: 18, bottom: outgoingAvatarOverlap, right: 0)))
@@ -217,7 +213,7 @@ class MKPrivateChatView: ChatViewController  , UITextViewDelegate {
         messageInputBar.separatorLine.isHidden = true
         messageInputBar.inputTextView.tintColor = .primaryColor
         messageInputBar.inputTextView.backgroundColor = UIColor(red: 245/255, green: 245/255, blue: 245/255, alpha: 1)
-        messageInputBar.inputTextView.placeholder = "메쎄지를 입력하세요."
+        messageInputBar.inputTextView.placeholder = "メールを入力してください."
         messageInputBar.inputTextView.placeholderTextColor = UIColor(red: 0.6, green: 0.6, blue: 0.6, alpha: 1)
         messageInputBar.inputTextView.textContainerInset = UIEdgeInsets(top: 8, left: 12, bottom: 8, right: 36)
         messageInputBar.inputTextView.placeholderLabelInsets = UIEdgeInsets(top: 8, left: 16, bottom: 8, right: 36)
@@ -564,7 +560,7 @@ extension MKPrivateChatView: MessagesDisplayDelegate {
         }
        else {
              avatarView.sd_setImage(with: URL(string: connectedPerson.user_avatar![0]), placeholderImage: UIImage(named: "avatar_woman"))
-            avatarView.layer.borderColor = (UIColor(red: 230/255, green: 230/255, blue: 230/255, alpha: 1) as! CGColor)
+        avatarView.layer.borderColor = UIColor(red: 230/255, green: 230/255, blue: 230/255, alpha: 1).cgColor
         
         }
         

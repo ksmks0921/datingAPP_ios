@@ -63,7 +63,9 @@ class ChatViewController: MessagesViewController, MessagesDataSource {
         
        
     }
-    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+           return .lightContent
+    }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -79,9 +81,7 @@ class ChatViewController: MessagesViewController, MessagesDataSource {
         audioController.stopAnyOngoingPlaying()
     }
     
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
-    }
+  
     
     @objc
     func loadMoreMessages() {

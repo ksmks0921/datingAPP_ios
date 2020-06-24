@@ -81,6 +81,8 @@ extension userPostsVC: UITableViewDelegate, UITableViewDataSource {
         cell.age_region_label.text = "(" + items[indexPath.row].age + " " + items[indexPath.row].region + ")"
         cell.hobbyLabel.text = items[indexPath.row].event_type
         cell.nickname.text = items[indexPath.row].nick_name
+        cell.regionLabel.text = items[indexPath.row].region
+        cell.timeLabel.text = items[indexPath.row].created_at
         if items[indexPath.row].thumb_path != nil {
            
                 cell.postImageView.sd_setImage(with: URL(string: items[indexPath.row].thumb_path), placeholderImage: UIImage(named: "default"))

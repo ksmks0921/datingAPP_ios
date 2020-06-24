@@ -294,10 +294,7 @@ final internal class MessageVM {
                                                 self.messages_japanese.append(original_message)
                                                 self.messages_chinese.append(original_message)
                                             }
-                                            
-                                              
-                                   
-                                            
+       
                                         }
                                         else if custom_message_item.source_type == AppConstant.eVideo{
 

@@ -217,6 +217,13 @@ extension signUpVC {
                    if success{
                        DataManager.isLogin = true
                        DataManager.isShowingSearchResult = false
+                       DataManager.email = self.emailTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+                       DataManager.password = self.passwordTxt.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+                       SettingVM.shared.getPoints()
+                       SettingVM.shared.getLikes()
+                       SettingVM.shared.getMemos()
+                       SettingVM.shared.getIgnores()
+                       SettingVM.shared.getBlocks()
                        let VC = self.storyboard?.instantiateViewController(withIdentifier: "customTabBarVC") as! customTabBarVC
                        self.navigationController?.pushViewController(VC, animated: true)
                    }else{

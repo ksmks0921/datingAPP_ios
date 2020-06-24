@@ -43,36 +43,32 @@ class postVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
-        
-        let tempdataSource = JXSegmentedTitleDataSource()
-        tempdataSource.isTitleColorGradientEnabled = false
-        tempdataSource.titles = titles
-        tempdataSource.titleSelectedColor = UIColor.white
-        segmentedDataSource = tempdataSource
-        DataManager.isShowingFilterResult = false
-    
-        
-     
-        let indicator = JXSegmentedIndicatorLineView()
-        indicator.indicatorHeight = 40
-        indicator.indicatorWidthIncrement = 30
-        indicator.layer.cornerRadius = 8
-        indicator.indicatorColor = #colorLiteral(red: 0.1521415114, green: 0.7645066977, blue: 0.3480054438, alpha: 1)
-        
-        
-        segmentedView.indicators = [indicator]
-
-
-         segmentedView.dataSource = segmentedDataSource
-         segmentedView.delegate = self
-         tabview.addSubview(self.segmentedView)
-
-         segmentedView.listContainer = listContainerView
-         contentview.addSubview(listContainerView)
-         initData()
+        setupUI()
+ 
     }
+    func setupUI() {
+       let tempdataSource = JXSegmentedTitleDataSource()
+       tempdataSource.isTitleColorGradientEnabled = false
+       tempdataSource.titles = titles
+       tempdataSource.titleSelectedColor = UIColor.white
+       segmentedDataSource = tempdataSource
+       DataManager.isShowingFilterResult = false
+   
+       
     
+       let indicator = JXSegmentedIndicatorLineView()
+       indicator.indicatorHeight = 40
+       indicator.indicatorWidthIncrement = 30
+       indicator.layer.cornerRadius = 8
+       indicator.indicatorColor = #colorLiteral(red: 0.1521415114, green: 0.7645066977, blue: 0.3480054438, alpha: 1)
+       
+       
+       segmentedView.indicators = [indicator]
+
+
+       segmentedView.dataSource = segmentedDataSource
+       segmentedView.delegate = self
+    }
     @IBAction func selectRegionTapped(_ sender: Any) {
         
         
@@ -99,7 +95,9 @@ class postVC: UIViewController {
         })
 
     }
-    func initData() {
+   
+    @IBAction func allSelectTapped(_ sender: Any) {
+        DataManager.isShowingFilterResult = true
         allSectBtn.backgroundColor = #colorLiteral(red: 0.1521415114, green: 0.7645066977, blue: 0.3480054438, alpha: 1)
         allSectBtn.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: .normal)
         imageSelectBtn.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
@@ -116,10 +114,6 @@ class postVC: UIViewController {
                 self.listContainerView.reloadData()
           
         })
-    }
-    @IBAction func allSelectTapped(_ sender: Any) {
-        DataManager.isShowingFilterResult = true
-        initData()
     }
     @IBAction func videoSelectTapped(_ sender: Any) {
         
@@ -189,9 +183,14 @@ class postVC: UIViewController {
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        
+        tabview.addSubview(self.segmentedView)
+        segmentedView.listContainer = listContainerView
+        contentview.addSubview(listContainerView)
+        
         customNavBar.frame.size.height = navbarHeight
         segmentedView.frame = CGRect(x: 0, y: 0, width: view.bounds.size.width, height: 40)
-        listContainerView.frame = CGRect(x: 0, y: 0, width: view.bounds.size.width, height: view.bounds.size.height)
+        listContainerView.frame = CGRect(x: 0, y: 0, width: view.bounds.size.width, height: self.contentview.frame.size.height)
     }
     @IBAction func postsearch(_ sender: Any) {
         
@@ -273,7 +272,8 @@ extension postVC: JXSegmentedListContainerViewDataSource {
     func listContainerView(_ listContainerView: JXSegmentedListContainerView, initListAt index: Int) -> JXSegmentedListContainerViewListDelegate {
         
         let controller = self.storyboard?.instantiateViewController(withIdentifier: "contentforpostVC") as! contentforpostVC
-        controller.height_table = Int(self.contentview.frame.size.height)        
+        controller.height_table = Int(self.contentview.frame.size.height)
+        print("________here____\(self.contentview.frame.size.height)")
         controller.pageType = index
         return controller
     }
