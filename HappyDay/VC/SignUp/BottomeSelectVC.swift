@@ -13,7 +13,7 @@ class BottomeSelectVC: BottomPopupViewController {
 
       var items = [String]()
       var height_row = 60
-      var selectedIndex:IndexPath!
+      var selectedIndex:Int = 0
 
       var height: CGFloat?
       var topCornerRadius: CGFloat?
@@ -34,7 +34,7 @@ class BottomeSelectVC: BottomPopupViewController {
           dismiss(animated: true, completion: nil)
           
 
-         delegate?.PopupWillDismissForData(data: items[selectedIndex.row])
+          delegate?.PopupWillDismissForData(data: items[selectedIndex])
          
 
       }
@@ -91,7 +91,7 @@ extension BottomeSelectVC: UITableViewDelegate, UITableViewDataSource{
             let cell = tableView.dequeueReusableCell(withIdentifier: "MyCustomCell", for: indexPath as IndexPath) as! CustomTableViewCell
             cell.label?.text = self.items[indexPath.row]
 
-            if (selectedIndex == indexPath) {
+        if (selectedIndex == indexPath.row) {
                 cell.radioBtn.setImage(UIImage(named: "sharp_radio_button_checked_black_18dp"),for:.normal)
                    } else {
                 cell.radioBtn.setImage(UIImage(named: "sharp_radio_button_unchecked_black_18dp"),for:.normal)
@@ -107,7 +107,7 @@ extension BottomeSelectVC: UITableViewDelegate, UITableViewDataSource{
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-        selectedIndex = indexPath as IndexPath
+        selectedIndex = indexPath.row
         tableView.reloadData()
          
     }

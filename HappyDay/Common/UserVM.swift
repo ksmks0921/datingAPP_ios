@@ -429,8 +429,8 @@ class UserVM {
                     let user_style = restDict[FireBaseConstant.EventUserStyle] as? String
                     let user_job = restDict[FireBaseConstant.EventUserJob] as? String
                     let user_id = restDict[FireBaseConstant.EventUserID] as? String
-                    
-                    let post_item = PostEvent(user_avatar: user_avatar!, event_type: event_type!, view_counts: view_counts!, nick_name: nick_name!, age: age!, region: region!, event_des: event_des!, thumb_path: thumb_path!, user_gender: gender!, source_type: source_type!, user_tall: user_tall!, user_style: user_style!, user_job: user_job!, user_id: user_id!)
+                    let created_at = restDict[FireBaseConstant.created_at] as? String
+                    let post_item = PostEvent(user_avatar: user_avatar!, event_type: event_type!, view_counts: view_counts!, nick_name: nick_name!, age: age!, region: region!, event_des: event_des!, thumb_path: thumb_path!, user_gender: gender!, source_type: source_type!, user_tall: user_tall!, user_style: user_style!, user_job: user_job!, user_id: user_id!, created_at: created_at!)
                     UserVM.eventPosts.append(post_item)
 
                     
@@ -465,8 +465,8 @@ class UserVM {
                     let user_style = restDict[FireBaseConstant.EventUserStyle] as? String
                     let user_job = restDict[FireBaseConstant.EventUserJob] as? String
                     let user_id = restDict[FireBaseConstant.EventUserID] as? String
-                    
-                    let post_item = PostEvent(user_avatar: user_avatar!, event_type: event_type!, view_counts: view_counts!, nick_name: nick_name!, age: age!, region: region!, event_des: event_des!, thumb_path: thumb_path!, user_gender: gender!, source_type: source_type!, user_tall: user_tall!, user_style: user_style!, user_job: user_job!, user_id: user_id!)
+                    let created_at = restDict[FireBaseConstant.created_at] as? String
+                    let post_item = PostEvent(user_avatar: user_avatar!, event_type: event_type!, view_counts: view_counts!, nick_name: nick_name!, age: age!, region: region!, event_des: event_des!, thumb_path: thumb_path!, user_gender: gender!, source_type: source_type!, user_tall: user_tall!, user_style: user_style!, user_job: user_job!, user_id: user_id!, created_at: created_at!)
                     if post_item.user_id == DataManager.userId {
                         UserVM.my_eventPosts.append(post_item)
                     }

@@ -80,6 +80,9 @@ class searchVC: UIViewController {
             NotificationCenter.default.removeObserver(self, name: UIApplication.didBecomeActiveNotification, object: nil)
         }
     }
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
     @objc func applicationDidBecomeActive(notification:NSNotification){
        
            let VC = self.storyboard?.instantiateViewController(withIdentifier: "ScreenLockVC") as! ScreenLockVC
@@ -189,6 +192,8 @@ extension searchVC:  UITableViewDelegate, UITableViewDataSource {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "searchTableViewCell", for: indexPath as IndexPath) as! searchTableViewCell
                 cell.property?.text = self.search_type[indexPath.row]
                 cell.value?.text = search_typye_value[indexPath.row]
+                cell.inputTextField.isHidden = true
+                cell.value.isHidden = false
                 return cell
 
         case .NICKNAME:

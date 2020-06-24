@@ -17,6 +17,8 @@ class postTableViewCell: UITableViewCell {
     @IBOutlet weak var nickname: UILabel!
     @IBOutlet weak var age_region_label: UILabel!
     @IBOutlet weak var textContentLabel: UILabel!
+    @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var regionLabel: UILabel!
     @IBOutlet weak var personPhoto: UIImageView!
     @IBOutlet weak var views: UILabel!
     override func awakeFromNib() {

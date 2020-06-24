@@ -34,7 +34,9 @@ class selectDomainVC: UIViewController{
         
         
     }
-    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
     private func setUpTitle(){
         if page_from == "login"{
             custom_title.text = "ドメイン選択"

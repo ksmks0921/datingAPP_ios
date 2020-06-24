@@ -35,9 +35,7 @@ protocol ImageSelectProtocol
 /// A base class for the example controllers
 class ChatViewController: MessagesViewController, MessagesDataSource {
     
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
-    }
+ 
     
     /// The `BasicAudioController` controll the AVAudioPlayer state (play, pause, stop) and udpate audio cell UI accordingly.
     open lazy var audioController = BasicAudioController(messageCollectionView: messagesCollectionView)
@@ -81,7 +79,9 @@ class ChatViewController: MessagesViewController, MessagesDataSource {
         audioController.stopAnyOngoingPlaying()
     }
     
-  
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
     
     @objc
     func loadMoreMessages() {

@@ -34,6 +34,7 @@ class MKPrivateChatView: ChatViewController  , UITextViewDelegate {
         messagesCollectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "CustomImageCell")
         
     }
+   
     func setupNavigationButton() {
         
          let button_translate = UIBarButtonItem(

@@ -94,7 +94,7 @@ class FireBaseConstant{
     static let EventUserName            = "EventUserName"
     static let EventUserStyle           = "EventUserStyle"
     static let EventUserTall            = "EventUserTall"
-    static let EventUserID                   = "UserID"
+    static let EventUserID              = "UserID"
     static let created_at               = "created_at"
     static let row_key                  = "row_key"
     static let source_type              = "source_type"

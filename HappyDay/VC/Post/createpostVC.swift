@@ -43,6 +43,9 @@ class createpostVC: BaseVC {
         
  
     }
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
     @objc func keyboardWillShow(notification:NSNotification){
 
         let userInfo = notification.userInfo!

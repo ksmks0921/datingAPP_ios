@@ -52,7 +52,7 @@ class AppConstant {
     static let height_60 = 60
     static let height_50 = 50
     static let height_40 = 40
-    static let height_postTableCell = 300
+    static let height_postTableCell = 340
     
     
     static let stickers = ["https://firebasestorage.googleapis.com/v0/b/happyday-c2593.appspot.com/o/Emogies%2Fa1.gif?alt=media&token=3ce4678d-0213-4250-b868-1bc9fa3b71d5",

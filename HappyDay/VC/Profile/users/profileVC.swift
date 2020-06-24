@@ -144,6 +144,9 @@ class profileVC: BaseVC {
         location.text = person?.user_city
         titleLabel.text = person?.user_nickName
     }
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
     override func viewWillAppear(_ animated: Bool) {
           
         super.viewWillAppear(animated)

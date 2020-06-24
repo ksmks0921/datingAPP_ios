@@ -706,7 +706,7 @@
                                     <constraint firstItem="J7q-C6-UMZ" firstAttribute="centerX" secondItem="8Wp-7z-A3w" secondAttribute="centerX" id="ySb-ED-ucx"/>
                                 </constraints>
                             </view>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="oPf-Jt-MEm">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="oPf-Jt-MEm">
                                 <rect key="frame" x="0.0" y="284" width="414" height="529"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="pfW-ge-1CY">
@@ -1496,8 +1496,11 @@
                                                 <rect key="frame" x="0.0" y="1047.5" width="414" height="62"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XVZ-cn-xjW" customClass="RoundButton" customModule="HappyDay" customModuleProvider="target">
-                                                        <rect key="frame" x="62" y="8" width="290" height="43.5"/>
+                                                        <rect key="frame" x="62" y="8" width="290" height="44"/>
                                                         <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="44" id="ogL-W5-FxH"/>
+                                                        </constraints>
                                                         <state key="normal" title="掲示板">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
@@ -1523,7 +1526,6 @@
                                                     <constraint firstItem="XVZ-cn-xjW" firstAttribute="width" secondItem="ZbU-Vq-PtB" secondAttribute="width" multiplier="0.7" id="FF4-id-o4S"/>
                                                     <constraint firstItem="XVZ-cn-xjW" firstAttribute="top" secondItem="ZbU-Vq-PtB" secondAttribute="top" constant="8" id="dqq-tn-ok3"/>
                                                     <constraint firstItem="XVZ-cn-xjW" firstAttribute="centerX" secondItem="ZbU-Vq-PtB" secondAttribute="centerX" id="jFZ-0c-f8z"/>
-                                                    <constraint firstItem="XVZ-cn-xjW" firstAttribute="height" secondItem="ZbU-Vq-PtB" secondAttribute="height" multiplier="0.7" id="vde-Lo-0dH"/>
                                                 </constraints>
                                             </view>
                                         </subviews>
@@ -1691,8 +1693,8 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wMB-ao-xRD" customClass="DesinableView" customModule="HappyDay" customModuleProvider="target">
                                         <rect key="frame" x="334" y="7" width="55" height="36"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="square.grid.2x2.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="fHM-FJ-IT2">
-                                                <rect key="frame" x="3" y="9" width="25.5" height="17.5"/>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gallary_big" translatesAutoresizingMaskIntoConstraints="NO" id="fHM-FJ-IT2">
+                                                <rect key="frame" x="3" y="8" width="25.5" height="20"/>
                                                 <color key="tintColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20" id="ujo-pa-RN2"/>
@@ -1825,7 +1827,7 @@
                                         <rect key="frame" x="0.0" y="50" width="414" height="51"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gallary_gallary" translatesAutoresizingMaskIntoConstraints="NO" id="Dkw-r2-xzc">
-                                                <rect key="frame" x="17" y="7.5" width="36" height="36"/>
+                                                <rect key="frame" x="17" y="7.5" width="36" height="36.000000000000227"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="tintColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
@@ -5858,8 +5860,11 @@
                                 <rect key="frame" x="0.0" y="799.5" width="414" height="62.5"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ldl-CR-uG2" customClass="RoundButton" customModule="HappyDay" customModuleProvider="target">
-                                        <rect key="frame" x="10" y="8" width="394" height="46.5"/>
+                                        <rect key="frame" x="10" y="9" width="394" height="44"/>
                                         <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="GGU-tt-DXv"/>
+                                        </constraints>
                                         <state key="normal" title="送信">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
@@ -5883,7 +5888,6 @@
                                 <constraints>
                                     <constraint firstItem="Ldl-CR-uG2" firstAttribute="leading" secondItem="FfS-Dk-0mA" secondAttribute="leading" constant="10" id="AkB-Gf-lBI"/>
                                     <constraint firstItem="Ldl-CR-uG2" firstAttribute="centerY" secondItem="FfS-Dk-0mA" secondAttribute="centerY" id="EwB-N8-3gX"/>
-                                    <constraint firstItem="Ldl-CR-uG2" firstAttribute="top" secondItem="FfS-Dk-0mA" secondAttribute="top" constant="8" id="Xkc-NQ-DqL"/>
                                     <constraint firstItem="Ldl-CR-uG2" firstAttribute="centerX" secondItem="FfS-Dk-0mA" secondAttribute="centerX" id="gVJ-9s-1BV"/>
                                 </constraints>
                             </view>
@@ -5992,7 +5996,6 @@
         <image name="sharp_cancel_black_18dp" width="36" height="36"/>
         <image name="sharp_check_white_18dp" width="18" height="18"/>
         <image name="sharp_radio_button_unchecked_black_18dp" width="36" height="36"/>
-        <image name="square.grid.2x2.fill" catalog="system" width="64" height="56"/>
         <image name="trash" catalog="system" width="60" height="64"/>
         <image name="xmark" catalog="system" width="64" height="56"/>
     </resources>

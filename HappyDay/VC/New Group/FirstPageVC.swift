@@ -49,11 +49,7 @@ class FirstPageVC: BaseVC {
         
         
     }
-   
-    override func viewDidDisappear(_ animated: Bool) {
-    
-        NotificationCenter.default.removeObserver(self, name: UIApplication.didBecomeActiveNotification, object: nil)
-    }
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)

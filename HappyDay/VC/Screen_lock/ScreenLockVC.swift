@@ -20,6 +20,9 @@ class ScreenLockVC: UIViewController {
              super.viewWillAppear(animated)
              navigationController?.setNavigationBarHidden(true, animated: animated)
     }
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
     @IBAction func confirmButtonTapped(_ sender: Any) {
         
 //        if DataManager.screenLockPass == passwordTextField.text {

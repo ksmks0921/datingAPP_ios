@@ -39,17 +39,19 @@ class contentforpostVC: UIViewController {
                 self.noResultView.alpha = 0
             }
             self.postTableView.reloadData()
-//            hegiht_tableView.constant = CGFloat(height_table - 50)
+            hegiht_tableView.constant = CGFloat(height_table)
         }
         else {
-//            hegiht_tableView.constant = CGFloat(height_table - 50)
+            hegiht_tableView.constant = CGFloat(height_table)
             getData()
         }
         
        
     }
   
-    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
     func getData() {
         Indicator.sharedInstance.showIndicator()
         UserVM.shared.getEventPosts(completion:  {_ in
@@ -108,6 +110,9 @@ extension contentforpostVC:  UITableViewDelegate, UITableViewDataSource {
             }
             cell.textContentLabel.text = event_post[indexPath.row].event_des
             cell.views.text = event_post[indexPath.row].view_counts
+            cell.regionLabel.text = event_post[indexPath.row].region
+            cell.timeLabel.text = event_post[indexPath.row].created_at
+            cell.selectionStyle = .none
             return cell
            
         

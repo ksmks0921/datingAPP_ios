@@ -127,6 +127,9 @@ class mainPageVC: BaseVC {
           }
          
     }
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
     @objc func applicationDidBecomeActive(notification:NSNotification){
          
              let VC = self.storyboard?.instantiateViewController(withIdentifier: "ScreenLockVC") as! ScreenLockVC
