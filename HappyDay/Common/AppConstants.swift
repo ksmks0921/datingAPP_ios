@@ -28,7 +28,7 @@ class AppConstant {
     static let LanguageJapanese = "japanese"
     static let LanguageKorean = "korean"
     static let LanguageChinese = "chinese"
-    static let languages = ["조선어", "中文", "日本語", "English"]
+    static let languages = ["English", "日本語","한국어", "中文"]
     static let kShowingSearch = "kSearch"
     static let kIsAutoLogin = "kIsAutoLogin"
     static let kIsScreenLock = "kIsScreenLock"
@@ -36,7 +36,7 @@ class AppConstant {
     static let kReportAlarm = "kReportAlarm"
     static let kLikeAlarm = "kLikeAlarm"
     static let kShowingFilter = "kFilter"
-  
+    
     static let screenLockPass = "screenLockPass"
     
     static let API_KEY_TRANSLATE = "AIzaSyBNoD64Un372JgIMHQMQ0ODF9eBsq59GIM"
@@ -53,7 +53,7 @@ class AppConstant {
     static let height_50 = 50
     static let height_40 = 40
     static let height_postTableCell = 340
-    
+    static let defatul_image_url = "https://firebasestorage.googleapis.com/v0/b/happyday-c2593.appspot.com/o/images%2Ficon_userphoto2.png?alt=media&token=275a03b5-24b3-4931-aa4a-d71e71f0d9df"
     
     static let stickers = ["https://firebasestorage.googleapis.com/v0/b/happyday-c2593.appspot.com/o/Emogies%2Fa1.gif?alt=media&token=3ce4678d-0213-4250-b868-1bc9fa3b71d5",
     "https://firebasestorage.googleapis.com/v0/b/happyday-c2593.appspot.com/o/Emogies%2Fa10.gif?alt=media&token=06c55dc1-3577-40d2-8b2b-e3dc95b78d6f",

@@ -190,7 +190,7 @@ extension mainProfileVC:  UITableViewDelegate, UITableViewDataSource {
         }
         else if indexPath.row == 2 {
             
-            showSlectViewWithRadio(items: ["男性", "女性"])
+//            showSlectViewWithRadio(items: ["男性", "女性"])
             
         }
         else if indexPath.row == 3 {

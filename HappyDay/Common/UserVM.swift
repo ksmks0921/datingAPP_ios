@@ -153,13 +153,13 @@ class UserVM {
             if error == nil{
                 DataManager.userId = user?.user.uid
                 DataManager.email = user?.user.email
-                
+                let user_avatar = [AppConstant.defatul_image_url, AppConstant.defatul_image_url, AppConstant.defatul_image_url]
                 let user_id = email.replacingOccurrences(of: "@", with: "", options: NSString.CompareOptions.literal, range: nil).replacingOccurrences(of: ".", with: "", options: NSString.CompareOptions.literal, range: nil)
                 let updateUser = [FireBaseConstant.kEmail         : DataManager.email!,
                                   FireBaseConstant.kCity          : city,
                                   FireBaseConstant.kAge           : age,
                                   FireBaseConstant.kUserID        : user_id,
-                                  FireBaseConstant.kUserAvatar    : "",
+                                  FireBaseConstant.kUserAvatar    : user_avatar,
                                   FireBaseConstant.kUserJob       : "",
                                   FireBaseConstant.kUserPassword  : "",
                                   FireBaseConstant.kUserBlood     : "",
@@ -267,8 +267,10 @@ class UserVM {
                                 
                                 
                                 UserVM.current_user = person_item
+                                print("______________here_____current________\(person_item.user_avatar)")
                             }
                             else if person_item.is_approved == "admin" {
+                               
                                 UserVM.admin = person_item
                             }
                                 
@@ -276,8 +278,9 @@ class UserVM {
 //                                UserVM.users.append(person_item)
 //                            }
                             else if person_item.is_approved == "approved" {
+                                 print("______________here_____other________\(person_item.user_avatar)")
                                                     UserVM.users.append(person_item)
-                                                }
+                            }
                             UserVM.all_users.append(person_item)
                             
 

@@ -22,7 +22,7 @@ class personalPageItemVC: UIViewController {
         self.contentTable.register(nib, forCellReuseIdentifier: "chatTableCell")
         
        
-        alertLabel.text = String(items.count) + "　人からいいねされました"
+        alertLabel.text = String(items.count) + "人"
         titleLabel.text = titleText
         
         

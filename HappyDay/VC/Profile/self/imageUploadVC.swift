@@ -60,22 +60,25 @@ class imageUploadVC: BaseVC {
             user = UserVM.current_user
             avatars = user.user_avatar!
         }
-        if avatars[0] != nil && avatars[0] != "" {
-            imageUploadView_1.isHidden = true
+        if avatars[0] != AppConstant.defatul_image_url {
+
             imageView1.isHidden = false
-            imageView1.sd_setImage(with: URL(string: avatars[0]),  placeholderImage: UIImage(named: "avatar_woman"))
+            imageView1.sd_setImage(with: URL(string: avatars[0]))
           
         }
-        if avatars[1] != nil && avatars[1] != "" {
-            imageUploadView_2.isHidden = true
+        print("______here\(avatars[1])")
+        print("______here\(avatars[2])")
+        if avatars[1] != AppConstant.defatul_image_url {
+
             imageView2.isHidden = false
-            imageView2.sd_setImage(with: URL(string: avatars[1]),  placeholderImage: UIImage(named: "avatar_woman"))
+            imageView2.sd_setImage(with: URL(string: avatars[1]))
           
         }
-        if avatars[2] != nil && avatars[2] != "" {
-            imageUploadView_3.isHidden = true
+        
+        if avatars[2] != AppConstant.defatul_image_url {
+
             imageView3.isHidden = false
-            imageView3.sd_setImage(with: URL(string: avatars[2]),  placeholderImage: UIImage(named: "avatar_woman"))
+            imageView3.sd_setImage(with: URL(string: avatars[2]))
           
         }
     }
@@ -190,15 +193,15 @@ class imageUploadVC: BaseVC {
 extension imageUploadVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func showImagePickerControllerActionSheet(){
-        let title = "画像アップオプション"
+        let title = "画像のアップロード"
 
         let popup = PopupDialog(title: title, message: "")
 
-        let buttonOne = DefaultButton(title: "ビデオ", dismissOnTap: true) {
+        let buttonOne = DefaultButton(title: "カメラで撮影", dismissOnTap: true) {
             self.showImagePickerController(sourceType: .camera)
         }
 
-        let buttonTwo = DefaultButton(title: "ライブラリ", dismissOnTap: true) {
+        let buttonTwo = DefaultButton(title: "ライブラリから選ぶ", dismissOnTap: true) {
             
             self.showImagePickerController(sourceType: .photoLibrary)
         }

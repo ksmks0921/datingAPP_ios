@@ -304,7 +304,7 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
 
         let components = inputBar.inputTextView.components
 
-        if UserVM.current_user.user_sex == "녀자" {
+        if UserVM.current_user.user_sex == "女性" {
             sendMessage()
         }
         else {

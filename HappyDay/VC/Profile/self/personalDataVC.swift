@@ -8,7 +8,7 @@
 
 import UIKit
 
-class personalDataVC: BaseVC {
+class personalDataVC: BaseVC, UITextViewDelegate {
 
     @IBOutlet weak var dataContentView: UITextView!
     
@@ -19,12 +19,11 @@ class personalDataVC: BaseVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        dataContentView.delegate = self
         if UserVM.current_user != nil {
             user = UserVM.current_user
             
             if from == "report" {
-               
                 titleLabel.text = "通報:" + String(report_person.user_nickName!)
                 dataContentView.customplaceholder = "通報内容を入力してください。"
             }
@@ -56,13 +55,20 @@ class personalDataVC: BaseVC {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
+    
     @objc func applicationDidBecomeActive(notification:NSNotification){
        
            let VC = self.storyboard?.instantiateViewController(withIdentifier: "ScreenLockVC") as! ScreenLockVC
            navigationController?.pushViewController(VC, animated: true)
 
     }
-    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+             if(text == "\n") {
+                 textView.resignFirstResponder()
+                 return false
+             }
+             return true
+    }
     @IBAction func sendBtnTapped(_ sender: Any) {
         if from == "personal" {
             let sex = { () -> Bool in

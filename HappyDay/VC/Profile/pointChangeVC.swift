@@ -14,7 +14,7 @@ protocol paymentFunctionDelegate
 
 }
 
-class pointChangeVC: UIViewController {
+class pointChangeVC: BaseVC {
 
     @IBOutlet weak var poinBalanceLabel: UILabel!
     @IBOutlet weak var changeBtn_1: UIButton!
@@ -63,18 +63,18 @@ class pointChangeVC: UIViewController {
     }
     
     @IBAction func pointerAddBtnTapped(_ sender: Any) {
-        pointerAddBtn.backgroundColor = #colorLiteral(red: 0.2039215686, green: 0.7803921569, blue: 0.3490196078, alpha: 1)
+        pointerAddBtn.backgroundColor = default_green_color
         pointerAddBtn.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: .normal)
         pointerChangeBtn.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-        pointerChangeBtn.setTitleColor(#colorLiteral(red: 0.2039215686, green: 0.7803921569, blue: 0.3490196078, alpha: 1), for: .normal)
+        pointerChangeBtn.setTitleColor(default_green_color, for: .normal)
 
 //        footView.isHidden = false
     }
     @IBAction func pointerChangeBtnTapped(_ sender: Any) {
-        pointerChangeBtn.backgroundColor = #colorLiteral(red: 0.2039215686, green: 0.7803921569, blue: 0.3490196078, alpha: 1)
+        pointerChangeBtn.backgroundColor = default_green_color
         pointerChangeBtn.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: .normal)
         pointerAddBtn.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-        pointerAddBtn.setTitleColor(#colorLiteral(red: 0.2039215686, green: 0.7803921569, blue: 0.3490196078, alpha: 1), for: .normal)
+        pointerAddBtn.setTitleColor(default_green_color, for: .normal)
         
     }
     @IBAction func changeBtn_1_Tapped(_ sender: Any) {

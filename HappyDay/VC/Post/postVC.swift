@@ -17,7 +17,7 @@ protocol SearchPostDelegate
     
 }
 
-class postVC: UIViewController {
+class postVC: BaseVC {
     
     
     
@@ -60,7 +60,7 @@ class postVC: UIViewController {
        indicator.indicatorHeight = 40
        indicator.indicatorWidthIncrement = 30
        indicator.layer.cornerRadius = 8
-       indicator.indicatorColor = #colorLiteral(red: 0.1521415114, green: 0.7645066977, blue: 0.3480054438, alpha: 1)
+       indicator.indicatorColor = default_green_color
        
        
        segmentedView.indicators = [indicator]
@@ -98,7 +98,7 @@ class postVC: UIViewController {
    
     @IBAction func allSelectTapped(_ sender: Any) {
         DataManager.isShowingFilterResult = true
-        allSectBtn.backgroundColor = #colorLiteral(red: 0.1521415114, green: 0.7645066977, blue: 0.3480054438, alpha: 1)
+        allSectBtn.backgroundColor = default_green_color
         allSectBtn.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: .normal)
         imageSelectBtn.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         imageSelectBtn.setTitleColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), for: .normal)
@@ -117,7 +117,7 @@ class postVC: UIViewController {
     }
     @IBAction func videoSelectTapped(_ sender: Any) {
         
-        videoSelectBtn.backgroundColor = #colorLiteral(red: 0.1521415114, green: 0.7645066977, blue: 0.3480054438, alpha: 1)
+        videoSelectBtn.backgroundColor = default_green_color
         videoSelectBtn.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: .normal)
         imageSelectBtn.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         imageSelectBtn.setTitleColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), for: .normal)
@@ -136,7 +136,7 @@ class postVC: UIViewController {
     }
     @IBAction func imageSelectTapped(_ sender: Any) {
         
-        imageSelectBtn.backgroundColor = #colorLiteral(red: 0.1521415114, green: 0.7645066977, blue: 0.3480054438, alpha: 1)
+        imageSelectBtn.backgroundColor = default_green_color
         imageSelectBtn.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: .normal)
         allSectBtn.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         allSectBtn.setTitleColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), for: .normal)
@@ -248,7 +248,7 @@ extension postVC: JXSegmentedViewDelegate {
         }
         for indicaotr in (segmentedView.indicators as! [JXSegmentedIndicatorBaseView]) {
 
-               indicaotr.indicatorColor = #colorLiteral(red: 0.1521415114, green: 0.7645066977, blue: 0.3480054438, alpha: 1)
+               indicaotr.indicatorColor = default_green_color
 
         }
        

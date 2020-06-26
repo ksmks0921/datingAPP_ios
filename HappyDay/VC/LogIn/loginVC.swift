@@ -8,29 +8,19 @@
 
 import UIKit
 
-protocol loginVCDelegate
-{
-    func selectDomainDismiss(domain: String)
-}
 
 
 
 class loginVC: BaseVC {
 
-    @IBOutlet weak var gotodomain: UIView!
-    @IBOutlet weak var domainLabel: UILabel!
     @IBOutlet weak var passwordTextField: UITextField!
-    var domain: String?
     @IBOutlet weak var emailTextField: UITextField!
-     @IBOutlet weak var ScrollContent: UIScrollView!
+    @IBOutlet weak var ScrollContent: UIScrollView!
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
-        
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(selectDomain(_:)))
-        tapGesture.delegate = self as? UIGestureRecognizerDelegate
-        gotodomain.addGestureRecognizer(tapGesture)
+  
 
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name:UIResponder.keyboardWillShowNotification, object: nil)
@@ -69,18 +59,8 @@ class loginVC: BaseVC {
            self.navigationController?.popViewController(animated: true)
     }
     
-    @objc func selectDomain(_ sender: UIView) {
-       let VC = self.storyboard?.instantiateViewController(withIdentifier: "selectDomainVC") as! selectDomainVC
-       VC.delegate = self
-       VC.page_from = "login"
-       navigationController?.pushViewController(VC, animated: true)
-    }
-
-    @IBAction func facebookLogin(_ sender: Any) {
-        let VC = self.storyboard?.instantiateViewController(withIdentifier: "facebookLoginVC") as! facebookLoginVC
-        navigationController?.pushViewController(VC, animated: true)
-    }
-    
+  
+ 
     @IBAction func login(_ sender: Any) {
         
         login()
@@ -153,13 +133,5 @@ extension loginVC {
     
 }
 
-extension loginVC: loginVCDelegate {
-    
-    func selectDomainDismiss(domain: String) {
-        self.domainLabel.text = domain
-    }
-    
-    
-}
 
 

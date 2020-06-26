@@ -16,7 +16,7 @@ class selectDomainVC: UIViewController{
     var domain: String?
     let cellReuseIdentifier = "cell"
     var selectedElement = [Int : String]()
-    var delegate: loginVCDelegate?
+  
    
     
     var selectedIndex: Int?
@@ -52,12 +52,7 @@ class selectDomainVC: UIViewController{
        
                 
     }
-    override func viewDidDisappear(_ animated: Bool) {
-        if page_from == "login"{
-            self.delegate?.selectDomainDismiss(domain: domains[selectedIndex!] )
-        }
-       
-    }
+ 
     @IBAction func backBtnTapped(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }

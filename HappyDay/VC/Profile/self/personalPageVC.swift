@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import QuickLook
 
-class personalPageVC: UIViewController {
+class personalPageVC: BaseVC {
 
     @IBOutlet weak var collectioView: UICollectionView!
     @IBOutlet weak var uploadPhotoView: UIView!
@@ -34,10 +35,11 @@ class personalPageVC: UIViewController {
     var screenWidth: CGFloat!
     var screenHeight: CGFloat!
     var likes : Int!
+    var previewItem = NSURL()
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.2039215686, green: 0.7803921569, blue: 0.3490196078, alpha: 1)
+        navigationController?.navigationBar.barTintColor = default_green_color
         UINavigationBar.appearance().tintColor = UIColor.white
 
         
@@ -129,6 +131,33 @@ class personalPageVC: UIViewController {
                 let VC_2 = self.storyboard?.instantiateViewController(withIdentifier: "personalDataVC") as! personalDataVC
                 navigationController?.pushViewController(VC_2, animated: true)
     }
+    func showHelpDoc() {
+ 
+        let previewController = QLPreviewController()
+        self.previewItem = getPreviewItem(withName : "help.docx")
+        previewController.dataSource = self
+//
+//        UINavigationBar.appearance(whenContainedInInstancesOf: [QLPreviewController.self]).backgroundColor = UIColor.green
+//     
+        self.present(previewController, animated: true, completion: nil)
+        
+    }
+    func getPreviewItem(withName name: String) -> NSURL{
+        let file = name.components(separatedBy: ".")
+        let path = Bundle.main.path(forResource: file.first!, ofType: file.last!)
+        let url = NSURL(fileURLWithPath: path!)
+        return url
+    }
+    
+}
+extension personalPageVC : QLPreviewControllerDataSource, QLPreviewControllerDelegate  {
+    func numberOfPreviewItems(in controller: QLPreviewController) -> Int {
+        return 1
+    }
+    
+    func previewController(_ controller: QLPreviewController, previewItemAt index: Int) -> QLPreviewItem {
+        return self.previewItem as QLPreviewItem
+    }
     
     
 }
@@ -150,9 +179,10 @@ extension personalPageVC: UICollectionViewDelegate, UICollectionViewDataSource, 
          cell.layer.borderColor = UIColor.lightGray.cgColor
          cell.layer.borderWidth = 0.5
          if indexPath.row != 0 && indexPath.row != 6{
-            cell.badgeHeight.constant = CGFloat(0)
+            cell.badgeView.isHidden = true
          }
          else {
+            cell.badgeView.isHidden = false
             if indexPath.row == 0 {
                 cell.otherText.text = String(UserVM.likes.count) + "人"
             }
@@ -218,6 +248,9 @@ extension personalPageVC: UICollectionViewDelegate, UICollectionViewDataSource, 
           
             navigationController?.pushViewController(VC, animated: true)
             
+        }
+        if indexPath.row == 8 {
+            self.showHelpDoc()
         }
         if indexPath.row == 9 {
                     Indicator.sharedInstance.showIndicator()

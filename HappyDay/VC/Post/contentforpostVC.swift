@@ -9,7 +9,7 @@
 import UIKit
 import JXSegmentedView
 
-class contentforpostVC: UIViewController {
+class contentforpostVC: BaseVC {
 
    
     @IBOutlet weak var altertview: UIView!
@@ -23,7 +23,7 @@ class contentforpostVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.2039215686, green: 0.7803921569, blue: 0.3490196078, alpha: 1)
+        navigationController?.navigationBar.barTintColor = default_green_color
         UINavigationBar.appearance().tintColor = UIColor.white
         self.title = "掲示板"
         

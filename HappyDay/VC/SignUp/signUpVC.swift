@@ -105,7 +105,6 @@ class signUpVC: BaseVC {
            super.viewWillAppear(animated)
            
            navigationController?.setNavigationBarHidden(true, animated: animated)
-          
                    
     }
     
@@ -120,7 +119,17 @@ class signUpVC: BaseVC {
             self.selected_item = 0
             self.RegionList = SettingVM.RegionList
             guard let popupVC = self.storyboard?.instantiateViewController(withIdentifier: "BottomeSelectVC") as? BottomeSelectVC else { return }
-               popupVC.height = CGFloat(self.RegionList.count * 60 + 70)
+            
+               let height_view = self.view.frame.size.height
+               let height_bottom_view = (SettingVM.RegionList.count + 1) * 60
+               if height_bottom_view > Int(height_view) {
+                   popupVC.height = CGFloat(height_view - 80)
+               }
+               else {
+                   popupVC.height = CGFloat(height_bottom_view)
+               }
+               
+            
                popupVC.topCornerRadius = 10
                popupVC.presentDuration = 1
                popupVC.dismissDuration = 1
@@ -140,7 +149,14 @@ class signUpVC: BaseVC {
              self.AgeList = SettingVM.AgeList
              self.selected_item = 1
              guard let popupVC = self.storyboard?.instantiateViewController(withIdentifier: "BottomeSelectVC") as? BottomeSelectVC else { return }
-             popupVC.height = CGFloat(self.AgeList.count * 60 + 70)
+             let height_view = self.view.frame.size.height
+             let height_bottom_view = (SettingVM.AgeList.count + 1) * 60
+             if height_bottom_view > Int(height_view) {
+                 popupVC.height = CGFloat(height_view - 80)
+             }
+             else {
+                 popupVC.height = CGFloat(height_bottom_view)
+             }
              popupVC.topCornerRadius = 10
              popupVC.presentDuration = 1
              popupVC.dismissDuration = 1
@@ -155,7 +171,7 @@ class signUpVC: BaseVC {
         
     }
     @IBAction func manSelect(_ sender: Any) {
-        manBtn.backgroundColor = #colorLiteral(red: 0.2039215686, green: 0.7803921569, blue: 0.3490196078, alpha: 1)
+        manBtn.backgroundColor = default_green_color
         manBtn.setImage(selectedImage, for: .normal)
         womanBtn.setImage(nil, for: .normal)
         womanBtn.backgroundColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)

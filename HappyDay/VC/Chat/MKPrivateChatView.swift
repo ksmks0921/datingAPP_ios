@@ -16,7 +16,7 @@ class MKPrivateChatView: ChatViewController  , UITextViewDelegate {
     var chat_title: String!
     var background_image = UIImageView()
     private var isBlocker = false
-
+    var default_green_color = #colorLiteral(red: 0.2588235294, green: 0.7294117647, blue: 0.1058823529, alpha: 1)
     
     override func viewDidLoad() {
 
@@ -138,7 +138,7 @@ class MKPrivateChatView: ChatViewController  , UITextViewDelegate {
           
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
-        navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.2039215686, green: 0.7803921569, blue: 0.3490196078, alpha: 1)
+        navigationController?.navigationBar.barTintColor = default_green_color
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)]
         if DataManager.isLockScreen {
             NotificationCenter.default.addObserver(self, selector: #selector(applicationDidBecomeActive), name: UIApplication.didBecomeActiveNotification, object: nil)
@@ -229,7 +229,7 @@ class MKPrivateChatView: ChatViewController  , UITextViewDelegate {
         button.contentEdgeInsets = UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2)
         button.image = UIImage(named: "icon_add")
         button.setSize(CGSize(width: 36, height: 36), animated: false)
-        button.tintColor = #colorLiteral(red: 0.2039215686, green: 0.7803921569, blue: 0.3490196078, alpha: 1)
+        button.tintColor = default_green_color
         button.onKeyboardSwipeGesture { item, gesture in
             if (gesture.direction == .left)     { item.inputBarAccessoryView?.setLeftStackViewWidthConstant(to: 0, animated: true)        }
             if (gesture.direction == .right) { item.inputBarAccessoryView?.setLeftStackViewWidthConstant(to: 36, animated: true)    }
@@ -293,7 +293,7 @@ class MKPrivateChatView: ChatViewController  , UITextViewDelegate {
     
         alert.addAction(UIAlertAction(title: "キャンセル", style: .cancel))
         alert.setValue(attributedString, forKey: "attributedTitle")
-        alert.view.tintColor = #colorLiteral(red: 0.2039215686, green: 0.7803921569, blue: 0.3490196078, alpha: 1)
+        alert.view.tintColor = default_green_color
         present(alert, animated: true)
     }
     
@@ -396,11 +396,11 @@ class MKPrivateChatView: ChatViewController  , UITextViewDelegate {
                 $0.spacing = .fixed(10)
                 $0.image = UIImage(named: named)?.withRenderingMode(.alwaysTemplate)
                 $0.setSize(CGSize(width: 25, height: 25), animated: false)
-                $0.tintColor = #colorLiteral(red: 0.2039215686, green: 0.7803921569, blue: 0.3490196078, alpha: 1)
+                $0.tintColor = default_green_color
             }.onSelected {
-                $0.tintColor = #colorLiteral(red: 0.2039215686, green: 0.7803921569, blue: 0.3490196078, alpha: 1)
+                $0.tintColor = self.default_green_color
             }.onDeselected {
-                $0.tintColor = #colorLiteral(red: 0.2039215686, green: 0.7803921569, blue: 0.3490196078, alpha: 1)
+                $0.tintColor = self.default_green_color
             }.onTouchUpInside {
                 print("Item Tapped")
                 let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
@@ -585,7 +585,7 @@ extension MKPrivateChatView: MessagesDisplayDelegate {
         guard shouldShow else { return }
 
         let button = UIButton(type: .infoLight)
-        button.tintColor = #colorLiteral(red: 0.2039215686, green: 0.7803921569, blue: 0.3490196078, alpha: 1)
+        button.tintColor = default_green_color
         accessoryView.addSubview(button)
         button.frame = accessoryView.bounds
         button.isUserInteractionEnabled = false // respond to accessoryView tap through `MessageCellDelegate`
@@ -694,7 +694,7 @@ extension MKPrivateChatView: SearchTypeDelegate{
     
     func selectSearchType(index: Int, type: String) {
         
-        if type == AppConstant.languages[0] {
+        if type == AppConstant.languages[2] {
             
             DispatchQueue.global(qos: .userInitiated).async {
 //                let count = UserDefaults.standard.mockMessagesCount()
@@ -708,7 +708,7 @@ extension MKPrivateChatView: SearchTypeDelegate{
             }
             
         }
-        else if type == AppConstant.languages[1] {
+        else if type == AppConstant.languages[3] {
             DispatchQueue.global(qos: .userInitiated).async {
                 MessageVM.shared.changeLanguage(language: AppConstant.LanguageChinese) { messages in
                     DispatchQueue.main.async {
@@ -719,7 +719,7 @@ extension MKPrivateChatView: SearchTypeDelegate{
                 }
             }
         }
-        else if type == AppConstant.languages[2] {
+        else if type == AppConstant.languages[1] {
              DispatchQueue.global(qos: .userInitiated).async {
                            MessageVM.shared.changeLanguage(language: AppConstant.LanguageJapanese) { messages in
                                DispatchQueue.main.async {
@@ -750,7 +750,7 @@ extension MKPrivateChatView {
     
     func send(chatId: String, text: String?, photo: UIImage?, video: URL?, audio: String?, sticker: String?) {
         
-        if UserVM.current_user.user_sex == "녀자" || UserVM.user_points > 20{
+        if UserVM.current_user.user_sex == "女性" || UserVM.user_points > 20{
                  print("______sending image_________")
                    let formatter = DateFormatter()
                    formatter.locale = Locale(identifier: "en_US_POSIX")
@@ -764,7 +764,7 @@ extension MKPrivateChatView {
 
                    let month_string = calendar.component(.month, from: Date())
                    let date_string = calendar.component(.day, from: Date())
-                   let date = String(month_string) + "월 " +  String(date_string) + "일"
+                   let date = String(month_string) + "月 " +  String(date_string) + "日"
            
                    Indicator.sharedInstance.showIndicator()
                    if photo != nil {

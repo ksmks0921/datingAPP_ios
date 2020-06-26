@@ -23,7 +23,7 @@ class otherSettingVC: BottomPopupViewController {
     var height_cell = 60
     var index_type = 0
     var delegate : SearchTypeDelegate?
-    
+    var default_green_color = #colorLiteral(red: 0.2588235294, green: 0.7294117647, blue: 0.1058823529, alpha: 1)
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -84,7 +84,7 @@ extension otherSettingVC: UITableViewDelegate, UITableViewDataSource {
         cell.valueLabel.isHidden = true
         
         if indexPath.row == items.count {
-            cell.contentView.backgroundColor = #colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1)
+            cell.contentView.backgroundColor = default_green_color
             cell.propertyLabel.text = "キャンセル"
         }
         else {

@@ -15,7 +15,7 @@ protocol SearchTypeDelegate
 }
 
 
-class searchVC: UIViewController {
+class searchVC: BaseVC {
     
     
     @IBOutlet weak var tableView: UITableView!
@@ -94,20 +94,20 @@ class searchVC: UIViewController {
     }
     @IBAction func profilesearchBtnTapped(_ sender: Any) {
         
-        profilesearchBtn.backgroundColor = #colorLiteral(red: 0.2039215686, green: 0.7803921569, blue: 0.3490196078, alpha: 1)
+        profilesearchBtn.backgroundColor = default_green_color
         profilesearchBtn.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: .normal)
         nicknamesearchBtn.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-        nicknamesearchBtn.setTitleColor(#colorLiteral(red: 0.2039215686, green: 0.7803921569, blue: 0.3490196078, alpha: 1), for: .normal)
+        nicknamesearchBtn.setTitleColor(default_green_color, for: .normal)
         self.searchType = .PROFILE
         self.tableView.reloadData()
     }
     
     @IBAction func nicknamesearchBtnTapped(_ sender: Any) {
         
-        nicknamesearchBtn.backgroundColor = #colorLiteral(red: 0.2039215686, green: 0.7803921569, blue: 0.3490196078, alpha: 1)
+        nicknamesearchBtn.backgroundColor = default_green_color
         nicknamesearchBtn.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: .normal)
         profilesearchBtn.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-        profilesearchBtn.setTitleColor(#colorLiteral(red: 0.2039215686, green: 0.7803921569, blue: 0.3490196078, alpha: 1), for: .normal)
+        profilesearchBtn.setTitleColor(default_green_color, for: .normal)
         self.searchType = .NICKNAME
         self.tableView.reloadData()
         
