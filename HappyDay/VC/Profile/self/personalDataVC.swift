@@ -12,6 +12,7 @@ class personalDataVC: BaseVC, UITextViewDelegate {
 
     @IBOutlet weak var dataContentView: UITextView!
     
+    @IBOutlet weak var sendButton: RoundButton!
     @IBOutlet weak var titleLabel: UILabel!
     var user: person!
     var report_person : person!
@@ -26,10 +27,12 @@ class personalDataVC: BaseVC, UITextViewDelegate {
             if from == "report" {
                 titleLabel.text = "通報:" + String(report_person.user_nickName!)
                 dataContentView.customplaceholder = "通報内容を入力してください。"
+                sendButton.setTitle("送信", for: .normal)
             }
             else {
                 titleLabel.text = "自己紹介"
                 dataContentView.text = user.user_introduce
+                sendButton.setTitle("完了", for: .normal)
             }
             
             

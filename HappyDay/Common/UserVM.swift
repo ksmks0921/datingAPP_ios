@@ -427,13 +427,16 @@ class UserVM {
                    
                     let event_des = restDict[FireBaseConstant.EventDes] as? String
                     let thumb_path = restDict[FireBaseConstant.thumb_path] as? String
+                    let event_photo = restDict[FireBaseConstant.EventPhoto] as? String
                     let source_type = restDict[FireBaseConstant.source_type] as? String
                     let user_tall = restDict[FireBaseConstant.EventUserTall] as? String
                     let user_style = restDict[FireBaseConstant.EventUserStyle] as? String
                     let user_job = restDict[FireBaseConstant.EventUserJob] as? String
                     let user_id = restDict[FireBaseConstant.EventUserID] as? String
                     let created_date = restDict[FireBaseConstant.EventCreatedDate] as? String
-                    let post_item = PostEvent(user_avatar: user_avatar!, event_type: event_type!, view_counts: view_counts!, nick_name: nick_name!, age: age!, region: region!, event_des: event_des!, thumb_path: thumb_path!, user_gender: gender!, source_type: source_type!, user_tall: user_tall!, user_style: user_style!, user_job: user_job!, user_id: user_id!, created_at: created_date!)
+                    
+                    
+                    let post_item = PostEvent(user_avatar: user_avatar!, event_type: event_type!, view_counts: view_counts!, nick_name: nick_name!, age: age!, region: region!, event_des: event_des!, thumb_path: thumb_path!, user_gender: gender!, source_type: source_type!, user_tall: user_tall!, user_style: user_style!, user_job: user_job!, user_id: user_id!, created_at: created_date!, event_photo: event_photo!)
                     UserVM.eventPosts.append(post_item)
 
                     
@@ -463,13 +466,14 @@ class UserVM {
                    
                     let event_des = restDict[FireBaseConstant.EventDes] as? String
                     let thumb_path = restDict[FireBaseConstant.thumb_path] as? String
+                    let event_photo = restDict[FireBaseConstant.EventPhoto] as? String
                     let source_type = restDict[FireBaseConstant.source_type] as? String
                     let user_tall = restDict[FireBaseConstant.EventUserTall] as? String
                     let user_style = restDict[FireBaseConstant.EventUserStyle] as? String
                     let user_job = restDict[FireBaseConstant.EventUserJob] as? String
                     let user_id = restDict[FireBaseConstant.EventUserID] as? String
                     let created_date = restDict[FireBaseConstant.EventCreatedDate] as? String
-                    let post_item = PostEvent(user_avatar: user_avatar!, event_type: event_type!, view_counts: view_counts!, nick_name: nick_name!, age: age!, region: region!, event_des: event_des!, thumb_path: thumb_path!, user_gender: gender!, source_type: source_type!, user_tall: user_tall!, user_style: user_style!, user_job: user_job!, user_id: user_id!, created_at: created_date!)
+                    let post_item = PostEvent(user_avatar: user_avatar!, event_type: event_type!, view_counts: view_counts!, nick_name: nick_name!, age: age!, region: region!, event_des: event_des!, thumb_path: thumb_path!, user_gender: gender!, source_type: source_type!, user_tall: user_tall!, user_style: user_style!, user_job: user_job!, user_id: user_id!, created_at: created_date!, event_photo: event_photo!)
                     if post_item.user_id == DataManager.userId {
                         UserVM.my_eventPosts.append(post_item)
                     }
@@ -619,13 +623,14 @@ class UserVM {
         
     }
     
-    func registerEvent(event_city: String, create_date: String, event_des: String, event_phone: String, event_title: String, event_type: String, user_age:String, user_avatar: String, user_city: String, user_gender: Bool, user_job: String, user_name: String, user_style: String, user_tall: String, user_id: String, created_at: String, row_key: String, source_type: String, thumb_path: String, views_counts: String,  response: @escaping responseCallBack){
+    func registerEvent(event_city: String, create_date: String, event_des: String, event_photo: String, event_phone: String, event_type: String, user_age:String, user_avatar: String, user_city: String, user_gender: Bool, user_job: String, user_name: String, user_style: String, user_tall: String, user_id: String, created_at: String, row_key: String, source_type: String, thumb_path: String, views_counts: String,  response: @escaping responseCallBack){
         
         let newEvent = [FireBaseConstant.EventCity                : event_city,
                         FireBaseConstant.EventCreatedDate         : create_date,
                         FireBaseConstant.EventDes                 : event_des,
+                        FireBaseConstant.EventPhoto               : event_photo,
                         FireBaseConstant.EventPhone               : event_phone,
-                        FireBaseConstant.EventTitle               : event_title,
+                        FireBaseConstant.EventTitle               : "event_title",
                         FireBaseConstant.EventType                : event_type,
                         FireBaseConstant.EventUserAge             : user_age,
                         FireBaseConstant.EventUserAvatar          : user_avatar,

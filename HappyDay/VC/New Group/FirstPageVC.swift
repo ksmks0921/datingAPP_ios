@@ -17,12 +17,14 @@ class FirstPageVC: BaseVC {
     var player : AVPlayer!
     var avAssets : AVAsset!
     @IBOutlet weak var videoView: UIView!
+    
+    @IBOutlet weak var bottomLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
         
         alertView.isHidden = false
         alertViewCloseBtn.isHidden = false
-
+        
         
         if DataManager.isAutoLogin == nil {
             DataManager.isAutoLogin = false
@@ -49,7 +51,7 @@ class FirstPageVC: BaseVC {
         
         
     }
-
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
@@ -129,10 +131,15 @@ class FirstPageVC: BaseVC {
                 }
                 
             }
-       
+           NotificationCenter.default.addObserver(self,selector: #selector(itemDidReachEnd),
+                                                  name: NSNotification.Name.AVPlayerItemDidPlayToEndTime,
+           object: player.currentItem)
         
     }
-  
+    @objc func itemDidReachEnd(notification: NSNotification) {
+        player.seek(to: CMTime.zero)
+        player.play()
+    }
 
 }
 //extension FirstPageVC: UICollectionViewDelegate, UICollectionViewDataSource{

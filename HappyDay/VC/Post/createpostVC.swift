@@ -11,10 +11,10 @@ import PopupDialog
 import FirebaseStorage
 import AVFoundation
 
-class createpostVC: BaseVC {
+class createpostVC: BaseVC, UITextFieldDelegate  {
 
     
-    @IBOutlet weak var eventTitleField: UITextField!
+//    @IBOutlet weak var eventTitleField: UITextField!
     
     @IBOutlet weak var eventTextField: UITextField!
     
@@ -39,7 +39,7 @@ class createpostVC: BaseVC {
         setupViewTap()
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name:UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:UIResponder.keyboardWillHideNotification, object: nil)
-        
+        self.eventTextField.delegate = self
         
  
     }
@@ -62,6 +62,11 @@ class createpostVC: BaseVC {
         let contentInset:UIEdgeInsets = UIEdgeInsets.zero
         contentScroll.contentInset = contentInset
     }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+           self.view.endEditing(true)
+           return false
+    }
     func setupViewTap() {
         let tapGesture_type = UITapGestureRecognizer(target: self, action: #selector(selectEventType(_:)))
         tapGesture_type.delegate = self as? UIGestureRecognizerDelegate
@@ -83,8 +88,8 @@ class createpostVC: BaseVC {
         
         guard let popupVC = self.storyboard?.instantiateViewController(withIdentifier: "otherSettingVC") as? otherSettingVC else { return }
         var items = [String]()
-        for i in 1...AppConstant.eType.count - 1 {
-            items.append(AppConstant.eType[i])
+        for i in 1...AppConstant.event_Type.count - 1 {
+            items.append(AppConstant.event_Type[i])
         }
         let height_view = self.view.frame.size.height
         let height_bottom_view = (items.count + 1) * 60
@@ -164,33 +169,53 @@ class createpostVC: BaseVC {
         if imageShowView.image != nil {
             Indicator.sharedInstance.showIndicator()
                    let storageRef = Storage.storage().reference().child("media").child(UUID().uuidString)
-                        if let uploadData = imageShowView.image!.pngData() {
+                      if let uploadData = imageShowView.image!.pngData() {
                        
-                       storageRef.putData(uploadData, metadata: nil) { (metadata, error) in
-                           Indicator.sharedInstance.hideIndicator()
-                           if error != nil {
-                               print("error")
-                               
-                           } else {
-                               storageRef.downloadURL { (url, error) in
-                                   guard let downloadURL = url else {return}
-                                self.registerEvent(url: downloadURL)
+                           storageRef.putData(uploadData, metadata: nil) { (metadata, error) in
+                               Indicator.sharedInstance.hideIndicator()
+                               if error != nil {
+                                   print("error")
                                    
-                       
+                               } else {
+                                   storageRef.downloadURL { (url, error) in
+                                    
+                                    guard let downloadURL = url else {return}
+                                    
+                                    if self.media == "video" {
+                                        let storageRef_video = Storage.storage().reference().child("media").child(UUID().uuidString)
+                                        storageRef_video.putFile(from: self.video_url as URL, metadata: nil) { (metadata, error) in
+                                        
+                                            if error != nil {
+                                                print("error")
+                                                
+                                            } else {
+                                                 storageRef_video.downloadURL { (url, error) in
+                                                 guard let video_downloadURL = url else {return}
+                                                    self.registerEvent(url: downloadURL, url_source: video_downloadURL.absoluteString)
+                                                }
+                                            }
+                                        }
+                                    }
+                                    else {
+                                        self.registerEvent(url: downloadURL, url_source: "")
+                                    }
+                                       
+                                       
+                           
+                                   }
+                
                                }
-            
                            }
-                       }
-            }
+                      }
             
         }
         else {
             self.showAlert(message: "画像或ビデオを選んでください")
         }
-        if eventTitleField.text == "" {
-            self.showAlert(message: "件名を記入下さい。")
-            return
-        }
+//        if eventTitleField.text == "" {
+//            self.showAlert(message: "件名を記入下さい。")
+//            return
+//        }
         if regionTextField.text == "" {
             self.showAlert(message: "地域を選んでください")
             return
@@ -211,7 +236,7 @@ class createpostVC: BaseVC {
         
     }
     
-    func registerEvent(url: URL) {
+    func registerEvent(url: URL, url_source: String) {
         
         let date = Date()
         let formatter = DateFormatter()
@@ -236,18 +261,21 @@ class createpostVC: BaseVC {
         let row_key = ""
         let source_type = self.media
         let thumb_path : String!
+        let event_photo : String!
         if media == "image" {
              thumb_path = ""
+             event_photo = url.absoluteString
         }
         else {
              thumb_path = url.absoluteString
+             event_photo = url_source
         }
         
         
         
         Indicator.sharedInstance.showIndicator()
         
-        UserVM.shared.registerEvent(event_city: regionTextField.text!, create_date: date_result, event_des: eventTextField.text! , event_phone: phoneSettingTextField.text!, event_title: eventTitleField.text!, event_type: eventTypeLabel.text!, user_age: user_age!, user_avatar: user_avatar![0], user_city: regionTextField.text!, user_gender: user_gender!, user_job: user_job!, user_name: user_name!, user_style: user_style!, user_tall: user_tall!, user_id: user_id!, created_at: "", row_key: row_key, source_type: source_type!, thumb_path: thumb_path, views_counts: "0" ) { (success, message, error) in
+        UserVM.shared.registerEvent(event_city: regionTextField.text!, create_date: date_result, event_des: eventTextField.text! ,event_photo: event_photo, event_phone: phoneSettingTextField.text!, event_type: eventTypeLabel.text!, user_age: user_age!, user_avatar: user_avatar![0], user_city: regionTextField.text!, user_gender: user_gender!, user_job: user_job!, user_name: user_name!, user_style: user_style!, user_tall: user_tall!, user_id: user_id!, created_at: "", row_key: row_key, source_type: source_type!, thumb_path: thumb_path, views_counts: "0" ) { (success, message, error) in
              
             Indicator.sharedInstance.hideIndicator()
             if error == nil{
@@ -256,7 +284,7 @@ class createpostVC: BaseVC {
                     self.regionTextField.text = ""
                     self.eventTextField.text = ""
                     self.phoneSettingTextField.text = ""
-                    self.eventTitleField.text = ""
+                 
                     self.eventTypeLabel.text = ""
                     self.imageShowView.isHidden = true
                     self.imageSelectView.alpha = 1
@@ -328,7 +356,7 @@ extension createpostVC: UIImagePickerControllerDelegate, UINavigationControllerD
 
             let popup = PopupDialog(title: title, message: "")
 
-            let buttonOne = DefaultButton(title: "ビデオ", dismissOnTap: true) {
+            let buttonOne = DefaultButton(title: "カメラ", dismissOnTap: true) {
 //                self.showImagePickerController(sourceType: .camera)
                 ImagePicker.cameraMulti(target: self, edit: true)
             }
@@ -361,15 +389,25 @@ extension createpostVC: UIImagePickerControllerDelegate, UINavigationControllerD
         func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
             
             video_url = info[.mediaURL] as? URL
-            
+       
             if video_url != nil {
-                SettingVM.shared.getThumbnailImageFromVideoUrl(url: video_url!) { (thumbImage) in
-                let video_thumbImage = thumbImage
-                    self.imageShowView.image = video_thumbImage
-                    self.imageShowView.isHidden = false
-                    self.imageSelectView.alpha = 0
-                    self.media = "video"
+                let asset = AVURLAsset(url: video_url)
+                print(asset.fileSize ?? 0)
+                let size = asset.fileSize
+                if size! > 60000000 {
+                    self.showAlert(message: "ファイルは60M未満である必要があります。")
                 }
+                else {
+                    SettingVM.shared.getThumbnailImageFromVideoUrl(url: video_url!) { (thumbImage) in
+                                       
+                       let video_thumbImage = thumbImage
+                       self.imageShowView.image = video_thumbImage
+                       self.imageShowView.isHidden = false
+                       self.imageSelectView.alpha = 0
+                       self.media = "video"
+                   }
+                }
+               
             }
             
             if let editedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
@@ -388,4 +426,12 @@ extension createpostVC: UIImagePickerControllerDelegate, UINavigationControllerD
             }
             dismiss(animated: true, completion: nil)
         }
+}
+extension AVURLAsset {
+    var fileSize: Int? {
+        let keys: Set<URLResourceKey> = [.totalFileSizeKey, .fileSizeKey]
+        let resourceValues = try? url.resourceValues(forKeys: keys)
+
+        return resourceValues?.fileSize ?? resourceValues?.totalFileSize
+    }
 }

@@ -97,7 +97,8 @@ internal struct MockMessage: MessageType {
     var kind: MessageKind
 
     var user: MockUser
-
+    var source_url : String!
+    
     private init(kind: MessageKind, user: MockUser, messageId: String, date: Date) {
         self.kind = kind
         self.user = user
@@ -130,9 +131,9 @@ internal struct MockMessage: MessageType {
 //        let mediaItem = ImageMediaItem(image: thumbnail)
 //        self.init(kind: .video(mediaItem), user: user, messageId: messageId, date: date)
 //    }
-    init(thumbnail: UIImage, user: MockUser, messageId: String, date: Date) {
+    init(thumbnail: UIImage, user: MockUser, messageId: String, date: Date, source_url: String) {
         let mediaItem = ImageMediaItem(image: thumbnail)
-            self.init(kind: .video(mediaItem), user: user, messageId: messageId, date: date)
+        self.init(kind: .video(mediaItem), user: user, messageId: messageId, date: date)
     }
     init(location: CLLocation, user: MockUser, messageId: String, date: Date) {
         let locationItem = CoordinateItem(location: location)

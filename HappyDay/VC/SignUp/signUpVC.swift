@@ -17,7 +17,7 @@ protocol PopUpDelegate
     
 }
 
-class signUpVC: BaseVC {
+class signUpVC: BaseVC , UITextFieldDelegate{
 
     var domains : [String]!
     var selectedElement = [Int : String]()
@@ -44,7 +44,9 @@ class signUpVC: BaseVC {
 
         
             setUpViewClick()
-    
+        passwordAgainTxt.delegate = self
+        passwordTxt.delegate = self
+        emailTextField.delegate = self
             if DataManager.isLogin! {
                 
                 
@@ -88,6 +90,10 @@ class signUpVC: BaseVC {
 
         let contentInset:UIEdgeInsets = UIEdgeInsets.zero
         contentScroll.contentInset = contentInset
+    }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+           self.view.endEditing(true)
+           return false
     }
     func setUpViewClick() {
         

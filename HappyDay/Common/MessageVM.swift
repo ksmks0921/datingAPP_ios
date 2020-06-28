@@ -168,7 +168,7 @@ final internal class MessageVM {
         case .Video:
             let randomNumberImage = Int(arc4random_uniform(UInt32(messageImages.count)))
             let image = messageImages[randomNumberImage]
-            return MockMessage(thumbnail: image, user: user, messageId: uniqueID, date: date)
+            return MockMessage(image: image, user: user, messageId: uniqueID, date: date)
         case .Audio:
             let randomNumberSound = Int(arc4random_uniform(UInt32(sounds.count)))
             let soundURL = sounds[randomNumberSound]
@@ -302,7 +302,7 @@ final internal class MessageVM {
                                            if let data = try? Data(contentsOf: url!)
                                            {
                                                let image: UIImage = UIImage(data: data)!
-                                               original_message = MockMessage(thumbnail: image, user: user, messageId: uniqueID, date: date)
+                                            original_message = MockMessage(thumbnail: image, user: user, messageId: uniqueID, date: date, source_url: source_path!)
                                             self.messages.append(original_message)
                                             self.messages_korean.append(original_message)
                                             self.messages_japanese.append(original_message)

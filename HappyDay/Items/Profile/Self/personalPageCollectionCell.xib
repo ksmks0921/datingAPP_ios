@@ -11,10 +11,10 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="personalPageCollectionCell" id="gTV-IL-0wX" customClass="personalPageCollectionCell" customModule="HappyDay" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="129" height="154"/>
+            <rect key="frame" x="0.0" y="0.0" width="129" height="130"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="129" height="154"/>
+                <rect key="frame" x="0.0" y="0.0" width="129" height="130"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UTs-Yf-jcy" customClass="DesinableView" customModule="HappyDay" customModuleProvider="target">
@@ -42,20 +42,20 @@
                         </userDefinedRuntimeAttributes>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f4p-Or-MfA">
-                        <rect key="frame" x="14.5" y="10" width="100" height="100"/>
+                        <rect key="frame" x="14.5" y="37" width="100" height="100"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="table" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="47l-44-MA9">
-                                <rect key="frame" x="27.5" y="11" width="45" height="42.5"/>
+                                <rect key="frame" x="32" y="11" width="36" height="33.5"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" red="0.25882352939999997" green="0.72941176470000002" blue="0.1058823529" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="45" id="0FY-FW-kPY"/>
+                                    <constraint firstAttribute="width" constant="36" id="0FY-FW-kPY"/>
                                     <constraint firstAttribute="width" secondItem="47l-44-MA9" secondAttribute="height" multiplier="123:123" id="RdT-7t-KO5"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CkW-di-V6u">
-                                <rect key="frame" x="29" y="67" width="42" height="20.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <rect key="frame" x="30.5" y="58" width="39.5" height="19.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -73,20 +73,20 @@
                 </subviews>
             </view>
             <constraints>
-                <constraint firstItem="f4p-Or-MfA" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="10" id="4jN-VK-sph"/>
+                <constraint firstItem="f4p-Or-MfA" firstAttribute="centerY" secondItem="ZTg-uK-7eu" secondAttribute="centerY" id="Xfa-bH-bXL"/>
                 <constraint firstItem="UTs-Yf-jcy" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="6" id="bBW-j2-575"/>
                 <constraint firstAttribute="trailing" secondItem="UTs-Yf-jcy" secondAttribute="trailing" constant="6" id="lgX-sG-p5c"/>
                 <constraint firstItem="f4p-Or-MfA" firstAttribute="centerX" secondItem="ZTg-uK-7eu" secondAttribute="centerX" id="stO-5D-508"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
-            <size key="customSize" width="129" height="154"/>
+            <size key="customSize" width="129" height="130"/>
             <connections>
                 <outlet property="badgeView" destination="UTs-Yf-jcy" id="y5U-nN-Ijm"/>
                 <outlet property="icon" destination="47l-44-MA9" id="DEM-8f-S0v"/>
                 <outlet property="otherText" destination="Obu-VB-13q" id="kqj-Et-mr0"/>
                 <outlet property="txt" destination="CkW-di-V6u" id="tKq-5H-vOi"/>
             </connections>
-            <point key="canvasLocation" x="199.27536231884059" y="172.09821428571428"/>
+            <point key="canvasLocation" x="199.27536231884059" y="164.0625"/>
         </collectionViewCell>
     </objects>
     <resources>

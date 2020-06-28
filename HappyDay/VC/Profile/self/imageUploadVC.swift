@@ -127,6 +127,9 @@ class imageUploadVC: BaseVC {
         self.image_index = 3
         showImagePickerControllerActionSheet()
     }
+    @IBAction func finishButtonTapped(_ sender: Any) {
+         self.navigationController?.popViewController(animated: true)
+    }
     
     func savePhoto(url: URL, index: Int, completion: @escaping (Bool) -> Void) {
         

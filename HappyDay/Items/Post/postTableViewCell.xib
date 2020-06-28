@@ -122,6 +122,13 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="play-button" translatesAutoresizingMaskIntoConstraints="NO" id="Pvg-Ct-Mt8">
+                        <rect key="frame" x="130" y="196.5" width="60" height="60"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="60" id="QRx-Bm-6pk"/>
+                            <constraint firstAttribute="width" constant="60" id="TJb-Gp-fqB"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="D5r-XN-pec" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="1Pz-6j-2eR"/>
@@ -131,11 +138,13 @@
                     <constraint firstItem="NkO-w6-nft" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="6" id="CM1-Fv-4VM"/>
                     <constraint firstItem="BIb-Te-lsg" firstAttribute="centerY" secondItem="N5K-14-8XD" secondAttribute="centerY" id="CRN-g6-ESR"/>
                     <constraint firstItem="asv-q2-Bi0" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" constant="8" id="CVe-os-r8G"/>
+                    <constraint firstItem="Pvg-Ct-Mt8" firstAttribute="centerY" secondItem="D5r-XN-pec" secondAttribute="centerY" id="Ela-j6-t5a"/>
                     <constraint firstItem="nQB-8X-7rs" firstAttribute="centerY" secondItem="bFv-FF-mPn" secondAttribute="centerY" id="F3Y-tS-h3G"/>
                     <constraint firstItem="JNP-aG-ml6" firstAttribute="leading" secondItem="NkO-w6-nft" secondAttribute="leading" id="FBe-ea-gJf"/>
                     <constraint firstItem="asv-q2-Bi0" firstAttribute="centerY" secondItem="JNP-aG-ml6" secondAttribute="centerY" id="FXZ-mD-SJr"/>
                     <constraint firstItem="BIb-Te-lsg" firstAttribute="leading" secondItem="n42-pF-BOF" secondAttribute="trailing" constant="3" id="Fns-db-ZAD"/>
                     <constraint firstItem="n42-pF-BOF" firstAttribute="centerY" secondItem="N5K-14-8XD" secondAttribute="centerY" id="IJG-fn-RU2"/>
+                    <constraint firstItem="Pvg-Ct-Mt8" firstAttribute="centerX" secondItem="D5r-XN-pec" secondAttribute="centerX" id="J0E-pn-hyU"/>
                     <constraint firstItem="JNP-aG-ml6" firstAttribute="top" secondItem="49x-i3-qWI" secondAttribute="bottom" constant="4" id="K65-uy-c6P"/>
                     <constraint firstItem="Vw7-Cj-uZk" firstAttribute="bottom" secondItem="NkO-w6-nft" secondAttribute="bottom" id="Kr8-jr-xhM"/>
                     <constraint firstItem="Vw7-Cj-uZk" firstAttribute="leading" secondItem="cr6-In-T2s" secondAttribute="leading" id="LvK-y4-Xyo"/>
@@ -161,6 +170,7 @@
                 <outlet property="hobbyLabel" destination="NED-fR-FHw" id="1Cj-KZ-GMx"/>
                 <outlet property="nickname" destination="cr6-In-T2s" id="hXj-oU-C1T"/>
                 <outlet property="personPhoto" destination="NkO-w6-nft" id="Bhc-Wv-j9f"/>
+                <outlet property="playButton" destination="Pvg-Ct-Mt8" id="CCX-ib-UQ7"/>
                 <outlet property="postImageView" destination="D5r-XN-pec" id="a3O-ud-26m"/>
                 <outlet property="regionLabel" destination="nQB-8X-7rs" id="Kma-Pb-mKR"/>
                 <outlet property="textContentLabel" destination="asv-q2-Bi0" id="BrA-bE-Vjo"/>
@@ -174,5 +184,6 @@
         <image name="avatar_man" width="128" height="128"/>
         <image name="eye.fill" catalog="system" width="64" height="38"/>
         <image name="photo" catalog="system" width="64" height="46"/>
+        <image name="play-button" width="64" height="64"/>
     </resources>
 </document>

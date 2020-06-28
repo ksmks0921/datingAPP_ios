@@ -11,7 +11,7 @@ import UIKit
 
 
 
-class loginVC: BaseVC {
+class loginVC: BaseVC , UITextFieldDelegate{
 
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
@@ -22,7 +22,8 @@ class loginVC: BaseVC {
         
   
 
-        
+        emailTextField.delegate = self
+        passwordTextField.delegate = self
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name:UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:UIResponder.keyboardWillHideNotification, object: nil)
 
@@ -44,6 +45,10 @@ class loginVC: BaseVC {
        let contentInset:UIEdgeInsets = UIEdgeInsets.zero
        ScrollContent.contentInset = contentInset
    }
+   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+           self.view.endEditing(true)
+           return false
+    }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         

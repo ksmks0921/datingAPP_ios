@@ -30,6 +30,7 @@
 		6732AE3523DCF3A6009A495C /* profilePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6732AE3423DCF3A6009A495C /* profilePageViewController.swift */; };
 		6732AE3923DCFF95009A495C /* profileContentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6732AE3823DCFF95009A495C /* profileContentVC.swift */; };
 		6741F470246AD64C007E9B93 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6741F46F246AD64B007E9B93 /* GoogleService-Info.plist */; };
+		67422E7F24A80D940050C791 /* BottomBorderClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67422E7E24A80D940050C791 /* BottomBorderClass.swift */; };
 		674B9DA823D68F8400FD2C48 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674B9DA723D68DDD00FD2C48 /* ChatViewController.swift */; };
 		674B9DA923D68F8400FD2C48 /* MKPrivateChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674B9DA623D68DDC00FD2C48 /* MKPrivateChatView.swift */; };
 		676B8BAB246C366A00BFF39D /* selfEvaluationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676B8BA9246C366A00BFF39D /* selfEvaluationCell.swift */; };
@@ -192,6 +193,7 @@
 		6732AE3423DCF3A6009A495C /* profilePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = profilePageViewController.swift; sourceTree = "<group>"; };
 		6732AE3823DCFF95009A495C /* profileContentVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = profileContentVC.swift; sourceTree = "<group>"; };
 		6741F46F246AD64B007E9B93 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		67422E7E24A80D940050C791 /* BottomBorderClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomBorderClass.swift; sourceTree = "<group>"; };
 		674B9DA623D68DDC00FD2C48 /* MKPrivateChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKPrivateChatView.swift; sourceTree = "<group>"; };
 		674B9DA723D68DDD00FD2C48 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		676B8BA9246C366A00BFF39D /* selfEvaluationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = selfEvaluationCell.swift; sourceTree = "<group>"; };
@@ -737,6 +739,7 @@
 				67A2EEC0246DD7B5002A49BD /* RectangularDashedView.swift */,
 				6780C8CE23CC63CC00A54733 /* RoundButton.swift */,
 				67D4A3FD247625F900FFF70E /* UITextViewPlaceholder.swift */,
+				67422E7E24A80D940050C791 /* BottomBorderClass.swift */,
 			);
 			path = CustomDesign;
 			sourceTree = "<group>";
@@ -1199,6 +1202,7 @@
 				67303F4A246F35EF00B571FD /* StickersView.swift in Sources */,
 				678C199B23D26A3800906A8D /* alertViewVC.swift in Sources */,
 				67F294E6246AEB7F0036BA5C /* AppConstants.swift in Sources */,
+				67422E7F24A80D940050C791 /* BottomBorderClass.swift in Sources */,
 				67303F942473FA7D00B571FD /* alarm.swift in Sources */,
 				6783EBDE23D7FBDF009DC0A3 /* MockMessage.swift in Sources */,
 				6780C8DE23CCF7A500A54733 /* signUpVC.swift in Sources */,
@@ -1402,13 +1406,13 @@
 				CODE_SIGN_ENTITLEMENTS = HappyDay/HappyDay.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 428L9X45XN;
+				DEVELOPMENT_TEAM = DFQNB7JWBQ;
 				INFOPLIST_FILE = HappyDay/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.phone.HappyDay;
+				PRODUCT_BUNDLE_IDENTIFIER = com.phone.ks.HappyDay;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "HappyDay/refer/HappyDay-Bridging-Header.h";
@@ -1427,13 +1431,13 @@
 				CODE_SIGN_ENTITLEMENTS = HappyDay/HappyDay.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 428L9X45XN;
+				DEVELOPMENT_TEAM = DFQNB7JWBQ;
 				INFOPLIST_FILE = HappyDay/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.phone.HappyDay;
+				PRODUCT_BUNDLE_IDENTIFIER = com.phone.ks.HappyDay;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "HappyDay/refer/HappyDay-Bridging-Header.h";

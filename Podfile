@@ -22,7 +22,7 @@ target 'HappyDay' do
 	pod 'Firebase/Core' 
 	pod 'Firebase/Messaging'
 	pod 'SDWebImage', '~> 5.0'
-	
+	pod 'Lightbox'
 
 	pod 'Kingfisher'
 	

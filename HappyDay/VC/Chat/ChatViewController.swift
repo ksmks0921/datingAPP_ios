@@ -26,6 +26,7 @@ SOFTWARE.
 import UIKit
 import MessageKit
 import InputBarAccessoryView
+import Lightbox
 
 protocol ImageSelectProtocol
 {
@@ -33,7 +34,17 @@ protocol ImageSelectProtocol
     
 }
 /// A base class for the example controllers
-class ChatViewController: MessagesViewController, MessagesDataSource {
+class ChatViewController: MessagesViewController, MessagesDataSource, LightboxControllerPageDelegate ,LightboxControllerDismissalDelegate  {
+    
+    
+    func lightboxController(_ controller: LightboxController, didMoveToPage page: Int) {
+        print("ok")
+    }
+    
+    func lightboxControllerWillDismiss(_ controller: LightboxController) {
+        print("ok")
+    }
+    
     
  
     
@@ -196,6 +207,50 @@ extension ChatViewController: MessageCellDelegate {
     }
     
     func didTapMessage(in cell: MessageCollectionViewCell) {
+//        guard let indexPath = messagesCollectionView.indexPath(for: cell),
+//            let message = messagesCollectionView.messagesDataSource?.messageForItem(at: indexPath, in: messagesCollectionView) else {
+//                print("Failed to identify message when audio cell receive tap gesture")
+//                return
+//        }
+////        let indexPath = messagesCollectionView.indexPath(for: cell)
+////        let message = messagesCollectionView.messagesDataSource?.messageForItem(at: indexPath!, in: messagesCollectionView)
+//        if case .custom = message.kind {
+//
+//        }
+//        if case .photo = message.kind {
+//            let images = [LightboxImage(imageURL: URL(string: MessageVM.shared.custom_messages[indexPath.row].source_path!)!)]
+//            let controller = LightboxController(images: images)
+//            controller.pageDelegate = self
+//            controller.dismissalDelegate = self
+//            controller.dynamicBackground = true
+//            LightboxConfig.CloseButton.image = UIImage(named: "icon_close1")
+//            LightboxConfig.CloseButton.text = ""
+//            present(controller, animated: true, completion: nil)
+//        }
+//        if case .video = message.kind {
+//
+//            print("____\(MessageVM.shared.custom_messages[indexPath.row].thumb_path)")
+//            print("__\(indexPath.row)")
+//
+//            let url = URL(string:MessageVM.shared.custom_messages[indexPath.row].thumb_path!)
+//                if let data = try? Data(contentsOf: url!)
+//                {
+//                    let video_url : String = MessageVM.shared.custom_messages[indexPath.row].source_path!
+//                 let image: UIImage = UIImage(data: data)!
+//                     let video = [LightboxImage(
+//                       image: image,
+//                       text: "",
+//                       videoURL: URL(string: video_url)
+//                     )]
+//                     let controller = LightboxController(images: video)
+//                     controller.pageDelegate = self
+//                     controller.dismissalDelegate = self
+//                     controller.dynamicBackground = true
+//                     LightboxConfig.CloseButton.image = UIImage(named: "icon_close1")
+//                     LightboxConfig.CloseButton.text = ""
+//                     present(controller, animated: true, completion: nil)
+//                }
+//        }
         print("Message tapped")
     }
     

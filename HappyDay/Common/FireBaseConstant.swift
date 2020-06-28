@@ -83,6 +83,7 @@ class FireBaseConstant{
     static let EventCity                = "EventCity"
     static let EventCreatedDate         = "EventCreateDate"
     static let EventDes                 = "EventDes"
+    static let EventPhoto               = "EventPhoto"
     static let EventPhone               = "EventPhone"
     static let EventTitle               = "EventTitle"
     static let EventType                = "EventType"

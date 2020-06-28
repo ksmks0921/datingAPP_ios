@@ -21,6 +21,7 @@ class postTableViewCell: UITableViewCell {
     @IBOutlet weak var regionLabel: UILabel!
     @IBOutlet weak var personPhoto: UIImageView!
     @IBOutlet weak var views: UILabel!
+    @IBOutlet weak var playButton: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
          personPhoto.roundedImage()

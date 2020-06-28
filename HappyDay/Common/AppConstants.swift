@@ -48,6 +48,7 @@ class AppConstant {
     static let points = "points"
     static let eAll = "全体"
     static let eType = ["全体", "メール友募集", "今からあそぼ", "友達募集", "ミドルエイジ", "すぐ会いたい", "すぐ会いたい"]
+    static let event_Type = ["メール友募集", "今からあそぼ", "友達募集", "ミドルエイジ", "すぐ会いたい", "すぐ会いたい"]
     static let phoneSetting = ["1時間後まで受ける", "2時間後まで受ける", "3時間後まで受ける", "4時間後まで受ける", "5時間後まで受ける"]
     static let height_60 = 60
     static let height_50 = 50
