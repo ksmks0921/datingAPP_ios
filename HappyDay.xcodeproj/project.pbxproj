@@ -201,7 +201,7 @@
 		676B8BAD246C547D00BFF39D /* aboutMeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = aboutMeCell.swift; sourceTree = "<group>"; };
 		676B8BAE246C547D00BFF39D /* aboutMeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = aboutMeCell.xib; path = "../New Group/aboutMeCell.xib"; sourceTree = "<group>"; };
 		676B8BB1246C642000BFF39D /* otherSettingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = otherSettingVC.swift; sourceTree = "<group>"; };
-		6775361323CC1DB7003B844E /* HappyDay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HappyDay.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6775361323CC1DB7003B844E /* HAHALove.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HAHALove.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6775361623CC1DB7003B844E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6775361823CC1DB7003B844E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		6775361A23CC1DB7003B844E /* profileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = profileVC.swift; sourceTree = "<group>"; };
@@ -576,7 +576,7 @@
 		6775361423CC1DB7003B844E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				6775361323CC1DB7003B844E /* HappyDay.app */,
+				6775361323CC1DB7003B844E /* HAHALove.app */,
 				6775362923CC1DBE003B844E /* HappyDayTests.xctest */,
 				6775363423CC1DBE003B844E /* HappyDayUITests.xctest */,
 			);
@@ -876,7 +876,7 @@
 			);
 			name = HappyDay;
 			productName = HappyDay;
-			productReference = 6775361323CC1DB7003B844E /* HappyDay.app */;
+			productReference = 6775361323CC1DB7003B844E /* HAHALove.app */;
 			productType = "com.apple.product-type.application";
 		};
 		6775362823CC1DBE003B844E /* HappyDayTests */ = {
@@ -1333,7 +1333,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1387,7 +1387,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -1404,21 +1404,21 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = HappyDay/HappyDay.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = DFQNB7JWBQ;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = 428L9X45XN;
 				INFOPLIST_FILE = HappyDay/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.phone.ks.HappyDay;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PRODUCT_BUNDLE_IDENTIFIER = com.phone.ks.HaHaLove;
+				PRODUCT_NAME = HAHALove;
+				PROVISIONING_PROFILE_SPECIFIER = hahaloveprovision;
 				SWIFT_OBJC_BRIDGING_HEADER = "HappyDay/refer/HappyDay-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1429,20 +1429,20 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = HappyDay/HappyDay.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = DFQNB7JWBQ;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = 428L9X45XN;
 				INFOPLIST_FILE = HappyDay/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.phone.ks.HappyDay;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PRODUCT_BUNDLE_IDENTIFIER = com.phone.ks.HaHaLove;
+				PRODUCT_NAME = HAHALove;
+				PROVISIONING_PROFILE_SPECIFIER = hahaloveprovision;
 				SWIFT_OBJC_BRIDGING_HEADER = "HappyDay/refer/HappyDay-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

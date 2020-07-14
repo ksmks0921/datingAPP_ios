@@ -623,7 +623,9 @@ class UserVM {
         
     }
     
-    func registerEvent(event_city: String, create_date: String, event_des: String, event_photo: String, event_phone: String, event_type: String, user_age:String, user_avatar: String, user_city: String, user_gender: Bool, user_job: String, user_name: String, user_style: String, user_tall: String, user_id: String, created_at: String, row_key: String, source_type: String, thumb_path: String, views_counts: String,  response: @escaping responseCallBack){
+    func registerEvent(event_city: String, create_date: String, event_des: String, event_photo: String, event_phone: String, event_type: String, user_age:String, user_avatar: String, user_city: String, user_gender: Bool, user_job: String, user_name: String, user_style: String, user_tall: String, user_id: String, created_at: String, source_type: String, thumb_path: String, views_counts: String,  response: @escaping responseCallBack){
+        
+        let row_key = self.ref.child(FireBaseConstant.Events).childByAutoId()
         
         let newEvent = [FireBaseConstant.EventCity                : event_city,
                         FireBaseConstant.EventCreatedDate         : create_date,

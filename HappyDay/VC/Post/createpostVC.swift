@@ -258,7 +258,6 @@ class createpostVC: BaseVC, UITextFieldDelegate  {
         let user_style = UserVM.current_user.user_style
         let user_tall = UserVM.current_user.user_tall
         let user_id = UserVM.current_user.user_id
-        let row_key = ""
         let source_type = self.media
         let thumb_path : String!
         let event_photo : String!
@@ -271,11 +270,12 @@ class createpostVC: BaseVC, UITextFieldDelegate  {
              event_photo = url_source
         }
         
-        
+        let currentDateTime = Date()
+        let created_at = Date().timeIntervalSinceReferenceDate
         
         Indicator.sharedInstance.showIndicator()
         
-        UserVM.shared.registerEvent(event_city: regionTextField.text!, create_date: date_result, event_des: eventTextField.text! ,event_photo: event_photo, event_phone: phoneSettingTextField.text!, event_type: eventTypeLabel.text!, user_age: user_age!, user_avatar: user_avatar![0], user_city: regionTextField.text!, user_gender: user_gender!, user_job: user_job!, user_name: user_name!, user_style: user_style!, user_tall: user_tall!, user_id: user_id!, created_at: "", row_key: row_key, source_type: source_type!, thumb_path: thumb_path, views_counts: "0" ) { (success, message, error) in
+        UserVM.shared.registerEvent(event_city: regionTextField.text!, create_date: date_result, event_des: eventTextField.text! ,event_photo: event_photo, event_phone: phoneSettingTextField.text!, event_type: eventTypeLabel.text!, user_age: user_age!, user_avatar: user_avatar![0], user_city: regionTextField.text!, user_gender: user_gender!, user_job: user_job!, user_name: user_name!, user_style: user_style!, user_tall: user_tall!, user_id: user_id!, created_at: String(created_at), source_type: source_type!, thumb_path: thumb_path, views_counts: "0" ) { (success, message, error) in
              
             Indicator.sharedInstance.hideIndicator()
             if error == nil{

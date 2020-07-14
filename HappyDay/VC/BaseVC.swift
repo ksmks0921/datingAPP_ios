@@ -54,7 +54,6 @@ class BaseVC: UIViewController {
         dateFormatter.dateFormat = "dd/MM/yyyy" //Set date style
         dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
         let localDate = dateFormatter.string(from: date1)
-        
     }
     
     func ConvertIntoDateTime(unixdate: Int) -> String{
