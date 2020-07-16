@@ -153,8 +153,9 @@ class UserVM {
             if error == nil{
                 DataManager.userId = user?.user.uid
                 DataManager.email = user?.user.email
-                let user_avatar = [AppConstant.defatul_image_url, AppConstant.defatul_image_url, AppConstant.defatul_image_url]
+                let user_avatar = ["UserAvatar1" : AppConstant.defatul_image_url, "UserAvatar2" : AppConstant.defatul_image_url, "UserAvatar2" :AppConstant.defatul_image_url]
                 let user_id = email.replacingOccurrences(of: "@", with: "", options: NSString.CompareOptions.literal, range: nil).replacingOccurrences(of: ".", with: "", options: NSString.CompareOptions.literal, range: nil)
+                let created_at = Date().timeIntervalSinceReferenceDate
                 let updateUser = [FireBaseConstant.kEmail         : DataManager.email!,
                                   FireBaseConstant.kCity          : city,
                                   FireBaseConstant.kAge           : age,
@@ -170,16 +171,16 @@ class UserVM {
                                   FireBaseConstant.kUserIntroduce : "",
                                   FireBaseConstant.kUserLifeStyle : "",
                                   FireBaseConstant.kUserOutside   : "",
-                                  FireBaseConstant.kUserSex       : String(gender),
+                                  FireBaseConstant.kUserSex       : gender,
                                   FireBaseConstant.kUserNickName  : "",
-                                  FireBaseConstant.kStatus        : "",
+                                  FireBaseConstant.kStatus        : "offline",
                                   FireBaseConstant.kStyle1        : "",
                                   FireBaseConstant.kStyle2        : "",
                                   FireBaseConstant.kStyle3        : "",
                                   FireBaseConstant.kStyle4        : "",
-                                  FireBaseConstant.kCreatedAt     : 0,
-                                  FireBaseConstant.kUpdatedAt     : 0,
-                                  FireBaseConstant.kIsApproved    : "",
+                                  FireBaseConstant.kCreatedAt     : created_at,
+                                  FireBaseConstant.kUpdatedAt     : created_at,
+                                  FireBaseConstant.kIsApproved    : "approved",
                                   FireBaseConstant.kRequireAge    : "",
                                   FireBaseConstant.kRequireStyle  : "",
                                   FireBaseConstant.kRequireTall   : ""
