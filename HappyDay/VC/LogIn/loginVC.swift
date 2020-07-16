@@ -63,18 +63,10 @@ class loginVC: BaseVC , UITextFieldDelegate{
     @IBAction func backBtnTapped(_ sender: Any) {
            self.navigationController?.popViewController(animated: true)
     }
-    
-  
- 
+
     @IBAction func login(_ sender: Any) {
-        
         login()
-       
-        
     }
-    
-  
-    
 
 }
 extension loginVC {

@@ -1406,12 +1406,14 @@
 				CODE_SIGN_ENTITLEMENTS = HappyDay/HappyDay.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 428L9X45XN;
 				INFOPLIST_FILE = HappyDay/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.01;
 				PRODUCT_BUNDLE_IDENTIFIER = com.phone.ks.HaHaLove;
 				PRODUCT_NAME = HAHALove;
 				PROVISIONING_PROFILE_SPECIFIER = hahaloveprovision;
@@ -1431,12 +1433,14 @@
 				CODE_SIGN_ENTITLEMENTS = HappyDay/HappyDay.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 428L9X45XN;
 				INFOPLIST_FILE = HappyDay/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.01;
 				PRODUCT_BUNDLE_IDENTIFIER = com.phone.ks.HaHaLove;
 				PRODUCT_NAME = HAHALove;
 				PROVISIONING_PROFILE_SPECIFIER = hahaloveprovision;
