@@ -122,9 +122,7 @@ class FireBaseConstant{
     static let l_id                 = "id"
     static let l_status             = "status"
     
-    //****************************** Chatlist ****************
-    static let p_point                 = "point"
-    static let p_updated_at            = "updated_at"
+    
     
     //****************************** Likes ****************
     static let LikeAge                  = "LikeAge"
@@ -176,8 +174,8 @@ class FireBaseConstant{
     static let RsenderImage             = "sender_image"
     static let RsenderName              = "sender_name"
     
-    //****************************** Points ****************
-    static let Ppoint                       = "point"
-    static let Pupdated_at                  = "updated_at"
-   
+  //****************************** Points ****************
+  
+   static let p_point                 = "point"
+   static let p_updated_at            = "updated_at"
 }

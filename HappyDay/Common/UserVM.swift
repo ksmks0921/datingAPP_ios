@@ -151,11 +151,13 @@ class UserVM {
         
         Auth.auth().createUser(withEmail: email, password: password) { (user, error) in
             if error == nil{
-                DataManager.userId = user?.user.uid
+                
                 DataManager.email = user?.user.email
-                let user_avatar = ["UserAvatar1" : AppConstant.defatul_image_url, "UserAvatar2" : AppConstant.defatul_image_url, "UserAvatar2" :AppConstant.defatul_image_url]
+                let user_avatar = ["UserAvatar1" : AppConstant.defatul_image_url, "UserAvatar2" : AppConstant.defatul_image_url, "UserAvatar3" :AppConstant.defatul_image_url]
                 let user_id = email.replacingOccurrences(of: "@", with: "", options: NSString.CompareOptions.literal, range: nil).replacingOccurrences(of: ".", with: "", options: NSString.CompareOptions.literal, range: nil)
-                let created_at = Date().timeIntervalSinceReferenceDate
+                DataManager.userId = user_id
+                let created_at_temp = Date().timeIntervalSince1970
+                let created_at = Int(created_at_temp * 1000)
                 let updateUser = [FireBaseConstant.kEmail         : DataManager.email!,
                                   FireBaseConstant.kCity          : city,
                                   FireBaseConstant.kAge           : age,
@@ -188,8 +190,8 @@ class UserVM {
                 self.ref.child(FireBaseConstant.UserNode).child(user_id).setValue(updateUser)
                 
                 let free_points = [
-                                  FireBaseConstant.Ppoint   :  100,
-                                  FireBaseConstant.Pupdated_at : 10000000
+                                  FireBaseConstant.p_point   :  100,
+                                  FireBaseConstant.p_updated_at : created_at
                 ]
                 self.ref.child(FireBaseConstant.Points).child(user_id).setValue(free_points)
                 
@@ -629,9 +631,9 @@ class UserVM {
         
     }
     
-    func registerEvent(event_city: String, create_date: String, event_des: String, event_photo: String, event_phone: String, event_type: String, user_age:String, user_avatar: String, user_city: String, user_gender: Bool, user_job: String, user_name: String, user_style: String, user_tall: String, user_id: String, created_at: String, source_type: String, thumb_path: String, views_counts: String,  response: @escaping responseCallBack){
+    func registerEvent(event_city: String, create_date: String, event_des: String, event_photo: String, event_phone: String, event_type: String, user_age:String, user_avatar: String, user_city: String, user_gender: Bool, user_job: String, user_name: String, user_style: String, user_tall: String, user_id: String, created_at: Int, source_type: String, thumb_path: String, views_counts: String,  response: @escaping responseCallBack){
         
-        let row_key = self.ref.child(FireBaseConstant.Events).childByAutoId()
+        let row_key = self.ref.child(FireBaseConstant.Events).childByAutoId().key
         
         let newEvent = [FireBaseConstant.EventCity                : event_city,
                         FireBaseConstant.EventCreatedDate         : create_date,
@@ -650,12 +652,12 @@ class UserVM {
                         FireBaseConstant.EventUserTall            : user_tall,
                         FireBaseConstant.EventUserID              : user_id,
                         FireBaseConstant.created_at               : created_at,
-                        FireBaseConstant.row_key                  : row_key,
+                        FireBaseConstant.row_key                  : String(row_key!),
                         FireBaseConstant.source_type              : source_type,
                         FireBaseConstant.thumb_path               : thumb_path,
                         FireBaseConstant.view_counts              : views_counts
             ] as [String : Any]
-        self.ref.child(FireBaseConstant.Events).childByAutoId().setValue(newEvent)
+        self.ref.child(FireBaseConstant.Events).child(row_key!).setValue(newEvent)
         response(true, "Registered Successfully.", nil)
         
     }
@@ -831,10 +833,11 @@ class UserVM {
         ]
        
         self.ref.child(FireBaseConstant.Chatlist).child(sender_id).child(receiver_id).setValue(newChatList)
-        
+        let created_at_temp = Date().timeIntervalSince1970
+        let created_at = Int(created_at_temp * 1000)
         let updated_points = [
-                            FireBaseConstant.Ppoint   :  UserVM.user_points - 20,
-                            FireBaseConstant.Pupdated_at : 10000000
+                            FireBaseConstant.p_point   :  UserVM.user_points - 20,
+                            FireBaseConstant.p_updated_at : created_at
         ]
         self.ref.child(FireBaseConstant.Points).child(sender_id).setValue(updated_points)
         
@@ -856,11 +859,11 @@ class UserVM {
         }
     }
     func getPoint(user_id: String, completion: @escaping (Bool) -> Void) {
-        
+        print("_____________hello_____\(user_id)")
         ref.child(FireBaseConstant.Points).child(user_id).child(FireBaseConstant.p_point).observe(.value) { (snapShot) in
 
-            let value = snapShot.value as! Int
-            UserVM.self.user_points = value
+            let value_point = snapShot.value as! Int
+            UserVM.self.user_points = value_point
                 completion(true)
         }
         

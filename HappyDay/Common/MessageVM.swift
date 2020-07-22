@@ -48,7 +48,7 @@ final internal class MessageVM {
     var currentSender: MockUser!
     var now = Date()
     
-    let messageImages: [UIImage] = [#imageLiteral(resourceName: "first"), #imageLiteral(resourceName: "third")]
+    let messageImages: [UIImage] = [#imageLiteral(resourceName: "notification"), #imageLiteral(resourceName: "feedon")]
     let emojis = [
         "👍",
         "😂😂😂",
