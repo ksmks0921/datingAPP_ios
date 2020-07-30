@@ -29,6 +29,7 @@ class signUpVC: BaseVC , UITextFieldDelegate{
     @IBOutlet weak var ageUIView: DesinableView!
     @IBOutlet weak var passwordTxt: UITextField!
     @IBOutlet weak var passwordAgainTxt: UITextField!
+    @IBOutlet weak var nickNameText: UITextField!
     @IBOutlet weak var contentScroll : UIScrollView!
     var gender = true
     var selectedImage = UIImage(named: "sharp_check_white_18dp")?.withRenderingMode(.alwaysTemplate)
@@ -41,12 +42,14 @@ class signUpVC: BaseVC , UITextFieldDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         
-            setUpViewClick()
+        
+        
+        setUpViewClick()
         passwordAgainTxt.delegate = self
         passwordTxt.delegate = self
         emailTextField.delegate = self
+        nickNameText.delegate = self
             if DataManager.isLogin! {
                 
                 
@@ -57,10 +60,14 @@ class signUpVC: BaseVC , UITextFieldDelegate{
 
                                SettingVM.shared.getSelectingAges(completion: {_ in
                                     self.AgeList = SettingVM.AgeList
+                                    self.ageLabel.text = self.AgeList[0]
+                                    
                                })
                                SettingVM.shared.getSelectingRegions(completion: {_ in
                                     self.RegionList = SettingVM.RegionList
+                                    self.regionLabel.text = self.RegionList[0]
                                })
+                               
 
                     }else {
                         self.showAlert(message: "_____error____")
@@ -68,12 +75,34 @@ class signUpVC: BaseVC , UITextFieldDelegate{
                 }
       
             }
-        
+            if AgeList.count > 0 {
+                self.ageLabel.text = self.AgeList[0]
+            }
+            if RegionList.count > 0 {
+                self.regionLabel.text = self.RegionList[0]
+            }
             NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name:UIResponder.keyboardWillShowNotification, object: nil)
             NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:UIResponder.keyboardWillHideNotification, object: nil)
         
         
         
+    }
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        if textField == passwordTxt || textField == passwordAgainTxt {
+            let maxLength = 6
+            let currentString: NSString = textField.text! as NSString
+            let newString: NSString =
+            currentString.replacingCharacters(in: range, with: string) as NSString
+            return newString.length <= maxLength
+        }
+        else {
+            let maxLength = 100
+            let currentString: NSString = textField.text! as NSString
+            let newString: NSString =
+            currentString.replacingCharacters(in: range, with: string) as NSString
+            return newString.length <= maxLength
+        }
     }
     @objc func keyboardWillShow(notification:NSNotification){
 
@@ -212,7 +241,16 @@ extension signUpVC {
             if emailTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines) == "" || passwordTxt.text!.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
                 return "Please fill the field"
             }
-
+            if nickNameText.text == nil || nickNameText.text == "" {
+                return "ニックネームを選択してください"
+            }
+            if regionLabel.text == "" || regionLabel.text == nil {
+                return "地域を選択してください"
+            }
+            if ageLabel.text == "" || regionLabel.text == nil {
+                return "年齢を選択してください"
+            }
+            
             
     //        let cleanPassword = passwordTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
     //        if UserVM.isPasswordValid(cleanPassword) == false {
@@ -232,7 +270,7 @@ extension signUpVC {
         }
         else {
             Indicator.sharedInstance.showIndicator()
-            UserVM.shared.singUp(email: emailTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines), password: passwordTxt.text!.trimmingCharacters(in: .whitespacesAndNewlines), city: regionLabel.text!, gender: gender, age: ageLabel.text!) { (success, message, error) in
+            UserVM.shared.singUp(email: emailTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines), password: passwordTxt.text!.trimmingCharacters(in: .whitespacesAndNewlines), city: regionLabel.text!, gender: gender, age: ageLabel.text!, nickName: nickNameText.text!) { (success, message, error) in
                 
                Indicator.sharedInstance.hideIndicator()
                if error == nil{

@@ -121,7 +121,7 @@ class UserVM {
                       FireBaseConstant.kUserID        : DataManager.userId!,
                       FireBaseConstant.kUserAvatar    : updateUserAvatar,
                       FireBaseConstant.kUserJob       : job,
-                      FireBaseConstant.kUserPassword  : "",
+                      FireBaseConstant.kUserPassword  : DataManager.password,
                       FireBaseConstant.kUserBlood     : blood,
                       FireBaseConstant.kUserDate      : date,
                       FireBaseConstant.kUserStar      : star,
@@ -147,7 +147,7 @@ class UserVM {
             self.ref.child(FireBaseConstant.UserNode).child(DataManager.userId!).setValue(updateUser)
             response(true, "Registered Successfully.", nil)
     }
-    func singUp(email: String, password: String, city: String, gender: Bool, age: String,  response: @escaping responseCallBack){
+    func singUp(email: String, password: String, city: String, gender: Bool, age: String, nickName: String,  response: @escaping responseCallBack){
         
         Auth.auth().createUser(withEmail: email, password: password) { (user, error) in
             if error == nil{
@@ -164,7 +164,7 @@ class UserVM {
                                   FireBaseConstant.kUserID        : user_id,
                                   FireBaseConstant.kUserAvatar    : user_avatar,
                                   FireBaseConstant.kUserJob       : "",
-                                  FireBaseConstant.kUserPassword  : "",
+                                  FireBaseConstant.kUserPassword  : password,
                                   FireBaseConstant.kUserBlood     : "",
                                   FireBaseConstant.kUserDate      : "",
                                   FireBaseConstant.kUserStar      : "",
@@ -174,7 +174,7 @@ class UserVM {
                                   FireBaseConstant.kUserLifeStyle : "",
                                   FireBaseConstant.kUserOutside   : "",
                                   FireBaseConstant.kUserSex       : gender,
-                                  FireBaseConstant.kUserNickName  : "",
+                                  FireBaseConstant.kUserNickName  : nickName,
                                   FireBaseConstant.kStatus        : "offline",
                                   FireBaseConstant.kStyle1        : "",
                                   FireBaseConstant.kStyle2        : "",

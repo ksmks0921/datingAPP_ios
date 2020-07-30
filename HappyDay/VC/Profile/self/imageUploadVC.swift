@@ -146,8 +146,9 @@ class imageUploadVC: BaseVC {
         UserVM.shared.updateUserData(city: user.user_city!, age: user.user_age!, job: user.user_job!, blood: user.user_blood!, star: user.user_star!, tall: user.user_tall!, user_style: user.user_style!, life_style: user.user_lifestyle!, user_outside: user.user_outside!, sex: sex(), nick_name: user.user_nickName!, style_1: user.style_1!, style_2: user.style_2!, style_3: user.style_3!, style_4: user.style_4!, require_age: user.required_age!, is_approved: user.is_approved!, updated_at: user.updated_at!, created_at: user!.created_at!, require_style: user.require_style!, require_tall: user.require_tall!, status: user!.user_status!, introduce: user!.user_introduce!, date: user!.user_date!, user_avatar: self.avatars) {(success, message, error) in
                    if error == nil {
                        if success {
-                            completion(true)
-                           
+                            UserVM.shared.getUsers(completion:  {_ in
+                                 completion(true)
+                            })
                        }
                        else {
                            self.showAlert(message: "error")
@@ -227,7 +228,7 @@ extension imageUploadVC: UIImagePickerControllerDelegate, UINavigationController
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let editedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
             if self.image_index == 1 {
-                imageUploadView_1.isHidden = true
+//                imageUploadView_1.isHidden = true
                 imageView1.isHidden = false
                 self.uploadImage(image_index: 0, imageData: editedImage, completion: {_ in
                     self.imageView1.image = editedImage
@@ -235,14 +236,14 @@ extension imageUploadVC: UIImagePickerControllerDelegate, UINavigationController
                 
             }
             else if self.image_index == 2 {
-                imageUploadView_2.isHidden = true
+//                imageUploadView_2.isHidden = true
                 imageView2.isHidden = false
                 self.uploadImage(image_index: 1, imageData: editedImage, completion: {_ in
                     self.imageView2.image = editedImage
                 })
             }
             else {
-                imageUploadView_3.isHidden = true
+//                imageUploadView_3.isHidden = true
                 imageView3.isHidden = false
                 self.uploadImage(image_index: 2, imageData: editedImage, completion: {_ in
                     self.imageView3.image = editedImage

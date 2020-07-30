@@ -1404,19 +1404,19 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = HappyDay/HappyDay.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 3;
-				DEVELOPMENT_TEAM = 428L9X45XN;
+				DEVELOPMENT_TEAM = DFQNB7JWBQ;
 				INFOPLIST_FILE = HappyDay/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.02;
-				PRODUCT_BUNDLE_IDENTIFIER = com.phone.ks.HaHaLove;
+				PRODUCT_BUNDLE_IDENTIFIER = com.phone.ks.HappyDay;
 				PRODUCT_NAME = HAHALove;
-				PROVISIONING_PROFILE_SPECIFIER = hahaloveprovision;
+				PROVISIONING_PROFILE_SPECIFIER = hanalove;
 				SWIFT_OBJC_BRIDGING_HEADER = "HappyDay/refer/HappyDay-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -1431,19 +1431,19 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = HappyDay/HappyDay.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 3;
-				DEVELOPMENT_TEAM = 428L9X45XN;
+				DEVELOPMENT_TEAM = DFQNB7JWBQ;
 				INFOPLIST_FILE = HappyDay/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.02;
-				PRODUCT_BUNDLE_IDENTIFIER = com.phone.ks.HaHaLove;
+				PRODUCT_BUNDLE_IDENTIFIER = com.phone.ks.HappyDay;
 				PRODUCT_NAME = HAHALove;
-				PROVISIONING_PROFILE_SPECIFIER = hahaloveprovision;
+				PROVISIONING_PROFILE_SPECIFIER = hanalove;
 				SWIFT_OBJC_BRIDGING_HEADER = "HappyDay/refer/HappyDay-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;

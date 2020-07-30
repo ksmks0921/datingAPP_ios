@@ -53,7 +53,6 @@ class searchTypeVC: UIViewController {
         })
         SettingVM.shared.getStyleSetting(completion: {_ in
             self.StyleList = SettingVM.AgeList
-            
             print("Style list added successfully!")
         })
         

@@ -79,9 +79,10 @@ class personalPageVC: BaseVC {
         if DataManager.points != nil {
             pointLabel.text = String(DataManager.points) + " " + "PT"
         }
+        
         if UserVM.current_user != nil {
-            let user = UserVM.current_user
             
+            let user = UserVM.current_user
             avatarImageView.sd_setImage(with: URL(string: user!.user_avatar![0]), placeholderImage: UIImage(named: "avatar_woman"))
             nameLabel.text = UserVM.current_user.user_nickName
             
@@ -102,6 +103,11 @@ class personalPageVC: BaseVC {
         }
         else {
             NotificationCenter.default.removeObserver(self, name: UIApplication.didBecomeActiveNotification, object: nil)
+        }
+        
+        if UserVM.current_user != nil {
+            let user = UserVM.current_user
+            avatarImageView.sd_setImage(with: URL(string: user!.user_avatar![0]), placeholderImage: UIImage(named: "avatar_woman"))
         }
     }
     override var preferredStatusBarStyle: UIStatusBarStyle {
