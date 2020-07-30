@@ -9,6 +9,8 @@
 import UIKit
 import JXSegmentedView
 import Lightbox
+import AVKit
+import AVFoundation
 
 class contentforpostVC: BaseVC {
 
@@ -69,8 +71,11 @@ class contentforpostVC: BaseVC {
         })
     }
     @objc func imageTapped(_ gesture:UITapGestureRecognizer) {
+        print("_____tag\(gesture.view!.tag)")
+        print("_____type\(event_post[gesture.view!.tag].source_type)")
         let tag =  gesture.view!.tag
         if event_post[tag].source_type == "video" {
+            print("video")
             let url = URL(string:event_post[tag].thumb_path)
                if let data = try? Data(contentsOf: url!)
                {
@@ -92,6 +97,7 @@ class contentforpostVC: BaseVC {
             
         }
         else {
+            print("image")
             let images = [LightboxImage(imageURL: URL(string: event_post[tag].event_photo)!)]
             let controller = LightboxController(images: images)
             controller.pageDelegate = self
@@ -176,7 +182,18 @@ extension contentforpostVC:  UITableViewDelegate, UITableViewDataSource, Lightbo
         return CGFloat(AppConstant.height_postTableCell)
        
     }
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-    }
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+////        print("______\(event_post[indexPath.row].event_photo)")
+////        if event_post[indexPath.row].source_type == "video" {
+////
+////            let player = AVPlayer(url: URL(string: event_post[indexPath.row].event_photo)!)
+////            let vc = AVPlayerViewController()
+////            vc.player = player
+////
+////            present(vc, animated: true) {
+////                vc.player?.play()
+////            }
+////        }
+//
+//    }
 }

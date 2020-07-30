@@ -21,9 +21,9 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>This app wants to use camera</string>
+	<string>This app wants to use camera to capture video</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>MyCoolApp uses the microphone to capture video</string>
+	<string>This app uses the microphone to capture video</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>This app wants to use photo library</string>
 	<key>UIApplicationSceneManifest</key>
