@@ -446,14 +446,17 @@ final internal class MessageVM {
                                    }
                                }
                                let last_message: String!
-                               if chats_for_list[chats_for_list.count - 1].message != "" {
-                                   last_message = chats_for_list[chats_for_list.count - 1].message
-                               }
-                               else {
-                                last_message = "(" + chats_for_list[chats_for_list.count - 1].source_type! + ")"
-                               }
-                               let list_item = ChatListItem(avatar: avatar![0], nick_name: nick_name!,  age: age!, region:region!, last_message: last_message, last_connect_time: chats_for_list[0].time!, last_connect_date: chats_for_list[chats_for_list.count - 1].date!, id: person_item.user_id!, chats: chats_for_list)
-                               self.chatListItems.append(list_item)
+                            if chats_for_list.count != 0 {
+                                if chats_for_list[chats_for_list.count - 1].message != "" {
+                                    last_message = chats_for_list[chats_for_list.count - 1].message
+                                }
+                                else {
+                                 last_message = "(" + chats_for_list[chats_for_list.count - 1].source_type! + ")"
+                                }
+                                let list_item = ChatListItem(avatar: avatar![0], nick_name: nick_name!,  age: age!, region:region!, last_message: last_message, last_connect_time: chats_for_list[0].time!, last_connect_date: chats_for_list[chats_for_list.count - 1].date!, id: person_item.user_id!, chats: chats_for_list)
+                                self.chatListItems.append(list_item)
+                            }
+                               
                         }
                        
                        

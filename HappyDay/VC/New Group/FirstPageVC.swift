@@ -22,9 +22,9 @@ class FirstPageVC: BaseVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        alertView.isHidden = false
-        alertViewCloseBtn.isHidden = false
-        
+        alertView.isHidden = true
+        alertViewCloseBtn.isHidden = true
+        showVideo()
         
         if DataManager.isAutoLogin == nil {
             DataManager.isAutoLogin = false
@@ -66,7 +66,7 @@ class FirstPageVC: BaseVC {
     @IBAction func alertCloseBtnTapped(_ sender: Any) {
         alertView.isHidden = true
         alertViewCloseBtn.isHidden = true
-        showVideo()
+        
     }
     @IBAction func gotoLogin(_ sender: Any) {
         if DataManager.isAutoLogin {
@@ -114,26 +114,28 @@ class FirstPageVC: BaseVC {
         navigationController?.pushViewController(VC, animated: true)
     }
     private func showVideo(){
-            let videoURL = Bundle.main.url(forResource: "splash", withExtension: "mp4") // Get video url
-             
-           player = AVPlayer(url: videoURL!)
-           avAssets = AVAsset(url: videoURL!)
-           let playerLayer = AVPlayerLayer(player: player)
-           playerLayer.frame = self.videoView.bounds
-           playerLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
-           self.videoView.layer.addSublayer(playerLayer)
-            player.play()
-            player.addPeriodicTimeObserver(forInterval: CMTime(seconds: 1, preferredTimescale: 1) , queue: .main) { [weak self] time in
-                
-                if time == self!.avAssets.duration {
-                    
-                    
-                }
-                
-            }
-           NotificationCenter.default.addObserver(self,selector: #selector(itemDidReachEnd),
-                                                  name: NSNotification.Name.AVPlayerItemDidPlayToEndTime,
-           object: player.currentItem)
+           let videoURL = Bundle.main.url(forResource: "splash", withExtension: "mp4") // Get video url
+        if videoURL != nil {
+            player = AVPlayer(url: videoURL!)
+            avAssets = AVAsset(url: videoURL!)
+            let playerLayer = AVPlayerLayer(player: player)
+            playerLayer.frame = self.videoView.bounds
+            playerLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
+            self.videoView.layer.addSublayer(playerLayer)
+             player.play()
+             player.addPeriodicTimeObserver(forInterval: CMTime(seconds: 1, preferredTimescale: 1) , queue: .main) { [weak self] time in
+                 
+                 if time == self!.avAssets.duration {
+                     
+                     
+                 }
+                 
+             }
+            NotificationCenter.default.addObserver(self,selector: #selector(itemDidReachEnd),
+                                                   name: NSNotification.Name.AVPlayerItemDidPlayToEndTime,
+            object: player.currentItem)
+        }
+           
         
     }
     @objc func itemDidReachEnd(notification: NSNotification) {

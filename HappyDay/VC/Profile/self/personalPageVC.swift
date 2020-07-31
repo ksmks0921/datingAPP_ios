@@ -138,14 +138,15 @@ class personalPageVC: BaseVC {
                 navigationController?.pushViewController(VC_2, animated: true)
     }
     func showHelpDoc() {
- 
-        let previewController = QLPreviewController()
-        self.previewItem = getPreviewItem(withName : "help.docx")
-        previewController.dataSource = self
-//
-//        UINavigationBar.appearance(whenContainedInInstancesOf: [QLPreviewController.self]).backgroundColor = UIColor.green
-//     
-        self.present(previewController, animated: true, completion: nil)
+            let VC_2 = self.storyboard?.instantiateViewController(withIdentifier: "helpVC") as! helpVC
+            navigationController?.pushViewController(VC_2, animated: true)
+//        let previewController = QLPreviewController()
+//        self.previewItem = getPreviewItem(withName : "help.docx")
+//        previewController.dataSource = self
+////
+////        UINavigationBar.appearance(whenContainedInInstancesOf: [QLPreviewController.self]).backgroundColor = UIColor.green
+////
+//        self.present(previewController, animated: true, completion: nil)
         
     }
     func getPreviewItem(withName name: String) -> NSURL{

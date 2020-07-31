@@ -17,8 +17,16 @@ class helpVC: UIViewController {
         let previewController = QLPreviewController()
         
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+          
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+   
+    }
 
+    @IBAction func okBtnTapped(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+    }
     
 
 }

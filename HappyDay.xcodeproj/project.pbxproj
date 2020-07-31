@@ -33,6 +33,7 @@
 		67422E7F24A80D940050C791 /* BottomBorderClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67422E7E24A80D940050C791 /* BottomBorderClass.swift */; };
 		674B9DA823D68F8400FD2C48 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674B9DA723D68DDD00FD2C48 /* ChatViewController.swift */; };
 		674B9DA923D68F8400FD2C48 /* MKPrivateChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674B9DA623D68DDC00FD2C48 /* MKPrivateChatView.swift */; };
+		67647B5C24D4378A00C416B0 /* splash.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 67647B5B24D4378A00C416B0 /* splash.mp4 */; };
 		676B8BAB246C366A00BFF39D /* selfEvaluationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676B8BA9246C366A00BFF39D /* selfEvaluationCell.swift */; };
 		676B8BAC246C366A00BFF39D /* selfEvaluationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 676B8BAA246C366A00BFF39D /* selfEvaluationCell.xib */; };
 		676B8BAF246C547D00BFF39D /* aboutMeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676B8BAD246C547D00BFF39D /* aboutMeCell.swift */; };
@@ -83,7 +84,6 @@
 		6783EBF423D7FD8C009DC0A3 /* sound1.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 6783EBF223D7FD8C009DC0A3 /* sound1.m4a */; };
 		6783EBF723D7FDB5009DC0A3 /* BasicAudioController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6783EBF623D7FDB4009DC0A3 /* BasicAudioController.swift */; };
 		6783EBF923D7FE19009DC0A3 /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6783EBF823D7FE19009DC0A3 /* CustomCell.swift */; };
-		678C130E249C2C8100E40352 /* splash.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 678C130D249C143000E40352 /* splash.mp4 */; };
 		678C199723D216B900906A8D /* DesinableImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 678C199623D216B900906A8D /* DesinableImageView.swift */; };
 		678C199923D25E4D00906A8D /* mainProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 678C199823D25E4D00906A8D /* mainProfileVC.swift */; };
 		678C199B23D26A3800906A8D /* alertViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 678C199A23D26A3800906A8D /* alertViewVC.swift */; };
@@ -196,12 +196,13 @@
 		67422E7E24A80D940050C791 /* BottomBorderClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomBorderClass.swift; sourceTree = "<group>"; };
 		674B9DA623D68DDC00FD2C48 /* MKPrivateChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKPrivateChatView.swift; sourceTree = "<group>"; };
 		674B9DA723D68DDD00FD2C48 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		67647B5B24D4378A00C416B0 /* splash.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = splash.mp4; sourceTree = "<group>"; };
 		676B8BA9246C366A00BFF39D /* selfEvaluationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = selfEvaluationCell.swift; sourceTree = "<group>"; };
 		676B8BAA246C366A00BFF39D /* selfEvaluationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = selfEvaluationCell.xib; sourceTree = "<group>"; };
 		676B8BAD246C547D00BFF39D /* aboutMeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = aboutMeCell.swift; sourceTree = "<group>"; };
 		676B8BAE246C547D00BFF39D /* aboutMeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = aboutMeCell.xib; path = "../New Group/aboutMeCell.xib"; sourceTree = "<group>"; };
 		676B8BB1246C642000BFF39D /* otherSettingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = otherSettingVC.swift; sourceTree = "<group>"; };
-		6775361323CC1DB7003B844E /* ドキドキChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ドキドキChat.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6775361323CC1DB7003B844E /* ドキドキ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ドキドキ.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6775361623CC1DB7003B844E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6775361823CC1DB7003B844E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		6775361A23CC1DB7003B844E /* profileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = profileVC.swift; sourceTree = "<group>"; };
@@ -252,7 +253,6 @@
 		6783EBF223D7FD8C009DC0A3 /* sound1.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = sound1.m4a; sourceTree = "<group>"; };
 		6783EBF623D7FDB4009DC0A3 /* BasicAudioController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicAudioController.swift; sourceTree = "<group>"; };
 		6783EBF823D7FE19009DC0A3 /* CustomCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
-		678C130D249C143000E40352 /* splash.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = splash.mp4; sourceTree = "<group>"; };
 		678C199623D216B900906A8D /* DesinableImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesinableImageView.swift; sourceTree = "<group>"; };
 		678C199823D25E4D00906A8D /* mainProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mainProfileVC.swift; sourceTree = "<group>"; };
 		678C199A23D26A3800906A8D /* alertViewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = alertViewVC.swift; sourceTree = "<group>"; };
@@ -576,7 +576,7 @@
 		6775361423CC1DB7003B844E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				6775361323CC1DB7003B844E /* ドキドキChat.app */,
+				6775361323CC1DB7003B844E /* ドキドキ.app */,
 				6775362923CC1DBE003B844E /* HappyDayTests.xctest */,
 				6775363423CC1DBE003B844E /* HappyDayUITests.xctest */,
 			);
@@ -598,10 +598,10 @@
 				6780C8D323CCD10600A54733 /* Items */,
 				6780C8D223CCD0E100A54733 /* VC */,
 				6775361623CC1DB7003B844E /* AppDelegate.swift */,
+				67647B5B24D4378A00C416B0 /* splash.mp4 */,
 				67303F41246F332E00B571FD /* AppConstant.h */,
 				6775361823CC1DB7003B844E /* SceneDelegate.swift */,
 				670BA59724A3DBD000F765AC /* help.docx */,
-				678C130D249C143000E40352 /* splash.mp4 */,
 				6775361C23CC1DB7003B844E /* Main.storyboard */,
 				6775361F23CC1DBE003B844E /* Assets.xcassets */,
 				6775362123CC1DBE003B844E /* LaunchScreen.storyboard */,
@@ -876,7 +876,7 @@
 			);
 			name = HappyDay;
 			productName = HappyDay;
-			productReference = 6775361323CC1DB7003B844E /* ドキドキChat.app */;
+			productReference = 6775361323CC1DB7003B844E /* ドキドキ.app */;
 			productType = "com.apple.product-type.application";
 		};
 		6775362823CC1DBE003B844E /* HappyDayTests */ = {
@@ -967,7 +967,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				678C130E249C2C8100E40352 /* splash.mp4 in Resources */,
 				67303F922473F8BB00B571FD /* alarmViewCell.xib in Resources */,
 				6792003223CE804700C4872B /* listCollectionViewCell.xib in Resources */,
 				676B8BAC246C366A00BFF39D /* selfEvaluationCell.xib in Resources */,
@@ -986,6 +985,7 @@
 				67A4B40323D9021100F39C10 /* addContentView.xib in Resources */,
 				6783EBF323D7FD8C009DC0A3 /* sound2.m4a in Resources */,
 				6741F470246AD64C007E9B93 /* GoogleService-Info.plist in Resources */,
+				67647B5C24D4378A00C416B0 /* splash.mp4 in Resources */,
 				6780C90123CD6DD500A54733 /* MyCustomCell.xib in Resources */,
 				670BA59824A3DBD200F765AC /* help.docx in Resources */,
 				677E7D2D24781BE500170DEA /* firstPageCell.xib in Resources */,
@@ -1415,7 +1415,7 @@
 				);
 				MARKETING_VERSION = 1.02;
 				PRODUCT_BUNDLE_IDENTIFIER = com.phone.ks.HappyDay;
-				PRODUCT_NAME = "ドキドキChat";
+				PRODUCT_NAME = "ドキドキ";
 				PROVISIONING_PROFILE_SPECIFIER = hanalove;
 				SWIFT_OBJC_BRIDGING_HEADER = "HappyDay/refer/HappyDay-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1442,7 +1442,7 @@
 				);
 				MARKETING_VERSION = 1.02;
 				PRODUCT_BUNDLE_IDENTIFIER = com.phone.ks.HappyDay;
-				PRODUCT_NAME = "ドキドキChat";
+				PRODUCT_NAME = "ドキドキ";
 				PROVISIONING_PROFILE_SPECIFIER = hanalove;
 				SWIFT_OBJC_BRIDGING_HEADER = "HappyDay/refer/HappyDay-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;

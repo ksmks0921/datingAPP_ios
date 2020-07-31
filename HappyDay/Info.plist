@@ -21,11 +21,11 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>This app wants to use camera to capture video</string>
+	<string>機器内の写真、メディア、ファイルへのアクセスをHAHALOVEに許可しますか？</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>This app uses the microphone to capture video</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>This app wants to use photo library</string>
+	<string>機器内の写真、メディア、ファイルへのアクセスをHAHALOVEに許可しますか？</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
