@@ -158,6 +158,7 @@ PODS:
     - abseil/base/base_internal
     - abseil/base/config
     - abseil/meta/type_traits
+  - ANZSingleImageViewer (0.4.0)
   - BoringSSL-GRPC (0.0.3):
     - BoringSSL-GRPC/Implementation (= 0.0.3)
     - BoringSSL-GRPC/Interface (= 0.0.3)
@@ -312,7 +313,7 @@ PODS:
     - Kingfisher/Core (= 5.14.0)
   - Kingfisher/Core (5.14.0)
   - leveldb-library (1.22)
-  - Lightbox (2.4.1):
+  - Lightbox (2.4.2):
     - Imaginary (~> 4.3.1)
   - MessageKit (3.0.0):
     - InputBarAccessoryView (~> 4.2.2)
@@ -334,6 +335,7 @@ PODS:
   - SwiftGoogleTranslate (0.2.1)
 
 DEPENDENCIES:
+  - ANZSingleImageViewer
   - Cosmos (~> 21.0)
   - Firebase/Analytics
   - Firebase/Auth
@@ -357,6 +359,7 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - abseil
+    - ANZSingleImageViewer
     - BoringSSL-GRPC
     - Cache
     - Cosmos
@@ -410,6 +413,7 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   abseil: 18063d773f5366ff8736a050fe035a28f635fd27
+  ANZSingleImageViewer: c36fdb822feeda3d72820ebca4e6cc9506b63b62
   BoringSSL-GRPC: db8764df3204ccea016e1c8dd15d9a9ad63ff318
   Cache: 48762993ec44e1d93483c4d4a13edd18452326f4
   Cosmos: 3dfb6e4ba48bd48b8c9aa2a77048ae11ed114f96
@@ -441,7 +445,7 @@ SPEC CHECKSUMS:
   JXSegmentedView: b278b4c5d4c4c2982b4e084cef76ff1ddd37c6a5
   Kingfisher: 7b64389a43139c903ec434788344c288217c792d
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
-  Lightbox: cede4a64f2d864da1f7e7959aa78a8659a311e7c
+  Lightbox: 8837c35c1150fa0410d94296e369b432d37f18c7
   MessageKit: e892a9ca49ebe6d82684d3a93ad84021fa23e2c6
   MessageViewController: 63ef2719d82c91d949ad52e101f049028a5a0611
   MessengerKit: 26dbfa81b76b22b7891028fb9a2cefdf4e86236f
@@ -453,6 +457,6 @@ SPEC CHECKSUMS:
   SnapKit: 0de968a9fec17499afa29683b05d0c775b6d1c29
   SwiftGoogleTranslate: 96960d3548e800e15b347518afca546d2edc8519
 
-PODFILE CHECKSUM: ac4ddcaf1ffbe136a2e0ee287f0cc470ae1a4673
+PODFILE CHECKSUM: 130ca94b6588c175257470a21ce3a355e9d0926c
 
-COCOAPODS: 1.8.4
+COCOAPODS: 1.9.3

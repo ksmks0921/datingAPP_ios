@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1FAC616724D827F300DF2B62 /* FirstPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FAC616624D827F300DF2B62 /* FirstPageVC.swift */; };
 		262341BEFD5583B8D97949B3 /* Pods_HappyDay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 394C0000A8A79953D7D4C0CA /* Pods_HappyDay.framework */; };
 		670BA59824A3DBD200F765AC /* help.docx in Resources */ = {isa = PBXBuildFile; fileRef = 670BA59724A3DBD000F765AC /* help.docx */; };
 		670BA59A24A3DDCB00F765AC /* helpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 670BA59924A3DDCB00F765AC /* helpVC.swift */; };
@@ -51,7 +52,6 @@
 		677E7D2D24781BE500170DEA /* firstPageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 677E7D2B24781BE500170DEA /* firstPageCell.xib */; };
 		677E7D2F247829C000170DEA /* PushNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 677E7D2E247829C000170DEA /* PushNotificationManager.swift */; };
 		677E7D3124782A6000170DEA /* PushNotificationSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 677E7D3024782A6000170DEA /* PushNotificationSender.swift */; };
-		6780C8CB23CC26E000A54733 /* FirstPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6780C8CA23CC26E000A54733 /* FirstPageVC.swift */; };
 		6780C8CD23CC4E5C00A54733 /* firstCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6780C8CC23CC4E5C00A54733 /* firstCollectionCell.swift */; };
 		6780C8CF23CC63CC00A54733 /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6780C8CE23CC63CC00A54733 /* RoundButton.swift */; };
 		6780C8D623CCD1A400A54733 /* loginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6780C8D523CCD1A400A54733 /* loginVC.swift */; };
@@ -167,6 +167,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1FAC616624D827F300DF2B62 /* FirstPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstPageVC.swift; sourceTree = "<group>"; };
 		24509974E7E1B9E5455A3894 /* Pods-HappyDay-HappyDayUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HappyDay-HappyDayUITests.debug.xcconfig"; path = "Target Support Files/Pods-HappyDay-HappyDayUITests/Pods-HappyDay-HappyDayUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		394C0000A8A79953D7D4C0CA /* Pods_HappyDay.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HappyDay.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BC3BA98B7574F132D655A3A /* Pods-HappyDay.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HappyDay.debug.xcconfig"; path = "Target Support Files/Pods-HappyDay/Pods-HappyDay.debug.xcconfig"; sourceTree = "<group>"; };
@@ -220,7 +221,6 @@
 		677E7D2B24781BE500170DEA /* firstPageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = firstPageCell.xib; sourceTree = "<group>"; };
 		677E7D2E247829C000170DEA /* PushNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationManager.swift; sourceTree = "<group>"; };
 		677E7D3024782A6000170DEA /* PushNotificationSender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationSender.swift; sourceTree = "<group>"; };
-		6780C8CA23CC26E000A54733 /* FirstPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FirstPageVC.swift; path = "../New Group/FirstPageVC.swift"; sourceTree = "<group>"; };
 		6780C8CC23CC4E5C00A54733 /* firstCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = firstCollectionCell.swift; sourceTree = "<group>"; };
 		6780C8CE23CC63CC00A54733 /* RoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
 		6780C8D523CCD1A400A54733 /* loginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = loginVC.swift; sourceTree = "<group>"; };
@@ -363,6 +363,14 @@
 				C6F69401A9A7D16E20F3DD16 /* Pods-HappyDayTests.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		1FAC616524D827C300DF2B62 /* First */ = {
+			isa = PBXGroup;
+			children = (
+				1FAC616624D827F300DF2B62 /* FirstPageVC.swift */,
+			);
+			path = First;
 			sourceTree = "<group>";
 		};
 		6728DB5A246CF0A100BB56DA /* Search */ = {
@@ -632,10 +640,10 @@
 		6780C8D223CCD0E100A54733 /* VC */ = {
 			isa = PBXGroup;
 			children = (
+				1FAC616524D827C300DF2B62 /* First */,
 				67F294E0246AE84E0036BA5C /* BaseVC.swift */,
 				67C59CE424A2A186003585DA /* Screen_lock */,
 				6783EBCA23D7FB3B009DC0A3 /* BottomPopupController */,
-				67F294DF246AE7EC0036BA5C /* FirstPage */,
 				6741F46E246AD441007E9B93 /* Payment */,
 				6741F46C246AD374007E9B93 /* Post */,
 				6741F46B246AD34E007E9B93 /* Chat */,
@@ -805,14 +813,6 @@
 			children = (
 			);
 			path = chatCell;
-			sourceTree = "<group>";
-		};
-		67F294DF246AE7EC0036BA5C /* FirstPage */ = {
-			isa = PBXGroup;
-			children = (
-				6780C8CA23CC26E000A54733 /* FirstPageVC.swift */,
-			);
-			path = FirstPage;
 			sourceTree = "<group>";
 		};
 		67F294E2246AEA2B0036BA5C /* Common */ = {
@@ -1153,6 +1153,7 @@
 				678C19A723D3B74D00906A8D /* userPostsVC.swift in Sources */,
 				6780C8CF23CC63CC00A54733 /* RoundButton.swift in Sources */,
 				6783EBD323D7FB3C009DC0A3 /* BottomPopupUtils.swift in Sources */,
+				1FAC616724D827F300DF2B62 /* FirstPageVC.swift in Sources */,
 				6780C90323CDF45100A54733 /* facebookLoginVC.swift in Sources */,
 				6783EBF923D7FE19009DC0A3 /* CustomCell.swift in Sources */,
 				6792003D23CF944300C4872B /* profileTableViewCell.swift in Sources */,
@@ -1194,7 +1195,6 @@
 				678C199923D25E4D00906A8D /* mainProfileVC.swift in Sources */,
 				67F294E1246AE84E0036BA5C /* BaseVC.swift in Sources */,
 				67A4B3FD23D84F4400F39C10 /* selectPaymentVC.swift in Sources */,
-				6780C8CB23CC26E000A54733 /* FirstPageVC.swift in Sources */,
 				67303F4C246F3AF000B571FD /* NavController.swift in Sources */,
 				67A2EEC1246DD7B5002A49BD /* RectangularDashedView.swift in Sources */,
 				6792004923D00AEB00C4872B /* postTableViewCell.swift in Sources */,

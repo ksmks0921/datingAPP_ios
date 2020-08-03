@@ -21,7 +21,7 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>機器内の写真、メディア、ファイルへのアクセスをHAHALOVEに許可しますか？</string>
+	<string>プロフィル画像、及びチャットでの送信画像を撮影するためにカメラにアクセスします</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>This app uses the microphone to capture video</string>
 	<key>NSPhotoLibraryUsageDescription</key>

@@ -8,11 +8,13 @@
 
 import UIKit
 import JXSegmentedView
-import Lightbox
+import ANZSingleImageViewer
 import AVKit
 import AVFoundation
+import Lightbox
 
 class contentforpostVC: BaseVC {
+   
 
    
     @IBOutlet weak var altertview: UIView!
@@ -23,6 +25,7 @@ class contentforpostVC: BaseVC {
     var pageType:Int?
     var event_post = [PostEvent]()
     var height_table : Int!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -75,37 +78,23 @@ class contentforpostVC: BaseVC {
         print("_____type\(event_post[gesture.view!.tag].source_type)")
         let tag =  gesture.view!.tag
         if event_post[tag].source_type == "video" {
-            print("video")
-            let url = URL(string:event_post[tag].thumb_path)
-               if let data = try? Data(contentsOf: url!)
-               {
-                let video_url : String = event_post[tag].event_photo
-                let image: UIImage = UIImage(data: data)!
-                    let video = [LightboxImage(
-                      image: image,
-                      text: "",
-                      videoURL: URL(string: video_url)
-                    )]
-                    let controller = LightboxController(images: video)
-                    controller.pageDelegate = self
-                    controller.dismissalDelegate = self
-                    controller.dynamicBackground = true
-                    LightboxConfig.CloseButton.image = UIImage(named: "icon_close1")
-                    LightboxConfig.CloseButton.text = ""
-                    present(controller, animated: true, completion: nil)
-               }
-            
+
+            let videoUrl: URL = URL(string: event_post[tag].event_photo)!
+            let player = AVPlayer(url: videoUrl)
+            let playerViewController = AVPlayerViewController()
+            playerViewController.player = player
+            self.present(playerViewController, animated: true) {
+                playerViewController.player!.play()
+            }
+
         }
         else {
-            print("image")
-            let images = [LightboxImage(imageURL: URL(string: event_post[tag].event_photo)!)]
-            let controller = LightboxController(images: images)
-            controller.pageDelegate = self
-            controller.dismissalDelegate = self
-            controller.dynamicBackground = true
-            LightboxConfig.CloseButton.image = UIImage(named: "icon_close1")
-            LightboxConfig.CloseButton.text = ""
-            present(controller, animated: true, completion: nil)
+            let image_url : URL = URL(string: event_post[tag].event_photo)!
+            let imageData = try! Data(contentsOf: image_url)
+
+            let image = UIImage(data: imageData)
+            ANZSingleImageViewer.showImage(image!, toParent: self)
+            
         }
       // open your camera controller here
     }
