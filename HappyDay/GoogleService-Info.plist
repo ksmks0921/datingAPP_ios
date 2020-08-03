@@ -3,23 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>265258274048-kfv31e2ogdcpkfplbrihm19p872bjeib.apps.googleusercontent.com</string>
+	<string>1000514793970-rvukpn8qamqo4jl9ve4jmqkvcav21n85.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.265258274048-kfv31e2ogdcpkfplbrihm19p872bjeib</string>
-	<key>ANDROID_CLIENT_ID</key>
-	<string>265258274048-35c5412lo2em4up6e8rbcmuto0dd8fda.apps.googleusercontent.com</string>
+	<string>com.googleusercontent.apps.1000514793970-rvukpn8qamqo4jl9ve4jmqkvcav21n85</string>
 	<key>API_KEY</key>
-	<string>AIzaSyAhyThl-nMgsNqryP1ofohePwZFVzaldKY</string>
+	<string>AIzaSyChwuVOFHdgndrxQPAXbsSXH9AbcAVEWUA</string>
 	<key>GCM_SENDER_ID</key>
-	<string>265258274048</string>
+	<string>1000514793970</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.phone.HappyDay</string>
+	<string>com.phone.ksm.hahalove</string>
 	<key>PROJECT_ID</key>
-	<string>happyday-c2593</string>
+	<string>hahalove-b4d3b</string>
 	<key>STORAGE_BUCKET</key>
-	<string>happyday-c2593.appspot.com</string>
+	<string>hahalove-b4d3b.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -31,8 +29,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:265258274048:ios:11a2ecef2831c1f47fb7e5</string>
+	<string>1:1000514793970:ios:b20d14fc5589d117117b6b</string>
 	<key>DATABASE_URL</key>
-	<string>https://happyday-c2593.firebaseio.com</string>
+	<string>https://hahalove-b4d3b.firebaseio.com</string>
 </dict>
 </plist>

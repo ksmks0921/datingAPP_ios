@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1FA7FF4024D8491B009F6D4B /* docVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA7FF3F24D8491B009F6D4B /* docVC.swift */; };
+		1FA7FF4224D86772009F6D4B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1FA7FF4124D86772009F6D4B /* GoogleService-Info.plist */; };
 		1FAC616724D827F300DF2B62 /* FirstPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FAC616624D827F300DF2B62 /* FirstPageVC.swift */; };
 		262341BEFD5583B8D97949B3 /* Pods_HappyDay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 394C0000A8A79953D7D4C0CA /* Pods_HappyDay.framework */; };
 		670BA59824A3DBD200F765AC /* help.docx in Resources */ = {isa = PBXBuildFile; fileRef = 670BA59724A3DBD000F765AC /* help.docx */; };
@@ -31,7 +32,6 @@
 		67303F9E247472C900B571FD /* SettingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 67303F9C247472C900B571FD /* SettingCell.xib */; };
 		6732AE3523DCF3A6009A495C /* profilePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6732AE3423DCF3A6009A495C /* profilePageViewController.swift */; };
 		6732AE3923DCFF95009A495C /* profileContentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6732AE3823DCFF95009A495C /* profileContentVC.swift */; };
-		6741F470246AD64C007E9B93 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6741F46F246AD64B007E9B93 /* GoogleService-Info.plist */; };
 		67422E7F24A80D940050C791 /* BottomBorderClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67422E7E24A80D940050C791 /* BottomBorderClass.swift */; };
 		674B9DA823D68F8400FD2C48 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674B9DA723D68DDD00FD2C48 /* ChatViewController.swift */; };
 		674B9DA923D68F8400FD2C48 /* MKPrivateChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674B9DA623D68DDC00FD2C48 /* MKPrivateChatView.swift */; };
@@ -169,6 +169,7 @@
 
 /* Begin PBXFileReference section */
 		1FA7FF3F24D8491B009F6D4B /* docVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = docVC.swift; sourceTree = "<group>"; };
+		1FA7FF4124D86772009F6D4B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1FAC616624D827F300DF2B62 /* FirstPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstPageVC.swift; sourceTree = "<group>"; };
 		24509974E7E1B9E5455A3894 /* Pods-HappyDay-HappyDayUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HappyDay-HappyDayUITests.debug.xcconfig"; path = "Target Support Files/Pods-HappyDay-HappyDayUITests/Pods-HappyDay-HappyDayUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		394C0000A8A79953D7D4C0CA /* Pods_HappyDay.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HappyDay.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -195,7 +196,6 @@
 		67303F9C247472C900B571FD /* SettingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingCell.xib; sourceTree = "<group>"; };
 		6732AE3423DCF3A6009A495C /* profilePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = profilePageViewController.swift; sourceTree = "<group>"; };
 		6732AE3823DCFF95009A495C /* profileContentVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = profileContentVC.swift; sourceTree = "<group>"; };
-		6741F46F246AD64B007E9B93 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		67422E7E24A80D940050C791 /* BottomBorderClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomBorderClass.swift; sourceTree = "<group>"; };
 		674B9DA623D68DDC00FD2C48 /* MKPrivateChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKPrivateChatView.swift; sourceTree = "<group>"; };
 		674B9DA723D68DDD00FD2C48 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
@@ -615,9 +615,9 @@
 				670BA59724A3DBD000F765AC /* help.docx */,
 				6775361C23CC1DB7003B844E /* Main.storyboard */,
 				6775361F23CC1DBE003B844E /* Assets.xcassets */,
+				1FA7FF4124D86772009F6D4B /* GoogleService-Info.plist */,
 				6775362123CC1DBE003B844E /* LaunchScreen.storyboard */,
 				6775362423CC1DBE003B844E /* Info.plist */,
-				6741F46F246AD64B007E9B93 /* GoogleService-Info.plist */,
 			);
 			path = HappyDay;
 			sourceTree = "<group>";
@@ -974,6 +974,7 @@
 				6792003223CE804700C4872B /* listCollectionViewCell.xib in Resources */,
 				676B8BAC246C366A00BFF39D /* selfEvaluationCell.xib in Resources */,
 				67303F47246F35EF00B571FD /* StickersView.xib in Resources */,
+				1FA7FF4224D86772009F6D4B /* GoogleService-Info.plist in Resources */,
 				6783EBF423D7FD8C009DC0A3 /* sound1.m4a in Resources */,
 				67303F9A24746DB700B571FD /* settingCellSwitch.xib in Resources */,
 				6792003E23CF944300C4872B /* profileTableViewCell.xib in Resources */,
@@ -987,7 +988,6 @@
 				6792005823D1249A00C4872B /* chatTableCell.xib in Resources */,
 				67A4B40323D9021100F39C10 /* addContentView.xib in Resources */,
 				6783EBF323D7FD8C009DC0A3 /* sound2.m4a in Resources */,
-				6741F470246AD64C007E9B93 /* GoogleService-Info.plist in Resources */,
 				67647B5C24D4378A00C416B0 /* splash.mp4 in Resources */,
 				6780C90123CD6DD500A54733 /* MyCustomCell.xib in Resources */,
 				670BA59824A3DBD200F765AC /* help.docx in Resources */,
@@ -1418,7 +1418,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.02;
-				PRODUCT_BUNDLE_IDENTIFIER = com.phone.ks.HappyDay;
+				PRODUCT_BUNDLE_IDENTIFIER = com.phone.ksm.hahalove;
 				PRODUCT_NAME = HaHaLove;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "HappyDay/refer/HappyDay-Bridging-Header.h";
@@ -1445,7 +1445,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.02;
-				PRODUCT_BUNDLE_IDENTIFIER = com.phone.ks.HappyDay;
+				PRODUCT_BUNDLE_IDENTIFIER = com.phone.ksm.hahalove;
 				PRODUCT_NAME = HaHaLove;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "HappyDay/refer/HappyDay-Bridging-Header.h";
