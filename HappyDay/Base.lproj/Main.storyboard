@@ -147,7 +147,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="900.00000000000011" y="136.60714285714286"/>
+            <point key="canvasLocation" x="317" y="137"/>
         </scene>
         <!--차트-->
         <scene sceneID="nO0-WT-Pjx">
@@ -1290,18 +1290,27 @@
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="注意事項" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eeo-EY-Bsr">
                                                 <rect key="frame" x="23" y="8" width="70" height="21"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="21" id="g3d-uz-Fnl"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ジャンル選択" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d4C-VC-eRR">
                                                 <rect key="frame" x="23" y="303.5" width="104" height="21"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="21" id="mAC-U6-2T0"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="本文（全角800文字）" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QR0-zf-dbg">
                                                 <rect key="frame" x="23" y="392.5" width="170" height="21"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="21" id="ZVQ-TF-5Bm"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -1395,18 +1404,21 @@
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <constraints>
                                                     <constraint firstItem="shn-34-itA" firstAttribute="centerX" secondItem="HSA-IR-faH" secondAttribute="centerX" id="5Ov-tW-bj3"/>
-                                                    <constraint firstAttribute="width" constant="414" id="EOc-Jg-0OO"/>
                                                     <constraint firstItem="shn-34-itA" firstAttribute="top" secondItem="lMH-fn-Phb" secondAttribute="bottom" constant="12" id="KQd-Ia-32t"/>
                                                     <constraint firstItem="lMH-fn-Phb" firstAttribute="leading" secondItem="Gnb-Tf-8lD" secondAttribute="leading" id="UPb-0S-XFF"/>
                                                     <constraint firstItem="Gnb-Tf-8lD" firstAttribute="top" secondItem="HSA-IR-faH" secondAttribute="top" constant="15" id="Xjp-rD-eRt"/>
                                                     <constraint firstItem="lMH-fn-Phb" firstAttribute="top" secondItem="Gnb-Tf-8lD" secondAttribute="bottom" constant="12" id="gvT-oL-GIB"/>
                                                     <constraint firstItem="Gnb-Tf-8lD" firstAttribute="leading" secondItem="HSA-IR-faH" secondAttribute="leading" constant="26" id="jXw-1b-x8u"/>
+                                                    <constraint firstAttribute="height" constant="258.5" id="jZk-dB-gza"/>
                                                     <constraint firstAttribute="bottom" secondItem="shn-34-itA" secondAttribute="bottom" constant="15" id="kUq-Gb-Nhy"/>
                                                     <constraint firstItem="shn-34-itA" firstAttribute="leading" secondItem="lMH-fn-Phb" secondAttribute="leading" id="wiO-fJ-dOU"/>
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="画像或ビデオ掲載" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4bM-wn-gLp">
                                                 <rect key="frame" x="23" y="481.5" width="139" height="21"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="21" id="1au-Z3-9dr"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -1431,13 +1443,22 @@
                                                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
+                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3Mw-r6-dYL">
+                                                                <rect key="frame" x="0.0" y="24" width="332" height="178"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="332" id="MzF-DN-Lb7"/>
+                                                                    <constraint firstAttribute="height" constant="178" id="q03-va-cz8"/>
+                                                                </constraints>
+                                                            </imageView>
                                                         </subviews>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                         <constraints>
+                                                            <constraint firstItem="3Mw-r6-dYL" firstAttribute="centerX" secondItem="eZs-Z9-yte" secondAttribute="centerX" id="6gp-uL-kOc"/>
                                                             <constraint firstItem="r2k-TC-XVF" firstAttribute="top" secondItem="eZs-Z9-yte" secondAttribute="top" constant="45" id="OiK-aq-XxW"/>
                                                             <constraint firstItem="r2k-TC-XVF" firstAttribute="centerX" secondItem="eZs-Z9-yte" secondAttribute="centerX" id="RAI-bn-foe"/>
                                                             <constraint firstItem="r2k-TC-XVF" firstAttribute="leading" secondItem="eZs-Z9-yte" secondAttribute="leading" constant="60" id="V6s-4C-bxh"/>
                                                             <constraint firstItem="MHU-wu-tyJ" firstAttribute="centerX" secondItem="eZs-Z9-yte" secondAttribute="centerX" id="Y7K-WQ-eTI"/>
+                                                            <constraint firstItem="3Mw-r6-dYL" firstAttribute="centerY" secondItem="eZs-Z9-yte" secondAttribute="centerY" id="ja6-Df-J9H"/>
                                                             <constraint firstItem="MHU-wu-tyJ" firstAttribute="top" secondItem="r2k-TC-XVF" secondAttribute="bottom" constant="16" id="thY-1j-yxu"/>
                                                         </constraints>
                                                         <userDefinedRuntimeAttributes>
@@ -1458,13 +1479,6 @@
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                     </view>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3Mw-r6-dYL">
-                                                        <rect key="frame" x="41" y="46" width="332" height="178"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" constant="332" id="MzF-DN-Lb7"/>
-                                                            <constraint firstAttribute="height" constant="178" id="q03-va-cz8"/>
-                                                        </constraints>
-                                                    </imageView>
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <constraints>
@@ -1472,13 +1486,14 @@
                                                     <constraint firstItem="eZs-Z9-yte" firstAttribute="centerX" secondItem="nN7-DG-PYn" secondAttribute="centerX" id="N9F-ak-Hpi"/>
                                                     <constraint firstItem="eZs-Z9-yte" firstAttribute="top" secondItem="nN7-DG-PYn" secondAttribute="top" constant="22" id="Rqc-QA-aGf"/>
                                                     <constraint firstItem="eZs-Z9-yte" firstAttribute="centerY" secondItem="nN7-DG-PYn" secondAttribute="centerY" id="UdM-aF-lFg"/>
-                                                    <constraint firstItem="3Mw-r6-dYL" firstAttribute="centerX" secondItem="nN7-DG-PYn" secondAttribute="centerX" id="YrK-ZK-N0h"/>
                                                     <constraint firstAttribute="height" constant="270" id="eZf-iO-KfW"/>
-                                                    <constraint firstItem="3Mw-r6-dYL" firstAttribute="centerY" secondItem="nN7-DG-PYn" secondAttribute="centerY" id="pBd-co-qj1"/>
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="書き込みエリア" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IWH-6X-4QG">
                                                 <rect key="frame" x="23" y="788.5" width="122" height="21"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="21" id="p0v-T1-cBG"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -1514,6 +1529,9 @@
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="転送電話受付設定" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zVN-uh-6Of">
                                                 <rect key="frame" x="23" y="877.5" width="139" height="21"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="21" id="N1K-jJ-IF0"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -1656,7 +1674,7 @@
                         <outlet property="eventTextField" destination="f0T-29-yyo" id="zgy-87-cca"/>
                         <outlet property="eventTypeLabel" destination="haN-CB-9vn" id="hb9-J4-RUQ"/>
                         <outlet property="eventTypeView" destination="JbL-VZ-y5f" id="Nkc-TQ-Jdn"/>
-                        <outlet property="imageSelect" destination="nN7-DG-PYn" id="qx5-yV-EaY"/>
+                        <outlet property="imageSelect" destination="nN7-DG-PYn" id="OgB-4f-HGM"/>
                         <outlet property="imageSelectView" destination="eZs-Z9-yte" id="sb8-g3-oj0"/>
                         <outlet property="imageShowView" destination="3Mw-r6-dYL" id="JeD-NA-oAu"/>
                         <outlet property="phoneSettingTextField" destination="auQ-w7-4aW" id="Xxo-AD-BHi"/>
@@ -2771,6 +2789,215 @@
             </objects>
             <point key="canvasLocation" x="5321.739130434783" y="818.97321428571422"/>
         </scene>
+        <!--DocVC-->
+        <scene sceneID="5xR-SI-Jap">
+            <objects>
+                <viewController storyboardIdentifier="docVC" id="faG-5P-BQi" customClass="docVC" customModule="ドキドキ" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="6gt-H5-iFG">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PQf-98-cZs">
+                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="【HAHA-LOVE】利用規約" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1sf-jW-TFZ">
+                                        <rect key="frame" x="89.5" y="10" width="235" height="24"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BPH-SJ-NxG">
+                                        <rect key="frame" x="10" y="7" width="30" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="SCj-Ec-OHY"/>
+                                            <constraint firstAttribute="width" constant="30" id="Tme-eP-Agg"/>
+                                        </constraints>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" image="back">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="backBtnTapped:" destination="faG-5P-BQi" eventType="touchUpInside" id="flM-CN-2Sp"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="BPH-SJ-NxG" firstAttribute="centerY" secondItem="PQf-98-cZs" secondAttribute="centerY" id="AMm-X2-4FY"/>
+                                    <constraint firstAttribute="height" constant="44" id="JTY-c3-ivM"/>
+                                    <constraint firstItem="1sf-jW-TFZ" firstAttribute="centerY" secondItem="PQf-98-cZs" secondAttribute="centerY" id="W9Y-jp-FIV"/>
+                                    <constraint firstItem="BPH-SJ-NxG" firstAttribute="leading" secondItem="PQf-98-cZs" secondAttribute="leading" constant="10" id="aSJ-TJ-0bV"/>
+                                    <constraint firstItem="1sf-jW-TFZ" firstAttribute="centerX" secondItem="PQf-98-cZs" secondAttribute="centerX" id="de9-VU-9cE"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SAQ-69-FVP">
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <subviews>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="IcE-W1-bLX">
+                                        <rect key="frame" x="8" y="8" width="398" height="758"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <mutableString key="text">第1条 定義
+1.「本規約」とは、本利用規約のことをいいます。
+2.【HAHA-LOVE】運営局 を以下「弊社」といいます。
+3.「本サービス」とは、弊社が運営するアプリを通じて提供される一切のサービスのことをいいます。
+4.「利用者」とは、本サービスを利用するお客様のことをいいます。
+ソーシャルネットワーク（SNS）サービス【HAHA-LOVE】の利用に際して、必ず本規約をご一読の上、同意いただき、ご利用ください。
+
+第2条　（本サービスの利用）
+1.本サービスは、本サービスが提供するアプリ上で、趣味・嗜好等を同じくする個人同士が、お互いの趣味等に関わる情報を交換し、会話したり、想像力を働かせたりすることにより、娯楽として、メッセージの交換等を楽しむためのソーシャルネットワークサービスです。したがって、利用者は、本サービスが、利用者に娯楽を提供することを目的とするものであり、出会い・異性交際のための相手をマッチングさせるサービスではないことをあらかじめ確認し同意したうえで利用するものとします。
+2.本サービスは18歳未満の利用者の会員使用は出来ないものとします。但し、18以上でも中学生、高校生の場合は利用者となる事は出来ない
+ものとします。
+
+第3条(情報の取扱い)
+1. 当社は、本サービスにおいてプロフィール情報(利用者名、利用者ID、画像ファイルなど)を以下の目的のために収集いたします。
+(1)ご本人確認や不正利用防止のため。
+(2)当社との連携先のアプリケーションとの連携などのため。
+(3)利用者の利便性向上、より良いサービス提供のための利用者傾向の分析などのため。
+2. 利用者は、本サービスの利用に際して利用者ご本人に関する情報を当社に対して提供する場合、真実、正確かつ完全な情報を提供しなければなりません。
+3. 利用者は、本サービスの利用に際してパスワードを登録する場合、これを不正に利用されないよう自らの責任で厳重に管理しなければなりません。当社は、登録されたパスワードを利用して行なわれた一切の行為を、利用者ご本人の行為とみなすことができます。
+
+第4条(禁止事項)
+弊社は、利用者が以下に該当、あるいは以下のものと判断する行為を固く禁じます。利用者がこれらの禁止行為を行った、又は行うおそれがあると弊社が判断した場合、利用者に通知することなく、弊社は該当する内容のデータの削除、利用制限、または強制退会させることができるものとします。ただし、弊社は、当該データ等を掲載停止または削除する義務を負うものではなく、データの削除および利用制限等の処分につきまして弊社は説明の義務を負わないものとします。なお、弊社は、本条に基づき弊社が行った措置に基づき利用者に生じた損害について一切の責任を負いません。
+1. 本規約に違反する行為。
+2. 公序良俗に反する行為。
+3. 面識のない異性との出会いや交際等を希望し、もしくは交際等に誘導する行為、または異性交際の相手方となるように誘う行為 
+4. 援助交際・売春・買春等の勧誘行為。
+5. わいせつ又は児童ポルノに該当する画像、文書等を送信し、又は掲載する行為。
+6. 暴力的、グロテスク、犯罪を誘発する表現、差別表現、およびその他一般の方が不快に感じる内容を含む画像、文書等を送信し、または掲載する行為。
+7. 詐欺等の犯罪に結びつく行為。
+8. 選挙運動若しくはこれに類似する行為、または公職選挙法に違反する行為。
+9. 宗教運動又はこれに類似する行為。
+10. 本サービスの利用を通じ得られた個人情報を第三者に開示または漏洩する行為。
+11. 本サービスの利用を通じて得られた弊社の営業上、技術上、開発上その他の情報を第三者に開示または漏洩する行為。
+12. 未成年者に害を及ぼすコンテンツ等を掲示する等の行為。
+13. 弊社又は第三者のプライバシーや知的財産権等を侵害する行為。
+14. 弊社又は第三者に対する差別若しくは誹謗中傷し、またはその名誉若しくは信用を傷つける行為。
+15. 弊社又は第三者に対するプライバシー、肖像権もしくはパブリシティ権を侵害する行為、誹謗中傷に相当する行為。
+16. 弊社の運営を妨害する行為。
+17. 弊社が事前に承諾する場合を除く、本サービスを利用した営利目的の行為。
+18. 他の利用者を含む第三者または弊社になりすまして、本サービスを利用する行為、その他情報を送信または掲載する行為。
+19. 同一利用者が複数のアカウントを保有する行為。
+20. 複数利用者間で同一のアカウントを共有する行為。
+21. アカウントを譲渡・貸与にかかわらず、第三者に提供する一切の行為。
+22. 利用者のアイコン画像、投稿画像を含む、本サービス上の画像を弊社の承諾なくキャプチャーその他の方法により複製、利用又は公開する行為
+23. 日本国またはご利用の際に利用者が所在する国・地域の法令に違反する行為
+24.異性交際に関する情報を送信する行為。
+24. その他、弊社が不適切とみなす一切の行為。
+
+第5条(本サービスの提供、無保証、変更、中止)
+1. 利用者は、本サービスを利用するにあたり、必要なパーソナルコンピュータ、携帯電話機、通信機器、オペレーションシステム、通信手段および電力などを、利用者の費用と責任で用意しなければなりません。
+2. 当社は、本サービスの提供を受けることができる利用者を、会員登録の有無、年齢、ご本人確認の有無、その他、当社が必要と判断する条件を満たしたお客様に限定することができるものとします。
+3. 当社は、本サービスに当社または第三者の広告を掲載することができるものとします。
+4. 当社は、当社が必要と判断する場合、あらかじめ利用者に通知することなく、いつでも、本サービスの全部または一部の内容を変更し、また、その提供を中止することができるものとします。
+6. 当社は、利用者が本規約に違反して本サービスを利用していると認めた場合、当社が必要かつ適切と判断する措置を講じます。ただし、当社は、利用者および第三者に対して、利用者その他の者が本規約に違反しないことを保証するものではありません。また、当社は、利用者および第三者に対して、かかる違反を防止または是正する義務を負いません。
+
+第6条 利用料金に関して
+利用者は、有料サービス利用の対価として、弊社が別途定める方法によりポイントを使用することで、有料サービスを利用することができるものとします。
+利用者は、ポイントの購入を希望する場合、弊社が別途定める方法により自ら購入申込（以下、「購入申込」といいます。）を行うものとします。なお、利用者は、購入申込の際、虚偽の内容を届け出てはならないものとします。
+弊社は、利用者に対し、ポイントを付与することにより購入申込を承諾するものとし、ポイントの購入に関する契約 （以下、「ポイント購入契約」といいます。）は、弊社が利用者からの購入申込に対してポイントを付与した時点で成立するも のとします。
+料金の金額及び支払方法並びに有料サービスを利用するために必要なポイントのポイント数は、別途弊社が定めるものとします。
+弊社は、いかなる理由によっても、利用者が購入されたポイントの払戻及び利用者が使用又は交換されたポイントの返還又は再発行等を一切行わないものとします。
+弊社は、以下の各号のいずれかに該当する場合、利用者に事前に通知することなく、ポイント購入契約に基づくポイントの付与その他のポイント付与の全部若しくは一部の取消若しくは解除又はポイントの削除その他適当な措置をとることができるものとします。
+1. 購入申込が利用者以外の第三者により行われたことが判明した場合
+2. 購入申込の際に届け出た内容に虚偽、誤記又は記入漏れがあったことが判明した場合
+3. 利用者が当規約に違反した場合
+4. その他、ポイント購入契約に基づくポイントの付与その他のポイント付与の全部若しくは一部の取消若しくは解除又はポイントの削除その他適当な措置をとることが適当であると弊社が判断した場合、当該利用者による本サービスの利用を制限することができるものとします。
+
+第7条 投稿等の削除に関して
+1. 本サービスの掲示板等に投稿した書き込み、メッセージ、写真、動画などの全ての情報について、監視人によって常時監視を行っており、利用者が本規約に違反した場合、または違反の恐れがあると弊社が判断した場合、弊社は利用者に事前に通知することなく、当該情報の全てまたは一部を削除することができるものとします。なお、この場合において弊社は、削除の際利用者に生じた損害について一切の責任を負わないものとします。
+2.不適切なコンテンツを生成する利用者に対して、他の利用者が「通報」機能を使用することにより、監視人は当該コンテンツを確認し削除できるものとします。
+3.不適切なコンテンツは掲載後24時間以内に削除します。
+4. 本サービス内における利用者間のやり取りの情報は、弊社の管理する電子掲示板を通じて提供されます。弊社は、事故防止および本サービスの利用目的に則った健全な利用者の提供のため、利用者が規約違反の恐れがあると判断した場合、前項に記載した情報の削除を当該掲示板にて行うことが出来ます。
+5. 本サービスの運営に必要な環境もしくは設備の関係上、一定日数が経過した投稿について、当該情報のすべて、または一部を削除することができるものとします。なお、この場合において弊社は、削除の際利用者に生じた損害について一切の責任を負わないものとします。
+
+第8条 本サービスの中止および停止に関して
+1. 弊社は、以下のいずれかに該当、あるいはその恐れがある場合、利用者への通知なく本サービスの提供を一時的に中止することがあります。
+・天災事変およびその他非常事態が発生し、弊社が本サービスの運営を困難と判断した場合。
+・本サービスのメンテナンスや新機能追加等の作業を行う場合。
+・本サービスの運営に必要な環境もしくは設備において、弊社が本サービスの運営を困難と判断するトラブル等が発生した場合。
+・弊社および本サービスに対し、コンピュータ・ウィルスの送信等による妨害行為を行われていることが判明し、速やかに対処を行う為に本サービスを中止する必要がある場合。
+・その他弊社が本サービスの中止を適切と判断する場合。
+2. 弊社は、前項に該当する事象が継続的に行われていると判断した場合、本サービスの提供を停止する場合があります。
+3. 弊社は本サービスの中止または停止を行った場合、利用者がその期間本サービスを利用できなかったことに対し一切の責任を負いません。
+
+第9条 免責事項
+1. 弊社は本サービス内における利用者に対し提供する情報において、その内容の完全性、正確性、確実性、有用性などを保証しないものとします。
+2. 利用者が本サービスの利用の結果または本サービスのシステム上の不具合等によって生じた結果について、弊社は一切の責任を負わないものとします。
+3. 弊社は利用者と第三者の間に発生した問題や損害等に対し、一切関与せず、責任を負わないものとします。
+4. 利用者は、お問い合わせにおいて弊社からの回答に時間のかかるものがあり、また、お問い合わせ内容によっては回答できない場合があることについて、事前に承諾するものとします。
+5. 弊社は利用者が設定したニックネーム等の情報内容を閲覧し、その内容を不適切と判断した場合には該当部分の削除・修正を行える権利を有するものとしますが、その義務を負うものではありません。
+6. 弊社は第三者または利用者が作成した電子メール・メッセージ又はアップロードされたコンテンツの内容について、一切責任を負いません。  
+7. 弊社は、利用者の本サービス利用に関し、料金、ポイントの払い戻しは一切行わないものとします。
+8. データおよびファイルの保存、整合性が必ずしも確実ではないことを利用者は承諾します。不測の事態が発生し、本サービス期間中に蓄積・記録したデータおよびファイルが消失しても弊社は責任を負いません。
+
+第10条 本規約の改訂
+1. 弊社は随時本規約を改訂することができます。
+2. 弊社は前項に従い本規約の改訂を行った場合、改訂した本サービスの利用規約を速やかに本サービス上に掲載します。
+3. 改訂された本規約は、本サービス上に掲載した時点より効力を生じるものとします。
+
+第11条 損害賠償
+利用者は故意若しくは過失により、または本規約違反により弊社に損害を与えた場合には、弊社に対しそのすべての損害(合理的な弁護士費用を含みますがこれに限らないものとする)を直ちに賠償する責任を負うものとします。
+
+
+第12条 資格の喪失に関して
+弊社では、次の事項に該当したときは、直ちに本サービス利用資格を喪失させることができるものとします。また、下記に該当する場合、弊社は、利用者に通知することなく、本サービス提供の停止を行うことができるものとします。
+1. 申込時の記載事項に年齢詐称等の虚偽の事項が確認された場合
+2. 第4条（禁止事項）各号に定める禁止行為を行った場合
+3. 規約又は該当する個別規定に違反した場合
+4. その他、本サービスの運営上不適切と弊社が判断した場合
+
+第13条 個人情報の取り扱い、プライバシーポリシーの遵守に関して
+弊社は、個人情報を適切に保護し、弊社が掲示するプライバシーポリシーを遵守します。
+
+第14条 アクセスログ等の取扱に関して
+弊社は、本サービスを利用した本ユーザのIPアドレス、携帯電話の端末情報や利用者エージェント、当該IPアドレス等から本サービスを利用 した日時等のいわゆるアクセスログを記録することができるものとします。
+当該アクセスログについては、本章に定める他、犯罪が行われた場合や、犯罪が行わ れたと疑うに足りる理由が存する場合や、検察･警察･監督官庁、弁護士会等の公的機関から照会を受けた場合には、それらの機関に対して、該当利用者の個人 情報及びアクセスログを開示することができるものとします。
+そして、弊社は、それらの情報開示による利用者からの損害、損失、その他の費用の賠償又 は補償を免れるものとします。
+
+第15条(準拠法、裁判管轄)
+本規約は日本語を正文とし、その準拠法は日本法とします。本サービスに起因または関連して利用者と当社との間に生じた紛争については東京地方裁判所または東京簡易裁判所を第一審の専属的合意管轄裁判所とします。かかる管轄裁判所で得られた勝訴判決は、いずれの国の裁判所においても執行可能とします。
+
+
+第16条 Apple社の指導に基づく
+1.本サービスでは監視人によって常時監視を行っており、この監視人がお客様がアップロードした不適切なコンテンツ（画像/文言）を削除します。
+2.不適切なコンテンツを生成するお客様に対して、他のお客様が「通報」機能を使用することにより、監視人は当該コンテンツを確認し削除できるものとします。
+3.不適切なコンテンツは掲載後24時間以内に削除します。
+4.本規約に違反したお客様に対し、監視人または運営側でアカウント停止措置を行います。
+</mutableString>
+                                        <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstItem="IcE-W1-bLX" firstAttribute="top" secondItem="SAQ-69-FVP" secondAttribute="top" constant="8" id="FXv-0a-1xc"/>
+                                    <constraint firstAttribute="bottom" secondItem="IcE-W1-bLX" secondAttribute="bottom" constant="8" id="YMk-h0-p0G"/>
+                                    <constraint firstAttribute="trailing" secondItem="IcE-W1-bLX" secondAttribute="trailing" constant="8" id="YXp-3w-jK1"/>
+                                    <constraint firstItem="IcE-W1-bLX" firstAttribute="leading" secondItem="SAQ-69-FVP" secondAttribute="leading" constant="8" id="yIV-JI-SFM"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.25882352941176467" green="0.72941176470588232" blue="0.10588235294117647" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="SAQ-69-FVP" firstAttribute="leading" secondItem="EZs-qG-yAI" secondAttribute="leading" id="4qK-tz-gBX"/>
+                            <constraint firstItem="EZs-qG-yAI" firstAttribute="trailing" secondItem="SAQ-69-FVP" secondAttribute="trailing" id="6W7-Go-tnp"/>
+                            <constraint firstItem="SAQ-69-FVP" firstAttribute="top" secondItem="PQf-98-cZs" secondAttribute="bottom" id="Tdv-e3-H4e"/>
+                            <constraint firstItem="PQf-98-cZs" firstAttribute="top" secondItem="EZs-qG-yAI" secondAttribute="top" id="Vm2-fm-LXS"/>
+                            <constraint firstItem="EZs-qG-yAI" firstAttribute="bottom" secondItem="SAQ-69-FVP" secondAttribute="bottom" id="b3N-sw-7zM"/>
+                            <constraint firstItem="PQf-98-cZs" firstAttribute="leading" secondItem="EZs-qG-yAI" secondAttribute="leading" id="c6s-B0-vNt"/>
+                            <constraint firstItem="EZs-qG-yAI" firstAttribute="trailing" secondItem="PQf-98-cZs" secondAttribute="trailing" id="xsi-8C-UeI"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="EZs-qG-yAI"/>
+                    </view>
+                    <connections>
+                        <outlet property="textField_main" destination="IcE-W1-bLX" id="UnG-hc-LVR"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tGy-fp-Rfn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1047.8260869565217" y="140.625"/>
+        </scene>
         <!--LoginVC-->
         <scene sceneID="Nmr-m9-xuO">
             <objects>
@@ -2816,7 +3043,7 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NHv-Fx-sod">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="687"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="774"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="So2-Wz-EfE" customClass="DesinableView" customModule="ドキドキ" customModuleProvider="target">
                                                 <rect key="frame" x="20" y="31" width="374" height="50"/>
@@ -2952,9 +3179,9 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="So2-Wz-EfE" firstAttribute="leading" secondItem="NHv-Fx-sod" secondAttribute="leading" constant="20" id="0jL-1Y-0S4"/>
+                                            <constraint firstAttribute="bottom" secondItem="05Z-Fc-8eE" secondAttribute="bottom" constant="487" id="3WX-ke-mlQ"/>
                                             <constraint firstAttribute="trailing" secondItem="aVk-oJ-uVF" secondAttribute="trailing" constant="20" id="B1y-2w-vvW"/>
                                             <constraint firstAttribute="trailing" secondItem="So2-Wz-EfE" secondAttribute="trailing" constant="20" id="CIS-p9-X39"/>
-                                            <constraint firstAttribute="bottom" secondItem="05Z-Fc-8eE" secondAttribute="bottom" constant="400" id="CfN-cf-IwT"/>
                                             <constraint firstItem="aVk-oJ-uVF" firstAttribute="top" secondItem="So2-Wz-EfE" secondAttribute="bottom" constant="12" id="FqK-z3-xVA"/>
                                             <constraint firstItem="05Z-Fc-8eE" firstAttribute="top" secondItem="aVk-oJ-uVF" secondAttribute="bottom" constant="100" id="K90-13-eQl"/>
                                             <constraint firstItem="05Z-Fc-8eE" firstAttribute="centerX" secondItem="NHv-Fx-sod" secondAttribute="centerX" id="Q4K-3W-avY"/>
@@ -4007,7 +4234,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uTz-Ld-N49" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="131.8840579710145" y="136.60714285714286"/>
+            <point key="canvasLocation" x="-493" y="137"/>
         </scene>
         <!--Search TypeVC-->
         <scene sceneID="Q9Y-VS-ZJa">

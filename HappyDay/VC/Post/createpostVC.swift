@@ -82,7 +82,7 @@ class createpostVC: BaseVC, UITextFieldDelegate  {
         
         let tapGesture_image = UITapGestureRecognizer(target: self, action: #selector(imageUpload(_:)))
         tapGesture_image.delegate = self as? UIGestureRecognizerDelegate
-        imageSelect.addGestureRecognizer(tapGesture_image)
+        imageSelectView.addGestureRecognizer(tapGesture_image)
     }
     @objc func selectEventType(_ sender: UIView) {
         
@@ -403,7 +403,7 @@ extension createpostVC: UIImagePickerControllerDelegate, UINavigationControllerD
                        let video_thumbImage = thumbImage
                        self.imageShowView.image = video_thumbImage
                        self.imageShowView.isHidden = false
-                       self.imageSelectView.alpha = 0
+                       self.imageSelectView.alpha = 1
                        self.media = "video"
                    }
                 }
@@ -413,14 +413,14 @@ extension createpostVC: UIImagePickerControllerDelegate, UINavigationControllerD
             if let editedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
                 imageShowView.image = editedImage
                 imageShowView.isHidden = false
-                imageSelectView.alpha = 0
+                imageSelectView.alpha = 1
                 media = "image"
                 
             }
             else if let originalImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
                 imageShowView.image = originalImage
                 imageShowView.isHidden = false
-                imageSelectView.alpha = 0
+                imageSelectView.alpha = 1
                 media = "image"
               
             }

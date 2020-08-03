@@ -47,6 +47,8 @@ class FirstPageVC: BaseVC {
     }
    @objc
    func tapFunction(sender:UITapGestureRecognizer) {
+        let VC = self.storyboard?.instantiateViewController(withIdentifier: "docVC") as! docVC
+        navigationController?.pushViewController(VC, animated: true)
        print("tap working")
    }
     override func viewWillAppear(_ animated: Bool) {

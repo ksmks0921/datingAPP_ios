@@ -206,7 +206,7 @@ class signUpVC: BaseVC , UITextFieldDelegate{
         
     }
     @IBAction func manSelect(_ sender: Any) {
-        manBtn.backgroundColor = default_green_color
+        manBtn.backgroundColor = #colorLiteral(red: 0.2588235294, green: 0.7294117647, blue: 0.1058823529, alpha: 1)
         manBtn.setImage(selectedImage, for: .normal)
         womanBtn.setImage(nil, for: .normal)
         womanBtn.backgroundColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
@@ -214,7 +214,7 @@ class signUpVC: BaseVC , UITextFieldDelegate{
         self.gender = true
     }
     @IBAction func womanSelect(_ sender: Any) {
-        womanBtn.backgroundColor = #colorLiteral(red: 0.2078431373, green: 0.6784313725, blue: 0.7450980392, alpha: 1)
+        womanBtn.backgroundColor = #colorLiteral(red: 0.2588235294, green: 0.7294117647, blue: 0.1058823529, alpha: 1)
         womanBtn.setImage(selectedImage, for: .normal)
         manBtn.setImage(nil, for: .normal)
         manBtn.backgroundColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
