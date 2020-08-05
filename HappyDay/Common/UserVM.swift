@@ -77,6 +77,7 @@ class UserVM {
                 let user_id = email.replacingOccurrences(of: "@", with: "", options: NSString.CompareOptions.literal, range: nil).replacingOccurrences(of: ".", with: "", options: NSString.CompareOptions.literal, range: nil)
                 DataManager.userId = user_id
                 DataManager.email = user?.user.email
+                
 //
 //                self.ref.child(FireBaseConstant.UserNode).child(user_id).observe(.value) {  (snapShot) in
 //                    let user_snap = snapShot as? NSDictionary

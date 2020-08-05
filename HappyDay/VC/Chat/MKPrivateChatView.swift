@@ -22,10 +22,7 @@ class MKPrivateChatView: ChatViewController {
 
         super.viewDidLoad()
         
-       
-        
-        
-
+   
     }
     
     

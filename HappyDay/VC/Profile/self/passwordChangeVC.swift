@@ -73,11 +73,39 @@ class passwordChangeVC: BaseVC, UITextFieldDelegate{
     func savePassword() {
         Indicator.sharedInstance.showIndicator()
         UserVM.shared.updatePassword(newPass: passwordText.text!) {(success, message, error) in
-            Indicator.sharedInstance.hideIndicator()
-            self.showAlert(message: message)
             DataManager.password = self.passwordText.text
-            self.passwordText.text = ""
-            self.passwordAgainText.text = ""
+            let user = UserVM.current_user
+            let sex = { () -> Bool in
+                if user!.user_sex == "男性" {
+                    return true
+                }
+                else {
+                    return false
+                }
+            }
+            
+            UserVM.shared.updateUserData(city: user!.user_city!, age: user!.user_age!, job: user!.user_job!, blood: user!.user_blood!, star: user!.user_star!, tall: user!.user_tall!, user_style: user!.user_style!, life_style: user!.user_lifestyle!, user_outside: user!.user_outside!, sex: sex(), nick_name: user!.user_nickName!, style_1: user!.style_1!, style_2: user!.style_2!, style_3: user!.style_3!, style_4: user!.style_4!, require_age: user!.required_age!, is_approved: user!.is_approved!, updated_at: user!.updated_at!, created_at: user!.created_at!, require_style: user!.require_style!, require_tall: user!.require_tall!, status: user!.user_status!, introduce: (user?.user_introduce)!, date: user!.user_date!, user_avatar: user!.user_avatar!) {(success, message, error) in
+                Indicator.sharedInstance.hideIndicator()
+                if error == nil {
+                    if success {
+                        self.showAlert(message: "パスワードが成功裏に変更されました。")
+                        
+                        self.passwordText.text = ""
+                        self.passwordAgainText.text = ""
+                    }
+                    else {
+                        self.showAlert(message: "error")
+                    }
+                }
+                else {
+                    print(error)
+                }
+                
+            }
+            
+            
+            
+            
             
         }
     }

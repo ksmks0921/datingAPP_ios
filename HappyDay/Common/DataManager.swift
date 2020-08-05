@@ -138,6 +138,15 @@ class DataManager {
             return UserDefaults.standard.string(forKey: AppConstant.screenLockPass)
         }
     }
+    static var chatBackground: String!{
+        set{
+            UserDefaults.standard.setValue(newValue, forKey: AppConstant.chatBackground)
+            UserDefaults.standard.synchronize()
+        }
+        get{
+            return UserDefaults.standard.string(forKey: AppConstant.chatBackground)
+        }
+    }
     static var language: String!{
         set{
             UserDefaults.standard.setValue(newValue, forKey: AppConstant.Language)

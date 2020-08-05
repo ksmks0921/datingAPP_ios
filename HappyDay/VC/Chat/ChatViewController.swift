@@ -80,6 +80,10 @@ class ChatViewController: MessagesViewController, MessagesDataSource, LightboxCo
        
     }
     func setupUI() {
+        print("////////\(DataManager.chatBackground)")
+        if DataManager.chatBackground != nil {
+            self.background_image.image = UIImage(named: DataManager.chatBackground)
+        }
         let height_of_view = self.messagesCollectionView.frame.size.height
         let width_of_view = self.messagesCollectionView.frame.size.width
         background_image.frame = CGRect(x: 0, y: 0, width: width_of_view, height: height_of_view)
@@ -163,7 +167,7 @@ class ChatViewController: MessagesViewController, MessagesDataSource, LightboxCo
        
           button_setting.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
           button_translate.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-//          self.title = chat_title
+          self.title = connectedPerson.user_nickName
           self.navigationItem.rightBarButtonItems = [button_translate, button_setting]
           self.navigationController?.navigationBar.tintColor = UIColor.white
     }
@@ -172,7 +176,9 @@ class ChatViewController: MessagesViewController, MessagesDataSource, LightboxCo
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+        if DataManager.chatBackground != nil {
+            self.background_image.image = UIImage(named: DataManager.chatBackground)
+        }
 //        MockSocket.shared.connect(with: [SampleData.shared.nathan, SampleData.shared.wu])
 //            .onNewMessage { [weak self] message in
 //                self?.insertMessage(message)
@@ -648,6 +654,7 @@ extension ChatViewController: SearchTypeDelegate{
 }
 extension ChatViewController : ImageSelectProtocol{
     func SelectBackgroundImage(data: String) {
+        DataManager.chatBackground = data
         self.background_image.image = UIImage(named: data)
         print(data)
     }

@@ -438,11 +438,7 @@ final internal class MessageVM {
     }
     
     func getChatListContents(completion: @escaping (Bool) -> Void){
-        
-        
-        
-        
-        
+ 
         ref.child(FireBaseConstant.Chatlist).child(UserVM.current_user.user_id!).observe(.value) { (snapShot) in
                 let children = snapShot.children
             
@@ -487,14 +483,7 @@ final internal class MessageVM {
                             }
                                
                         }
-                       
-                       
-                   
-                        
 
-
-                        
-                        
                     }
                 }
                 print("_________")
@@ -516,7 +505,7 @@ final internal class MessageVM {
             }
             
         }
-        
+//
         return target_user
     }
 

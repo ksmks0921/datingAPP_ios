@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import ANZSingleImageViewer
+import AVKit
+import AVFoundation
 
 class userPostsVC: UIViewController {
 
@@ -61,7 +64,34 @@ class userPostsVC: UIViewController {
            navigationController?.pushViewController(VC, animated: true)
 
     }
-    
+    @objc func imageTapped(_ gesture:UITapGestureRecognizer) {
+        print("_____tag\(gesture.view!.tag)")
+        print("_____type\(items[gesture.view!.tag].source_type)")
+        let tag =  gesture.view!.tag
+        if items[tag].source_type == "video" {
+
+            let videoUrl: URL = URL(string: items[tag].event_photo)!
+            let player = AVPlayer(url: videoUrl)
+            let playerViewController = AVPlayerViewController()
+            playerViewController.player = player
+            self.present(playerViewController, animated: true) {
+                playerViewController.player!.play()
+            }
+            UserVM.shared.addView(event: items[tag]) { (success, message, error) in
+                print("viewed!!!")
+            }
+
+        }
+        else {
+            let image_url : URL = URL(string: items[tag].event_photo)!
+            let imageData = try! Data(contentsOf: image_url)
+
+            let image = UIImage(data: imageData)
+            ANZSingleImageViewer.showImage(image!, toParent: self)
+            
+        }
+      // open your camera controller here
+    }
 
 }
 extension userPostsVC: UITableViewDelegate, UITableViewDataSource {
@@ -77,7 +107,10 @@ extension userPostsVC: UITableViewDelegate, UITableViewDataSource {
         
         let cell = contentTable.dequeueReusableCell(withIdentifier: "postTableViewCell", for: indexPath as IndexPath) as! postTableViewCell
         
-        cell.personPhoto.sd_setImage(with: URL(string: items[indexPath.row].user_avatar), placeholderImage: UIImage(named: "avatar_woman"))
+  
+        let avatar = UserVM.current_user.user_avatar![0]
+        cell.personPhoto.sd_setImage(with: URL(string: avatar))
+        
         cell.age_region_label.text = "(" + items[indexPath.row].age + " " + items[indexPath.row].region + ")"
         cell.hobbyLabel.text = items[indexPath.row].event_type
         cell.nickname.text = items[indexPath.row].nick_name
@@ -93,6 +126,14 @@ extension userPostsVC: UITableViewDelegate, UITableViewDataSource {
                 cell.postImageView.image = UIImage(named: "default")
            
         }
+        if items[indexPath.row].source_type == "image" {
+            cell.postImageView.sd_setImage(with: URL(string: items[indexPath.row].event_photo), placeholderImage: UIImage(named: "default"))
+            cell.playButton.isHidden = true
+        }
+        else {
+            cell.postImageView.sd_setImage(with: URL(string: items[indexPath.row].thumb_path), placeholderImage: UIImage(named: "default"))
+            cell.playButton.isHidden = false
+        }
         if items[indexPath.row].gender == true {
             cell.nickname.textColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
            
@@ -100,6 +141,12 @@ extension userPostsVC: UITableViewDelegate, UITableViewDataSource {
         else {
             cell.nickname.textColor = #colorLiteral(red: 0.8549019694, green: 0.250980407, blue: 0.4784313738, alpha: 1)
         }
+        
+        let imageTap = UITapGestureRecognizer(target: self, action: #selector(imageTapped(_:)))
+        cell.postImageView.tag = indexPath.row
+        cell.postImageView.isUserInteractionEnabled = true
+        cell.postImageView.addGestureRecognizer(imageTap)
+        
         cell.textContentLabel.text = items[indexPath.row].event_des
         cell.views.text = items[indexPath.row].view_counts
         return cell

@@ -157,7 +157,10 @@ extension contentforpostVC:  UITableViewDelegate, UITableViewDataSource, Lightbo
         
             let cell = postTableView.dequeueReusableCell(withIdentifier: "postTableViewCell", for: indexPath as IndexPath) as! postTableViewCell
         
-            cell.personPhoto.sd_setImage(with: URL(string: event_post[indexPath.row].user_avatar), placeholderImage: UIImage(named: "avatar_woman"))
+            let user_id = event_post[indexPath.row].user_id
+            let selected_person = getDataFromUsers(id: user_id!)
+            let avatar = selected_person.user_avatar![0]
+            cell.personPhoto.sd_setImage(with: URL(string: avatar))
             cell.age_region_label.text = "(" + event_post[indexPath.row].age + " " + event_post[indexPath.row].region + ")"
             cell.hobbyLabel.text = event_post[indexPath.row].event_type
             cell.nickname.text = event_post[indexPath.row].nick_name
