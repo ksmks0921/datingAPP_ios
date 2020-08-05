@@ -50,6 +50,7 @@ extension UITextView: UITextViewDelegate {
             
             if let placeholderLabel = self.viewWithTag(100) as? UILabel {
                 placeholderText = placeholderLabel.text
+                placeholderLabel.textColor = UIColor.gray
             }
             
             return placeholderText
@@ -57,6 +58,7 @@ extension UITextView: UITextViewDelegate {
         set {
             if let placeholderLabel = self.viewWithTag(100) as! UILabel? {
                 placeholderLabel.text = newValue
+                placeholderLabel.textColor = UIColor.gray
                 placeholderLabel.sizeToFit()
             } else {
                 self.addPlaceholder(newValue!)

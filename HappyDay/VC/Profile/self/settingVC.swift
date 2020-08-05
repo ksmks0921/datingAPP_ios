@@ -19,7 +19,7 @@ class settingVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        contentTableView.backgroundColor = UIColor.white
         let nib_1 = UINib.init(nibName: "settingCellSwitch", bundle: nil)
         contentTableView.register(nib_1, forCellReuseIdentifier: "settingCellSwitch")
         let nib_2 = UINib.init(nibName: "SettingCell", bundle: nil)

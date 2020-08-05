@@ -61,7 +61,7 @@ class BottomeSelectVC: BottomPopupViewController {
       }
       
       override func viewDidLoad() {
-          
+            tableView.backgroundColor = UIColor.white
           let nib = UINib.init(nibName: "MyCustomCell", bundle: nil)
           self.tableView.register(nib, forCellReuseIdentifier: "MyCustomCell")
           
@@ -90,7 +90,7 @@ extension BottomeSelectVC: UITableViewDelegate, UITableViewDataSource{
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "MyCustomCell", for: indexPath as IndexPath) as! CustomTableViewCell
             cell.label?.text = self.items[indexPath.row]
-
+        cell.backgroundColor = UIColor.white
         if (selectedIndex == indexPath.row) {
                 cell.radioBtn.setImage(UIImage(named: "sharp_radio_button_checked_black_18dp"),for:.normal)
                    } else {

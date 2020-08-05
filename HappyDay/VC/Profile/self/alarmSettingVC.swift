@@ -14,7 +14,7 @@ class alarmSettingVC: UIViewController {
     var items = ["メール通知", "いいね通知", "お知らせ通知"]
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        contentTableView.backgroundColor = UIColor.white
         let nib = UINib.init(nibName: "settingCellSwitch", bundle: nil)
         contentTableView.register(nib, forCellReuseIdentifier: "settingCellSwitch")
       

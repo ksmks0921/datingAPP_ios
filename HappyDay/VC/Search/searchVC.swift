@@ -33,7 +33,7 @@ class searchVC: BaseVC {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        
+        self.tableView.backgroundColor = UIColor.white
         getSettingData()
         
         searchType = .PROFILE

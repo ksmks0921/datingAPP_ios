@@ -17,7 +17,7 @@ class personalPageItemVC: UIViewController {
     var titleText: String!
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        contentTable.backgroundColor = UIColor.white
         let nib = UINib.init(nibName: "chatTableCell", bundle: nil)
         self.contentTable.register(nib, forCellReuseIdentifier: "chatTableCell")
         

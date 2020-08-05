@@ -28,7 +28,7 @@ class contentforpostVC: BaseVC {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.postTableView.backgroundColor = UIColor.white
         navigationController?.navigationBar.barTintColor = default_green_color
         UINavigationBar.appearance().tintColor = UIColor.white
         self.title = "掲示板"
@@ -109,6 +109,9 @@ class contentforpostVC: BaseVC {
             playerViewController.player = player
             self.present(playerViewController, animated: true) {
                 playerViewController.player!.play()
+            }
+            UserVM.shared.addView(event: event_post[tag]) { (success, message, error) in
+                print("viewed!!!")
             }
 
         }

@@ -18,7 +18,7 @@ class alertViewVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.alarmsTableView.backgroundColor = UIColor.white
         // register tableView
          let nib = UINib.init(nibName: "alarmViewCell", bundle: nil)
          self.alarmsTableView.register(nib, forCellReuseIdentifier: "alarmViewCell")

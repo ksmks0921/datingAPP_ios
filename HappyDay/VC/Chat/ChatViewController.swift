@@ -26,7 +26,10 @@ SOFTWARE.
 import UIKit
 import MessageKit
 import InputBarAccessoryView
+import ANZSingleImageViewer
 import Lightbox
+import AVKit
+import AVFoundation
 
 protocol ImageSelectProtocol
 {
@@ -111,20 +114,24 @@ class ChatViewController: MessagesViewController, MessagesDataSource, LightboxCo
         
     }
     func loadFirstMessages() {
-       
-      
+        DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: .now() + 0.1) {
             Indicator.sharedInstance.showIndicator()
             MessageVM.shared.geData(language: AppConstant.LanguageEnglish ,sender_id: self.chatId, connectedPerson: self.connectedPerson, completion: {_ in
                     let count = UserDefaults.standard.mockMessagesCount()
                     MessageVM.shared.getMessages(count: count) { messages in
                         Indicator.sharedInstance.hideIndicator()
+                        DispatchQueue.main.async {
+                            self.messageList = messages
+                            self.messagesCollectionView.reloadData()
+                            self.messagesCollectionView.scrollToBottom()
+                        }
                         
-                        self.messageList = messages
-                        self.messagesCollectionView.reloadData()
-                        self.messagesCollectionView.scrollToBottom()
                         
                     }
              })
+        }
+      
+            
                
         
            
@@ -293,15 +300,35 @@ extension ChatViewController: MessageCellDelegate {
     }
     
     func didTapMessage(in cell: MessageCollectionViewCell) {
-//        guard let indexPath = messagesCollectionView.indexPath(for: cell),
-//            let message = messagesCollectionView.messagesDataSource?.messageForItem(at: indexPath, in: messagesCollectionView) else {
-//                print("Failed to identify message when audio cell receive tap gesture")
-//                return
-//        }
-////        let indexPath = messagesCollectionView.indexPath(for: cell)
-////        let message = messagesCollectionView.messagesDataSource?.messageForItem(at: indexPath!, in: messagesCollectionView)
-//        if case .custom = message.kind {
+
+        let indexPath = messagesCollectionView.indexPath(for: cell)
+        print(indexPath?.section)
+        let message = messagesCollectionView.messagesDataSource?.messageForItem(at: indexPath!, in: messagesCollectionView)
+        let item = messageList[indexPath!.section]
+        if case .photo = item.kind {
+            print("yes____")
+            print(item.source_url)
+            let image_url : URL = URL(string: item.source_url)!
+            let imageData = try! Data(contentsOf: image_url)
 //
+//            let image = UIImage(data: imageData)
+            
+            let image: UIImage = UIImage.sd_image(withGIFData: imageData)!
+     
+            ANZSingleImageViewer.showImage(image, toParent: self)
+        }
+        if case .video = message?.kind {
+            
+            let videoUrl: URL = URL(string: item.source_url)!
+            let player = AVPlayer(url: videoUrl)
+            let playerViewController = AVPlayerViewController()
+            playerViewController.player = player
+            self.present(playerViewController, animated: true) {
+                playerViewController.player!.play()
+            }
+        }
+//        if case .custom = message.kind {
+
 //        }
 //        if case .photo = message.kind {
 //            let images = [LightboxImage(imageURL: URL(string: MessageVM.shared.custom_messages[indexPath.row].source_path!)!)]
@@ -527,6 +554,9 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
 //                                           }
 //                                       }
                                    }
+                           }
+                           else {
+                                    print(error)
                            }
                
                        }

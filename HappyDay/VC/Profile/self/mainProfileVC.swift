@@ -24,7 +24,7 @@ class mainProfileVC: BaseVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         //set title and change back button title
-    
+        tableView.backgroundColor = UIColor.white
         let backButton = UIBarButtonItem()
         backButton.title = ""
         self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton

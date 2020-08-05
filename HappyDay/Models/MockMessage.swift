@@ -99,32 +99,33 @@ internal struct MockMessage: MessageType {
     var user: MockUser
     var source_url : String!
     
-    private init(kind: MessageKind, user: MockUser, messageId: String, date: Date) {
+    private init(kind: MessageKind, user: MockUser, messageId: String, date: Date, source_url: String) {
         self.kind = kind
         self.user = user
         self.messageId = messageId
         self.sentDate = date
+        self.source_url = source_url
     }
     
-    init(custom: Any?, user: MockUser, messageId: String, date: Date) {
-        self.init(kind: .custom(custom), user: user, messageId: messageId, date: date)
+    init(custom: Any?, user: MockUser, messageId: String, date: Date, source_url: String) {
+        self.init(kind: .custom(custom), user: user, messageId: messageId, date: date, source_url: source_url)
     }
 
-    init(text: String, user: MockUser, messageId: String, date: Date) {
-        self.init(kind: .text(text), user: user, messageId: messageId, date: date)
+    init(text: String, user: MockUser, messageId: String, date: Date, source_url: String) {
+        self.init(kind: .text(text), user: user, messageId: messageId, date: date, source_url: source_url)
     }
 
-    init(attributedText: NSAttributedString, user: MockUser, messageId: String, date: Date) {
-        self.init(kind: .attributedText(attributedText), user: user, messageId: messageId, date: date)
+    init(attributedText: NSAttributedString, user: MockUser, messageId: String, date: Date, source_url: String) {
+        self.init(kind: .attributedText(attributedText), user: user, messageId: messageId, date: date, source_url: source_url)
     }
 
 //    init(image: UIImage, user: MockUser, messageId: String, date: Date) {
 //        let mediaItem = ImageMediaItem(url: image)
 //        self.init(kind: .photo(mediaItem), user: user, messageId: messageId, date: date)
 //    }
-    init(image: UIImage, user: MockUser, messageId: String, date: Date) {
+    init(image: UIImage, user: MockUser, messageId: String, date: Date, source_url: String) {
         let mediaItem = ImageMediaItem(image: image)
-        self.init(kind: .photo(mediaItem), user: user, messageId: messageId, date: date)
+        self.init(kind: .photo(mediaItem), user: user, messageId: messageId, date: date, source_url: source_url)
     }
 
 //    init(thumbnail: UIImage, user: MockUser, messageId: String, date: Date) {
@@ -133,23 +134,23 @@ internal struct MockMessage: MessageType {
 //    }
     init(thumbnail: UIImage, user: MockUser, messageId: String, date: Date, source_url: String) {
         let mediaItem = ImageMediaItem(image: thumbnail)
-        self.init(kind: .video(mediaItem), user: user, messageId: messageId, date: date)
+        self.init(kind: .video(mediaItem), user: user, messageId: messageId, date: date, source_url: source_url)
     }
-    init(location: CLLocation, user: MockUser, messageId: String, date: Date) {
+    init(location: CLLocation, user: MockUser, messageId: String, date: Date, source_url: String) {
         let locationItem = CoordinateItem(location: location)
-        self.init(kind: .location(locationItem), user: user, messageId: messageId, date: date)
+        self.init(kind: .location(locationItem), user: user, messageId: messageId, date: date, source_url: source_url)
     }
 
-    init(emoji: String, user: MockUser, messageId: String, date: Date) {
-        self.init(kind: .emoji(emoji), user: user, messageId: messageId, date: date)
+    init(emoji: String, user: MockUser, messageId: String, date: Date, source_url: String) {
+        self.init(kind: .emoji(emoji), user: user, messageId: messageId, date: date, source_url: source_url)
     }
 
-    init(audioURL: URL, user: MockUser, messageId: String, date: Date) {
+    init(audioURL: URL, user: MockUser, messageId: String, date: Date, source_url: String) {
         let audioItem = MockAudiotem(url: audioURL)
-        self.init(kind: .audio(audioItem), user: user, messageId: messageId, date: date)
+        self.init(kind: .audio(audioItem), user: user, messageId: messageId, date: date, source_url: source_url)
     }
 
-    init(contact: MockContactItem, user: MockUser, messageId: String, date: Date) {
-        self.init(kind: .contact(contact), user: user, messageId: messageId, date: date)
+    init(contact: MockContactItem, user: MockUser, messageId: String, date: Date, source_url: String) {
+        self.init(kind: .contact(contact), user: user, messageId: messageId, date: date, source_url: source_url)
     }
 }

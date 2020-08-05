@@ -26,7 +26,7 @@ class otherSettingVC: BottomPopupViewController {
     var default_green_color = #colorLiteral(red: 0.2588235294, green: 0.7294117647, blue: 0.1058823529, alpha: 1)
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        userinfotableview.backgroundColor = UIColor.white
         let nib = UINib(nibName: "profileTableViewCell", bundle: nil)
         self.userinfotableview.register(nib, forCellReuseIdentifier: "profileTableViewCell")
         

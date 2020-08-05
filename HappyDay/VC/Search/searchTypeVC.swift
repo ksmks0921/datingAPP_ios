@@ -33,7 +33,7 @@ class searchTypeVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
+        self.tableView.backgroundColor = UIColor.white
         getSettingData()
         searchType = .PROFILE
         print("___")
@@ -106,19 +106,19 @@ class searchTypeVC: UIViewController {
     }
 
     @IBAction func serachTypeBtnTapped(_ sender: Any) {
-        searchTypeBtn.backgroundColor = #colorLiteral(red: 0.2039215686, green: 0.7803921569, blue: 0.3490196078, alpha: 1)
+        searchTypeBtn.backgroundColor = #colorLiteral(red: 0.2588235294, green: 0.7294117647, blue: 0.1058823529, alpha: 1)
         searchTypeBtn.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: .normal)
         saveBtn.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-        saveBtn.setTitleColor(#colorLiteral(red: 0.2039215686, green: 0.7803921569, blue: 0.3490196078, alpha: 1), for: .normal)
+        saveBtn.setTitleColor(#colorLiteral(red: 0.2588235294, green: 0.7294117647, blue: 0.1058823529, alpha: 1), for: .normal)
         self.searchType = .PROFILE
         self.tableView.reloadData()
         print(searchType)
     }
     @IBAction func saveBtnTapped(_ sender: Any) {
-        saveBtn.backgroundColor = #colorLiteral(red: 0.2039215686, green: 0.7803921569, blue: 0.3490196078, alpha: 1)
+        saveBtn.backgroundColor = #colorLiteral(red: 0.2588235294, green: 0.7294117647, blue: 0.1058823529, alpha: 1)
         saveBtn.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: .normal)
         searchTypeBtn.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-        searchTypeBtn.setTitleColor(#colorLiteral(red: 0.2039215686, green: 0.7803921569, blue: 0.3490196078, alpha: 1), for: .normal)
+        searchTypeBtn.setTitleColor(#colorLiteral(red: 0.2588235294, green: 0.7294117647, blue: 0.1058823529, alpha: 1), for: .normal)
         self.searchType = .NICKNAME
         self.tableView.reloadData()
         print(searchType)

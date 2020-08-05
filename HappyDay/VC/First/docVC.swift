@@ -13,7 +13,7 @@ class docVC: UIViewController {
     @IBOutlet weak var textField_main: UITextView!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        textField_main.backgroundColor = UIColor.white
         // Do any additional setup after loading the view.
     }
     override func viewWillAppear(_ animated: Bool) {

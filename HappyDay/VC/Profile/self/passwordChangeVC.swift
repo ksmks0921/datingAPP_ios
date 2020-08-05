@@ -15,6 +15,8 @@ class passwordChangeVC: BaseVC, UITextFieldDelegate{
     var count_password: Int!
     override func viewDidLoad() {
         super.viewDidLoad()
+        passwordText.delegate = self
+        passwordAgainText.delegate = self
         
     }
     override func viewDidDisappear(_ animated: Bool) {
@@ -69,9 +71,11 @@ class passwordChangeVC: BaseVC, UITextFieldDelegate{
     }
     
     func savePassword() {
+        Indicator.sharedInstance.showIndicator()
         UserVM.shared.updatePassword(newPass: passwordText.text!) {(success, message, error) in
-            
+            Indicator.sharedInstance.hideIndicator()
             self.showAlert(message: message)
+            DataManager.password = self.passwordText.text
             self.passwordText.text = ""
             self.passwordAgainText.text = ""
             
@@ -89,7 +93,7 @@ class passwordChangeVC: BaseVC, UITextFieldDelegate{
         let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
 
         // make sure the result is under 16 characters
-        return updatedText.count <= 8
+        return updatedText.count <= 6
     }
 
    

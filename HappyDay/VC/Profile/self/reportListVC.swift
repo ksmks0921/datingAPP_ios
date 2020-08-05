@@ -18,7 +18,7 @@ class reportListVC: UIViewController {
     var items = [Any]()
     override func viewDidLoad() {
         super.viewDidLoad()
-  
+        self.contentTableView.backgroundColor = UIColor.white
         alertLabel.text = String(items.count) + "人からいいねされました"
     
     }

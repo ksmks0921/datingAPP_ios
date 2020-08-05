@@ -18,7 +18,7 @@ class userPostsVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        contentTable.backgroundColor = UIColor.white
         let nib = UINib.init(nibName: "postTableViewCell", bundle: nil)
         self.contentTable.register(nib, forCellReuseIdentifier: "postTableViewCell")
         

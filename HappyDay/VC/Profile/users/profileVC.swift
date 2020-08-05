@@ -32,7 +32,7 @@ class profileVC: BaseVC {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        userinfotableview.backgroundColor = UIColor.white
         setUpValue()
         
         let nib = UINib.init(nibName: "profileTableViewCell", bundle: nil)
@@ -290,6 +290,7 @@ extension profileVC:  UITableViewDelegate, UITableViewDataSource {
             
             let cell = userinfotableview.dequeueReusableCell(withIdentifier: "profileTableSectionCell", for: indexPath as IndexPath) as! profileTableSectionCell
             cell.titleLabel.text = sections[indexPath.section].title
+            cell.backgroundColor = UIColor.white
             cell.selectionStyle = .none
             return cell
             
@@ -309,6 +310,8 @@ extension profileVC:  UITableViewDelegate, UITableViewDataSource {
             else if indexPath.section == 0 {
                 let cell = userinfotableview.dequeueReusableCell(withIdentifier: "aboutMeCell", for: indexPath as IndexPath) as! aboutMeCell
                 cell.aboutMeText.text = self.sections[indexPath.section].items[data_index]
+                cell.backgroundColor = UIColor.white
+                cell.aboutMeText.backgroundColor = UIColor.white
                 cell.selectionStyle = .none
                 return cell
             }

@@ -13,11 +13,13 @@ class chatListVC: UIViewController {
 
     @IBOutlet weak var chatListTableView: UITableView!
     
-   
+    @IBOutlet weak var emptyView: UIView!
+    
     var lists = [ChatListItem]()
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.chatListTableView.backgroundColor = UIColor.white
 
          let nib = UINib.init(nibName: "chatTableCell", bundle: nil)
          self.chatListTableView.register(nib, forCellReuseIdentifier: "chatTableCell")
@@ -25,7 +27,14 @@ class chatListVC: UIViewController {
         MessageVM.shared.geAllData(sender_id: UserVM.current_user.user_id!, completion: {_ in
             MessageVM.shared.getChatListContents(completion: {_ in
                        self.lists = MessageVM.shared.chatListItems
-                       self.chatListTableView.reloadData()
+                if self.lists.count == 0 {
+                    self.emptyView.isHidden = false
+                }
+                else {
+                    self.emptyView.isHidden = true
+                     self.chatListTableView.reloadData()
+                }
+                      
             })
         })
          

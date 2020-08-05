@@ -19,7 +19,7 @@ class personalDataVC: BaseVC, UITextViewDelegate {
     var from = "personal"
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        dataContentView.backgroundColor = UIColor.white
         dataContentView.delegate = self
         if UserVM.current_user != nil {
             user = UserVM.current_user
@@ -27,6 +27,7 @@ class personalDataVC: BaseVC, UITextViewDelegate {
             if from == "report" {
                 titleLabel.text = "通報:" + String(report_person.user_nickName!)
                 dataContentView.customplaceholder = "通報内容を入力してください。"
+                
                 sendButton.setTitle("送信", for: .normal)
             }
             else {

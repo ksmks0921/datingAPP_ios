@@ -104,8 +104,9 @@ class UserVM {
             
         let user = Auth.auth().currentUser
         Auth.auth().currentUser?.updatePassword(to: newPass) { (error) in
-            response(true, "암호가 성과적으로 변경되였습니다.", nil)
+            response(true, "パスワードが成功裏に変更されました。", nil)
         }
+        
     }
     func updateUserData(city: String,age: String, job: String, blood: String, star: String, tall: String,user_style: String, life_style: String, user_outside: String, sex: Bool, nick_name: String, style_1: String, style_2 : String, style_3: String, style_4: String,require_age: String, is_approved:String, updated_at: String, created_at: String, require_style: String, require_tall: String, status: String, introduce: String, date: String, user_avatar: [String], response: @escaping responseCallBack){
         
@@ -442,9 +443,12 @@ class UserVM {
                     let user_job = restDict[FireBaseConstant.EventUserJob] as? String
                     let user_id = restDict[FireBaseConstant.EventUserID] as? String
                     let created_date = restDict[FireBaseConstant.EventCreatedDate] as? String
+                    let event_city = restDict[FireBaseConstant.EventCity] as? String
+                    let event_phone = restDict[FireBaseConstant.EventPhone] as? String
+                    let user_city = restDict[FireBaseConstant.EventUserCity] as? String
+                    let row_key = restDict[FireBaseConstant.row_key] as? String
                     
-                    
-                    let post_item = PostEvent(user_avatar: user_avatar!, event_type: event_type!, view_counts: view_counts!, nick_name: nick_name!, age: age!, region: region!, event_des: event_des!, thumb_path: thumb_path!, user_gender: gender!, source_type: source_type!, user_tall: user_tall!, user_style: user_style!, user_job: user_job!, user_id: user_id!, created_at: created_date!, event_photo: event_photo!)
+                    let post_item = PostEvent(user_avatar: user_avatar!, event_type: event_type!, view_counts: view_counts!, nick_name: nick_name!, age: age!, region: region!, event_des: event_des!, thumb_path: thumb_path!, user_gender: gender!, source_type: source_type!, user_tall: user_tall!, user_style: user_style!, user_job: user_job!, user_id: user_id!, created_at: created_date!,  event_photo: event_photo!, event_city : event_city!, event_phone : event_phone!, user_city : user_city!, row_key: row_key!)
                     UserVM.eventPosts.append(post_item)
 
                     
@@ -481,7 +485,12 @@ class UserVM {
                     let user_job = restDict[FireBaseConstant.EventUserJob] as? String
                     let user_id = restDict[FireBaseConstant.EventUserID] as? String
                     let created_date = restDict[FireBaseConstant.EventCreatedDate] as? String
-                    let post_item = PostEvent(user_avatar: user_avatar!, event_type: event_type!, view_counts: view_counts!, nick_name: nick_name!, age: age!, region: region!, event_des: event_des!, thumb_path: thumb_path!, user_gender: gender!, source_type: source_type!, user_tall: user_tall!, user_style: user_style!, user_job: user_job!, user_id: user_id!, created_at: created_date!, event_photo: event_photo!)
+                    let event_city = restDict[FireBaseConstant.EventCity] as? String
+                    let event_phone = restDict[FireBaseConstant.EventPhone] as? String
+                    let user_city = restDict[FireBaseConstant.EventUserCity] as? String
+                    let row_key = restDict[FireBaseConstant.row_key] as? String
+                    
+                    let post_item = PostEvent(user_avatar: user_avatar!, event_type: event_type!, view_counts: view_counts!, nick_name: nick_name!, age: age!, region: region!, event_des: event_des!, thumb_path: thumb_path!, user_gender: gender!, source_type: source_type!, user_tall: user_tall!, user_style: user_style!, user_job: user_job!, user_id: user_id!, created_at: created_date!, event_photo: event_photo!, event_city : event_city!, event_phone : event_phone!, user_city : user_city!, row_key: row_key!)
                     if post_item.user_id == DataManager.userId {
                         UserVM.my_eventPosts.append(post_item)
                     }
@@ -541,8 +550,7 @@ class UserVM {
                     
                     if item.region == value  {
                         result.append(item)
-                        print("________0000000")
-                        print(item.region)
+                     
                     }
                     
                 }
@@ -630,7 +638,36 @@ class UserVM {
         return result
         
     }
-    
+    func addView(event: PostEvent!, response: @escaping responseCallBack){
+        
+        
+        let views : String = String(Int(event.view_counts)! + 1)
+        let newEvent = [FireBaseConstant.EventCity                : event.event_city,
+                        FireBaseConstant.EventCreatedDate         : event.created_at,
+                        FireBaseConstant.EventDes                 : event.event_des,
+                        FireBaseConstant.EventPhoto               : event.event_photo,
+                        FireBaseConstant.EventPhone               : event.event_phone,
+                        FireBaseConstant.EventTitle               : "event_title",
+                        FireBaseConstant.EventType                : event.event_type,
+                        FireBaseConstant.EventUserAge             : event.age,
+                        FireBaseConstant.EventUserAvatar          : event.user_avatar,
+                        FireBaseConstant.EventUserCity            : event.user_city,
+                        FireBaseConstant.EventUserGender          : event.gender,
+                        FireBaseConstant.EventUserJob             : event.user_job,
+                        FireBaseConstant.EventUserName            : event.nick_name,
+                        FireBaseConstant.EventUserStyle           : event.user_style,
+                        FireBaseConstant.EventUserTall            : event.user_tall,
+                        FireBaseConstant.EventUserID              : event.user_id,
+                        FireBaseConstant.created_at               : event.created_at,
+                        FireBaseConstant.row_key                  : event.row_key,
+                        FireBaseConstant.source_type              : event.source_type,
+                        FireBaseConstant.thumb_path               : event.thumb_path,
+                        FireBaseConstant.view_counts              : views
+            ] as [String : Any]
+        self.ref.child(FireBaseConstant.Events).child(event.row_key!).setValue(newEvent)
+        response(true, "added Successfully.", nil)
+        
+    }
     func registerEvent(event_city: String, create_date: String, event_des: String, event_photo: String, event_phone: String, event_type: String, user_age:String, user_avatar: String, user_city: String, user_gender: Bool, user_job: String, user_name: String, user_style: String, user_tall: String, user_id: String, created_at: Int, source_type: String, thumb_path: String, views_counts: String,  response: @escaping responseCallBack){
         
         let row_key = self.ref.child(FireBaseConstant.Events).childByAutoId().key
@@ -665,7 +702,7 @@ class UserVM {
     func sendImageMessage(sender_id: String, receiver_id: String, text: String, sourceType: String, sourcePath: String,thumb_path: String,  time: String, date: String, imageData: UIImage, completion: @escaping (Bool) -> Void) {
         
                print("--------1-------")
-               let storageRef = Storage.storage().reference().child("media").child(UUID().uuidString)
+               let storageRef = Storage.storage().reference().child("Chat-Image").child(UUID().uuidString)
                     if let uploadData = imageData.pngData() {
                    
                     storageRef.putData(uploadData, metadata: nil) { (metadata, error) in
@@ -676,15 +713,19 @@ class UserVM {
                        } else {
                            storageRef.downloadURL { (url, error) in
                             guard let downloadURL = url else {return}
-                               
+                            print("upload ok____\(downloadURL)")
                             UserVM.shared.sendMessage(sender_id: sender_id, receiver_id: receiver_id, text: "", sourceType: sourceType, sourcePath: downloadURL.absoluteString, thumb_path: "", time: time, date: date) { (success, message, error) in
 
                                                    if error == nil{
-                                                    if success{
-                                                        
-                                                        completion(true)
-                                                    }
-                                            }
+                                                        if success{
+                                                            
+                                                            completion(true)
+                                                        }
+                                                   }
+                                                   else {
+                                                    print(message)
+                                                    print("00000\(error)")
+                                                   }
                                 
                                 }
                                 
@@ -715,65 +756,100 @@ class UserVM {
         
     }
     func sendVideoMessage(sender_id: String, receiver_id: String, text: String, sourceType: String, sourcePath: String, thumb_path: String,  time: String, date: String, thumb_imageData: UIImage,  video: URL, completion: @escaping (Bool) -> Void) {
-        
-               // upload video file
-               let storageRef_video = Storage.storage().reference().child("media").child(UUID().uuidString)
-               
-                   
-                    storageRef_video.putFile(from: video as URL, metadata: nil) { (metadata, error) in
-                       
-                       if error != nil {
-                           print("error")
-                           
-                       } else {
-                            storageRef_video.downloadURL { (url, error) in
-                            guard let video_downloadURL = url else {return}
-                            
-                            //upload thumb_image
-                            let storageRef_thumb = Storage.storage().reference().child("media").child(UUID().uuidString)
-                            if let uploadData = thumb_imageData.pngData() {
-                            
-                                
-                                
-                               storageRef_thumb.putData(uploadData, metadata: nil) { (metadata, error) in
-                                
-                                      if error != nil {
-                                          print("error")
-                                          
-                                      } else {
-                                            storageRef_thumb.downloadURL { (url, error) in
-                                                guard let thumb_downloadURL = url else {return}
-                                                
-                                                //send message
-                                                UserVM.shared.sendMessage(sender_id: sender_id, receiver_id: receiver_id, text: "", sourceType: sourceType, sourcePath: video_downloadURL.absoluteString, thumb_path: thumb_downloadURL.absoluteString, time: time, date: date) { (success, message, error) in
+               var upload_video_url : URL!
+               do {
+                   if #available(iOS 13, *) {
+                       //If on iOS13 slice the URL to get the name of the file
+                    let urlString = video.relativeString
+                    
+                       let urlSlices = urlString.split(separator: ".")
+                       if urlSlices.count == 3 {
+                           //Create a temp directory using the file name
+                           let tempDirectoryURL = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
+                           let targetURL = tempDirectoryURL.appendingPathComponent(String(urlSlices[1])).appendingPathExtension(String(urlSlices[2]))
 
-                                                            if error == nil{
-                                                                    if success{
-                                                                        
-                                                                        completion(true)
-                                                                    }
-                                                            }
-                                                
-                                                }// end of send message
-                                                
-                                                
-                                                
-                                            }
-                                      }
-                                }
-                                
-                                
-                                        
-                                
-
-                            
-                   
-                           }// end of thumb upload
-        
+                           //Copy the video over
+                        try FileManager.default.copyItem(at: video, to: targetURL)
+                           print("______a is______")
+                           upload_video_url = targetURL
                        }
+                       else {
+                           upload_video_url = video
+                       }
+                       
+
                    }
-        
-        }// end of video upload
+                   else {
+                   
+                        upload_video_url = video
+                  
+                   }
+               }
+               catch let error {
+                   //Handle errors
+               }
+               // upload video file
+                 print("sending video message.......yes")
+        if upload_video_url != nil {
+            let storageRef_video = Storage.storage().reference().child("Chat-video").child(UUID().uuidString)
+                   
+                        
+                        storageRef_video.putFile(from: upload_video_url as URL, metadata: nil) { (metadata, error) in
+                           
+                           if error != nil {
+                               print("error")
+                               
+                           } else {
+                                storageRef_video.downloadURL { (url, error) in
+                                guard let video_downloadURL = url else {return}
+                                
+                                //upload thumb_image
+                                let storageRef_thumb = Storage.storage().reference().child("media").child(UUID().uuidString)
+                                if let uploadData = thumb_imageData.pngData() {
+                                
+                                    
+                                    
+                                   storageRef_thumb.putData(uploadData, metadata: nil) { (metadata, error) in
+                                    
+                                          if error != nil {
+                                              print("error")
+                                              
+                                          } else {
+                                                storageRef_thumb.downloadURL { (url, error) in
+                                                    guard let thumb_downloadURL = url else {return}
+                                                    
+                                                    //send message
+                                                    UserVM.shared.sendMessage(sender_id: sender_id, receiver_id: receiver_id, text: "", sourceType: sourceType, sourcePath: video_downloadURL.absoluteString, thumb_path: thumb_downloadURL.absoluteString, time: time, date: date) { (success, message, error) in
+
+                                                                if error == nil{
+                                                                        if success{
+                                                                            
+                                                                            completion(true)
+                                                                        }
+                                                                }
+                                                    
+                                                    }// end of send message
+                                                    
+                                                    
+                                                    
+                                                }
+                                          }
+                                    }
+                                    
+                                    
+                                            
+                                    
+
+                                
+                       
+                               }// end of thumb upload
+            
+                           }
+                       }
+            
+            }// end of video upload
+        }
+               
         
     }
     
@@ -785,56 +861,225 @@ class UserVM {
         var lang_chinese : String!
         var lang_korean : String!
         var lang_japanese : String!
-        let lang_english : String!
+        var lang_english : String!
         var original_language: String!
-        SwiftGoogleTranslate.shared.detect(message_content) { (detections, error) in
-          if let detections = detections {
-            for detection in detections {
-              original_language = detection.language
-              print("______language_____\(detection.language)")
-              print(detection.language)
-              print(detection.isReliable)
-              print(detection.confidence)
-              print("---")
-                SwiftGoogleTranslate.shared.translate(message_content, "ko", original_language) { (text, error) in
-                         if let t_ko = text {
-                           lang_korean = t_ko
-                           SwiftGoogleTranslate.shared.translate(message_content, "ja", original_language) { (text, error) in
-                                    if let t_ja = text {
-                                      lang_japanese = t_ja
-                                       SwiftGoogleTranslate.shared.translate(message_content, "zh", original_language) { (text, error) in
-                                         if let t_cn = text {
-                                           lang_chinese = t_cn
-                                           let newMessage = [    FireBaseConstant.lang_chinese                 : lang_chinese!,
-                                                                 FireBaseConstant.lang_korean                  : lang_korean!,
-                                                                 FireBaseConstant.lang_japanese                : lang_japanese!,
-                                                                 FireBaseConstant.lang_english                 : message_content,
-                                                                 FireBaseConstant.mdate                        : date,
-                                                                 FireBaseConstant.misseen                      : false,
-                                                                 FireBaseConstant.message                      : message_content,
-                                                                 FireBaseConstant.mreceiver                    : receiver_id,
-                                                                 FireBaseConstant.msender                      : sender_id,
-                                                                 FireBaseConstant.msource_path                 : sourcePath,
-                                                                 FireBaseConstant.msource_type                 : sourceType,
-                                                                 FireBaseConstant.mthumb_path                  : thumb_path,
-                                                                 FireBaseConstant.mtime                        : time
-                                                       
-                                               
-                                            ] as [String : Any]
+        if sourceType == "text" {
+            SwiftGoogleTranslate.shared.detect(message_content) { (detections, error) in
+              if let detections = detections {
+                for detection in detections {
+                  original_language = detection.language
+                  print("______language_____\(detection.language)")
+                  print(detection.language)
+                  print(detection.isReliable)
+                  print(detection.confidence)
+                  print("---")
+                    if detection.language == "en" {
+                        SwiftGoogleTranslate.shared.translate(message_content, "ko", original_language) { (text, error) in
+                          if let t_ko = text {
+                            lang_korean = t_ko
+                            print(t_ko)
+                            SwiftGoogleTranslate.shared.translate(message_content, "ja", original_language) { (text, error) in
+                                     if let t_ja = text {
+                                       lang_japanese = t_ja
+                                       print(t_ja)
+                                        SwiftGoogleTranslate.shared.translate(message_content, "zh", original_language) { (text, error) in
+                                          if let t_cn = text {
+                                            lang_chinese = t_cn
+                                            print(t_cn)
+                                    
+                                            let newMessage = [    FireBaseConstant.lang_chinese                 : lang_chinese!,
+                                                                  FireBaseConstant.lang_korean                  : lang_korean!,
+                                                                  FireBaseConstant.lang_japanese                : lang_japanese!,
+                                                                  FireBaseConstant.lang_english                 : message_content,
+                                                                  FireBaseConstant.mdate                        : date,
+                                                                  FireBaseConstant.misseen                      : false,
+                                                                  FireBaseConstant.message                      : message_content,
+                                                                  FireBaseConstant.mreceiver                    : receiver_id,
+                                                                  FireBaseConstant.msender                      : sender_id,
+                                                                  FireBaseConstant.msource_path                 : sourcePath,
+                                                                  FireBaseConstant.msource_type                 : sourceType,
+                                                                  FireBaseConstant.mthumb_path                  : thumb_path,
+                                                                  FireBaseConstant.mtime                        : time
+                                                        
+                                                
+                                             ] as [String : Any]
+                                            
+                                            self.ref.child(FireBaseConstant.Chats).childByAutoId().setValue(newMessage)
                                            
-                                           self.ref.child(FireBaseConstant.Chats).childByAutoId().setValue(newMessage)
-                                           print(t_cn)
+                                          }
+                                          else {
+                                             print("error___huhuhu")
                                          }
-                                       }
-                                      print(t_ja)
-                                    }
-                                  }
-                           print(t_ko)
-                         }
-                       }
+                                        }
+                                       
+                                     }
+                                   }
+                            
+                          }
+                        }
+                    }
+                    else if detection.language == "ko" {
+                        SwiftGoogleTranslate.shared.translate(message_content, "en", original_language) { (text, error) in
+                          if let t_en = text {
+                            lang_english = t_en
+                            print(t_en)
+                            SwiftGoogleTranslate.shared.translate(message_content, "ja", original_language) { (text, error) in
+                                     if let t_ja = text {
+                                       lang_japanese = t_ja
+                                       print(t_ja)
+                                        SwiftGoogleTranslate.shared.translate(message_content, "zh", original_language) { (text, error) in
+                                          if let t_cn = text {
+                                            lang_chinese = t_cn
+                                            print(t_cn)
+                                    
+                                            let newMessage = [    FireBaseConstant.lang_chinese                 : lang_chinese!,
+                                                                  FireBaseConstant.lang_korean                  : message_content,
+                                                                  FireBaseConstant.lang_japanese                : lang_japanese!,
+                                                                  FireBaseConstant.lang_english                 : lang_english!,
+                                                                  FireBaseConstant.mdate                        : date,
+                                                                  FireBaseConstant.misseen                      : false,
+                                                                  FireBaseConstant.message                      : message_content,
+                                                                  FireBaseConstant.mreceiver                    : receiver_id,
+                                                                  FireBaseConstant.msender                      : sender_id,
+                                                                  FireBaseConstant.msource_path                 : sourcePath,
+                                                                  FireBaseConstant.msource_type                 : sourceType,
+                                                                  FireBaseConstant.mthumb_path                  : thumb_path,
+                                                                  FireBaseConstant.mtime                        : time
+                                                        
+                                                
+                                             ] as [String : Any]
+                                            
+                                            self.ref.child(FireBaseConstant.Chats).childByAutoId().setValue(newMessage)
+                                           
+                                          }
+                                          else {
+                                             print("error___huhuhu")
+                                         }
+                                        }
+                                       
+                                     }
+                                   }
+                            
+                          }
+                        }
+                    }
+                    else if detection.language == "ja" {
+                        SwiftGoogleTranslate.shared.translate(message_content, "en", original_language) { (text, error) in
+                          if let t_en = text {
+                            lang_english = t_en
+                            print(t_en)
+                            SwiftGoogleTranslate.shared.translate(message_content, "ko", original_language) { (text, error) in
+                                     if let t_ko = text {
+                                       lang_korean = t_ko
+                                       print(t_ko)
+                                        SwiftGoogleTranslate.shared.translate(message_content, "zh", original_language) { (text, error) in
+                                          if let t_cn = text {
+                                            lang_chinese = t_cn
+                                            print(t_cn)
+                                    
+                                            let newMessage = [    FireBaseConstant.lang_chinese                 : lang_chinese!,
+                                                                  FireBaseConstant.lang_korean                  : message_content,
+                                                                  FireBaseConstant.lang_japanese                : message_content,
+                                                                  FireBaseConstant.lang_english                 : lang_english,
+                                                                  FireBaseConstant.mdate                        : date,
+                                                                  FireBaseConstant.misseen                      : false,
+                                                                  FireBaseConstant.message                      : message_content,
+                                                                  FireBaseConstant.mreceiver                    : receiver_id,
+                                                                  FireBaseConstant.msender                      : sender_id,
+                                                                  FireBaseConstant.msource_path                 : sourcePath,
+                                                                  FireBaseConstant.msource_type                 : sourceType,
+                                                                  FireBaseConstant.mthumb_path                  : thumb_path,
+                                                                  FireBaseConstant.mtime                        : time
+                                                        
+                                                
+                                             ] as [String : Any]
+                                            
+                                            self.ref.child(FireBaseConstant.Chats).childByAutoId().setValue(newMessage)
+                                           
+                                          }
+                                          else {
+                                             print("error___huhuhu")
+                                         }
+                                        }
+                                       
+                                     }
+                                   }
+                            
+                          }
+                        }
+                    }
+                    else {
+                        SwiftGoogleTranslate.shared.translate(message_content, "ko", original_language) { (text, error) in
+                          if let t_ko = text {
+                            lang_korean = t_ko
+                            print(t_ko)
+                            SwiftGoogleTranslate.shared.translate(message_content, "ja", original_language) { (text, error) in
+                                     if let t_ja = text {
+                                       lang_japanese = t_ja
+                                       print(t_ja)
+                                        SwiftGoogleTranslate.shared.translate(message_content, "en", original_language) { (text, error) in
+                                          if let t_en = text {
+                                            lang_english = t_en
+                                            print(t_en)
+                                    
+                                            let newMessage = [    FireBaseConstant.lang_chinese                 : message_content,
+                                                                  FireBaseConstant.lang_korean                  : lang_korean!,
+                                                                  FireBaseConstant.lang_japanese                : lang_japanese!,
+                                                                  FireBaseConstant.lang_english                 : lang_english!,
+                                                                  FireBaseConstant.mdate                        : date,
+                                                                  FireBaseConstant.misseen                      : false,
+                                                                  FireBaseConstant.message                      : message_content,
+                                                                  FireBaseConstant.mreceiver                    : receiver_id,
+                                                                  FireBaseConstant.msender                      : sender_id,
+                                                                  FireBaseConstant.msource_path                 : sourcePath,
+                                                                  FireBaseConstant.msource_type                 : sourceType,
+                                                                  FireBaseConstant.mthumb_path                  : thumb_path,
+                                                                  FireBaseConstant.mtime                        : time
+                                                        
+                                                
+                                             ] as [String : Any]
+                                            
+                                            self.ref.child(FireBaseConstant.Chats).childByAutoId().setValue(newMessage)
+                                           
+                                          }
+                                          else {
+                                             print("error___huhuhu")
+                                         }
+                                        }
+                                       
+                                     }
+                                   }
+                            
+                          }
+                        }
+                    }
+                    
+                }
+              }
             }
-          }
         }
+        
+        else {
+            let newMessage = [    FireBaseConstant.lang_chinese                 : "",
+                                  FireBaseConstant.lang_korean                  : "",
+                                  FireBaseConstant.lang_japanese                : "",
+                                  FireBaseConstant.lang_english                 : "",
+                                  FireBaseConstant.mdate                        : date,
+                                  FireBaseConstant.misseen                      : false,
+                                  FireBaseConstant.message                      : "",
+                                  FireBaseConstant.mreceiver                    : receiver_id,
+                                  FireBaseConstant.msender                      : sender_id,
+                                  FireBaseConstant.msource_path                 : sourcePath,
+                                  FireBaseConstant.msource_type                 : sourceType,
+                                  FireBaseConstant.mthumb_path                  : thumb_path,
+                                  FireBaseConstant.mtime                        : time
+                        
+                
+             ] as [String : Any]
+            
+            self.ref.child(FireBaseConstant.Chats).childByAutoId().setValue(newMessage)
+        }
+        
        
        
         

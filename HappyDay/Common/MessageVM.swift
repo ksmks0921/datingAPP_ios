@@ -146,50 +146,50 @@ final internal class MessageVM {
     }
 
     // swiftlint:disable cyclomatic_complexity
-    func randomMessage(allowedSenders: [MockUser]) -> MockMessage {
-        let randomNumberSender = Int(arc4random_uniform(UInt32(allowedSenders.count)))
-        
-        let uniqueID = UUID().uuidString
-        let user = allowedSenders[randomNumberSender]
-        let date = dateAddingRandomTime()
-
-        switch randomMessageType() {
-        case .Text:
-            let randomSentence = Lorem.sentence()
-            return MockMessage(text: randomSentence, user: user, messageId: uniqueID, date: date)
-        case .AttributedText:
-            let randomSentence = Lorem.sentence()
-            let attributedText = attributedString(with: randomSentence)
-            return MockMessage(attributedText: attributedText, user: user, messageId: uniqueID, date: date)
-        case .Photo:
-            let randomNumberImage = Int(arc4random_uniform(UInt32(messageImages.count)))
-            let image = messageImages[randomNumberImage]
-            return MockMessage(image: image, user: user, messageId: uniqueID, date: date)
-        case .Video:
-            let randomNumberImage = Int(arc4random_uniform(UInt32(messageImages.count)))
-            let image = messageImages[randomNumberImage]
-            return MockMessage(image: image, user: user, messageId: uniqueID, date: date)
-        case .Audio:
-            let randomNumberSound = Int(arc4random_uniform(UInt32(sounds.count)))
-            let soundURL = sounds[randomNumberSound]
-            return MockMessage(audioURL: soundURL, user: user, messageId: uniqueID, date: date)
-        case .Emoji:
-            let randomNumberEmoji = Int(arc4random_uniform(UInt32(emojis.count)))
-            return MockMessage(emoji: emojis[randomNumberEmoji], user: user, messageId: uniqueID, date: date)
-        case .Location:
-            let randomNumberLocation = Int(arc4random_uniform(UInt32(locations.count)))
-            return MockMessage(location: locations[randomNumberLocation], user: user, messageId: uniqueID, date: date)
-        case .Url:
-            return MockMessage(text: "https://github.com/MessageKit", user: user, messageId: uniqueID, date: date)
-        case .Phone:
-            return MockMessage(text: "123-456-7890", user: user, messageId: uniqueID, date: date)
-        case .Custom:
-            return MockMessage(custom: "Someone left the conversation", user: system, messageId: uniqueID, date: date)
-        case .ShareContact:
-            let randomContact = Int(arc4random_uniform(UInt32(contactsToShare.count)))
-            return MockMessage(contact: contactsToShare[randomContact], user: user, messageId: uniqueID, date: date)
-        }
-    }
+//    func randomMessage(allowedSenders: [MockUser]) -> MockMessage {
+////        let randomNumberSender = Int(arc4random_uniform(UInt32(allowedSenders.count)))
+////
+////        let uniqueID = UUID().uuidString
+////        let user = allowedSenders[randomNumberSender]
+////        let date = dateAddingRandomTime()
+////
+////        switch randomMessageType() {
+////        case .Text:
+////            let randomSentence = Lorem.sentence()
+////            return MockMessage(text: randomSentence, user: user, messageId: uniqueID, date: date)
+////        case .AttributedText:
+////            let randomSentence = Lorem.sentence()
+////            let attributedText = attributedString(with: randomSentence)
+////            return MockMessage(attributedText: attributedText, user: user, messageId: uniqueID, date: date)
+////        case .Photo:
+////            let randomNumberImage = Int(arc4random_uniform(UInt32(messageImages.count)))
+////            let image = messageImages[randomNumberImage]
+////            return MockMessage(image: image, user: user, messageId: uniqueID, date: date)
+////        case .Video:
+////            let randomNumberImage = Int(arc4random_uniform(UInt32(messageImages.count)))
+////            let image = messageImages[randomNumberImage]
+////            return MockMessage(image: image, user: user, messageId: uniqueID, date: date)
+////        case .Audio:
+////            let randomNumberSound = Int(arc4random_uniform(UInt32(sounds.count)))
+////            let soundURL = sounds[randomNumberSound]
+////            return MockMessage(audioURL: soundURL, user: user, messageId: uniqueID, date: date)
+////        case .Emoji:
+////            let randomNumberEmoji = Int(arc4random_uniform(UInt32(emojis.count)))
+////            return MockMessage(emoji: emojis[randomNumberEmoji], user: user, messageId: uniqueID, date: date)
+////        case .Location:
+////            let randomNumberLocation = Int(arc4random_uniform(UInt32(locations.count)))
+////            return MockMessage(location: locations[randomNumberLocation], user: user, messageId: uniqueID, date: date)
+////        case .Url:
+////            return MockMessage(text: "https://github.com/MessageKit", user: user, messageId: uniqueID, date: date)
+////        case .Phone:
+////            return MockMessage(text: "123-456-7890", user: user, messageId: uniqueID, date: date)
+////        case .Custom:
+////            return MockMessage(custom: "Someone left the conversation", user: system, messageId: uniqueID, date: date)
+////        case .ShareContact:
+////            let randomContact = Int(arc4random_uniform(UInt32(contactsToShare.count)))
+////            return MockMessage(contact: contactsToShare[randomContact], user: user, messageId: uniqueID, date: date)
+////        }
+//    }
     func changeLanguage(language: String, completion: ([MockMessage]) -> Void) {
        
             if language == AppConstant.LanguageEnglish {
@@ -276,38 +276,40 @@ final internal class MessageVM {
                                             let original_message_korean : MockMessage!
                                             let original_message_chinese : MockMessage!
                                         if custom_message_item.source_type == AppConstant.eText{
-                                            original_message = MockMessage(text: custom_message_item.english!, user: user!, messageId: uniqueID, date: date)
-                                            original_message_korean = MockMessage(text: custom_message_item.korean!, user: user!, messageId: uniqueID, date: date)
-                                            original_message_japanese = MockMessage(text: custom_message_item.japanese!, user: user!, messageId: uniqueID, date: date)
-                                            original_message_chinese = MockMessage(text: custom_message_item.chinese!, user: user!, messageId: uniqueID, date: date)
+                                            original_message = MockMessage(text: custom_message_item.english!, user: user!, messageId: uniqueID, date: date, source_url: "")
+                                            original_message_korean = MockMessage(text: custom_message_item.korean!, user: user!, messageId: uniqueID, date: date, source_url: "")
+                                            original_message_japanese = MockMessage(text: custom_message_item.japanese!, user: user!, messageId: uniqueID, date: date, source_url: "")
+                                            original_message_chinese = MockMessage(text: custom_message_item.chinese!, user: user!, messageId: uniqueID, date: date, source_url: "")
                                         
                                             print("called____yes____ksm")
                                             if custom_message_item.receiver == sender_id {
                                                 if DataManager.language == AppConstant.LanguageEnglish {
-                                                    original_message = MockMessage(text: custom_message_item.english!, user: user!, messageId: uniqueID, date: date)
+                                                    original_message = MockMessage(text: custom_message_item.english!, user: user!, messageId: uniqueID, date: date, source_url: "")
                                                     self.messages.append(original_message)
                                                 }
                                                 else if DataManager.language == AppConstant.LanguageKorean {
-                                                    original_message = MockMessage(text: custom_message_item.korean!, user: user!, messageId: uniqueID, date: date)
+                                                    original_message = MockMessage(text: custom_message_item.korean!, user: user!, messageId: uniqueID, date: date, source_url: "")
                                                     self.messages.append(original_message)
                                                 }
                                                 else if DataManager.language == AppConstant.LanguageJapanese {
-                                                    original_message = MockMessage(text: custom_message_item.japanese!, user: user!, messageId: uniqueID, date: date)
+                                                    original_message = MockMessage(text: custom_message_item.japanese!, user: user!, messageId: uniqueID, date: date, source_url: "")
                                                     self.messages.append(original_message)
                                                 }
                                                 else if DataManager.language == AppConstant.LanguageChinese {
-                                                    original_message = MockMessage(text: custom_message_item.chinese!, user: user!, messageId: uniqueID, date: date)
+                                                    original_message = MockMessage(text: custom_message_item.chinese!, user: user!, messageId: uniqueID, date: date, source_url: "")
                                                     self.messages.append(original_message)
                                                 }
                                             }
                                             else {
-                                                original_message = MockMessage(text: custom_message_item.english!, user: user!, messageId: uniqueID, date: date)
+                                                
+                                                
+                                                original_message = MockMessage(text: custom_message_item.message!, user: user!, messageId: uniqueID, date: date, source_url: "")
                                                 self.messages.append(original_message)
                                             }
                                            
-                                            self.messages_korean.append( MockMessage(text: custom_message_item.korean!, user: user!, messageId: uniqueID, date: date))
-                                            self.messages_japanese.append( MockMessage(text: custom_message_item.japanese!, user: user!, messageId: uniqueID, date: date))
-                                            self.messages_chinese.append( MockMessage(text: custom_message_item.chinese!, user: user!, messageId: uniqueID, date: date))
+                                            self.messages_korean.append( MockMessage(text: custom_message_item.korean!, user: user!, messageId: uniqueID, date: date, source_url: ""))
+                                            self.messages_japanese.append( MockMessage(text: custom_message_item.japanese!, user: user!, messageId: uniqueID, date: date, source_url: ""))
+                                            self.messages_chinese.append( MockMessage(text: custom_message_item.chinese!, user: user!, messageId: uniqueID, date: date, source_url: ""))
                                         }
                                         else if custom_message_item.source_type == AppConstant.eImage{
                                             
@@ -315,7 +317,7 @@ final internal class MessageVM {
                                             if let data = try? Data(contentsOf: url!)
                                             {
                                                 let image: UIImage = UIImage(data: data)!
-                                                original_message = MockMessage(image: image, user: user, messageId: uniqueID, date: date)
+                                                original_message = MockMessage(image: image, user: user, messageId: uniqueID, date: date, source_url: custom_message_item.source_path!)
                                                 self.messages.append(original_message)
                                                 self.messages_korean.append(original_message)
                                                 self.messages_japanese.append(original_message)
@@ -343,7 +345,7 @@ final internal class MessageVM {
                                            {
                                             let image: UIImage = UIImage.sd_image(withGIFData: data)!
 //                                            MockMessage(emoji: emojis[randomNumberEmoji], user: user, messageId: uniqueID, date: date)
-                                            original_message = MockMessage(image: image, user: user, messageId: uniqueID, date: date)
+                                            original_message = MockMessage(image: image, user: user, messageId: uniqueID, date: date, source_url: custom_message_item.source_path!)
                                             self.messages.append(original_message)
                                             self.messages_korean.append(original_message)
                                             self.messages_japanese.append(original_message)
@@ -525,8 +527,8 @@ final internal class MessageVM {
         // Enable Custom Messages
         UserDefaults.standard.set(true, forKey: "Custom Messages")
         for _ in 0..<count {
-            let message = randomMessage(allowedSenders: senders)
-            messages.append(message)
+//            let message = randomMessage(allowedSenders: senders)
+//            messages.append(message)
         }
         completion(messages)
     }
@@ -540,7 +542,7 @@ final internal class MessageVM {
             let user = senders.random()!
             let date = dateAddingRandomTime()
             let randomSentence = Lorem.sentence()
-            let message = MockMessage(text: randomSentence, user: user, messageId: uniqueID, date: date)
+            let message = MockMessage(text: randomSentence, user: user, messageId: uniqueID, date: date, source_url: "")
             messages.append(message)
         }
         completion(messages)
