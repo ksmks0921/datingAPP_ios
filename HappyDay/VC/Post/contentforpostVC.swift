@@ -73,6 +73,30 @@ class contentforpostVC: BaseVC {
               self.postTableView.reloadData()
         })
     }
+    func getDataFromUsers(id: String) -> person{
+        var target_user: person!
+        for user_item in UserVM.all_users {
+            
+            if user_item.user_id == id {
+                
+               target_user = user_item
+                
+            }
+            
+        }
+        
+        return target_user
+    }
+    @objc func avatarTapped(_ gesture : UITapGestureRecognizer) {
+        let v = gesture.view!
+        let tag = v.tag
+        let VC = self.storyboard?.instantiateViewController(withIdentifier: "profileVC") as! profileVC
+        let selected_person = getDataFromUsers(id: event_post[tag].user_id)
+        VC.person = selected_person
+
+        navigationController?.pushViewController(VC, animated: true)
+        
+    }
     @objc func imageTapped(_ gesture:UITapGestureRecognizer) {
         print("_____tag\(gesture.view!.tag)")
         print("_____type\(event_post[gesture.view!.tag].source_type)")
@@ -152,10 +176,15 @@ extension contentforpostVC:  UITableViewDelegate, UITableViewDataSource, Lightbo
             else {
                 cell.nickname.textColor = #colorLiteral(red: 0.8549019694, green: 0.250980407, blue: 0.4784313738, alpha: 1)
             }
-            let imageTap = UITapGestureRecognizer(target: self, action: #selector(imageTapped))
+            let imageTap = UITapGestureRecognizer(target: self, action: #selector(imageTapped(_:)))
             cell.postImageView.tag = indexPath.row
             cell.postImageView.isUserInteractionEnabled = true
             cell.postImageView.addGestureRecognizer(imageTap)
+            
+            let avatarTap = UITapGestureRecognizer(target: self, action: #selector(avatarTapped(_:)))
+            cell.personPhoto.tag = indexPath.row
+            cell.personPhoto.isUserInteractionEnabled = true
+            cell.personPhoto.addGestureRecognizer(avatarTap)
         
             cell.textContentLabel.text = event_post[indexPath.row].event_des
             cell.views.text = event_post[indexPath.row].view_counts

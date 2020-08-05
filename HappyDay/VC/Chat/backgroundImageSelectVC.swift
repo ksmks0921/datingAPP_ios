@@ -19,6 +19,8 @@ class backgroundImageSelectVC: UIViewController {
         let nibCell = UINib(nibName: "backgroundImageCell", bundle: nil)
         imageCollection.register(nibCell, forCellWithReuseIdentifier: "backgroundImageCell")
         
+        
+        
     }
     override func viewDidDisappear(_ animated: Bool) {
     

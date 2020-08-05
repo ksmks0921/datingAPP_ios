@@ -664,7 +664,7 @@ class UserVM {
     
     func sendImageMessage(sender_id: String, receiver_id: String, text: String, sourceType: String, sourcePath: String,thumb_path: String,  time: String, date: String, imageData: UIImage, completion: @escaping (Bool) -> Void) {
         
-               
+               print("--------1-------")
                let storageRef = Storage.storage().reference().child("media").child(UUID().uuidString)
                     if let uploadData = imageData.pngData() {
                    
@@ -786,43 +786,56 @@ class UserVM {
         var lang_korean : String!
         var lang_japanese : String!
         let lang_english : String!
-
-        SwiftGoogleTranslate.shared.translate(message_content, "ko", "en") { (text, error) in
-          if let t_ko = text {
-            lang_korean = t_ko
-            SwiftGoogleTranslate.shared.translate(message_content, "ja", "en") { (text, error) in
-                     if let t_ja = text {
-                       lang_japanese = t_ja
-                        SwiftGoogleTranslate.shared.translate(message_content, "zh", "en") { (text, error) in
-                          if let t_cn = text {
-                            lang_chinese = t_cn
-                            let newMessage = [    FireBaseConstant.lang_chinese                 : lang_chinese!,
-                                                  FireBaseConstant.lang_korean                  : lang_korean!,
-                                                  FireBaseConstant.lang_japanese                : lang_japanese!,
-                                                  FireBaseConstant.lang_english                 : message_content,
-                                                  FireBaseConstant.mdate                        : date,
-                                                  FireBaseConstant.misseen                      : false,
-                                                  FireBaseConstant.message                      : message_content,
-                                                  FireBaseConstant.mreceiver                    : receiver_id,
-                                                  FireBaseConstant.msender                      : sender_id,
-                                                  FireBaseConstant.msource_path                 : sourcePath,
-                                                  FireBaseConstant.msource_type                 : sourceType,
-                                                  FireBaseConstant.mthumb_path                  : thumb_path,
-                                                  FireBaseConstant.mtime                        : time
-                                        
-                                
-                             ] as [String : Any]
-                            
-                            self.ref.child(FireBaseConstant.Chats).childByAutoId().setValue(newMessage)
-                            print(t_cn)
-                          }
-                        }
-                       print(t_ja)
-                     }
-                   }
-            print(t_ko)
+        var original_language: String!
+        SwiftGoogleTranslate.shared.detect(message_content) { (detections, error) in
+          if let detections = detections {
+            for detection in detections {
+              original_language = detection.language
+              print("______language_____\(detection.language)")
+              print(detection.language)
+              print(detection.isReliable)
+              print(detection.confidence)
+              print("---")
+                SwiftGoogleTranslate.shared.translate(message_content, "ko", original_language) { (text, error) in
+                         if let t_ko = text {
+                           lang_korean = t_ko
+                           SwiftGoogleTranslate.shared.translate(message_content, "ja", original_language) { (text, error) in
+                                    if let t_ja = text {
+                                      lang_japanese = t_ja
+                                       SwiftGoogleTranslate.shared.translate(message_content, "zh", original_language) { (text, error) in
+                                         if let t_cn = text {
+                                           lang_chinese = t_cn
+                                           let newMessage = [    FireBaseConstant.lang_chinese                 : lang_chinese!,
+                                                                 FireBaseConstant.lang_korean                  : lang_korean!,
+                                                                 FireBaseConstant.lang_japanese                : lang_japanese!,
+                                                                 FireBaseConstant.lang_english                 : message_content,
+                                                                 FireBaseConstant.mdate                        : date,
+                                                                 FireBaseConstant.misseen                      : false,
+                                                                 FireBaseConstant.message                      : message_content,
+                                                                 FireBaseConstant.mreceiver                    : receiver_id,
+                                                                 FireBaseConstant.msender                      : sender_id,
+                                                                 FireBaseConstant.msource_path                 : sourcePath,
+                                                                 FireBaseConstant.msource_type                 : sourceType,
+                                                                 FireBaseConstant.mthumb_path                  : thumb_path,
+                                                                 FireBaseConstant.mtime                        : time
+                                                       
+                                               
+                                            ] as [String : Any]
+                                           
+                                           self.ref.child(FireBaseConstant.Chats).childByAutoId().setValue(newMessage)
+                                           print(t_cn)
+                                         }
+                                       }
+                                      print(t_ja)
+                                    }
+                                  }
+                           print(t_ko)
+                         }
+                       }
+            }
           }
         }
+       
        
         
         

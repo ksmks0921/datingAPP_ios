@@ -182,13 +182,19 @@ class createpostVC: BaseVC, UITextFieldDelegate  {
                                     guard let downloadURL = url else {return}
                                     
                                     if self.media == "video" {
+//                                        self.uploadTOFireBaseVideo(url: self.video_url, success: {(url) in
+//                                            self.registerEvent(url: downloadURL, url_source: url)
+//                                        }, failure: {(error) in
+//                                            print(error)
+//                                        })
                                         let storageRef_video = Storage.storage().reference().child("media").child(UUID().uuidString)
                                         storageRef_video.putFile(from: self.video_url as URL, metadata: nil) { (metadata, error) in
-                                        
+                                            print("_________ok________\(self.video_url)")
                                             if error != nil {
-                                                print("error")
-                                                
+                                                print("error ocurred\(error)")
+
                                             } else {
+                                                print("_________ok________\(downloadURL)")
                                                  storageRef_video.downloadURL { (url, error) in
                                                  guard let video_downloadURL = url else {return}
                                                     self.registerEvent(url: downloadURL, url_source: video_downloadURL.absoluteString)
@@ -269,6 +275,8 @@ class createpostVC: BaseVC, UITextFieldDelegate  {
              thumb_path = url.absoluteString
              event_photo = url_source
         }
+        
+        print("event_photo___is_____\(event_photo)")
         
         let currentDateTime = Date()
         let created_at_temp = currentDateTime.timeIntervalSince1970
@@ -385,13 +393,111 @@ extension createpostVC: UIImagePickerControllerDelegate, UINavigationControllerD
 //            imagePickerController.mediaTypes =  [kUTTypeImage as String, kUTTypeMovie as String]
             self.present(imagePickerController, animated: true, completion: nil)
         }
+        func convertVideo(toMPEG4FormatForVideo inputURL: URL, outputURL: URL, handler: @escaping (AVAssetExportSession) -> Void) {
+            try! FileManager.default.removeItem(at: outputURL as URL)
+            let asset = AVURLAsset(url: inputURL as URL, options: nil)
 
+            let exportSession = AVAssetExportSession(asset: asset, presetName: AVAssetExportPresetHighestQuality)!
+            exportSession.outputURL = outputURL
+            exportSession.outputFileType = .mp4
+            exportSession.exportAsynchronously(completionHandler: {
+                handler(exportSession)
+            })
+        }
+        func uploadTOFireBaseVideo(url: URL,
+                                          success : @escaping (String) -> Void,
+                                          failure : @escaping (Error) -> Void) {
+
+            let name = "\(Int(Date().timeIntervalSince1970)).mp4"
+            let path = NSTemporaryDirectory() + name
+
+            let dispatchgroup = DispatchGroup()
+
+            dispatchgroup.enter()
+
+            let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+            let outputurl = documentsURL.appendingPathComponent(name)
+            var ur = outputurl
+            self.convertVideo(toMPEG4FormatForVideo: url as URL, outputURL: outputurl) { (session) in
+
+                ur = session.outputURL!
+                dispatchgroup.leave()
+
+            }
+            dispatchgroup.wait()
+
+            let data = NSData(contentsOf: ur as URL)
+
+            do {
+
+                try data?.write(to: URL(fileURLWithPath: path), options: .atomic)
+
+            } catch {
+
+                print(error)
+            }
+
+            let storageRef = Storage.storage().reference().child("Videos").child(name)
+            if let uploadData = data as Data? {
+                storageRef.putData(uploadData, metadata: nil
+                    , completion: { (metadata, error) in
+                        if let error = error {
+                            failure(error)
+                        }else{
+                            storageRef.downloadURL { (url, error) in
+                                success(url!.absoluteString)
+                            }
+//                            guard let downloadURL = url else {return}
+//                            let strPic:String = (metadata)!
+                            
+                        }
+                })
+            }
+        }
         func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
             
-            video_url = info[.mediaURL] as? URL
-       
+//            video_url = info[.mediaURL] as? URL
+            let temp_video_url = info[.mediaURL] as? URL
+            if temp_video_url != nil {
+                do {
+                    if #available(iOS 13, *) {
+                        //If on iOS13 slice the URL to get the name of the file
+                        let urlString = temp_video_url!.relativeString
+                        print("_____hello____\(temp_video_url)")
+                        let urlSlices = urlString.split(separator: ".")
+                        if urlSlices.count == 3 {
+                            //Create a temp directory using the file name
+                            let tempDirectoryURL = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
+                            let targetURL = tempDirectoryURL.appendingPathComponent(String(urlSlices[1])).appendingPathExtension(String(urlSlices[2]))
+
+                            //Copy the video over
+                            try FileManager.default.copyItem(at: temp_video_url!, to: targetURL)
+                            print("______a is______")
+                            self.video_url = targetURL
+                        }
+                        else {
+                            self.video_url = temp_video_url
+                        }
+                        
+
+                    }
+                    else {
+                        print("______b is______")
+                        //If on iOS12 just use the original URL
+                        picker.dismiss(animated: true) {
+                            print("______c is______")
+                            self.video_url = temp_video_url
+                        }
+                    }
+                }
+                catch let error {
+                    //Handle errors
+                }
+            }
+            
             if video_url != nil {
-                let asset = AVURLAsset(url: video_url)
+                print("______d is______")
+                let asset = AVURLAsset(url: video_url!)
                 print(asset.fileSize ?? 0)
                 let size = asset.fileSize
                 if size! > 60000000 {

@@ -7,14 +7,14 @@ import MessageKit
 import InputBarAccessoryView
 import AVFoundation
 
-class MKPrivateChatView: ChatViewController  , UITextViewDelegate {
+class MKPrivateChatView: ChatViewController {
     
 
     
     @IBOutlet weak var contentView: UIView!
     let outgoingAvatarOverlap: CGFloat = 0
     var chat_title: String!
-    var background_image = UIImageView()
+   
     private var isBlocker = false
     var default_green_color = #colorLiteral(red: 0.2588235294, green: 0.7294117647, blue: 0.1058823529, alpha: 1)
     
@@ -22,96 +22,15 @@ class MKPrivateChatView: ChatViewController  , UITextViewDelegate {
 
         super.viewDidLoad()
         
-        setupUI()
-        setupNavigationButton()
-        loadFirstMessages()
+       
+        
+        
 
     }
-    func setupUI() {
-        let height_of_view = self.messagesCollectionView.frame.size.height
-        let width_of_view = self.messagesCollectionView.frame.size.width
-        background_image.frame = CGRect(x: 0, y: 0, width: width_of_view, height: height_of_view)
-        background_image.image = UIImage(named: "person_2")
-        view.addSubview(background_image)
-        messagesCollectionView.backgroundColor = UIColor(white: 1, alpha: 0.5)
-        messagesCollectionView.backgroundView = background_image
-        messageInputBar.inputTextView.delegate = self
-        messagesCollectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "CustomImageCell")
-    }
-    func setupNavigationButton() {
-        
-         let button_translate = UIBarButtonItem(
-              image: UIImage(named: "translate_icon"),
-              style: .plain,
-              target: self,
-              
-              action: #selector(selectLanguage)
-          )
-          let button_setting = UIBarButtonItem(
-              image: UIImage(named: "rsz_icon_setting_white"),
-              style: .plain,
-              target: self,
-              action: #selector(showSetting)
-          )
-       
-          button_setting.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-          button_translate.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-          self.title = chat_title
-          self.navigationItem.rightBarButtonItems = [button_translate, button_setting]
-          self.navigationController?.navigationBar.tintColor = UIColor.white
-    }
-    func loadFirstMessages() {
-           
-        DispatchQueue.global(qos: .userInitiated).async {
-            Indicator.sharedInstance.showIndicator()
-            MessageVM.shared.geData(language: AppConstant.LanguageEnglish ,sender_id: self.chatId, connectedPerson: self.connectedPerson, completion: {_ in
-                    let count = UserDefaults.standard.mockMessagesCount()
-                    MessageVM.shared.getMessages(count: count) { messages in
-                        Indicator.sharedInstance.hideIndicator()
-                        DispatchQueue.main.async {
-                            self.messageList = messages
-                            self.messagesCollectionView.reloadData()
-                            self.messagesCollectionView.scrollToBottom()
-                        }
-                    }
-             })
-               
-        }
-           
-           
-    }
-    @objc
-    private func selectLanguage() {
-      
-        guard let popupVC = storyboard?.instantiateViewController(withIdentifier: "otherSettingVC") as? otherSettingVC else { return }
-        let items = AppConstant.languages
-        
-        let height_view = self.view.frame.size.height
-        let height_bottom_view = (items.count + 1) * 60
-        if height_bottom_view > Int(height_view) {
-            popupVC.height = CGFloat(height_view - 80)
-        }
-        else {
-            popupVC.height = CGFloat(height_bottom_view)
-        }
-        popupVC.topCornerRadius = 10
-        popupVC.presentDuration = 1
-        popupVC.dismissDuration = 1
-        popupVC.shouldDismissInteractivelty = true
-        popupVC.items = items
-        popupVC.delegate = self
-        present(popupVC, animated: true, completion: nil)
-        
-    }
     
-    @objc
-    private func showSetting() {
-        
-        guard let VC = storyboard?.instantiateViewController(withIdentifier: "backgroundImageSelectVC") as? backgroundImageSelectVC else { return }
-        VC.delegate = self
-        self.navigationController?.pushViewController(VC, animated: true)
-        
-    }
+    
+    
+    
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -212,6 +131,7 @@ class MKPrivateChatView: ChatViewController  , UITextViewDelegate {
         messageInputBar.isTranslucent = true
         messageInputBar.separatorLine.isHidden = true
         messageInputBar.inputTextView.tintColor = .primaryColor
+        messageInputBar.inputTextView.textColor = UIColor.black
         messageInputBar.inputTextView.backgroundColor = UIColor(red: 245/255, green: 245/255, blue: 245/255, alpha: 1)
         messageInputBar.inputTextView.placeholder = "メールを入力してください."
         messageInputBar.inputTextView.placeholderTextColor = UIColor(red: 0.6, green: 0.6, blue: 0.6, alpha: 1)
@@ -690,68 +610,13 @@ extension MKPrivateChatView: StickersDelegate {
     }
     
 }
-extension MKPrivateChatView: SearchTypeDelegate{
-    
-    func selectSearchType(index: Int, type: String) {
-        
-        if type == AppConstant.languages[2] {
-            
-            DispatchQueue.global(qos: .userInitiated).async {
-//                let count = UserDefaults.standard.mockMessagesCount()
-                MessageVM.shared.changeLanguage(language: AppConstant.LanguageKorean) { messages in
-                    DispatchQueue.main.async {
-                        self.messageList = messages
-                        self.messagesCollectionView.reloadData()
-                        self.messagesCollectionView.scrollToBottom()
-                    }
-                }
-            }
-            
-        }
-        else if type == AppConstant.languages[3] {
-            DispatchQueue.global(qos: .userInitiated).async {
-                MessageVM.shared.changeLanguage(language: AppConstant.LanguageChinese) { messages in
-                    DispatchQueue.main.async {
-                        self.messageList = messages
-                        self.messagesCollectionView.reloadData()
-                        self.messagesCollectionView.scrollToBottom()
-                    }
-                }
-            }
-        }
-        else if type == AppConstant.languages[1] {
-             DispatchQueue.global(qos: .userInitiated).async {
-                           MessageVM.shared.changeLanguage(language: AppConstant.LanguageJapanese) { messages in
-                               DispatchQueue.main.async {
-                                   self.messageList = messages
-                                   self.messagesCollectionView.reloadData()
-                                   self.messagesCollectionView.scrollToBottom()
-                               }
-                           }
-                       }
-        }
-        else {
-             DispatchQueue.global(qos: .userInitiated).async {
-               MessageVM.shared.changeLanguage(language: AppConstant.LanguageEnglish) { messages in
-                   DispatchQueue.main.async {
-                       self.messageList = messages
-                       self.messagesCollectionView.reloadData()
-                       self.messagesCollectionView.scrollToBottom()
-                   }
-               }
-             }
-        }
-        
-    }
-    
-    
-}
+
 extension MKPrivateChatView {
     
     func send(chatId: String, text: String?, photo: UIImage?, video: URL?, audio: String?, sticker: String?) {
         
         if UserVM.current_user.user_sex == "女性" || UserVM.user_points > 20{
-                 print("______sending image_________")
+               
                    let formatter = DateFormatter()
                    formatter.locale = Locale(identifier: "en_US_POSIX")
                    formatter.dateFormat = "h:mm a"
@@ -805,12 +670,12 @@ extension MKPrivateChatView {
                   
         }
         else {
-            print("______not sending image_________")
+         
             self.showAlertPoints(message: "ポイントが足りないのでメールを送信できません", title: "通知", otherButtons: ["確認": {(action) in
             
-                  print("_______")
+             
             }], cancelTitle: "キャンセル", cancelAction: { (Acrion) in
-                  print("cancel clicked____")
+                 
             })
         }
         
@@ -845,14 +710,7 @@ extension MKPrivateChatView {
     
     
 }
-extension MKPrivateChatView : ImageSelectProtocol{
-    func SelectBackgroundImage(data: String) {
-        self.background_image.image = UIImage(named: data)
-        print(data)
-    }
-    
-    
-}
+
 extension MKPrivateChatView {
     func showAlertPoints(message: String?, title:String = "通知", otherButtons:[String:((UIAlertAction)-> ())]? = nil, cancelTitle: String = "キャンセル", cancelAction: ((UIAlertAction)-> ())? = nil) {
         let newTitle = title.capitalized

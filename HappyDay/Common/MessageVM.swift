@@ -193,15 +193,20 @@ final internal class MessageVM {
     func changeLanguage(language: String, completion: ([MockMessage]) -> Void) {
        
             if language == AppConstant.LanguageEnglish {
+                print("-----ksm\(self.messages.count)")
                  completion(self.messages)
             }
             else if language == AppConstant.LanguageKorean {
+                print("-----ksm\(self.messages_korean[1])")
                  completion(self.messages_korean)
             }
             else if language == AppConstant.LanguageJapanese {
+                print("-----ksm\(self.messages_japanese[messages_japanese.count - 1])")
+                
                  completion(self.messages_japanese)
             }
             else if language == AppConstant.LanguageChinese{
+                print("-----ksm\(self.messages_chinese.count)")
                  completion(self.messages_chinese)
             }
             else {
@@ -254,7 +259,7 @@ final internal class MessageVM {
                                 
                                     if (custom_message_item.receiver == sender_id && custom_message_item.sender == connectedPerson.user_id) || (custom_message_item.receiver == connectedPerson.user_id && custom_message_item.sender == sender_id) {
                                             
-                                   
+                                            
                                             self.custom_messages.append(custom_message_item)
                                             let user: MockUser!
                                             if custom_message_item.sender == sender_id {
@@ -266,7 +271,7 @@ final internal class MessageVM {
                                             let uniqueID = UUID().uuidString
                                             let date = self.dateAddingRandomTime()
                                         
-                                            let original_message : MockMessage!
+                                        var original_message : MockMessage!
                                             let original_message_japanese : MockMessage!
                                             let original_message_korean : MockMessage!
                                             let original_message_chinese : MockMessage!
@@ -276,11 +281,33 @@ final internal class MessageVM {
                                             original_message_japanese = MockMessage(text: custom_message_item.japanese!, user: user!, messageId: uniqueID, date: date)
                                             original_message_chinese = MockMessage(text: custom_message_item.chinese!, user: user!, messageId: uniqueID, date: date)
                                         
-                                            
-                                            self.messages.append(original_message)
-                                            self.messages_korean.append(original_message_korean)
-                                            self.messages_japanese.append(original_message_japanese)
-                                            self.messages_chinese.append(original_message_chinese)
+                                            print("called____yes____ksm")
+                                            if custom_message_item.receiver == sender_id {
+                                                if DataManager.language == AppConstant.LanguageEnglish {
+                                                    original_message = MockMessage(text: custom_message_item.english!, user: user!, messageId: uniqueID, date: date)
+                                                    self.messages.append(original_message)
+                                                }
+                                                else if DataManager.language == AppConstant.LanguageKorean {
+                                                    original_message = MockMessage(text: custom_message_item.korean!, user: user!, messageId: uniqueID, date: date)
+                                                    self.messages.append(original_message)
+                                                }
+                                                else if DataManager.language == AppConstant.LanguageJapanese {
+                                                    original_message = MockMessage(text: custom_message_item.japanese!, user: user!, messageId: uniqueID, date: date)
+                                                    self.messages.append(original_message)
+                                                }
+                                                else if DataManager.language == AppConstant.LanguageChinese {
+                                                    original_message = MockMessage(text: custom_message_item.chinese!, user: user!, messageId: uniqueID, date: date)
+                                                    self.messages.append(original_message)
+                                                }
+                                            }
+                                            else {
+                                                original_message = MockMessage(text: custom_message_item.english!, user: user!, messageId: uniqueID, date: date)
+                                                self.messages.append(original_message)
+                                            }
+                                           
+                                            self.messages_korean.append( MockMessage(text: custom_message_item.korean!, user: user!, messageId: uniqueID, date: date))
+                                            self.messages_japanese.append( MockMessage(text: custom_message_item.japanese!, user: user!, messageId: uniqueID, date: date))
+                                            self.messages_chinese.append( MockMessage(text: custom_message_item.chinese!, user: user!, messageId: uniqueID, date: date))
                                         }
                                         else if custom_message_item.source_type == AppConstant.eImage{
                                             

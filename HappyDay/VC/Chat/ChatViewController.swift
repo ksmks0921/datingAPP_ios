@@ -34,7 +34,7 @@ protocol ImageSelectProtocol
     
 }
 /// A base class for the example controllers
-class ChatViewController: MessagesViewController, MessagesDataSource, LightboxControllerPageDelegate ,LightboxControllerDismissalDelegate  {
+class ChatViewController: MessagesViewController, MessagesDataSource, LightboxControllerPageDelegate ,LightboxControllerDismissalDelegate, UITextViewDelegate  {
     
     
     func lightboxController(_ controller: LightboxController, didMoveToPage page: Int) {
@@ -52,7 +52,7 @@ class ChatViewController: MessagesViewController, MessagesDataSource, LightboxCo
     open lazy var audioController = BasicAudioController(messageCollectionView: messagesCollectionView)
 
     var messageList: [MockMessage] = []
-    
+    var background_image = UIImageView()
     var chatId = ""
     var connectedPerson: person!
      
@@ -70,9 +70,95 @@ class ChatViewController: MessagesViewController, MessagesDataSource, LightboxCo
 
         configureMessageCollectionView()
         configureMessageInputBar()
-        
+        setupUI()
+        setupNavigationButton()
+        loadFirstMessages()
         
        
+    }
+    func setupUI() {
+        let height_of_view = self.messagesCollectionView.frame.size.height
+        let width_of_view = self.messagesCollectionView.frame.size.width
+        background_image.frame = CGRect(x: 0, y: 0, width: width_of_view, height: height_of_view)
+        background_image.image = UIImage(named: "person_2")
+        view.addSubview(background_image)
+        messagesCollectionView.backgroundColor = UIColor(white: 1, alpha: 0.5)
+        messagesCollectionView.backgroundView = background_image
+        messageInputBar.inputTextView.delegate = self
+        messagesCollectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "CustomImageCell")
+    }
+    @objc
+    private func selectLanguage() {
+      
+        guard let popupVC = storyboard?.instantiateViewController(withIdentifier: "otherSettingVC") as? otherSettingVC else { return }
+        let items = AppConstant.languages
+        
+        let height_view = self.view.frame.size.height
+        let height_bottom_view = (items.count + 1) * 60
+        if height_bottom_view > Int(height_view) {
+            popupVC.height = CGFloat(height_view - 80)
+        }
+        else {
+            popupVC.height = CGFloat(height_bottom_view)
+        }
+        popupVC.topCornerRadius = 10
+        popupVC.presentDuration = 1
+        popupVC.dismissDuration = 1
+        popupVC.shouldDismissInteractivelty = true
+        popupVC.items = items
+        popupVC.delegate = self
+        present(popupVC, animated: true, completion: nil)
+        
+    }
+    func loadFirstMessages() {
+       
+      
+            Indicator.sharedInstance.showIndicator()
+            MessageVM.shared.geData(language: AppConstant.LanguageEnglish ,sender_id: self.chatId, connectedPerson: self.connectedPerson, completion: {_ in
+                    let count = UserDefaults.standard.mockMessagesCount()
+                    MessageVM.shared.getMessages(count: count) { messages in
+                        Indicator.sharedInstance.hideIndicator()
+                        
+                        self.messageList = messages
+                        self.messagesCollectionView.reloadData()
+                        self.messagesCollectionView.scrollToBottom()
+                        
+                    }
+             })
+               
+        
+           
+           
+    }
+    @objc
+    private func showSetting() {
+        
+        guard let VC = storyboard?.instantiateViewController(withIdentifier: "backgroundImageSelectVC") as? backgroundImageSelectVC else { return }
+        VC.delegate = self
+        self.navigationController?.pushViewController(VC, animated: true)
+        
+    }
+    func setupNavigationButton() {
+        
+         let button_translate = UIBarButtonItem(
+              image: UIImage(named: "translate_icon"),
+              style: .plain,
+              target: self,
+              
+              action: #selector(selectLanguage)
+          )
+          let button_setting = UIBarButtonItem(
+              image: UIImage(named: "rsz_icon_setting_white"),
+              style: .plain,
+              target: self,
+              action: #selector(showSetting)
+          )
+       
+          button_setting.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+          button_translate.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+//          self.title = chat_title
+          self.navigationItem.rightBarButtonItems = [button_translate, button_setting]
+          self.navigationController?.navigationBar.tintColor = UIColor.white
     }
     override var preferredStatusBarStyle: UIStatusBarStyle {
            return .lightContent
@@ -418,16 +504,28 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
                
                                   if error == nil{
                                    if success{
-               
-                                       DispatchQueue.global(qos: .default).async {
-                                           // fake send request task
-                                           sleep(1)
-                                           DispatchQueue.main.async { [weak self] in
-                                               self?.messageInputBar.sendButton.stopAnimating()
-                                               self?.messageInputBar.inputTextView.placeholder = "メールを入力してください"
-                                               self?.messagesCollectionView.scrollToBottom(animated: true)
-                                           }
+                                       let count = UserDefaults.standard.mockMessagesCount()
+                                       MessageVM.shared.getMessages(count: count) { messages in
+                                           Indicator.sharedInstance.hideIndicator()
+                                          
+                                               self.messageList = messages
+                                            print(".....\(self.messageList.count)")
+                                               self.messagesCollectionView.reloadData()
+                                               self.messagesCollectionView.scrollToBottom()
+                                               self.messageInputBar.sendButton.stopAnimating()
+                                               self.messageInputBar.inputTextView.placeholder = "メールを入力してください"
+                                               self.messagesCollectionView.scrollToBottom(animated: true)
+                                           
                                        }
+//                                       DispatchQueue.global(qos: .default).async {
+//                                           // fake send request task
+//                                           sleep(1)
+//                                           DispatchQueue.main.async { [weak self] in
+//                                               self?.messageInputBar.sendButton.stopAnimating()
+//                                               self?.messageInputBar.inputTextView.placeholder = "メールを入力してください"
+//                                               self?.messagesCollectionView.scrollToBottom(animated: true)
+//                                           }
+//                                       }
                                    }
                            }
                
@@ -451,18 +549,18 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
 //        present(alert, animated: true, completion: nil)
 //    }
 
-    private func insertMessages(_ data: [Any]) {
-        for component in data {
-            let user = MessageVM.shared.currentSender
-            if let str = component as? String {
-                let message = MockMessage(text: str, user: user!, messageId: UUID().uuidString, date: Date())
-                insertMessage(message)
-            } else if let img = component as? UIImage {
-//                let message = MockMessage(image: img, user: user!, messageId: UUID().uuidString, date: Date())
+//    private func insertMessages(_ data: [Any]) {
+//        for component in data {
+//            let user = MessageVM.shared.currentSender
+//            if let str = component as? String {
+//                let message = MockMessage(text: str, user: user!, messageId: UUID().uuidString, date: Date())
 //                insertMessage(message)
-            }
-        }
-    }
+//            } else if let img = component as? UIImage {
+////                let message = MockMessage(image: img, user: user!, messageId: UUID().uuidString, date: Date())
+////                insertMessage(message)
+//            }
+//        }
+//    }
 }
 extension ChatViewController {
     func showAlert(message: String?, title:String = "通知", otherButtons:[String:((UIAlertAction)-> ())]? = nil, cancelTitle: String = "キャンセル", cancelAction: ((UIAlertAction)-> ())? = nil) {
@@ -478,4 +576,51 @@ extension ChatViewController {
         }
         present(alert, animated: true, completion: nil)
     }
+}
+extension ChatViewController: SearchTypeDelegate{
+    
+    func selectSearchType(index: Int, type: String) {
+        
+        if type == AppConstant.languages[2] {
+            DataManager.language = AppConstant.LanguageKorean
+            loadFirstMessages()
+            
+        }
+        else if type == AppConstant.languages[3] {
+            DataManager.language = AppConstant.LanguageChinese
+            loadFirstMessages()
+           
+        }
+        else if type == AppConstant.languages[1] {
+            DataManager.language = AppConstant.LanguageJapanese
+            loadFirstMessages()
+//             DispatchQueue.global(qos: .userInitiated).async {
+//                           MessageVM.shared.changeLanguage(language: AppConstant.LanguageJapanese) { messages in
+//                               DispatchQueue.main.async {
+//
+//                                    self.messageList.removeAll()
+//                                   self.messageList = messages
+//                                   self.messagesCollectionView.reloadData()
+//                                   self.messagesCollectionView.scrollToBottom()
+//                               }
+//                           }
+//                       }
+        }
+        else {
+             DataManager.language = AppConstant.LanguageEnglish
+             loadFirstMessages()
+             
+        }
+        
+    }
+    
+    
+}
+extension ChatViewController : ImageSelectProtocol{
+    func SelectBackgroundImage(data: String) {
+        self.background_image.image = UIImage(named: data)
+        print(data)
+    }
+    
+    
 }

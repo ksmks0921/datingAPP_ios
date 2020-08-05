@@ -36,7 +36,7 @@ class AppConstant {
     static let kReportAlarm = "kReportAlarm"
     static let kLikeAlarm = "kLikeAlarm"
     static let kShowingFilter = "kFilter"
-    
+    static let Language = "Language"
     static let screenLockPass = "screenLockPass"
     
     static let API_KEY_TRANSLATE = "AIzaSyBNoD64Un372JgIMHQMQ0ODF9eBsq59GIM"

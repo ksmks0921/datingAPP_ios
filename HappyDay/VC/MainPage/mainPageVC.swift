@@ -43,7 +43,9 @@ class mainPageVC: BaseVC {
         
         
         
-        
+        if DataManager.language == nil {
+            DataManager.language = AppConstant.LanguageEnglish
+        }
        
       
         if DataManager.isShowingSearchResult! {

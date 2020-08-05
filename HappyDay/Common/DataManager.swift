@@ -138,4 +138,13 @@ class DataManager {
             return UserDefaults.standard.string(forKey: AppConstant.screenLockPass)
         }
     }
+    static var language: String!{
+        set{
+            UserDefaults.standard.setValue(newValue, forKey: AppConstant.Language)
+            UserDefaults.standard.synchronize()
+        }
+        get{
+            return UserDefaults.standard.string(forKey: AppConstant.Language)
+        }
+    }
 }
