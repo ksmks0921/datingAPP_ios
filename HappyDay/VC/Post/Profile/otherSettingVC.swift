@@ -36,7 +36,7 @@ class otherSettingVC: BottomPopupViewController {
    
         if  height_table > Int(height_view) {
             
-            heightOfTable.constant = CGFloat(height_view - 50)
+            heightOfTable.constant = CGFloat(height_view - 80)
             
         }
         else {

@@ -3468,7 +3468,7 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J1O-ix-uoR" userLabel="ContentView">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="774"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="706"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DKv-LB-FTO">
                                                 <rect key="frame" x="35" y="12" width="41" height="21"/>
@@ -3809,6 +3809,7 @@
                                             <constraint firstItem="DKv-LB-FTO" firstAttribute="leading" secondItem="J1O-ix-uoR" secondAttribute="leading" constant="35" id="Ibd-Eo-SJ9"/>
                                             <constraint firstItem="9Bg-7B-DCd" firstAttribute="leading" secondItem="SKr-XM-oXz" secondAttribute="leading" id="JmN-5J-Glc"/>
                                             <constraint firstItem="SKr-XM-oXz" firstAttribute="top" secondItem="TJp-T4-RwJ" secondAttribute="bottom" constant="23" id="KPP-1d-VEM"/>
+                                            <constraint firstAttribute="bottom" secondItem="2o0-DT-OPF" secondAttribute="bottom" constant="60" id="L94-XJ-ndb"/>
                                             <constraint firstItem="wHO-EL-ehc" firstAttribute="top" secondItem="DKv-LB-FTO" secondAttribute="bottom" constant="8" id="MVo-aa-G2s"/>
                                             <constraint firstItem="d0l-vB-McA" firstAttribute="leading" secondItem="iQb-Kg-4pK" secondAttribute="leading" id="Ng1-KI-Od5"/>
                                             <constraint firstItem="DKv-LB-FTO" firstAttribute="top" secondItem="J1O-ix-uoR" secondAttribute="top" constant="12" id="OpQ-gx-dUg"/>

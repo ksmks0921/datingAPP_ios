@@ -467,11 +467,12 @@ final internal class MessageVM {
                                var chats_for_list =  [MessageItem]()
                                for chats_item in chats {
                                    if chats_item.receiver == id || chats_item.sender == id {
+                                    print("_____yjm___\(chats_item.receiver)")
                                        chats_for_list.append(chats_item)
                                    }
                                }
                                let last_message: String!
-                            if chats_for_list.count != 0 {
+                               if chats_for_list.count != 0 {
                                 if chats_for_list[chats_for_list.count - 1].message != "" {
                                     last_message = chats_for_list[chats_for_list.count - 1].message
                                 }

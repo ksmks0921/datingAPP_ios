@@ -163,7 +163,6 @@ class postVC: BaseVC {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
 
-        
         if DataManager.isLockScreen {
             NotificationCenter.default.addObserver(self, selector: #selector(applicationDidBecomeActive), name: UIApplication.didBecomeActiveNotification, object: nil)
         }

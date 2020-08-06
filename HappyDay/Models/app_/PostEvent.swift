@@ -25,13 +25,14 @@ struct PostEvent {
     var user_style : String!
     var user_job : String!
     var user_id : String!
-    var created_at : String!
+    var created_at : Int!
     var event_photo : String!
     var event_city: String!
     var event_phone : String!
     var user_city : String!
     var row_key : String!
-    init(user_avatar: String, event_type:String, view_counts: String, nick_name: String, age: String, region: String,  event_des: String, thumb_path: String, user_gender: Bool, source_type: String, user_tall: String, user_style: String, user_job: String, user_id: String, created_at: String ,event_photo : String, event_city: String, event_phone : String, user_city : String, row_key : String){
+    var created_date: String!
+    init(user_avatar: String, event_type:String, view_counts: String, nick_name: String, age: String, region: String,  event_des: String, thumb_path: String, user_gender: Bool, source_type: String, user_tall: String, user_style: String, user_job: String, user_id: String, created_at: Int ,event_photo : String, event_city: String, event_phone : String, user_city : String, row_key : String, created_date: String){
         
         self.user_avatar    = user_avatar
         self.event_type     = event_type
@@ -53,6 +54,7 @@ struct PostEvent {
         self.event_phone    = event_phone
         self.user_city      = user_city
         self.row_key        = row_key
+        self.created_date   = created_date
     }
     
     

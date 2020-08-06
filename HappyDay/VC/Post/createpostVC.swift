@@ -281,6 +281,7 @@ class createpostVC: BaseVC, UITextFieldDelegate  {
         let currentDateTime = Date()
         let created_at_temp = currentDateTime.timeIntervalSince1970
         let created_at = Int(created_at_temp * 1000)
+        print("___created at is ____\(created_at)")
         Indicator.sharedInstance.showIndicator()
         
         UserVM.shared.registerEvent(event_city: regionTextField.text!, create_date: date_result, event_des: eventTextField.text! ,event_photo: event_photo, event_phone: phoneSettingTextField.text!, event_type: eventTypeLabel.text!, user_age: user_age!, user_avatar: user_avatar![0], user_city: regionTextField.text!, user_gender: user_gender!, user_job: user_job!, user_name: user_name!, user_style: user_style!, user_tall: user_tall!, user_id: user_id!, created_at: created_at, source_type: source_type!, thumb_path: thumb_path, views_counts: "0" ) { (success, message, error) in

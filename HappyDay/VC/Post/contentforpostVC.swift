@@ -37,15 +37,20 @@ class contentforpostVC: BaseVC {
         self.postTableView.register(nib, forCellReuseIdentifier: "postTableViewCell")
 
         if DataManager.isShowingFilterResult! {
-            self.event_post = UserVM.filtered_eventPosts
-            if self.event_post.count == 0 {
-                self.noResultView.alpha = 1
-            }
-            else {
-                self.noResultView.alpha = 0
-            }
-            self.postTableView.reloadData()
-            hegiht_tableView.constant = CGFloat(height_table)
+              let event_post_temp = UserVM.filtered_eventPosts
+              self.event_post = event_post_temp.sorted(by: {$0.created_at > $1.created_at})
+        
+               if self.event_post.count == 0 {
+                   self.noResultView.alpha = 1
+               }
+               else {
+                   self.noResultView.alpha = 0
+               }
+               self.postTableView.reloadData()
+               self.hegiht_tableView.constant = CGFloat(self.height_table)
+            
+            
+            
         }
         else {
             hegiht_tableView.constant = CGFloat(height_table)
@@ -61,8 +66,10 @@ class contentforpostVC: BaseVC {
     func getData() {
         Indicator.sharedInstance.showIndicator()
         UserVM.shared.getEventPosts(completion:  {_ in
-              Indicator.sharedInstance.hideIndicator()
-              self.event_post = UserVM.eventPosts
+                    Indicator.sharedInstance.hideIndicator()
+                    let event_post_temp = UserVM.eventPosts
+                    self.event_post = event_post_temp.sorted(by: {$0.created_at > $1.created_at})
+                    
                     if self.event_post.count == 0 {
                         self.noResultView.alpha = 1
                     }
@@ -121,6 +128,10 @@ class contentforpostVC: BaseVC {
 
             let image = UIImage(data: imageData)
             ANZSingleImageViewer.showImage(image!, toParent: self)
+            
+            UserVM.shared.addView(event: event_post[tag]) { (success, message, error) in
+                print("viewed!!!")
+            }
             
         }
       // open your camera controller here
@@ -195,7 +206,7 @@ extension contentforpostVC:  UITableViewDelegate, UITableViewDataSource, Lightbo
             cell.textContentLabel.text = event_post[indexPath.row].event_des
             cell.views.text = event_post[indexPath.row].view_counts
             cell.regionLabel.text = event_post[indexPath.row].region
-            cell.timeLabel.text = event_post[indexPath.row].created_at
+            cell.timeLabel.text = event_post[indexPath.row].created_date
             cell.selectionStyle = .none
             return cell
            

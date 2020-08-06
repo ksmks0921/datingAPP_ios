@@ -216,6 +216,7 @@ extension mainPageVC {
     }
 }
 
+@available(iOS 11.0, *)
 extension mainPageVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     
     

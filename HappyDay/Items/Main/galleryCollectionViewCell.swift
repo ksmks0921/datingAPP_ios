@@ -8,6 +8,7 @@
 
 import UIKit
 
+@available(iOS 11.0, *)
 class galleryCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var image: UIImageView!

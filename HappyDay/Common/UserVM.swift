@@ -444,12 +444,13 @@ class UserVM {
                     let user_job = restDict[FireBaseConstant.EventUserJob] as? String
                     let user_id = restDict[FireBaseConstant.EventUserID] as? String
                     let created_date = restDict[FireBaseConstant.EventCreatedDate] as? String
+                    let created_at = restDict[FireBaseConstant.created_at] as? Int
                     let event_city = restDict[FireBaseConstant.EventCity] as? String
                     let event_phone = restDict[FireBaseConstant.EventPhone] as? String
                     let user_city = restDict[FireBaseConstant.EventUserCity] as? String
                     let row_key = restDict[FireBaseConstant.row_key] as? String
                     
-                    let post_item = PostEvent(user_avatar: user_avatar!, event_type: event_type!, view_counts: view_counts!, nick_name: nick_name!, age: age!, region: region!, event_des: event_des!, thumb_path: thumb_path!, user_gender: gender!, source_type: source_type!, user_tall: user_tall!, user_style: user_style!, user_job: user_job!, user_id: user_id!, created_at: created_date!,  event_photo: event_photo!, event_city : event_city!, event_phone : event_phone!, user_city : user_city!, row_key: row_key!)
+                    let post_item = PostEvent(user_avatar: user_avatar!, event_type: event_type!, view_counts: view_counts!, nick_name: nick_name!, age: age!, region: region!, event_des: event_des!, thumb_path: thumb_path!, user_gender: gender!, source_type: source_type!, user_tall: user_tall!, user_style: user_style!, user_job: user_job!, user_id: user_id!, created_at: created_at!,  event_photo: event_photo!, event_city : event_city!, event_phone : event_phone!, user_city : user_city!, row_key: row_key!, created_date: created_date!)
                     UserVM.eventPosts.append(post_item)
 
                     
@@ -486,12 +487,13 @@ class UserVM {
                     let user_job = restDict[FireBaseConstant.EventUserJob] as? String
                     let user_id = restDict[FireBaseConstant.EventUserID] as? String
                     let created_date = restDict[FireBaseConstant.EventCreatedDate] as? String
+                    let created_at = restDict[FireBaseConstant.created_at] as? Int
                     let event_city = restDict[FireBaseConstant.EventCity] as? String
                     let event_phone = restDict[FireBaseConstant.EventPhone] as? String
                     let user_city = restDict[FireBaseConstant.EventUserCity] as? String
                     let row_key = restDict[FireBaseConstant.row_key] as? String
                     
-                    let post_item = PostEvent(user_avatar: user_avatar!, event_type: event_type!, view_counts: view_counts!, nick_name: nick_name!, age: age!, region: region!, event_des: event_des!, thumb_path: thumb_path!, user_gender: gender!, source_type: source_type!, user_tall: user_tall!, user_style: user_style!, user_job: user_job!, user_id: user_id!, created_at: created_date!, event_photo: event_photo!, event_city : event_city!, event_phone : event_phone!, user_city : user_city!, row_key: row_key!)
+                    let post_item = PostEvent(user_avatar: user_avatar!, event_type: event_type!, view_counts: view_counts!, nick_name: nick_name!, age: age!, region: region!, event_des: event_des!, thumb_path: thumb_path!, user_gender: gender!, source_type: source_type!, user_tall: user_tall!, user_style: user_style!, user_job: user_job!, user_id: user_id!, created_at: created_at!, event_photo: event_photo!, event_city : event_city!, event_phone : event_phone!, user_city : user_city!, row_key: row_key!, created_date: created_date!)
                     if post_item.user_id == DataManager.userId {
                         UserVM.my_eventPosts.append(post_item)
                     }
@@ -506,40 +508,45 @@ class UserVM {
         
     }
     func filterEvents(location: String, type: String, source_type: String, age: String, tall: String, style: String, job: String, nick_name: String, completion: @escaping (Bool) -> Void){
-        UserVM.filtered_eventPosts = UserVM.eventPosts
+        UserVM.shared.getEventPosts(completion:  {_ in
+                      UserVM.filtered_eventPosts = UserVM.eventPosts
+                      
+                      if location != AppConstant.eAll {
+                          print("_____no all")
+                        UserVM.filtered_eventPosts = self.doFilter(init_data: UserVM.filtered_eventPosts , key: FireBaseConstant.EventCity, value: location)
+                      }
+                      if type != AppConstant.eAll {
+                        UserVM.filtered_eventPosts = self.doFilter(init_data: UserVM.filtered_eventPosts , key: FireBaseConstant.EventType, value: type)
+                      }
+                      if source_type != AppConstant.eAll {
+                      
+                        UserVM.filtered_eventPosts = self.doFilter(init_data: UserVM.filtered_eventPosts , key: FireBaseConstant.source_type, value: source_type)
+                      }
+                      if age != AppConstant.eAll {
+                      
+                        UserVM.filtered_eventPosts = self.doFilter(init_data: UserVM.filtered_eventPosts , key: FireBaseConstant.kAge, value: age)
+                      }
+                      if tall != AppConstant.eAll {
+                      
+                        UserVM.filtered_eventPosts = self.doFilter(init_data: UserVM.filtered_eventPosts , key: FireBaseConstant.kUserTall, value: tall)
+                      }
+                      if style != AppConstant.eAll {
+                      
+                        UserVM.filtered_eventPosts = self.doFilter(init_data: UserVM.filtered_eventPosts , key: FireBaseConstant.kUserStyle, value: style)
+                      }
+                      if job != AppConstant.eAll {
+                      
+                        UserVM.filtered_eventPosts = self.doFilter(init_data: UserVM.filtered_eventPosts , key: FireBaseConstant.kUserJob, value: job)
+                      }
+                      if nick_name != AppConstant.eAll {
+                      
+                        UserVM.filtered_eventPosts = self.doFilter(init_data: UserVM.filtered_eventPosts , key: FireBaseConstant.kUserNickName, value: nick_name)
+                      }
+                      completion(true)
+                      
+                 
+        })
         
-        if location != AppConstant.eAll {
-            print("_____no all")
-            UserVM.filtered_eventPosts = doFilter(init_data: UserVM.filtered_eventPosts , key: FireBaseConstant.EventCity, value: location)
-        }
-        if type != AppConstant.eAll {
-            UserVM.filtered_eventPosts = doFilter(init_data: UserVM.filtered_eventPosts , key: FireBaseConstant.EventType, value: type)
-        }
-        if source_type != AppConstant.eAll {
-        
-            UserVM.filtered_eventPosts = doFilter(init_data: UserVM.filtered_eventPosts , key: FireBaseConstant.source_type, value: source_type)
-        }
-        if age != AppConstant.eAll {
-        
-            UserVM.filtered_eventPosts = doFilter(init_data: UserVM.filtered_eventPosts , key: FireBaseConstant.kAge, value: age)
-        }
-        if tall != AppConstant.eAll {
-        
-            UserVM.filtered_eventPosts = doFilter(init_data: UserVM.filtered_eventPosts , key: FireBaseConstant.kUserTall, value: tall)
-        }
-        if style != AppConstant.eAll {
-        
-            UserVM.filtered_eventPosts = doFilter(init_data: UserVM.filtered_eventPosts , key: FireBaseConstant.kUserStyle, value: style)
-        }
-        if job != AppConstant.eAll {
-        
-            UserVM.filtered_eventPosts = doFilter(init_data: UserVM.filtered_eventPosts , key: FireBaseConstant.kUserJob, value: job)
-        }
-        if nick_name != AppConstant.eAll {
-        
-            UserVM.filtered_eventPosts = doFilter(init_data: UserVM.filtered_eventPosts , key: FireBaseConstant.kUserNickName, value: nick_name)
-        }
-        completion(true)
     }
     
     func doFilter(init_data: [PostEvent], key: String, value: String) -> [PostEvent]  {
@@ -644,7 +651,7 @@ class UserVM {
         
         let views : String = String(Int(event.view_counts)! + 1)
         let newEvent = [FireBaseConstant.EventCity                : event.event_city,
-                        FireBaseConstant.EventCreatedDate         : event.created_at,
+                        FireBaseConstant.EventCreatedDate         : event.created_date,
                         FireBaseConstant.EventDes                 : event.event_des,
                         FireBaseConstant.EventPhoto               : event.event_photo,
                         FireBaseConstant.EventPhone               : event.event_phone,
@@ -1090,8 +1097,14 @@ class UserVM {
         let newChatList = [ FireBaseConstant.l_id       : receiver_id,
                             FireBaseConstant.l_status   : "add"
         ]
-       
+        
         self.ref.child(FireBaseConstant.Chatlist).child(sender_id).child(receiver_id).setValue(newChatList)
+        
+        let newChatList_2 = [ FireBaseConstant.l_id       : sender_id,
+                            FireBaseConstant.l_status   : "add"
+        ]
+        self.ref.child(FireBaseConstant.Chatlist).child(receiver_id).child(sender_id).setValue(newChatList_2)
+        
         let created_at_temp = Date().timeIntervalSince1970
         let created_at = Int(created_at_temp * 1000)
         let updated_points = [

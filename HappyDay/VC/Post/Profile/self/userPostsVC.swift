@@ -29,7 +29,9 @@ class userPostsVC: UIViewController {
         Indicator.sharedInstance.showIndicator()
         UserVM.shared.getMyEventPosts(completion:  {_ in
               Indicator.sharedInstance.hideIndicator()
-              self.items = UserVM.my_eventPosts
+              let event_post_temp = UserVM.my_eventPosts
+              self.items = event_post_temp.sorted(by: {$0.created_at > $1.created_at})
+      
               self.contentTable.reloadData()
         })
         
@@ -115,7 +117,7 @@ extension userPostsVC: UITableViewDelegate, UITableViewDataSource {
         cell.hobbyLabel.text = items[indexPath.row].event_type
         cell.nickname.text = items[indexPath.row].nick_name
         cell.regionLabel.text = items[indexPath.row].region
-        cell.timeLabel.text = items[indexPath.row].created_at
+        cell.timeLabel.text = items[indexPath.row].created_date
         if items[indexPath.row].thumb_path != nil {
            
                 cell.postImageView.sd_setImage(with: URL(string: items[indexPath.row].thumb_path), placeholderImage: UIImage(named: "default"))
